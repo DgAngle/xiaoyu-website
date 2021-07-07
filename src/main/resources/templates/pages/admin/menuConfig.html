@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>菜单配置</title>
+    <!-- 公共 css -->
+    <link th:include="common/common_css"/>
+</head>
+<body>
+<div class="page-container">
+    <div th:include="layout/sidebar"></div>
+    <div th:include="layout/topMenu"></div>
+
+    <!-- 内容区域 -->
+    <div class="container-fluid">
+
+    </div>
+</div>
+
+<!-- 公共 js -->
+<div th:include="common/common_js"></div>
+</body>
+</html>
