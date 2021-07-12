@@ -1,0 +1,44 @@
+/*搜索栏*/
+.comm-form-search {
+    margin: 10px 0 10px 0;
+}
+
+.comm-form-search label {
+    margin: 0px 20px 0px 0px;
+}
+
+.comm-form-search input {
+    height: 38px;
+    width: 250px !important;
+}
+
+.comm-form-item {
+    padding: 0 0 0 0;
+}
+
+/*操作按钮区域*/
+.comm-operate {
+    margin: 10px 0 0 0;
+    /*padding: 0 0 10px 0;*/
+    /*border-bottom: 1px solid #c2f6f2;*/
+}
+
+.border-rebeccapurple {
+    border: 1px solid rebeccapurple;
+}
+
+.border-red {
+    border: 1px solid red;
+}
+
+.border-aqua {
+    border: 1px solid aqua;
+}
+
+.border-black {
+    border: 1px solid black;
+}
+
+.border-blue {
+    border: 1px solid blue;
+}

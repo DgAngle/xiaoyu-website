@@ -1,12 +1,12 @@
 server:
   port: 8091
   servlet:
-    context-path: /xiaoyu-website
+#    context-path: /xiaoyu_website
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/xiaoyu-website
+    url: jdbc:mysql://localhost:3306/xiaoyu_website?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     username: root
     password: root
   web:
@@ -19,8 +19,14 @@ spring:
     encoding: UTF-8
     mode: HTML
 
+
 mybatis:
-  mapper-locations: classpath:/mybatis/mapper/*.xml
+  mapper-locations: classpath:/mapper/*.xml
   type-aliases-package: com.xiaoyu.entity
+  config-location: classpath:/mybatis-config.xml
 
-
+logging:
+  level:
+    com:
+      xiaoyu:
+        dao: debug
