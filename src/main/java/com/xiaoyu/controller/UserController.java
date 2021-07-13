@@ -1,6 +1,8 @@
 package com.xiaoyu.controller;
 
+import com.xiaoyu.entity.RoleBean;
 import com.xiaoyu.entity.UserBean;
+import com.xiaoyu.service.RoleService;
 import com.xiaoyu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +19,13 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     @RequestMapping("userList")
     public String goUserList(Model model, UserBean userBean) {
         model.addAttribute("userList", userService.queryUser(userBean));
+        model.addAttribute("roleList", roleService.queryRole(new RoleBean()));
         return "user/userList";
     }
 
