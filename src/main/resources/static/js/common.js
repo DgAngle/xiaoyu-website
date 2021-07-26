@@ -1,3 +1,5 @@
+let commonUtil;
+
 window.onload = function () {
     // 获取页面路径
     let url = window.location.href;
@@ -11,4 +13,14 @@ window.onload = function () {
             $(this).parent("li").parent("ul").parent("li").addClass("active");
         }
     });
+
+    commonUtil = commonUtil || {};
+
+    /*弹出模态框*/
+    commonUtil.openDialog = function (title, url, callback) {
+        console.log(title);
+    }
 }
+
+
+

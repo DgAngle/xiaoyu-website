@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>笔记分类</title>
+    <!-- 公共 css -->
+    <link th:include="common/common_css"/>
+</head>
+<body>
+<div class="page-container">
+    <div th:include="layout/sidebar"></div>
+    <div th:include="layout/topMenu"></div>
+
+    <!-- 内容区域 -->
+    <div id="noteCatContainer" class="container-fluid">
+        <div class="row comm-operate ">
+            <button class="btn btn-outline-primary btn-sm" @click="openAdd()"><i class="fa fa-plus-square"></i>
+                添加笔记分类
+            </button>
+        </div>
+        <table class="table table-hover table-striped comm-table">
+            <thead class="thead-dark">
+            <tr>
+                <th>序号</th>
+                <th>笔记编号</th>
+                <th>笔记分类名称</th>
+                <th>排序号</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(noteCat, index) in noteCatData.noteCatList">
+                <th>{{index + 1}}</th>
+                <th>{{noteCat.noteCatNum}}</th>
+                <th>{{noteCat.noteCatName}}</th>
+                <th>{{noteCat.orderNum}}</th>
+                <th>
+                    <a href="#" title="修改"><i class="fa fa-pencil"></i></a>
+                    <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- 新增页面 -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">新增笔记分类</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    笔记分类
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- 公共 js -->
+<div th:include="common/common_js"></div>
+<script>
+    let noteCatData = {
+        noteCatList: [
+            {noteCatNum: '0001', noteCatName: '学习笔记', orderNum: 100},
+            {noteCatNum: '0002', noteCatName: '工作经验', orderNum: 800},
+            {noteCatNum: '0003', noteCatName: '生活记事', orderNum: 60}
+        ],
+    };
+
+    function openAdd() {
+        $("#exampleModal").modal({
+            keyboard: true,
+            backdrop: "static"
+        })
+    }
+
+    new Vue({
+        el: "#noteCatContainer",
+        data: noteCatData
+    })
+</script>
+</body>
+</html>

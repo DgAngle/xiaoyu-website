@@ -12,15 +12,53 @@
     width: 250px !important;
 }
 
-.comm-form-item {
+.comm-search-item {
     padding: 0 0 0 0;
 }
+
+.comm-form-item {
+    padding: 0 0 0 0 !important;
+    margin: 0 0 20px 0 !important;
+}
+
+.comm-form-item label span {
+    text-align: left;
+    width: 100px !important;
+}
+
+.comm-form-item input {
+    width: 250px !important;
+}
+
+.comm-form-item textarea {
+    width: 70% !important;
+    height: 120px;
+}
+
+.form-search {
+    margin-top: 10px;
+}
+
+.form-search-label label {
+    padding-right: 10px;
+}
+
 
 /*操作按钮区域*/
 .comm-operate {
     margin: 10px 0 0 0;
     /*padding: 0 0 10px 0;*/
     /*border-bottom: 1px solid #c2f6f2;*/
+}
+
+.comm-operate-inner {
+    margin: 0 0 20px 0;
+
+}
+
+/* 表格区域 */
+.comm-table {
+    margin-top: 10px;
 }
 
 .border-rebeccapurple {
