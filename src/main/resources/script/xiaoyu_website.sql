@@ -11,30 +11,105 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 13/07/2021 15:24:33
+ Date: 26/07/2021 22:34:11
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
+-- Table structure for label
+-- ----------------------------
+DROP TABLE IF EXISTS `label`;
+CREATE TABLE `label`  (
+                          `labelId` bigint(20) NOT NULL COMMENT '主键',
+                          `labelName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标签名称',
+                          `useCount` int(11) NULL DEFAULT NULL COMMENT '使用数量',
+                          `labelType` int(11) NULL DEFAULT NULL COMMENT '标签类型, note/music/...',
+                          `nameSymbol` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标签首字母拼音符号, 用于按照字母分类查找标签',
+                          `orderNum` int(11) NULL DEFAULT NULL COMMENT '排序号',
+                          `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                          `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                          PRIMARY KEY (`labelId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '标签表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of label
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for note
+-- ----------------------------
+DROP TABLE IF EXISTS `note`;
+CREATE TABLE `note`  (
+                         `noteId` bigint(20) NOT NULL COMMENT '主键',
+                         `noteName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '笔记名称',
+                         `noteCat` bigint(20) NULL DEFAULT NULL COMMENT '笔记分类',
+                         `LabelIdArr` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '笔记标签',
+                         `noteContent` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '笔记内容',
+                         `level` int(11) NULL DEFAULT NULL COMMENT '重要等级1-7',
+                         `isTop` int(11) NULL DEFAULT NULL COMMENT '是否置顶',
+                         `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                         `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                         PRIMARY KEY (`noteId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '笔记表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of note
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for note_cat
+-- ----------------------------
+DROP TABLE IF EXISTS `note_cat`;
+CREATE TABLE `note_cat`  (
+                             `noteCatId` bigint(20) NOT NULL COMMENT '主键',
+                             `noteCatName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '分类名称',
+                             `noteCatNum` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '笔记分类编号,四位一级,例：000100010001',
+                             `parentNoteCatId` bigint(20) NULL DEFAULT NULL COMMENT '父级主键',
+                             `orderNum` int(11) NULL DEFAULT NULL COMMENT '排序号',
+                             `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                             `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                             PRIMARY KEY (`noteCatId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '笔记分类表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of note_cat
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for role
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role`  (
-                         `roleId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-                         `roleName` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色名称',
+                         `roleId` bigint(20) NOT NULL COMMENT '主键',
+                         `roleName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '角色名称',
                          `orderNum` int(11) NULL DEFAULT NULL COMMENT '排序号',
-                         `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                         `createDt` datetime NULL DEFAULT NULL COMMENT '创建日期',
                          `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
                          PRIMARY KEY (`roleId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of role
 -- ----------------------------
-INSERT INTO `role` VALUES (1, '管理员', 100, '2021-07-12 15:14:00', '212e9d78-e2cc-11eb-ac37-002324c5600f');
-INSERT INTO `role` VALUES (2, '普通用户', 80, '2021-07-12 15:14:00', '212e9d78-e2cc-11eb-ac37-002324c5600f');
+
+-- ----------------------------
+-- Table structure for type
+-- ----------------------------
+DROP TABLE IF EXISTS `type`;
+CREATE TABLE `type`  (
+                         `typeId` bigint(20) NOT NULL COMMENT '主键',
+                         `typeName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '类型名称',
+                         `orderNum` int(11) NULL DEFAULT NULL COMMENT '排序号',
+                         `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                         `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                         PRIMARY KEY (`typeId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '类型表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of type
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for user
@@ -49,16 +124,13 @@ CREATE TABLE `user`  (
                          `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '邮箱',
                          `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '手机',
                          `identify` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '身份证',
-                         `roleId` bigint(20) NULL DEFAULT NULL COMMENT '角色主键',
-                         `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
                          `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
                          PRIMARY KEY (`userId`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('212e9d78-e2cc-11eb-ac37-002324c5600f', '系统管理员', 'admin', '123456', NULL, NULL, NULL, NULL, 1, '2021-07-11 14:30:00', NULL);
-INSERT INTO `user` VALUES ('aeb97912-e2d7-11eb-ac37-002324c5600f', '系统管理员2', 'admin2', '123456', NULL, NULL, NULL, NULL, 1, '2021-07-11 15:12:00', NULL);
+INSERT INTO `user` VALUES ('212e9d78-e2cc-11eb-ac37-002324c5600f', '系统管理员', 'admin', '123456', '1', NULL, NULL, NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
