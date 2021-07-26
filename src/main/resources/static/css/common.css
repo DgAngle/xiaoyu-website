@@ -35,6 +35,14 @@
     height: 120px;
 }
 
+.form-search {
+    margin-top: 10px;
+}
+
+.form-search-label label {
+    padding-right: 10px;
+}
+
 
 /*操作按钮区域*/
 .comm-operate {
@@ -43,9 +51,14 @@
     /*border-bottom: 1px solid #c2f6f2;*/
 }
 
-.comm-operate-inner{
+.comm-operate-inner {
     margin: 0 0 20px 0;
 
+}
+
+/* 表格区域 */
+.comm-table {
+    margin-top: 10px;
 }
 
 .border-rebeccapurple {
