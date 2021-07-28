@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoyu.dao.NoteCatMapper">
+    <select id="queryRole" parameterType="roleBean" resultType="roleBean">
+        select *
+        from role limit #{start}, #{pageCount}
+    </select>
+
+    <insert id="addRole" parameterType="roleBean">
+        insert into role(roleName, order, createDt, createBy)
+        values (#{roleName}, #{order}, #{createDt}, #{createBy})
+    </insert>
+</mapper>

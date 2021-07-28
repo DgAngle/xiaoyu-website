@@ -1,5 +1,6 @@
 package com.xiaoyu.entity;
 
+import com.xiaoyu.common.Pagination;
 import lombok.Data;
 
 import java.util.Date;
@@ -8,7 +9,7 @@ import java.util.Date;
  * 笔记分类
  */
 @Data
-public class NoteCatBean {
+public class NoteCatBean extends Pagination {
     private long noteCatId; // 笔记分类主键
     private String noteCatName; // 分类名称
     private String noteCatNum; // 笔记分类编号,四位一级,例：000100010001
