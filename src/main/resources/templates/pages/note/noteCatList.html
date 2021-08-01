@@ -13,7 +13,7 @@
 
     <!-- 内容区域 -->
     <div id="noteCatContainer" class="container-fluid">
-        <div class="row comm-operate ">
+        <div class="row comm-operate">
             <button class="btn btn-outline-primary btn-sm" @click="openAdd()"><i class="fa fa-plus-square"></i>
                 添加笔记分类
             </button>
@@ -45,17 +45,36 @@
     </div>
 
     <!-- 新增页面 -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="noteCatModal" tabindex="-1" aria-labelledby="noteCatModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <div class="modal-content">
+            <div class="modal-content comm-modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">新增笔记分类</h5>
+                    <h5 class="modal-title" id="noteCatModalLabel">新增笔记分类</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    笔记分类
+                    <form class="row-form">
+                        <div class="form-group">
+                            <label for="noteCatNameEdit">笔记分类名称</label>
+                            <input type="text" class="form-control" id="noteCatNameEdit"
+                                   aria-describedby="emailHelp">
+                        </div>
+                        <div class="form-group">
+                            <label for="parentNoteCatEdit">父级分类</label>
+                            <input type="text" class="form-control" id="parentNoteCatEdit">
+                        </div>
+                        <div class="form-group">
+                            <label for="orderNum">排序号</label>
+                            <input type="text" class="form-control" id="orderNum">
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">确认</button>
                 </div>
             </div>
         </div>
@@ -74,8 +93,12 @@
         ],
     };
 
+    let noteCatAddData = {
+        notCatName: '',
+    }
+
     function openAdd() {
-        $("#exampleModal").modal({
+        $("#noteCatModal").modal({
             keyboard: true,
             backdrop: "static"
         })
@@ -84,6 +107,10 @@
     new Vue({
         el: "#noteCatContainer",
         data: noteCatData
+    })
+    new Vue({
+        el: "#noteCatModal",
+        data: noteCatAddData
     })
 </script>
 </body>
