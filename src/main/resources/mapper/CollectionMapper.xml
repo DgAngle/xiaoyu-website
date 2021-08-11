@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoyu.dao.NoteCatMapper">
+
+    <!-- ************************* 收藏分类 ************************* -->
+    <select id="queryCollectionCatList" parameterType="collectionCatBean" resultType="collectionCatBean">
+        select *
+        from collection limit #{start}, #{pageCount}
+    </select>
+
+    <insert id="addCollectionCat" parameterType="collectionCatBean">
+        insert into role(collectionName, collectionCatId, remark, createDt, createBy)
+        values (#{collectionName}, #{collectionCatId}, #{remark}, #{createDt}, #{createBy})
+    </insert>
+
+    <!-- ************************* 收藏主表 ************************* -->
+    <select id="queryCollectionList" parameterType="collectionBean" resultType="collectionBean">
+        select *
+        from collection limit #{start}, #{pageCount}
+    </select>
+
+    <insert id="addCollection" parameterType="collectionBean">
+        insert into role(collectionName, collectionUrl, collectionCatId, remark, createDt, createBy)
+        values (#{collectionName}, #{collectionUrl}, #{collectionCatId}, #{remark}, #{createDt}, #{createBy})
+    </insert>
+</mapper>

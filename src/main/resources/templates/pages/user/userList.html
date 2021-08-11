@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <title>用户管理</title>
     <!-- 公共 css -->
-    <link th:include="common/common_css"/>
+    <link th:replace="common/common_css"/>
 
 </head>
 <body>
 <div class="page-container">
-    <div th:include="layout/sidebar"></div>
-    <div th:include="layout/topMenu"></div>
+    <div th:replace="layout/sidebar"></div>
+    <div th:replace="layout/topMenu"></div>
 
     <!-- 内容区域 -->
     <div class="container-fluid">
@@ -243,7 +243,7 @@
 </div>
 
 <!-- 公共 js -->
-<div th:include="common/common_js"></div>
+<div th:replace="common/common_js"></div>
 
 <script th:inline="javascript">
     function addUser() {

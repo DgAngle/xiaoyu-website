@@ -16,7 +16,8 @@
                         <a href="/index"><i class="ti-dashboard"></i><span>主页</span></a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>系统管理</span></a>
+                        <!-- ti-layout-sidebar-left -->
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-cogs"></i><span>系统管理</span></a>
                         <ul class="collapse">
                             <li id="userList"><a href="/user/userList">用户管理</a></li>
                             <!-- <li id="menuConfig"><a href="/menuConfig">菜单配置</a></li>-->
@@ -24,10 +25,18 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span>笔记管理</span></a>
+                        <!-- ti-pie-chart -->
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-pencil-square-o"></i><span>笔记管理</span></a>
                         <ul class="collapse">
-                            <li id="noteList"><a href="/note/noteList">笔记列表</a></li>
                             <li id="noteCatList"><a href="/noteCat/noteCatList">笔记分类</a></li>
+                            <li id="noteList"><a href="/note/noteList">笔记列表</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-star"></i><span>收藏管理</span></a>
+                        <ul class="collapse">
+                            <li id="collectionList"><a href="/collect/cat/goCatList">收藏分类</a></li>
+                            <li id="collectionCatList"><a href="/collect/goList">收藏列表</a></li>
                         </ul>
                     </li>
                 </ul>
