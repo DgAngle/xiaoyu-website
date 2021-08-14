@@ -3,7 +3,6 @@ var commonUtil = commonUtil || {};
 window.onload = function () {
     // 获取页面路径
     let url = window.location.href;
-    let ext = url.indexOf("menuConfig");
 
     $("#menu").find("li>a").each(function () {
         let href = $(this).attr("href");

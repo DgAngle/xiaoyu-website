@@ -17,20 +17,20 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/user")
 public class UserController {
 
+    private static final String user_path = "pagelist/user";
+
     @Autowired
     private UserService userService;
     @Autowired
     private RoleService roleService;
 
-    @RequestMapping("userList")
+    @RequestMapping("goList")
     public String goUserList(Model model, UserBean userBean) {
         model.addAttribute("userList", userService.queryUser(userBean));
         model.addAttribute("roleList", roleService.queryRole(new RoleBean()));
-        return "user/userList";
+        return this.user_path + "/userList";
     }
 
-
-    public String queryUser(Model model) {
-        return "user/userList";
+    public void queryUser() {
     }
 }
