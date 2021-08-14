@@ -1,4 +1,4 @@
-let commonUtil;
+var commonUtil = commonUtil || {};
 
 window.onload = function () {
     // 获取页面路径
@@ -13,13 +13,27 @@ window.onload = function () {
             $(this).parent("li").parent("ul").parent("li").addClass("active");
         }
     });
+}
 
-    commonUtil = commonUtil || {};
+/*弹出模态框*/
+commonUtil.openDialog = function (title, url, callback) {
+    console.log(title);
+}
 
-    /*弹出模态框*/
-    commonUtil.openDialog = function (title, url, callback) {
-        console.log(title);
-    }
+/*Ajax请求*/
+commonUtil.ajax = function (url, data, successCallback) {
+    $.ajax({
+        // async: false, // 默认true, 异步执行
+        // traditional:true // 默认为false,是否使用传统的方式浅层序列化, 如果是数组, 设置为true
+        url: url,
+        data: data,
+        type: 'POST',
+        dataType: 'JSON',
+        success: successCallback,
+        error: function () {
+            alert("error!");
+        }
+    })
 }
 
 

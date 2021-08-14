@@ -1,6 +1,6 @@
 <!-- catAddModel -->
 <div class="modal fade" id="collectionCatModal" tabindex="-1" aria-labelledby="collectionCatModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-scrollable" style="max-width: 80%;">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="collectionCatModalLabel">新增收藏分类</h5>
@@ -9,70 +9,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="accordion" id="accordionExample">
-                    <div class="card">
-                        <div class="card-header" id="headingOne">
-                            <h2 class="mb-0">
-                                <button class="btn btn-link btn-block text-left" type="button"
-                                        data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                                        aria-controls="collapseOne">
-                                    1. 用户信息
-                                </button>
-                            </h2>
-                        </div>
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
-                            <div class="card-body">
-                                <form class="form-inline comm-form-search">
-                                    <div class="form-group col-md-6 comm-form-item">
-                                        <label for="realnameIn" class="col-form-label"><span><span
-                                                style="color: red">*</span>姓名:</span></label>
-                                        <input type="text" class="form-control" id="realnameIn">
-                                    </div>
-                                    <div class="form-group col-md-6 comm-form-item">
-                                        <label for="sexIn" class="col-form-label"><span><span
-                                                style="color: red">*</span>性别:</span></label>
-                                        <input type="text" class="form-control" id="sexIn">
-                                    </div>
-                                    <div class="form-group col-md-6 comm-form-item">
-                                        <label for="usernameIn" class="col-form-label"><span><span
-                                                style="color: red">*</span>用户名:</span></label>
-                                        <input type="text" class="form-control" id="usernameIn">
-                                    </div>
-                                    <div class="form-group col-md-6 comm-form-item">
-                                        <label for="password" class="col-form-label"><span><span
-                                                style="color: red">*</span>密码:</span></label>
-                                        <input type="text" class="form-control" id="password">
-                                    </div>
-                                    <div class="form-group col-md-12 comm-form-item ">
-                                        <label for="remark" class="col-form-label"><span><span>&nbsp&nbsp</span>备注:</span></label>
-                                        <textarea class="form-control" id="remark"></textarea>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                <form>
+                    <div class="form-group">
+                        <label for="collectionCatNameEdit"><span style="color: red">*</span>收藏分类名称：</label>
+                        <input type="text" class="form-control" id="collectionCatNameEdit" aria-describedby="emailHelp" v-model="collectionCatForm.collectionCatName" autocomplete="off">
+                        <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
                     </div>
-                    <div class="card">
-                        <div class="card-header" id="headingThree">
-                            <h2 class="mb-0">
-                                <button class="btn btn-link btn-block text-left collapsed" type="button"
-                                        data-toggle="collapse" data-target="#collapseThree"
-                                        aria-expanded="false"
-                                        aria-controls="collapseThree">
-                                    3. 其他信息
-                                </button>
-                            </h2>
-                        </div>
-                        <div id="collapseThree" class="collapse show" aria-labelledby="headingThree">
-                            <div class="card-body" id="otherContent">
-                                <table id="tableContent"></table>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label for="orderNumEdit"><span style="color: red"></span>排序号：</label>
+                        <input type="text" class="form-control" id="orderNumEdit" v-model="collectionCatForm.orderNum" autocomplete="off">
                     </div>
-                </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">确认</button>
+                <button type="button" class="btn btn-primary" @click="addCollectionCat()">确认</button>
             </div>
         </div>
     </div>

@@ -32,15 +32,14 @@ public class CollectionController {
     @RequestMapping("/cat/list")
     @ResponseBody
     public R catList(CollectionCatBean collectionCatBean) {
-        collectionService.queryCollectionCatList(collectionCatBean);
-        return R.success();
+        return R.success().data("collectionCatList", collectionService.queryCollectionCatList(collectionCatBean));
     }
 
     @RequestMapping("/cat/add")
     @ResponseBody
     public R catAdd(CollectionCatBean collectionCatBean) {
         collectionService.addCollectionCat(collectionCatBean);
-        return R.success();
+        return R.success().message("添加成功！");
     }
 
     /************************* 收藏主表 *************************/

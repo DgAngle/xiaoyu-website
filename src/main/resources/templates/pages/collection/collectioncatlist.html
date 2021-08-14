@@ -16,7 +16,7 @@
         <div th:replace="collectionedit/collectioncatadd"></div>
 
         <div class="row comm-operate">
-            <button class="btn btn-outline-primary btn-sm" @click="addCollectionCat()"><i class="fa fa-plus-square"></i>&nbsp;
+            <button class="btn btn-outline-primary btn-sm" @click="openCollectionCatAdd()"><i class="fa fa-plus-square"></i>&nbsp;
                 新增收藏分类
             </button>
         </div>
@@ -43,7 +43,7 @@
             <tbody>
             <tr v-for="(collectCat, index) in collectionCatList">
                 <th>{{index + 1}}</th>
-                <th>{{collectCat.collectCatName}}</th>
+                <th>{{collectCat.collectionCatName}}</th>
                 <th>{{collectCat.orderNum}}</th>
                 <th>
                     <a href="#" title="修改"><i class="fa fa-pencil"></i></a>
@@ -52,26 +52,10 @@
             </tr>
             </tbody>
         </table>
-
     </div>
 </div>
 <!-- 公共 js -->
 <div th:replace="common/common_js"></div>
-<script>
-    new Vue({
-        el: "#collectionCatContainer",
-        data: {
-            collectionCatList: {}
-        },
-        methods: {
-            addCollectionCat() {
-                $("#collectionCatModal").modal({
-                    keyboard: true,
-                    backdrop: "static"
-                })
-            }
-        }
-    })
-</script>
+<script type="text/javascript" src="/js/pages/collectioncat.js"></script>
 </body>
 </html>

@@ -7,6 +7,7 @@ import com.xiaoyu.service.CollectionService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,6 +28,7 @@ public class CollectionServiceImpl implements CollectionService {
 
     @Override
     public int addCollectionCat(CollectionCatBean collectionCatBean) {
+        collectionCatBean.setCreateDt(new Date());
         return collectionMapper.addCollectionCat(collectionCatBean);
     }
 
@@ -39,6 +41,7 @@ public class CollectionServiceImpl implements CollectionService {
 
     @Override
     public int addCollection(CollectionBean collectionBean) {
+        collectionBean.setCreateDt(new Date());
         return collectionMapper.addCollection(collectionBean);
     }
 }
