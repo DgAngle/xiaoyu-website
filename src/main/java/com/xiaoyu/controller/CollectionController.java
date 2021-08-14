@@ -18,15 +18,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/collect")
 public class CollectionController {
 
+    private static final String collection_path = "pagelist/collection";
+    private static final String collection_cat_path = "pagelist/collection";
+
     @Autowired
     private CollectionService collectionService;
 
 
     /************************* 收藏分类 *************************/
 
-    @RequestMapping("/cat/goCatList")
+    @RequestMapping("/cat/goList")
     public String goCatList(CollectionCatBean collectionCatBean) {
-        return "collection/collectioncatlist";
+        return this.collection_cat_path + "/collectioncatlist";
     }
 
     @RequestMapping("/cat/list")
@@ -47,7 +50,7 @@ public class CollectionController {
 
     @RequestMapping("/goList")
     public String goList(CollectionCatBean collectionCatBean) {
-        return "collection/collectionlist";
+        return this.collection_path + "/collectionlist";
     }
 
     @RequestMapping("/list")
