@@ -1,10 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<!-- catAddModel -->
+<div class="modal fade" id="collectionCatModal" tabindex="-1" aria-labelledby="collectionCatModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="collectionCatModalLabel">新增收藏分类</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="collectionCatNameEdit"><span style="color: red">*</span>收藏分类名称：</label>
+                        <input type="text" class="form-control" id="collectionCatNameEdit" aria-describedby="emailHelp" v-model="collectionCatForm.collectionCatName" autocomplete="off">
+                        <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                    </div>
+                    <div class="form-group">
+                        <label for="orderNumEdit"><span style="color: red"></span>排序号：</label>
+                        <input type="text" class="form-control" id="orderNumEdit" v-model="collectionCatForm.orderNum" autocomplete="off">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" @click="addCollectionCat()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>

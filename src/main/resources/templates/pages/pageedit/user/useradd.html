@@ -1,0 +1,48 @@
+<!-- catAddModel -->
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalLabel">新增用户</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="userNameEdit"><span style="color: red">*</span>用户名称：</label>
+                        <input type="text" class="form-control" id="userNameEdit" aria-describedby="emailHelp"
+                               v-model="userForm.username" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordEdit"><span style="color: red">*</span>用户密码：</label>
+                        <input type="text" class="form-control" id="passwordEdit" aria-describedby="emailHelp"
+                               v-model="userForm.password" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="realnameEdit"><span style="color: red">*</span>真实姓名：</label>
+                        <input type="text" class="form-control" id="realnameEdit" v-model="userForm.realname"
+                               autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="realnameEdit"><span style="color: red">*</span>性别：</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sex" id="man" @click="checkSex(1)" :checked="userForm.sex == 1">
+                            <label class="form-check-label" for="man">男</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sex" id="woman" @click="checkSex(0)" :checked="userForm.sex == 0">
+                            <label class="form-check-label" for="woman">女</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" @click="addUser()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>

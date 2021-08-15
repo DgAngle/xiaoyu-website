@@ -7,9 +7,9 @@ import java.util.Date;
  * 日期工具类
  */
 public class DateUtil {
-    
+
     /**
-     * 解析年龄, 小于1岁 按1岁算
+     * 计算年龄, 小于1岁 按1岁算
      *
      * @param birthday 生日
      * @param nowDt    计算时间

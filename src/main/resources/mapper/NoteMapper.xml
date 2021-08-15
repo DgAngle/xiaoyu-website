@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoyu.dao.NoteMapper">
+    <select id="queryNoteCatListCount" parameterType="noteCatBean" resultType="java.lang.Integer">
+        select count(1)
+        from note_cat limit #{start}, #{pageCount}
+    </select>
+
+    <select id="queryNoteCatList" parameterType="noteCatBean" resultType="noteCatBean">
+        select noteCatId,
+               noteCatName,
+               noteCatNum,
+               parentNoteCatNum,
+               parentNoteCatId,
+               orderNum,
+               createDt,
+               createBy
+        from note_cat
+        order by length(noteCatNum), orderNum desc
+            limit #{start}, #{pageCount}
+    </select>
+
+    <select id="queryNoteCatByNoteCatName" resultType="java.lang.Integer">
+        select count(1)
+        from note_cat
+        where noteCatName = #{noteCatName}
+    </select>
+
+    <select id="queryNoteCatByNoteCatId" resultType="noteCatBean">
+        select noteCatId, noteCatName, noteCatNum, parentNoteCatNum, parentNoteCatId, orderNum
+        from note_cat
+        where noteCatId = #{noteCatId}
+    </select>
+
+    <select id="queryMaxNoteCatNum" resultType="java.lang.String">
+        select max(noteCatNum)
+        from note_cat
+        where noteCatNum like concat(#{noteCatNum}, '____')
+    </select>
+
+    <insert id="addNoteCat" parameterType="roleBean">
+        insert into note_cat(noteCatId, noteCatName, noteCatNum, parentNoteCatNum, parentNoteCatId, orderNum, createDt,
+                             createBy)
+        values (#{noteCatId}, #{noteCatName}, #{noteCatNum}, #{parentNoteCatNum}, #{parentNoteCatId}, #{orderNum},
+                #{createDt}, #{createBy})
+    </insert>
+
+</mapper>

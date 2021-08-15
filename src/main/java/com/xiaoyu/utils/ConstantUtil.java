@@ -8,4 +8,9 @@ public class ConstantUtil {
     public static final char[] letter_lowercase_array = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
     // 大写字母数组
     public static final char[] letter_uppercase_array = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+
+    // 分类编号长度
+    public static final int cat_num_length = 4;
+    // 分类编号起始值
+    public static final String cat_num_begin = "0001";
 }

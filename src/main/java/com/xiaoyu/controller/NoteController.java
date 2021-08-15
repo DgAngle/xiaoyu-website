@@ -2,8 +2,9 @@ package com.xiaoyu.controller;
 
 import com.xiaoyu.common.ListResult;
 import com.xiaoyu.entity.NoteCatBean;
-import com.xiaoyu.service.NoteCatService;
+import com.xiaoyu.service.NoteService;
 import com.xiaoyu.utils.R;
+import com.xiaoyu.utils.RCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,31 +21,40 @@ public class NoteController {
     private static final String note_cat_path = "pagelist/note";
 
     @Autowired
-    private NoteCatService noteCatService;
+    private NoteService noteService;
 
     /***************** 笔记分类 *****************/
 
     // 进入笔记分类
-    @RequestMapping("goList")
+    @RequestMapping("/cat/goList")
     public String goNoteCat() {
-        return this.note_cat_path + "/noteCatList";
+        return this.note_cat_path + "/notecatlist";
     }
 
     // 笔记分类列表查询
-    @RequestMapping("queryNoteCatList")
+    @RequestMapping("/cat/list")
     @ResponseBody
     public R queryNoteCatList(NoteCatBean noteCatBean) {
-        ListResult<NoteCatBean> listResult = noteCatService.queryNoteCatList(noteCatBean);
+        ListResult<NoteCatBean> listResult = noteService.queryNoteCatList(noteCatBean);
 
         return R.success()
                 .data("noteCatList", listResult.getList())
                 .data("pagination", listResult.getPagination());
     }
 
+    // 笔记分类列表查询
+    @RequestMapping("/cat/add")
+    @ResponseBody
+    public R addNoteCat(NoteCatBean noteCatBean) {
+        int r = noteService.addNoteCat(noteCatBean);
+        if (r == RCode.repeat_code) return R.error().message("笔记分类名称重复, 请重新输入！");
+        return R.success().message("添加成功！");
+    }
+
     /***************** 笔记 *****************/
 
-    @RequestMapping("cat/goList")
+    @RequestMapping("/goList")
     public String goNoteList() {
-        return this.note_path + "/noteList";
+        return this.note_path + "/notelist";
     }
 }

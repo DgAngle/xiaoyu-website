@@ -14,7 +14,7 @@
     <!-- 内容区域 -->
     <div id="noteCatContainer" class="container-fluid">
         <div class="row comm-operate">
-            <button class="btn btn-outline-primary btn-sm" @click="openAdd()"><i class="fa fa-plus-square"></i>
+            <button class="btn btn-outline-primary btn-sm" @click="openNoteCatAdd()"><i class="fa fa-plus-square"></i>
                 添加笔记分类
             </button>
         </div>
@@ -22,17 +22,17 @@
             <thead class="thead-dark">
             <tr>
                 <th>序号</th>
-                <th>笔记编号</th>
                 <th>笔记分类名称</th>
+                <th>笔记编号</th>
                 <th>排序号</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(noteCat, index) in noteCatData.noteCatList">
+            <tr v-for="(noteCat, index) in noteCatList">
                 <th>{{index + 1}}</th>
-                <th>{{noteCat.noteCatNum}}</th>
                 <th>{{noteCat.noteCatName}}</th>
+                <th>{{noteCat.noteCatNum}}</th>
                 <th>{{noteCat.orderNum}}</th>
                 <th>
                     <a href="#" title="修改"><i class="fa fa-pencil"></i></a>
@@ -84,34 +84,35 @@
 
 <!-- 公共 js -->
 <div th:include="common/common_js"></div>
-<script>
-    let noteCatData = {
-        noteCatList: [
-            {noteCatNum: '0001', noteCatName: '学习笔记', orderNum: 100},
-            {noteCatNum: '0002', noteCatName: '工作经验', orderNum: 800},
-            {noteCatNum: '0003', noteCatName: '生活记事', orderNum: 60}
-        ],
-    };
+<script type="text/javascript" src="/js/pages/notecat.js"></script>
+<!--<script>-->
+<!--    let noteCatData = {-->
+<!--        noteCatList: [-->
+<!--            {noteCatNum: '0001', noteCatName: '学习笔记', orderNum: 100},-->
+<!--            {noteCatNum: '0002', noteCatName: '工作经验', orderNum: 800},-->
+<!--            {noteCatNum: '0003', noteCatName: '生活记事', orderNum: 60}-->
+<!--        ],-->
+<!--    };-->
 
-    let noteCatAddData = {
-        notCatName: '',
-    }
+<!--    let noteCatAddData = {-->
+<!--        notCatName: '',-->
+<!--    }-->
 
-    function openAdd() {
-        $("#noteCatModal").modal({
-            keyboard: true,
-            backdrop: "static"
-        })
-    }
+<!--    function openAdd() {-->
+<!--        $("#noteCatModal").modal({-->
+<!--            keyboard: true,-->
+<!--            backdrop: "static"-->
+<!--        })-->
+<!--    }-->
 
-    new Vue({
-        el: "#noteCatContainer",
-        data: noteCatData
-    })
-    new Vue({
-        el: "#noteCatModal",
-        data: noteCatAddData
-    })
-</script>
+<!--    new Vue({-->
+<!--        el: "#noteCatContainer",-->
+<!--        data: noteCatData-->
+<!--    })-->
+<!--    new Vue({-->
+<!--        el: "#noteCatModal",-->
+<!--        data: noteCatAddData-->
+<!--    })-->
+<!--</script>-->
 </body>
 </html>

@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public List<UserBean> queryUser(UserBean userBean) {
-        return userMapper.queryUser(userBean);
+    public List<UserBean> queryUserList(UserBean userBean) {
+        return userMapper.queryUserList(userBean);
     }
 }
