@@ -55,14 +55,13 @@ public class CollectionController {
     @RequestMapping("/list")
     @ResponseBody
     public R list(CollectionBean collectionBean) {
-        collectionService.queryCollectionList(collectionBean);
-        return R.success();
+        return R.success().data("collectionList", collectionService.queryCollectionList(collectionBean));
     }
 
     @RequestMapping("/add")
     @ResponseBody
     public R add(CollectionBean collectionBean) {
         collectionService.addCollection(collectionBean);
-        return R.success();
+        return R.success().message("添加成功！");
     }
 }

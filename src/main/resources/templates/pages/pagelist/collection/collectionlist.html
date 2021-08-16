@@ -13,53 +13,50 @@
 
     <!-- 内容区域 -->
     <div id="collectionContainer" class="container-fluid">
+        <div th:replace="pageedit/collection/collectionadd"></div>
+
         <div class="row comm-operate">
-            <button class="btn btn-outline-primary btn-sm" @click="openAdd()"><i class="fa fa-plus-square"></i>&nbsp;
+            <button class="btn btn-outline-primary btn-sm" @click="openCollectionAdd()"><i class="fa fa-plus-square"></i>&nbsp;
                 新增收藏
             </button>
         </div>
 
-        <form class="form-inline form-search form-search-label" action="userList">
+        <form class="form-inline form-search " onsubmit="return false;">
             <div class="form-group col-sm-3 ">
-                <label for="collectionName" class="col-form-label ">收藏名称:</label>
-                <input type="text" class="form-control form-control-sm" id="collectionName" placeholder="">
+                <label for="collectionName" class="col-form-label ">收藏名称:&nbsp;&nbsp;</label>
+                <input type="text" class="form-control form-control-sm" id="collectionName" v-model="collectionQuery.collectionName" placeholder="" autocomplete="off"
+                       @keyup.enter="refreshCollationList()">
             </div>
-            <div class="form-group col-sm-3">
-                <label for="collectionCat" class="col-form-label">收藏类型:</label>
-                <select class="form-control form-control-sm" id="collectionCat">
-                    <option></option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+            <div class="form-group col-sm-3 ">
+                <label for="collectionCatName">收藏分类：&nbsp;&nbsp;</label>
+                <select class="form-control form-control-sm" id="collectionCatName" v-model="collectionQuery.collectionCatId">
+                    <option value="-1"></option>
+                    <option v-for="collectionCat in collectionCatList" :value="collectionCat.collectionCatId">{{collectionCat.collectionCatName}}</option>
                 </select>
             </div>
-            <div class="form-group col-sm-3 ">
-            </div>
-            <div class="form-group col-sm-3 ">
-                <button type="submit" class="btn btn-outline-primary btn-sm">搜索</button>
+            <div class="form-group col-sm-2 ">
+                <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshCollationList()">搜索</button>
             </div>
         </form>
 
         <table class="table table-hover table-striped comm-table">
             <thead class="thead-dark">
             <tr>
-                <th>序号</th>
-                <th>收藏名称</th>
-                <th>收藏类型</th>
-                <th>地址</th>
-                <th>描述</th>
-                <th>操作</th>
+                <th width="60">序号</th>
+                <th width="180">收藏名称</th>
+                <th width="100">收藏分类</th>
+                <th width="200">地址</th>
+                <th width="200">备注</th>
+                <th width="80">操作</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="(collect, index) in collectionList">
                 <th>{{index + 1}}</th>
-                <th>{{collect.collectName}}</th>
-                <th>{{collect.collectCatName}}</th>
-                <th>{{collect.collectUrl}}</th>
-                <th>{{collect.remark}}</th>
+                <th>{{collect.collectionName}}</th>
+                <th>{{collect.collectionCatName}}</th>
+                <th><a :href="collect.collectionUrl" style="text-decoration: underline;" target="_blank">{{collect.collectionUrl}}</a></th>
+                <th :title="collect.remark">{{collect.remark | ellipsis}}</th>
                 <th>
                     <a href="#" title="修改"><i class="fa fa-pencil"></i></a>
                     <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>

@@ -21,13 +21,14 @@
             </button>
         </div>
 
-        <form class="form-inline form-search " action="userList">
+        <form class="form-inline form-search " onsubmit="return false;">
             <div class="form-group col-sm-3 ">
-                <label for="collectionName" class="col-form-label ">收藏分类名称:</label>
-                <input type="text" class="form-control form-control-sm" id="collectionName" placeholder="">
+                <label for="collectionCatName" class="col-form-label ">收藏分类名称:&nbsp;&nbsp;</label>
+                <input type="text" class="form-control form-control-sm" id="collectionCatName" placeholder="" autocomplete="off" v-model="collectionCatQuery.collectionCatName"
+                       @keyup.enter="refreshCollationCatList()">
             </div>
             <div class="form-group col-sm-2 ">
-                <button type="submit" class="btn btn-outline-primary btn-sm">搜索</button>
+                <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshCollationCatList()">搜索</button>
             </div>
         </form>
 

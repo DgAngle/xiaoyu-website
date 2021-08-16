@@ -27,10 +27,12 @@ new Vue({
             let _this = this;
             let url = "/note/cat/add";
             commonUtil.ajax(url, _this.noteCatForm, function (res) {
-                if (res && res.data.value) {
-                    alert(res.data.message);
+                if (res && res.value) {
+                    alert(res.message);
                     $("#noteCatModal").modal('hide');
                     _this.refreshNoteCatList();
+                } else {
+                    alert(res.message);
                 }
             })
         },

@@ -78,6 +78,12 @@
     margin-right: 12px;
 }
 
+/* 表单 */
+.form-select-default {
+    height: calc(2.25rem + 8px) !important;
+}
+
+
 .border-rebeccapurple {
     border: 1px solid rebeccapurple;
 }

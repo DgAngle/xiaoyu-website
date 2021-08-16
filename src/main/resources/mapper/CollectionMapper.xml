@@ -3,9 +3,19 @@
 <mapper namespace="com.xiaoyu.dao.CollectionMapper">
 
     <!-- ************************* 收藏分类 ************************* -->
+    <sql id="collection_cat_query_condition">
+        <if test="collectionCatName != null and collectionCatName != ''">
+            and collectionCatName like concat('%',concat(#{collectionCatName},'%'))
+        </if>
+    </sql>
+
     <select id="queryCollectionCatList" parameterType="collectionCatBean" resultType="collectionCatBean">
         select *
-        from collection_cat limit #{start}, #{pageCount}
+        from collection_cat
+        where 1=1
+        <include refid="collection_cat_query_condition"></include>
+        order by orderNum desc
+        limit #{start}, #{pageCount}
     </select>
 
     <insert id="addCollectionCat" parameterType="collectionCatBean">
@@ -14,13 +24,33 @@
     </insert>
 
     <!-- ************************* 收藏主表 ************************* -->
-    <select id="queryCollectionList" parameterType="collectionBean" resultType="collectionBean">
-        select *
-        from collection limit #{start}, #{pageCount}
+    <sql id="collection_query_condition">
+        <if test="collectionName != null and collectionName != ''">
+            and cn.collectionName like concat('%',concat(#{collectionName},'%'))
+        </if>
+        <if test="collectionCatId != null and collectionCatId != -1 ">
+            and cn.collectionCatId = #{collectionCatId}
+        </if>
+    </sql>
+
+    <select id="queryCollectionList" parameterType="collectionBean" resultType="collectionVo">
+        select cn.collectionId,
+        cn.collectionName,
+        cn.collectionUrl,
+        cn.collectionCatId,
+        cn.remark,
+        cn.createDt,
+        cn.createBy,
+        ccn.collectionCatName
+        from collection cn
+        inner join collection_cat ccn on cn.collectionCatId = ccn.collectionCatId
+        where 1=1
+        <include refid="collection_query_condition"></include>
+        order by createDt desc limit #{start}, #{pageCount}
     </select>
 
     <insert id="addCollection" parameterType="collectionBean">
-        insert into role(collectionName, collectionUrl, collectionCatId, remark, createDt, createBy)
+        insert into collection(collectionName, collectionUrl, collectionCatId, remark, createDt, createBy)
         values (#{collectionName}, #{collectionUrl}, #{collectionCatId}, #{remark}, #{createDt}, #{createBy})
     </insert>
 </mapper>

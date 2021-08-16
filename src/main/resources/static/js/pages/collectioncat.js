@@ -25,8 +25,8 @@ new Vue({
             let _this = this;
             let url = "/collect/cat/add";
             commonUtil.ajax(url, _this.collectionCatForm, function (res) {
-                if (res && res.data.value) {
-                    alert(res.data.message);
+                if (res && res.value) {
+                    alert(res.message);
                     $("#collectionCatModal").modal('hide');
                     _this.refreshCollationCatList();
                 }
