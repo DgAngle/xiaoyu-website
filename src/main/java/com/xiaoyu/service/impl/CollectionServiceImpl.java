@@ -1,5 +1,7 @@
 package com.xiaoyu.service.impl;
 
+import com.xiaoyu.common.ListResult;
+import com.xiaoyu.common.Pagination;
 import com.xiaoyu.dao.CollectionMapper;
 import com.xiaoyu.entity.CollectionBean;
 import com.xiaoyu.entity.CollectionCatBean;
@@ -35,8 +37,18 @@ public class CollectionServiceImpl implements CollectionService {
     /************************* 收藏主表 *************************/
 
     @Override
-    public List<CollectionBean> queryCollectionList(CollectionBean collectionBean) {
-        return collectionMapper.queryCollectionList(collectionBean);
+    public ListResult<CollectionBean> queryCollectionList(CollectionBean collectionBean) {
+        ListResult<CollectionBean> listResult = new ListResult<>();
+        int totalCount = collectionMapper.queryCollectionListCount(collectionBean);
+        if (totalCount > 0) listResult.setList(collectionMapper.queryCollectionList(collectionBean));
+
+        Pagination pagination = new Pagination();
+        pagination.setTotalCount(totalCount);
+        pagination.setPageCount(collectionBean.getPageCount());
+        pagination.setStart(collectionBean.getStart());
+        pagination.setCurrentPage(collectionBean.getCurrentPage());
+        listResult.setPagination(pagination);
+        return listResult;
     }
 
     @Override

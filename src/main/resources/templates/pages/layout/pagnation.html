@@ -1,10 +1,123 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div id="paginationContainer" class="">
+    <div :hidden="pagination.totalCount > 0">没有符合的条件</div>
 
-</body>
-</html>
+    <div class="row pagination-text" :hidden="pagination.totalCount <= 0">
+        <div class="col-md-6">
+            <div class="float-left">
+                <span> 从</span>
+                <span> {{pagination.start + 1}} </span>
+                <span> 到</span>
+                <span> {{pagination.end}} </span>
+                <span> ，共</span>
+                <span> {{pagination.totalCount}} </span>
+                <span> 条数据，每页显示 </span>
+            </div>
+            <select class="form-control float-left pagination-select" @change="pageCountChanged($event)" v-model="pagination.pageCount">
+                <option v-for="count in paginationSelect" :value="count">{{count}}</option>
+            </select>
+        </div>
+        <div class="col">
+            <div class="row ">
+                <div class="col-md-12 float-right">
+                    <div class="input-group float-right" style="width:8em; margin-left: 10px;">
+                        <input type="text" id="directNum" style="width:2em" class="form-control form-control-sm" placeholder="页码" aria-label="页码" title="输入页码"
+                               data-toggle="tooltip" autocomplete="off" v-model="toPage">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-outline-primary" type="button" @click="goToPage()">直达</button>
+                        </div>
+                    </div>
+                    <nav aria-label="Page navigation" class="float-right">
+                        <ul class="pagination">
+                            <li class="page-item" :class="{disabled: pagination.currentPage==1}" @click="prevPage()">
+                                <a class="page-link" href="javascript:void(0);" aria-label="Previous" title="上一页" data-toggle="tooltip">
+                                    <!--<span aria-hidden="true">&laquo;</span>-->
+                                    <span aria-hidden="true">&lt;</span>
+                                </a>
+                            </li>
+                            <li class="page-item" v-for="pageNum in pageNums" :class="{active: pagination.currentPage==pageNum}" @click="goToPage(pageNum)"><a class="page-link"
+                                                                                                                                                               href="#">{{pageNum}}</a></li>
+                            <li class="page-item" :class="{disabled: pagination.currentPage==pagination.totalPage}" @click="nextPage()">
+                                <a class="page-link" href="javascript:void(0);" aria-label="" title="下一页" data-toggle="tooltip">
+                                    <!--<span aria-hidden="true">&raquo;</span>-->
+                                    <span aria-hidden="true">&gt;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var paginationVm = new Vue({
+        el: '#paginationContainer',
+        data: {
+            paginationSelect: [5, 10, 15, 20, 30, 50, 100],
+            pagination: {
+                start: 1, // 当前页开始
+                end: 0, // 当前页结束
+                totalCount: 0, // 总数量
+                currentPage: 1, // 当前页数
+                pageCount: 15, // 每页个数
+                totalPage: 0, // 总页数
+            },
+            toPage: null,
+            pageNums: [],
+        },
+        mounted: function () {
+            // this.initNumbers();
+        },
+        methods: {
+            initNumbers() {
+                let _this = this;
+                _this.pageNums = [];
+                let pages = _this.pagination.totalCount / _this.pagination.pageCount;
+                _this.pagination.totalPage = pages <= 1 ? 1 : pages;
+                _this.pagination.end = _this.pagination.start + _this.pagination.pageCount > _this.pagination.totalCount
+                    ? _this.pagination.totalCount : _this.pagination.start + _this.pagination.pageCount;
+                let j = 0;
+                // TODO 有问题, 需要修改
+                for (let i = _this.pagination.totalPage - 5 > 0 ? (_this.pagination.totalPage - 5) : 0; i < _this.pagination.totalPage; i++) {
+                    _this.pageNums[j++] = i + 1;
+                }
+            },
+            pageCountChanged(e) {
+                let _this = this;
+                _this.pageCount = e.target.value
+                _this.query();
+            },
+            query() {
+                let _this = this;
+                let pageQuery = $("#queryForm").serialize();
+                pageQuery += "&currentPage=" + parseInt(_this.pagination.currentPage) + "&pageCount=" + _this.pagination.pageCount;
+                listVm.refreshPaginationList(pageQuery);
+            },
+            goToPage(toPage) {
+                let _this = this;
+                _this.pagination.currentPage = toPage || _this.toPage;
+                if (_this.pagination.currentPage > _this.pagination.totalPage || _this.pagination.currentPage < 1) {
+                    alert("页码范围在1-" + _this.pagination.totalPage + "之间");
+                    return;
+                }
+                _this.query();
+            },
+            prevPage() {
+                let _this = this;
+                if (_this.pagination.currentPage == 1) return;
+                _this.pagination.currentPage = _this.pagination.currentPage - 1 < 1 ? 1 : _this.pagination.currentPage - 1;
+                _this.query();
+            },
+            nextPage() {
+                let _this = this;
+                if (_this.pagination.currentPage == _this.pagination.totalPage) return;
+                _this.pagination.currentPage = _this.pagination.currentPage + 1 > _this.pagination.totalPage ? _this.pagination.totalPage : _this.pagination.currentPage + 1;
+                _this.query();
+            }
+
+        }
+    })
+</script>
+

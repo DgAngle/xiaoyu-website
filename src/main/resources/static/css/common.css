@@ -39,6 +39,13 @@
     margin-top: 10px;
 }
 
+.form-search div label {
+    font-size: 14px;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
 .form-search-label label {
     padding-right: 10px;
 }
@@ -83,6 +90,17 @@
     height: calc(2.25rem + 8px) !important;
 }
 
+
+/* 分页 */
+.pagination-text{
+    font-size: 14px;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    line-height: 40px;
+}
+.pagination-select{
+    margin-left:5px;width: auto;!important;
+}
 
 .border-rebeccapurple {
     border: 1px solid rebeccapurple;

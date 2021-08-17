@@ -1,5 +1,6 @@
 package com.xiaoyu.controller;
 
+import com.xiaoyu.common.ListResult;
 import com.xiaoyu.entity.CollectionBean;
 import com.xiaoyu.entity.CollectionCatBean;
 import com.xiaoyu.service.CollectionService;
@@ -55,7 +56,10 @@ public class CollectionController {
     @RequestMapping("/list")
     @ResponseBody
     public R list(CollectionBean collectionBean) {
-        return R.success().data("collectionList", collectionService.queryCollectionList(collectionBean));
+        ListResult<CollectionBean> listResult = collectionService.queryCollectionList(collectionBean);
+        return R.success()
+                .data("collectionList", listResult.getList())
+                .data("pagination", listResult.getPagination());
     }
 
     @RequestMapping("/add")

@@ -1,5 +1,5 @@
 /* 收藏 */
-new Vue({
+let listVm = new Vue({
     el: "#collectionContainer",
     data: {
         collectionQuery: {
@@ -71,6 +71,16 @@ new Vue({
             let url = "/collect/list";
             commonUtil.ajax(url, _this.collectionQuery, function (res) {
                 _this.collectionList = res.data.collectionList;
+                paginationVm.pagination = res.data.pagination;
+                paginationVm.initNumbers();
+            })
+        },
+        refreshPaginationList(pageQuery) {
+            let _this = this;
+            commonUtil.ajax("/collect/list", pageQuery, function (res) {
+                _this.collectionList = res.data.collectionList;
+                paginationVm.pagination = res.data.pagination;
+                paginationVm.initNumbers();
             })
         }
     }

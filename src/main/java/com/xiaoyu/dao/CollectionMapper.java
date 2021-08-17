@@ -13,12 +13,14 @@ import java.util.List;
 public interface CollectionMapper {
 
     /************************* 收藏分类 *************************/
-    
+
     List<CollectionCatBean> queryCollectionCatList(CollectionCatBean collectionCatBean);
 
     int addCollectionCat(CollectionCatBean collectionCatBean);
 
     /************************* 收藏主表 *************************/
+
+    int queryCollectionListCount(CollectionBean collectionBean);
 
     List<CollectionBean> queryCollectionList(CollectionBean collectionBean);
 

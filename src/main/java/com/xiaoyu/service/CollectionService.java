@@ -1,5 +1,6 @@
 package com.xiaoyu.service;
 
+import com.xiaoyu.common.ListResult;
 import com.xiaoyu.entity.CollectionBean;
 import com.xiaoyu.entity.CollectionCatBean;
 
@@ -19,7 +20,7 @@ public interface CollectionService {
 
     /************************* 收藏主表 *************************/
 
-    List<CollectionBean> queryCollectionList(CollectionBean collectionBean);
+    ListResult<CollectionBean> queryCollectionList(CollectionBean collectionBean);
 
     int addCollection(CollectionBean collectionBean);
 }

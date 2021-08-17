@@ -28,10 +28,14 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public ListResult<NoteCatBean> queryNoteCatList(NoteCatBean noteCatBean) {
         ListResult<NoteCatBean> listResult = new ListResult<>();
+        int totalCount = noteMapper.queryNoteCatListCount(noteCatBean);
+        if (totalCount > 0) listResult.setList(noteMapper.queryNoteCatList(noteCatBean));
+
         Pagination pagination = new Pagination();
-        if (noteMapper.queryNoteCatListCount(noteCatBean) > 0) {
-            listResult.setList(noteMapper.queryNoteCatList(noteCatBean));
-        }
+        pagination.setTotalCount(totalCount);
+        pagination.setPageCount(noteCatBean.getPageCount());
+        pagination.setStart(noteCatBean.getStart());
+        pagination.setCurrentPage(noteCatBean.getCurrentPage());
         listResult.setPagination(pagination);
         return listResult;
     }

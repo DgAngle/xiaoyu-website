@@ -33,6 +33,13 @@
         </if>
     </sql>
 
+    <select id="queryCollectionListCount" parameterType="collectionBean" resultType="java.lang.Integer">
+        select count(1)
+        from collection cn
+        where 1=1
+        <include refid="collection_query_condition"></include>
+    </select>
+
     <select id="queryCollectionList" parameterType="collectionBean" resultType="collectionVo">
         select cn.collectionId,
         cn.collectionName,
