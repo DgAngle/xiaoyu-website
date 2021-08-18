@@ -55,7 +55,7 @@
     var paginationVm = new Vue({
         el: '#paginationContainer',
         data: {
-            paginationSelect: [5, 10, 15, 20, 30, 50, 100],
+            paginationSelect: [2, 5, 10, 15, 20, 30, 50, 100],
             pagination: {
                 start: 1, // 当前页开始
                 end: 0, // 当前页结束
@@ -74,7 +74,7 @@
             initNumbers() {
                 let _this = this;
                 _this.pageNums = [];
-                let pages = _this.pagination.totalCount / _this.pagination.pageCount;
+                let pages = _this.pagination.totalCount % _this.pagination.pageCount == 0 ? _this.pagination.totalCount / _this.pagination.pageCount : parseInt(_this.pagination.totalCount / _this.pagination.pageCount) + 1;
                 _this.pagination.totalPage = pages <= 1 ? 1 : pages;
                 _this.pagination.end = _this.pagination.start + _this.pagination.pageCount > _this.pagination.totalCount
                     ? _this.pagination.totalCount : _this.pagination.start + _this.pagination.pageCount;
@@ -86,7 +86,8 @@
             },
             pageCountChanged(e) {
                 let _this = this;
-                _this.pageCount = e.target.value
+                _this.pageCount = e.target.value;
+                _this.pagination.currentPage = 1;
                 _this.query();
             },
             query() {

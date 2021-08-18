@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 16/08/2021 16:49:49
+ Date: 18/08/2021 17:34:04
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `collection`  (
   `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   PRIMARY KEY (`collectionId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of collection
@@ -49,5 +49,6 @@ INSERT INTO `collection` VALUES (11, 'iconfont-阿里巴巴矢量图标库', 'ht
 INSERT INTO `collection` VALUES (12, 'CSDN', 'https://www.csdn.net/', 1, 'CSDN-IT博客网站', '2021-08-16 14:32:47', NULL);
 INSERT INTO `collection` VALUES (13, '自定义定时任务', 'https://www.cnblogs.com/likun10579/p/10896831.html', 9, '自定义定时任务，从数据库读取定时任务的参数来决定何时执行定时任务', '2021-08-16 15:00:34', NULL);
 INSERT INTO `collection` VALUES (14, 'BootCDN', 'https://www.bootcdn.cn/', 1, '前端资源文件，如：vue.js，jquery.js ...CDN整合，稳定、快速、免费的前端开源项目 CDN 加速服务', '2021-08-16 16:48:58', NULL);
+INSERT INTO `collection` VALUES (15, 'Vue', 'https://cn.vuejs.org/', 1, 'Vue官网', '2021-08-17 14:29:19', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
