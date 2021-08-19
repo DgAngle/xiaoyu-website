@@ -12,6 +12,12 @@ window.onload = function () {
             $(this).parent("li").parent("ul").parent("li").addClass("active");
         }
     });
+
+    Qmsg.config({
+        position: 'center',
+        showClose: true,
+        timeout: 5000
+    })
 }
 
 /*弹出模态框*/

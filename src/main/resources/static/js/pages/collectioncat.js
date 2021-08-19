@@ -64,7 +64,7 @@ new Vue({
             else url = '/collect/cat/update';
             commonUtil.ajax(url, _this.collectionCatForm, function (res) {
                 if (res && res.value) {
-                    alert(res.message);
+                    Qmsg.success(res.message);
                     $("#collectionCatModal").modal('hide');
                     _this.refreshCollationCatList();
                 }
@@ -74,7 +74,6 @@ new Vue({
             let _this = this;
             let url = "/collect/cat/list";
             commonUtil.ajax(url, _this.collectionCatQuery, function (res) {
-                console.log(res);
                 _this.collectionCatList = res.data.collectionCatList;
             })
         }

@@ -92,14 +92,25 @@
 
 
 /* 分页 */
-.pagination-text{
+.pagination-no-content {
+    font-size: 16px;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    line-height: 40px;
+    text-align: center;
+}
+
+.pagination-text {
     font-size: 14px;
     font-family: 'Lato', sans-serif;
     font-weight: bold;
     line-height: 40px;
 }
-.pagination-select{
-    margin-left:5px;width: auto;!important;
+
+.pagination-select {
+    margin-left: 5px;
+    width: auto;
+!important;
 }
 
 .border-rebeccapurple {

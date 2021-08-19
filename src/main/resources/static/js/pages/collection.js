@@ -95,7 +95,7 @@ let listVm = new Vue({
             else url = '/collect/update';
             commonUtil.ajax(url, _this.collectionForm, function (res) {
                 if (res && res.value) {
-                    alert(res.message);
+                    Qmsg.success(res.message);
                     $("#collectionModal").modal('hide');
                     _this.refreshCollationList();
                 }
