@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="collectionCatModalLabel">新增收藏分类</h5>
+                <h5 class="modal-title" id="collectionCatModalLabel">{{modalName}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -23,7 +23,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" @click="addCollectionCat()">确认</button>
+                <button type="button" class="btn btn-primary" @click="saveCollectionCat()">确认</button>
             </div>
         </div>
     </div>

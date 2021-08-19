@@ -34,6 +34,21 @@ public class CollectionServiceImpl implements CollectionService {
         return collectionMapper.addCollectionCat(collectionCatBean);
     }
 
+    @Override
+    public CollectionCatBean queryCollectionCatDetailById(long collectionCatId) {
+        return collectionMapper.queryCollectionCatDetailById(collectionCatId);
+    }
+
+    @Override
+    public int updateCollectionCat(CollectionCatBean collectionCatBean) {
+        return collectionMapper.updateCollectionCat(collectionCatBean);
+    }
+
+    @Override
+    public int deleteCollectionCatById(long collectionCatId) {
+        return collectionMapper.deleteCollectionCatById(collectionCatId);
+    }
+
     /************************* 收藏主表 *************************/
 
     @Override
@@ -55,5 +70,20 @@ public class CollectionServiceImpl implements CollectionService {
     public int addCollection(CollectionBean collectionBean) {
         collectionBean.setCreateDt(new Date());
         return collectionMapper.addCollection(collectionBean);
+    }
+
+    @Override
+    public CollectionBean queryCollectionDetailById(long collectionId) {
+        return collectionMapper.queryCollectionDetailById(collectionId);
+    }
+
+    @Override
+    public int updateCollection(CollectionBean collectionBean) {
+        return collectionMapper.updateCollection(collectionBean);
+    }
+
+    @Override
+    public int deleteCollectionById(long collectionId) {
+        return collectionMapper.deleteCollectionById(collectionId);
     }
 }

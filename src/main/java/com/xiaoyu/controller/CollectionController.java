@@ -46,6 +46,27 @@ public class CollectionController {
         return R.success().message("添加成功！");
     }
 
+    @RequestMapping("/cat/detail")
+    @ResponseBody
+    public R catDetail(long collectionCatId) {
+        return R.success().data("collectionCatDetail", collectionService.queryCollectionCatDetailById(collectionCatId));
+    }
+
+    @RequestMapping("/cat/update")
+    @ResponseBody
+    public R catUpdate(CollectionCatBean collectionCatBean) {
+        collectionService.updateCollectionCat(collectionCatBean);
+        return R.success().message("修改成功！");
+    }
+
+    @RequestMapping("/cat/del")
+    @ResponseBody
+    public R catDel(long collectionCatId) {
+        collectionService.deleteCollectionCatById(collectionCatId);
+        return R.success().message("删除成功！");
+    }
+
+
     /************************* 收藏主表 *************************/
 
     @RequestMapping("/goList")
@@ -67,5 +88,25 @@ public class CollectionController {
     public R add(CollectionBean collectionBean) {
         collectionService.addCollection(collectionBean);
         return R.success().message("添加成功！");
+    }
+
+    @RequestMapping("/detail")
+    @ResponseBody
+    public R detail(long collectionId) {
+        return R.success().data("collectionDetail", collectionService.queryCollectionDetailById(collectionId));
+    }
+
+    @RequestMapping("/update")
+    @ResponseBody
+    public R update(CollectionBean collectionBean) {
+        collectionService.updateCollection(collectionBean);
+        return R.success().message("修改成功！");
+    }
+
+    @RequestMapping("/del")
+    @ResponseBody
+    public R del(long collectionId) {
+        collectionService.deleteCollectionById(collectionId);
+        return R.success().message("删除成功！");
     }
 }

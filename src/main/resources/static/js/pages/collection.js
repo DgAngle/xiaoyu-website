@@ -12,6 +12,8 @@ let listVm = new Vue({
             collectionCatId: null,
             remark: '',
         },
+        modalName: '',
+        modalType: 'add',
         collectionList: {},
         collectionCatList: {}
     },
@@ -29,6 +31,7 @@ let listVm = new Vue({
         }
     },
     methods: {
+        // 获取分类列表
         queryCollectionCatList() {
             let _this = this;
             let url = "/collect/cat/list";
@@ -38,8 +41,11 @@ let listVm = new Vue({
                 }
             })
         },
-        clearForm() {
+        // 初始化新增参数
+        initAddForm() {
             let _this = this;
+            _this.modalType = 'add';
+            _this.modalName = '新增收藏';
             _this.collectionForm = {
                 collectionName: '',
                 collectionUrl: '',
@@ -47,17 +53,46 @@ let listVm = new Vue({
                 remark: '',
             };
         },
+        // 初始化修改参数
+        initEditForm(collectionDetail) {
+            let _this = this;
+            _this.modalType = 'edit';
+            _this.modalName = '修改收藏';
+            _this.collectionForm = {
+                collectionId: collectionDetail.collectionId,
+                collectionName: collectionDetail.collectionName,
+                collectionUrl: collectionDetail.collectionUrl,
+                collectionCatId: collectionDetail.collectionCatId,
+                remark: collectionDetail.remark,
+            };
+        },
+        // 打开新增模态框
         openCollectionAdd() {
             let _this = this;
-            _this.clearForm();
+            _this.initAddForm();
             $("#collectionModal").modal({
                 keyboard: true,
                 backdrop: "static"
             })
         },
-        addCollection() {
+        // 打开新增修改
+        openCollectionEdit(collectionId) {
             let _this = this;
-            let url = "/collect/add";
+            let url = "/collect/detail";
+            commonUtil.ajax(url, {'collectionId': collectionId}, function (res) {
+                _this.initEditForm(res.data.collectionDetail)
+            })
+            $("#collectionModal").modal({
+                keyboard: true,
+                backdrop: "static"
+            })
+        },
+        // 执行增/改操作
+        saveCollection() {
+            let _this = this;
+            let url = '';
+            if (_this.modalType == 'add') url = '/collect/add';
+            else url = '/collect/update';
             commonUtil.ajax(url, _this.collectionForm, function (res) {
                 if (res && res.value) {
                     alert(res.message);

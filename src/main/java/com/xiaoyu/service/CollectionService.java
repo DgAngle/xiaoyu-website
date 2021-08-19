@@ -18,9 +18,22 @@ public interface CollectionService {
 
     int addCollectionCat(CollectionCatBean collectionCatBean);
 
+    CollectionCatBean queryCollectionCatDetailById(long collectionCatId);
+
+    int updateCollectionCat(CollectionCatBean collectionCatBean);
+
+    int deleteCollectionCatById(long collectionCatId);
+
     /************************* 收藏主表 *************************/
 
     ListResult<CollectionBean> queryCollectionList(CollectionBean collectionBean);
 
     int addCollection(CollectionBean collectionBean);
+
+    CollectionBean queryCollectionDetailById(long collectionId);
+
+    int updateCollection(CollectionBean collectionBean);
+
+    int deleteCollectionById(long collectionId);
+
 }

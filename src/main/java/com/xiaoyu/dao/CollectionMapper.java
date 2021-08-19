@@ -18,6 +18,12 @@ public interface CollectionMapper {
 
     int addCollectionCat(CollectionCatBean collectionCatBean);
 
+    CollectionCatBean queryCollectionCatDetailById(long collectionCatId);
+
+    int updateCollectionCat(CollectionCatBean collectionCatBean);
+
+    int deleteCollectionCatById(long collectionCatId);
+
     /************************* 收藏主表 *************************/
 
     int queryCollectionListCount(CollectionBean collectionBean);
@@ -25,4 +31,12 @@ public interface CollectionMapper {
     List<CollectionBean> queryCollectionList(CollectionBean collectionBean);
 
     int addCollection(CollectionBean collectionBean);
+
+    CollectionBean queryCollectionDetailById(long collectionId);
+
+    int updateCollection(CollectionBean collectionBean);
+
+    int deleteCollectionById(long collectionId);
+
+
 }

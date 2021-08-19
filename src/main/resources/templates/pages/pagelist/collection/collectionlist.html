@@ -59,7 +59,7 @@
                     <th><a :href="collect.collectionUrl" style="text-decoration: underline;" target="_blank">{{collect.collectionUrl}}</a></th>
                     <th :title="collect.remark">{{collect.remark | ellipsis}}</th>
                     <th>
-                        <a href="#" title="修改"><i class="fa fa-pencil"></i></a>
+                        <a href="#" title="修改" @click="openCollectionEdit(collect.collectionId)"><i class="fa fa-pencil"></i></a>
                         <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
                     </th>
                 </tr>
