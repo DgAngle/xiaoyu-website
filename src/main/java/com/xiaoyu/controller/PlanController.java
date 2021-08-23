@@ -3,7 +3,7 @@ package com.xiaoyu.controller;
 import com.xiaoyu.common.ListResult;
 import com.xiaoyu.entity.PlanBean;
 import com.xiaoyu.entity.PlanCatBean;
-import com.xiaoyu.service.PlanService;
+import com.xiaoyu.service.baseservice.PlanService;
 import com.xiaoyu.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

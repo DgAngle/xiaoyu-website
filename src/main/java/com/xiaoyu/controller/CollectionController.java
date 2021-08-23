@@ -3,7 +3,7 @@ package com.xiaoyu.controller;
 import com.xiaoyu.common.ListResult;
 import com.xiaoyu.entity.CollectionBean;
 import com.xiaoyu.entity.CollectionCatBean;
-import com.xiaoyu.service.CollectionService;
+import com.xiaoyu.service.baseservice.CollectionService;
 import com.xiaoyu.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

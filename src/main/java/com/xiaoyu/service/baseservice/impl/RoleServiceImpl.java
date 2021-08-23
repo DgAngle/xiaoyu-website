@@ -1,8 +1,8 @@
-package com.xiaoyu.service.impl;
+package com.xiaoyu.service.baseservice.impl;
 
 import com.xiaoyu.dao.RoleMapper;
 import com.xiaoyu.entity.RoleBean;
-import com.xiaoyu.service.RoleService;
+import com.xiaoyu.service.baseservice.RoleService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

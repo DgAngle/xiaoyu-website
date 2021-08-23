@@ -1,4 +1,4 @@
-package com.xiaoyu.service;
+package com.xiaoyu.service.baseservice;
 
 import com.xiaoyu.entity.UserBean;
 

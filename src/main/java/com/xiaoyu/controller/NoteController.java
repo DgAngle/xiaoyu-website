@@ -2,7 +2,7 @@ package com.xiaoyu.controller;
 
 import com.xiaoyu.common.ListResult;
 import com.xiaoyu.entity.NoteCatBean;
-import com.xiaoyu.service.NoteService;
+import com.xiaoyu.service.baseservice.NoteService;
 import com.xiaoyu.utils.R;
 import com.xiaoyu.utils.RCode;
 import org.springframework.beans.factory.annotation.Autowired;

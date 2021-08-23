@@ -1,17 +1,14 @@
 package com.xiaoyu.controller;
 
-import com.xiaoyu.entity.CollectionCatBean;
 import com.xiaoyu.entity.RoleBean;
 import com.xiaoyu.entity.UserBean;
-import com.xiaoyu.service.RoleService;
-import com.xiaoyu.service.UserService;
+import com.xiaoyu.service.baseservice.RoleService;
+import com.xiaoyu.service.baseservice.UserService;
 import com.xiaoyu.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 用户后台控制

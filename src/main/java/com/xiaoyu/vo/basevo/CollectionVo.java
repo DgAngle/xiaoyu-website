@@ -1,4 +1,4 @@
-package com.xiaoyu.vo;
+package com.xiaoyu.vo.basevo;
 
 import com.xiaoyu.entity.CollectionBean;
 import lombok.Data;

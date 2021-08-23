@@ -1,9 +1,7 @@
 package com.xiaoyu.controller;
 
 import com.xiaoyu.entity.RoleBean;
-import com.xiaoyu.entity.UserBean;
-import com.xiaoyu.service.RoleService;
-import com.xiaoyu.service.UserService;
+import com.xiaoyu.service.baseservice.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

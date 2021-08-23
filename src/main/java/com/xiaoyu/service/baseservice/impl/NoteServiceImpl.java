@@ -1,14 +1,12 @@
-package com.xiaoyu.service.impl;
+package com.xiaoyu.service.baseservice.impl;
 
 import com.xiaoyu.common.ListResult;
 import com.xiaoyu.common.Pagination;
 import com.xiaoyu.dao.NoteMapper;
 import com.xiaoyu.entity.NoteCatBean;
-import com.xiaoyu.service.NoteService;
-import com.xiaoyu.utils.ConstantUtil;
+import com.xiaoyu.service.baseservice.NoteService;
 import com.xiaoyu.utils.RCode;
 import com.xiaoyu.utils.StringUtil;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

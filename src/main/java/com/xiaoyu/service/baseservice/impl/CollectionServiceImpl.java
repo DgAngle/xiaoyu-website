@@ -1,11 +1,11 @@
-package com.xiaoyu.service.impl;
+package com.xiaoyu.service.baseservice.impl;
 
 import com.xiaoyu.common.ListResult;
 import com.xiaoyu.common.Pagination;
 import com.xiaoyu.dao.CollectionMapper;
 import com.xiaoyu.entity.CollectionBean;
 import com.xiaoyu.entity.CollectionCatBean;
-import com.xiaoyu.service.CollectionService;
+import com.xiaoyu.service.baseservice.CollectionService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

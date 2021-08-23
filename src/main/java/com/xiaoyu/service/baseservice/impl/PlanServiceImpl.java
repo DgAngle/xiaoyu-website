@@ -1,11 +1,11 @@
-package com.xiaoyu.service.impl;
+package com.xiaoyu.service.baseservice.impl;
 
 import com.xiaoyu.common.ListResult;
 import com.xiaoyu.common.Pagination;
 import com.xiaoyu.dao.PlanMapper;
 import com.xiaoyu.entity.PlanBean;
 import com.xiaoyu.entity.PlanCatBean;
-import com.xiaoyu.service.PlanService;
+import com.xiaoyu.service.baseservice.PlanService;
 import com.xiaoyu.utils.ConstantUtil;
 import org.springframework.stereotype.Service;
 

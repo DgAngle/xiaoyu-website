@@ -1,8 +1,8 @@
-package com.xiaoyu.service.impl;
+package com.xiaoyu.service.baseservice.impl;
 
 import com.xiaoyu.dao.UserMapper;
 import com.xiaoyu.entity.UserBean;
-import com.xiaoyu.service.UserService;
+import com.xiaoyu.service.baseservice.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
