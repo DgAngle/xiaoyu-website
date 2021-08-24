@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 19/08/2021 17:25:29
+ Date: 24/08/2021 16:12:02
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `collection`  (
   `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   PRIMARY KEY (`collectionId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of collection
@@ -72,5 +72,7 @@ INSERT INTO `collection` VALUES (34, 'Vue可爱动物卡片样式动画特效', 
 INSERT INTO `collection` VALUES (35, 'Jquery插件库', 'https://www.jq22.com/', 1, 'Jquery插件', '2021-08-19 16:41:11', NULL);
 INSERT INTO `collection` VALUES (36, '原生JS消息提示插件Message.js(原创)', 'https://www.jq22.com/jquery-info23550', 10, '原生JS消息提示插件Message.js(原创)', '2021-08-19 16:56:33', NULL);
 INSERT INTO `collection` VALUES (37, '新拟物化登陆UI设计', 'https://www.jq22.com/demo/cssnwhdl202101040928/', 10, '新拟物化登陆UI设计\nhttps://www.jq22.com/jquery-info23579', '2021-08-19 17:02:06', NULL);
+INSERT INTO `collection` VALUES (38, 'labuladong的算法小抄', 'https://labuladong.gitbook.io/algo/', 4, '算法在线读，leetcode刷题', '2021-08-20 09:55:32', NULL);
+INSERT INTO `collection` VALUES (39, 'CSS阴影效果(Box-shadow)用法趣味讲解', 'https://www.webhek.com/post/css-box-shadow-property.html', 9, 'CSS 之 box-shadow 属性用法详解', '2021-08-24 13:41:29', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

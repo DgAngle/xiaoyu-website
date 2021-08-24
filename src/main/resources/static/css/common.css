@@ -1,3 +1,10 @@
+* {
+    /*font-family: "Times New Roman", Times, serif;*/
+    /*font-family: "Georgia", Times, serif;*/
+    /*font-family: Arial, Helvetica, sans-serif;*/
+    /*font-family: "Lucida Console", "Courier New", monospace;*/
+}
+
 /*搜索栏*/
 .comm-form-search {
     margin: 10px 0 10px 0;
@@ -70,7 +77,7 @@
 
 }
 
-.table-operate a{
+.table-operate a {
     margin: 0 5px 0 0;
 }
 
@@ -143,11 +150,11 @@
     padding: 10px;
     width: 100%;
     height: 200px;
-    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     margin-top: 20px;
     /*margin: 20px;*/
-    display: flex;
+    /*display: flex;*/
     /*justify-content: center;*/
     /*align-items: center;*/
     border-top: 1px solid rgba(255, 255, 255, 0.5);
@@ -156,17 +163,24 @@
     transform-style: preserve-3d;
     transform: perspective(800px)
 }
-.box:hover{
+
+.box:hover {
     box-shadow: 0px 0px 20px rgb(0, 146, 255);
 }
 
+.box-content-title{
+    width: 100%;
+    height: 30px;
+    font-size: 18px;
+    font-weight: 600;
+}
 
 .title-box {
     position: relative;
     padding: 10px;
     width: 100%;
     height: 50px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     margin-top: 30px;
     /*margin: 30px;*/
@@ -180,22 +194,27 @@
     /*transform: perspective(800px)*/
 }
 
-.style1{
+.style1 {
     background-color: #fffb58;
 }
-.style2{
+
+.style2 {
     background-color: #2ed0ff;
 }
-.style3{
-     background-color: #ff358b;
- }
-.style4{
+
+.style3 {
+    background-color: #ff358b;
+}
+
+.style4 {
     background-color: #e703ff;
 }
-.style5{
+
+.style5 {
     background-color: #17ff06;
 }
-.style6{
+
+.style6 {
     background-color: #fd0000;
 }
 
@@ -205,6 +224,8 @@
 }
 
 .box-content {
+    margin: 10px 0 0 20px;
+    font-family: "Times New Roman", Times, serif;
     font-size: 16px;
     font-weight: 500;
 }
