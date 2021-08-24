@@ -70,6 +70,10 @@
 
 }
 
+.table-operate a{
+    margin: 0 5px 0 0;
+}
+
 /* 表格区域 */
 .comm-table {
     margin-top: 10px;
@@ -131,4 +135,84 @@
 
 .border-blue {
     border: 1px solid blue;
+}
+
+/* Box */
+.box {
+    position: relative;
+    padding: 10px;
+    width: 100%;
+    height: 200px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    margin-top: 20px;
+    /*margin: 20px;*/
+    display: flex;
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    transform-style: preserve-3d;
+    transform: perspective(800px)
+}
+.box:hover{
+    box-shadow: 0px 0px 20px rgb(0, 146, 255);
+}
+
+
+.title-box {
+    position: relative;
+    padding: 10px;
+    width: 100%;
+    height: 50px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    margin-top: 30px;
+    /*margin: 30px;*/
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+    /*border-top: 1px solid rgba(255, 255, 255, 0.5);*/
+    /*border-left: 1px solid rgba(255, 255, 255, 0.5);*/
+    /*backdrop-filter: blur(5px);*/
+    /*transform-style: preserve-3d;*/
+    /*transform: perspective(800px)*/
+}
+
+.style1{
+    background-color: #fffb58;
+}
+.style2{
+    background-color: #2ed0ff;
+}
+.style3{
+     background-color: #ff358b;
+ }
+.style4{
+    background-color: #e703ff;
+}
+.style5{
+    background-color: #17ff06;
+}
+.style6{
+    background-color: #fd0000;
+}
+
+.title-box .title-box-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.box-content {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.shadow-inset {
+    box-shadow: inset 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.shadow-left {
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
 }

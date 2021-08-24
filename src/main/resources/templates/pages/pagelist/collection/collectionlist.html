@@ -44,11 +44,11 @@
                 <thead class="thead-dark">
                 <tr>
                     <th width="60">序号</th>
-                    <th width="180">收藏名称</th>
+                    <th width="200">收藏名称</th>
                     <th width="100">收藏分类</th>
                     <th width="200">地址</th>
-                    <th width="200">备注</th>
-                    <th width="80">操作</th>
+                    <th width="180">备注</th>
+                    <th width="100">操作</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -58,7 +58,7 @@
                     <th>{{collect.collectionCatName}}</th>
                     <th><a :href="collect.collectionUrl" style="text-decoration: underline;" target="_blank">{{collect.collectionUrl}}</a></th>
                     <th :title="collect.remark">{{collect.remark | ellipsis}}</th>
-                    <th>
+                    <th class="table-operate">
                         <a href="#" title="修改" @click="openCollectionEdit(collect.collectionId)"><i class="fa fa-pencil"></i></a>
                         <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
                     </th>
