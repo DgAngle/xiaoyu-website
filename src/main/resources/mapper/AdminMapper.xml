@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoyu.dao.AdminMapper">
+
+    <!-- ************ function top5 ************ -->
+    <select id="queryCollectionCatTop4" resultType="collectionCatBean">
+        select *
+        from collection_cat
+        order by orderNum desc limit 4
+    </select>
+
+    <select id="queryCollectionTop5" parameterType="java.lang.Long" resultType="collectionBean">
+        select *
+        from collection
+        where collectionCatId = #{collectionCatId}
+        order by createDt desc limit 5
+    </select>
+
+    <select id="queryCollectionWithCatTop5" parameterType="java.lang.Long" resultType="collectionCatBean">
+        select cn.collectionId,
+               cn.collectionName,
+               cn.collectionUrl,
+               cn.collectionCatId,
+               cn.remark,
+               cn.createDt,
+               cn.createBy,
+               ccn.collectionCatName
+        from collection cn
+                 inner join collection_cat ccn on cn.collectionCatId = ccn.collectionCatId
+        where cn.collectionCatId = #{collectionCatId}
+        order by cn.createDt desc limit 5
+    </select>
+</mapper>

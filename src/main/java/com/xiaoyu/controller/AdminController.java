@@ -1,13 +1,21 @@
 package com.xiaoyu.controller;
 
+import com.xiaoyu.service.baseservice.AdminService;
 import com.xiaoyu.utils.R;
+import com.xiaoyu.vo.topvo.CollectionTopVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("")
 public class AdminController {
+    @Autowired
+    private AdminService adminService;
+
     @RequestMapping({"index"})
     public String goIndex() {
         return "admin/index";
@@ -27,7 +35,7 @@ public class AdminController {
     @RequestMapping("/topCollection")
     @ResponseBody
     public R queryTopCollection() {
-        return R.success();
+        return R.success().data("topCollectionList", adminService.queryTopCollection());
     }
 
     @RequestMapping("/topNote")

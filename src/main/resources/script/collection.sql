@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 24/08/2021 16:12:02
+ Date: 25/08/2021 13:02:32
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `collection`  (
   `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   PRIMARY KEY (`collectionId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of collection
@@ -74,5 +74,10 @@ INSERT INTO `collection` VALUES (36, '原生JS消息提示插件Message.js(原�
 INSERT INTO `collection` VALUES (37, '新拟物化登陆UI设计', 'https://www.jq22.com/demo/cssnwhdl202101040928/', 10, '新拟物化登陆UI设计\nhttps://www.jq22.com/jquery-info23579', '2021-08-19 17:02:06', NULL);
 INSERT INTO `collection` VALUES (38, 'labuladong的算法小抄', 'https://labuladong.gitbook.io/algo/', 4, '算法在线读，leetcode刷题', '2021-08-20 09:55:32', NULL);
 INSERT INTO `collection` VALUES (39, 'CSS阴影效果(Box-shadow)用法趣味讲解', 'https://www.webhek.com/post/css-box-shadow-property.html', 9, 'CSS 之 box-shadow 属性用法详解', '2021-08-24 13:41:29', NULL);
+INSERT INTO `collection` VALUES (40, 'Github', 'https://github.com/', 3, 'Github官网', '2021-08-25 11:59:58', NULL);
+INSERT INTO `collection` VALUES (41, 'Centos 下载', 'http://mirrors.aliyun.com/centos/', 6, '虚拟机CentOS系统 aliyun镜像下载', '2021-08-25 12:02:10', NULL);
+INSERT INTO `collection` VALUES (42, 'JQuery 下载', 'https://www.jq22.com/plugin/122', 6, 'JQuery 历史版本下载', '2021-08-25 12:03:18', NULL);
+INSERT INTO `collection` VALUES (43, 'Stackoverflow', 'https://stackoverflow.com/', 3, 'Stackoverflow，程序员的在线问答网站，解决各种BUG', '2021-08-25 12:05:14', NULL);
+INSERT INTO `collection` VALUES (44, 'ProcessOn', 'https://www.processon.com/', 1, 'ProcessOn官网，在线设计流程图，思维导图', '2021-08-25 12:08:31', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

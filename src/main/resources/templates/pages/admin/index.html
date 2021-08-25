@@ -26,65 +26,40 @@
         <div class="breadcrumbs-area clearfix">
         </div>
     </div>-->
-    <div class="main-content container-fluid">
+    <div id="indexContainer" class="main-content container-fluid">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-6">
                 <div class="title-box style1">
                     <span class="title-box-title">今日计划</span>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-6">
+                <div class="title-box style1">
+                    <span class="title-box-title">每月消费</span>
+                </div>
+            </div>
+            <div class="col-lg-6">
                 <div class="box"></div>
             </div>
-            <div class="col-lg-3">
-                <div class="box"></div>
-            </div>
-            <div class="col-lg-3">
-                <div class="box"></div>
-            </div>
-            <div class="col-lg-3">
+            <div class="col-lg-6">
                 <div class="box"></div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="title-box style3">
-                    <span class="title-box-title" style="color: #ffffff">近期收藏</span>
+                    <span class="title-box-title"><a class="style-white" href="/collect/goList">近期收藏</a></span>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div v-for="topCollection in topCollectionList" class="col-lg-3">
                 <div class="box">
-                    <div class="box-content-title">在线学习</div>
+                    <div class="box-content-title">{{topCollection.collectionCat.collectionCatName}}</div>
                     <div class="box-content">
                         <ul>
-                            <li><a target="_blank" href="https://leetcode-cn.com/">🧡&nbsp;Leetcode</a></li>
-                            <li><a href="#">💜&nbsp;xxx</a></li>
-                            <li><a href="#">🤍&nbsp;xxx</a></li>
-                            <li><a href="#">💛&nbsp;xxx</a></li>
-                            <li><a href="#">🤎&nbsp;xxx</a></li>
+                            <li v-for="collection in topCollection.collections"><a target="_blank" :href="collection.collectionUrl">💗&nbsp;{{collection.collectionName}}</a></li>
                         </ul>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="box">
-                    <div class="box-content-title">在线阅读</div>
-                    <div class="box-content">
-                        <ul>
-                            <li><a target="_blank" href="https://labuladong.gitbook.io/algo/">🧡&nbsp;labuladong的算法小抄</a></li>
-                            <li><a target="_blank" href="https://icyfenix.cn/">💜&nbsp;凤凰架构</a></li>
-                            <li><a target="_blank" href="http://concurrent.redspider.group/RedSpider.html">🤍&nbsp;RedSpider社区</a></li>
-                            <li><a href="#">💛&nbsp;xxx</a></li>
-                            <li><a href="#">🤎&nbsp;xxx</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="box"></div>
-            </div>
-            <div class="col-lg-3">
-                <div class="box"></div>
             </div>
         </div>
         <div class="row">
@@ -114,6 +89,33 @@
 
 <!-- 公共 js -->
 <div th:include="common/common_js"></div>
+
+<script>
+    new Vue({
+        el: '#indexContainer',
+        data: {
+            topCollectionIcon: ['🧡', '💜', '🤍', '💛', '🤎'],
+            topCollectionList: {},
+        },
+        mounted: function () {
+            this.refreshInit();
+        },
+        methods: {
+            refreshInit() {
+                let _this = this;
+                _this.refreshTopCollection();
+            },
+            refreshTopCollection() {
+                let _this = this;
+                let url = "/topCollection";
+                commonUtil.ajax(url, {}, function (res) {
+                    _this.topCollectionList = res.data.topCollectionList;
+                })
+            },
+        }
+    })
+
+</script>
 
 </body>
 
