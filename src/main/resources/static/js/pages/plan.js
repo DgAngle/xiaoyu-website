@@ -5,21 +5,28 @@ let listVm = new Vue({
         planQuery: {
             planName: '',
             planCatId: -1,
+            status: 2,
         },
         planForm: {
             planName: '',
-            planUrl: '',
             planCatId: null,
+            planContent: '',
             remark: '',
         },
+        planId: null,
+        statusCode: null, // 状态
         modalName: '',
         modalType: 'add',
         planList: {},
-        planCatList: {}
+        planCatList: {},
+        tableStatusList: [],
+        statusList: {}
     },
     mounted: function () {
+        this.queryStatusList();
         this.queryPlanCatList();
         this.refreshPlanList();
+
     },
     filters: {
         ellipsis(value) {
@@ -31,6 +38,18 @@ let listVm = new Vue({
         }
     },
     methods: {
+        // 获取分类列表
+        queryStatusList() {
+            let _this = this;
+            commonUtil.ajax("/code/statusList", {}, function (res) {
+                for (let i = 0; i < commonUtil.status.length; i++) {
+                    let statusItem = {};
+                    statusItem.statusCode = commonUtil.status[i];
+                    statusItem.statusMessage = res.data.statusMap[commonUtil.status[i]];
+                    _this.tableStatusList[i] = statusItem;
+                }
+            })
+        },
         // 获取分类列表
         queryPlanCatList() {
             let _this = this;
@@ -48,8 +67,8 @@ let listVm = new Vue({
             _this.modalName = '新增收藏';
             _this.planForm = {
                 planName: '',
-                planUrl: '',
                 planCatId: null,
+                planContent: '',
                 remark: '',
             };
         },
@@ -61,7 +80,7 @@ let listVm = new Vue({
             _this.planForm = {
                 planId: planDetail.planId,
                 planName: planDetail.planName,
-                planUrl: planDetail.planUrl,
+                planContent: planDetail.planContent,
                 planCatId: planDetail.planCatId,
                 remark: planDetail.remark,
             };
@@ -100,6 +119,27 @@ let listVm = new Vue({
                     _this.refreshPlanList();
                 }
             })
+        },
+        // 状态变更
+        openStatusEdit(planId, statusCode) {
+            let _this = this;
+            _this.planId = planId;
+            _this.statusCode = statusCode;
+            _this.statusList = commonUtil.statusList;
+            $("#statusModal").modal({
+                keyboard: true,
+                backdrop: "static"
+            })
+        },
+        saveStatus() {
+            let _this = this;
+            let url = "/plan/updateStatus";
+            commonUtil.ajax(url, {'planId': _this.planId, 'status': _this.statusCode}, function (res) {
+                Qmsg.success(res.message);
+                $("#statusModal").modal("hide");
+                _this.refreshPlanList();
+            })
+
         },
         refreshPlanList() {
             let _this = this;

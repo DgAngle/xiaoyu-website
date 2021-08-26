@@ -24,7 +24,7 @@ public class PlanController {
     @Autowired
     private PlanService planService;
 
-    /************************* 收藏分类 *************************/
+    /************************* 计划分类 *************************/
 
     @RequestMapping("/cat/goList")
     public String goCatList(PlanCatBean planCatBean) {
@@ -64,7 +64,7 @@ public class PlanController {
         return R.success().message("删除成功！");
     }
 
-    /************************* 收藏主表 *************************/
+    /************************* 计划主表 *************************/
 
     @RequestMapping("/goList")
     public String goList(PlanCatBean planCatBean) {
@@ -105,5 +105,12 @@ public class PlanController {
     public R del(long planId) {
         planService.deletePlanById(planId);
         return R.success().message("删除成功！");
+    }
+
+    @RequestMapping("/updateStatus")
+    @ResponseBody
+    public R del(long planId, int status) {
+        planService.updateStatusById(status, planId);
+        return R.success().message("变更成功！");
     }
 }

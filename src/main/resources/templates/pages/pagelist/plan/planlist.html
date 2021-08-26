@@ -15,6 +15,7 @@
     <div class="container-fluid">
         <div id="planContainer">
             <div th:replace="pageedit/plan/planadd"></div>
+            <div th:replace="pageedit/plan/statusedit"></div>
 
             <div class="row comm-operate">
                 <button class="btn btn-outline-primary btn-sm" @click="openPlanAdd()"><i class="fa fa-plus-square"></i>&nbsp;
@@ -35,6 +36,13 @@
                         <option v-for="planCat in planCatList" :value="planCat.planCatId">{{planCat.planCatName}}</option>
                     </select>
                 </div>
+                <div class="form-group col-sm-3 ">
+                    <label for="planStatus">执行状态:</label>
+                    <select class="form-control form-control-sm" id="planStatus" v-model="planQuery.status">
+                        <option value="-1"></option>
+                        <option v-for="tableStatus in tableStatusList" :value="tableStatus.statusCode">{{tableStatus.statusMessage}}</option>
+                    </select>
+                </div>
                 <div class="form-group col-sm-2 ">
                     <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshPlanList()">搜索</button>
                 </div>
@@ -47,8 +55,9 @@
                     <th width="180">计划名称</th>
                     <th width="100">计划分类</th>
                     <th width="200">计划内容</th>
-                    <th width="200">备注</th>
-                    <th width="80">操作</th>
+                    <th width="80">执行状态</th>
+                    <th width="60">状态变更</th>
+                    <th width="60">操作</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -57,7 +66,10 @@
                     <th>{{plan.planName}}</th>
                     <th>{{plan.planCatName}}</th>
                     <th :title="plan.planContent">{{plan.planContent | ellipsis}}</th>
-                    <th :title="plan.remark">{{plan.remark | ellipsis}}</th>
+                    <th><span class="status circle" :class="'table-status-' + plan.status">{{plan.statusMessage}}</span></th>
+                    <th class="table-operate">
+                        <a href="#" title="配置" @click="openStatusEdit(plan.planId, plan.status)"><i class="fa fa-retweet"></i></a>
+                    </th>
                     <th class="table-operate">
                         <a href="#" title="修改" @click="openPlanEdit(plan.planId)"><i class="fa fa-pencil"></i></a>
                         <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>

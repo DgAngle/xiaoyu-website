@@ -1,5 +1,8 @@
 var commonUtil = commonUtil || {};
 
+commonUtil.statusList = [];
+commonUtil.status = [0, 2, 3, 4, 5, 8]
+
 window.onload = function () {
     // 获取页面路径
     let url = window.location.href;
@@ -17,6 +20,16 @@ window.onload = function () {
         position: 'center',
         showClose: true,
         timeout: 5000
+    })
+
+    /* 全局状态码 */
+    commonUtil.ajax("/code/statusList", {}, function (res) {
+        for (let i = 0; i < commonUtil.status.length; i++) {
+            let statusItem = {};
+            statusItem.statusCode = commonUtil.status[i];
+            statusItem.statusMessage = res.data.statusMap[commonUtil.status[i]];
+            commonUtil.statusList[i] = statusItem;
+        }
     })
 }
 

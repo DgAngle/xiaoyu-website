@@ -19,27 +19,30 @@ public class ConstantUtil {
     /* 计划状态码 */
     public static final int plan_status_not_start = 0; // 计划未开始
     public static final int plan_status_underway = 2;  // 计划进行中
+    public static final int plan_status_unfinished = 3;  // 计划未完成
     public static final int plan_status_cancel = 4;  // 计划取消
     public static final int plan_status_delay = 5;  // 计划延期
-    public static final int plan_status_delay_finished = 58;  // 计划延期完成
+    // public static final int plan_status_delay_finished = 58;  // 计划延期完成
     public static final int plan_status_finished = 8;  // 计划已完成
-    public static final int plan_status_unfinished = -1;  // 计划未完成
+
     /* 计划状态码对应信息 */
     public static final String plan_status_not_start_message = "未开始";
     public static final String plan_status_underway_message = "进行中";
-    public static final String plan_status_cancel_message = "取消";
-    public static final String plan_status_delay_message = "延期";
-    public static final String plan_status_delay_finished_message = "延期完成";
+    public static final String plan_status_cancel_message = "已取消";
+    public static final String plan_status_delay_message = "延期中";
+    // public static final String plan_status_delay_finished_message = "延期完成";
     public static final String plan_status_finished_message = "已完成";
     public static final String plan_status_unfinished_message = "未完成";
     /* 计划 Map */
-    public static final Map<Integer, String> planMap = new HashMap<Integer, String>() {{
+    public static final Map<Integer, String> planMap;
+    static {
+        planMap = new HashMap<Integer, String>();
         planMap.put(plan_status_not_start, plan_status_not_start_message);
         planMap.put(plan_status_underway, plan_status_underway_message);
         planMap.put(plan_status_cancel, plan_status_cancel_message);
         planMap.put(plan_status_delay, plan_status_delay_message);
-        planMap.put(plan_status_delay_finished, plan_status_delay_finished_message);
+        // planMap.put(plan_status_delay_finished, plan_status_delay_finished_message);
         planMap.put(plan_status_finished, plan_status_finished_message);
         planMap.put(plan_status_unfinished, plan_status_unfinished_message);
-    }};
+    };
 }

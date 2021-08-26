@@ -18,4 +18,9 @@ public class PlanVo extends PlanBean {
     public String getStatusMessage() {
         return ConstantUtil.planMap.get(getStatus());
     }
+
+
+    public static void main(String[] args) {
+        System.out.println(ConstantUtil.planMap.get(0));
+    }
 }

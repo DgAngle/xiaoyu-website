@@ -90,4 +90,9 @@ public class PlanServiceImpl implements PlanService {
     public int deletePlanById(long planId) {
         return planMapper.deletePlanById(planId);
     }
+
+    @Override
+    public int updateStatusById(int status, long planId) {
+        return planMapper.updateStatusById(status, planId);
+    }
 }

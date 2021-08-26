@@ -38,5 +38,5 @@ public interface PlanMapper {
 
     int deletePlanById(long planId);
 
-
+    int updateStatusById(int status, long planId);
 }

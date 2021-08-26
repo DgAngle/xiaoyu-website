@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xiaoyu.dao.PlanMapper">
 
-    <!-- ************************* 收藏分类 ************************* -->
+    <!-- ************************* 计划分类 ************************* -->
     <sql id="plan_cat_query_condition">
         <if test="planCatName != null and planCatName != ''">
             and planCatName like concat('%',concat(#{planCatName},'%'))
@@ -51,13 +51,16 @@
         where planCatId = #{planCatId}
     </delete>
 
-    <!-- ************************* 收藏主表 ************************* -->
+    <!-- ************************* 计划主表 ************************* -->
     <sql id="plan_query_condition">
         <if test="planName != null and planName != ''">
             and pn.planName like concat('%',concat(#{planName},'%'))
         </if>
         <if test="planCatId != null and planCatId != -1 ">
             and pn.planCatId = #{planCatId}
+        </if>
+        <if test="status != null and status != -1 ">
+            and pn.status = #{status}
         </if>
         <if test="planContent != null and planContent != ''">
             and pn.planContent like concat('%',concat(#{planContent},'%'))
@@ -153,6 +156,12 @@
     <update id="updatePlan" parameterType="planBean">
         update plan
         <include refid="plan_update_condition"></include>
+        where planId = #{planId}
+    </update>
+
+    <update id="updateStatusById">
+        update plan
+        set status = #{status}
         where planId = #{planId}
     </update>
 
