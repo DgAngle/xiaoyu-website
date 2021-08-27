@@ -18,5 +18,5 @@ import java.util.List;
 @AllArgsConstructor
 public class CollectionTopVo {
     private CollectionCatBean collectionCat;
-    private List<CollectionBean> collections;
+    private List<CollectionBean> collectionList;
 }

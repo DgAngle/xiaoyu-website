@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 25/08/2021 13:03:02
+ Date: 27/08/2021 17:22:59
 */
 
 SET NAMES utf8mb4;
@@ -28,13 +28,15 @@ CREATE TABLE `plan_cat`  (
   `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   PRIMARY KEY (`planCatId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '计划分类表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '计划分类表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of plan_cat
 -- ----------------------------
-INSERT INTO `plan_cat` VALUES (1, '今日计划', 0000000010, '2021-08-19 13:30:39', NULL);
+INSERT INTO `plan_cat` VALUES (1, '今日计划', 0000000008, '2021-08-19 13:30:39', NULL);
 INSERT INTO `plan_cat` VALUES (2, '长期计划', 0000000000, '2021-08-19 13:30:50', NULL);
 INSERT INTO `plan_cat` VALUES (3, '短期计划', 0000000000, '2021-08-19 13:30:57', NULL);
+INSERT INTO `plan_cat` VALUES (4, '工作计划', 0000000010, '2021-08-26 14:38:18', NULL);
+INSERT INTO `plan_cat` VALUES (5, '学习计划', 0000000006, '2021-08-26 14:59:14', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

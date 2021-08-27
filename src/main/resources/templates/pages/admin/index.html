@@ -28,20 +28,27 @@
     </div>-->
     <div id="indexContainer" class="main-content container-fluid">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-9">
                 <div class="title-box style1">
-                    <span class="title-box-title">今日计划</span>
+                    <span class="title-box-title"><a class="style-black" href="/plan/goList">今日计划</a></span>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="title-box style1">
-                    <span class="title-box-title">每月消费</span>
+            <div class="col-lg-3">
+                <div class="title-box style7">
+                    <span class="title-box-title"><a class="style-white" href="#">我的消费</a></span>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="box"></div>
+            <div v-for="topPlan in topPlanList" class="col-lg-3">
+                <div class="box">
+                    <div class="box-content-title">{{topPlan.planCat.planCatName}}</div>
+                    <div class="box-content">
+                        <ul>
+                            <li class="plan-item" v-for="plan in topPlan.planList" :title="plan.planContent">📔&nbsp;{{plan.planName}}</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-3">
                 <div class="box"></div>
             </div>
         </div>
@@ -56,7 +63,7 @@
                     <div class="box-content-title">{{topCollection.collectionCat.collectionCatName}}</div>
                     <div class="box-content">
                         <ul>
-                            <li v-for="collection in topCollection.collections"><a target="_blank" :href="collection.collectionUrl">💗&nbsp;{{collection.collectionName}}</a></li>
+                            <li v-for="collection in topCollection.collectionList"><a target="_blank" :href="collection.collectionUrl">⭐&nbsp;{{collection.collectionName}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -96,6 +103,7 @@
         data: {
             topCollectionIcon: ['🧡', '💜', '🤍', '💛', '🤎'],
             topCollectionList: {},
+            topPlanList: {},
         },
         mounted: function () {
             this.refreshInit();
@@ -104,12 +112,21 @@
             refreshInit() {
                 let _this = this;
                 _this.refreshTopCollection();
+                _this.refreshTopPLan();
             },
             refreshTopCollection() {
                 let _this = this;
                 let url = "/topCollection";
                 commonUtil.ajax(url, {}, function (res) {
                     _this.topCollectionList = res.data.topCollectionList;
+                })
+            },
+            refreshTopPLan() {
+                let _this = this;
+                let url = "/topPlan";
+                commonUtil.ajax(url, {}, function (res) {
+                    _this.topPlanList = res.data.topPlanList;
+                    console.log(_this.topPlanList)
                 })
             },
         }

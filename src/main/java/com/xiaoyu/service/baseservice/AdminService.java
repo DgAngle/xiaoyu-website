@@ -1,6 +1,7 @@
 package com.xiaoyu.service.baseservice;
 
 import com.xiaoyu.vo.topvo.CollectionTopVo;
+import com.xiaoyu.vo.topvo.PlanTopVo;
 
 import java.util.List;
 
@@ -11,4 +12,6 @@ import java.util.List;
  */
 public interface AdminService {
     List<CollectionTopVo> queryTopCollection();
+
+    List<PlanTopVo> queryTopPlan();
 }

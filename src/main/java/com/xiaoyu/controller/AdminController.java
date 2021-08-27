@@ -29,7 +29,7 @@ public class AdminController {
     @RequestMapping("/topPlan")
     @ResponseBody
     public R queryTopPlan() {
-        return R.success();
+        return R.success().data("topPlanList", adminService.queryTopPlan());
     }
 
     @RequestMapping("/topCollection")

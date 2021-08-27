@@ -3,8 +3,10 @@ package com.xiaoyu.service.baseservice.impl;
 import com.xiaoyu.dao.AdminMapper;
 import com.xiaoyu.entity.CollectionBean;
 import com.xiaoyu.entity.CollectionCatBean;
+import com.xiaoyu.entity.PlanCatBean;
 import com.xiaoyu.service.baseservice.AdminService;
 import com.xiaoyu.vo.topvo.CollectionTopVo;
+import com.xiaoyu.vo.topvo.PlanTopVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -32,5 +34,17 @@ public class AdminServiceImpl implements AdminService {
             collectionTopVos.add(new CollectionTopVo(collectionCat, adminMapper.queryCollectionTop5(collectionCat.getCollectionCatId())));
         });
         return collectionTopVos;
+    }
+
+    @Override
+    public List<PlanTopVo> queryTopPlan() {
+        List<PlanTopVo> planTopVos = new ArrayList<>();
+        // 查询排序后的前2个计划分类
+        List<PlanCatBean> planCatBeans = adminMapper.queryPlanCatTop2();
+        Optional.ofNullable(planCatBeans).orElse(new ArrayList<>()).forEach((planCat) -> {
+            // 一个分类对应多个收藏
+            planTopVos.add(new PlanTopVo(planCat, adminMapper.queryPlanTop5(planCat.getPlanCatId())));
+        });
+        return planTopVos;
     }
 }

@@ -218,6 +218,10 @@
     background-color: #fd0000;
 }
 
+.style7 {
+    background-color: #ffa300;
+}
+
 .title-box .title-box-title {
     font-size: 20px;
     font-weight: 600;
@@ -228,10 +232,41 @@
     text-decoration: underline;
 }
 
+.title-box .title-box-title .style-black {
+    color: #000000;
+    text-decoration: underline;
+}
+
+.title-box .title-box-title .style-pink {
+    color: #fd028d;
+    text-decoration: underline;
+}
+
+.title-box .title-box-title .style-red {
+    color: #ff0202;
+    text-decoration: underline;
+}
+
 .title-box .title-box-title .style-white:hover {
     box-shadow: 0px 0px 10px rgb(4, 255, 215);
     /*font-size: 22px;*/
 }
+
+.title-box .title-box-title .style-black:hover {
+    box-shadow: 0px 0px 10px rgb(4, 255, 215);
+    /*font-size: 22px;*/
+}
+
+.title-box .title-box-title .style-pink:hover {
+    box-shadow: 0px 0px 10px rgb(4, 255, 215);
+    /*font-size: 22px;*/
+}
+
+.title-box .title-box-title .style-red:hover {
+    box-shadow: 0px 0px 10px rgb(4, 255, 215);
+    /*font-size: 22px;*/
+}
+
 
 .box-content {
     /*margin: 10px 0 0 20px;*/
@@ -297,7 +332,63 @@
     color: #050505;
 }
 
-.circle{
+.circle {
     padding: 5px 16px 5px 15px;
     border-radius: 50px;
 }
+
+.plan-item {
+
+}
+
+.plan-item {
+    /*font-family: 'Audiowide';*/
+    /*text-align: center;*/
+    color: #c96d02;
+    /*color: #000000;*/
+    /*font-weight: bold;*/
+    /*font-size: 7em;*/
+    /*-webkit-transition: all 1.5s ease;*/
+    /*transition: all 1.5s ease;*/
+    text-shadow: 1px 1px 2px rgba(42, 42, 42, 0.5);
+    /*-webkit-animation: Glow 1.5s ease infinite alternate;*/
+    /*animation: Glow 1.5s ease infinite alternate;*/
+}
+
+.plan-item:hover {
+    color: #0562ff;
+    cursor: pointer;
+    /*-webkit-animation: Glow 1.5s ease infinite alternate;*/
+    /*animation: Glow 1.5s ease infinite alternate;*/
+}
+
+/*@-webkit-keyframes Glow {*/
+/*    from {*/
+/*        text-shadow: 0 0 5px #fff,*/
+/*        0 0 20px #fff,*/
+/*        0 0 30px #fff,*/
+/*        0 0 40px #08fdfd;*/
+/*    }*/
+/*    to {*/
+/*        text-shadow: 0 0 2px #fff,*/
+/*        0 0 10px #fff,*/
+/*        0 0 15px #fff,*/
+/*        0 0 20px #08fdfd,*/
+/*        0 0 35px #08fdfd;*/
+/*    }*/
+/*}*/
+
+/*@keyframes Glow {*/
+/*    from {*/
+/*        text-shadow: 0 0 3px #fff,*/
+/*        0 0 20px #fff,*/
+/*        0 0 30px #fff,*/
+/*        0 0 40px #08fdfd;*/
+/*    }*/
+/*    to {*/
+/*        text-shadow: 0 0 2px #fff,*/
+/*        0 0 10px #fff,*/
+/*        0 0 15px #fff,*/
+/*        0 0 20px #08fdfd;*/
+/*    }*/
+/*}*/
