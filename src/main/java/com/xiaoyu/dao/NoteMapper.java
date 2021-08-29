@@ -18,6 +18,18 @@ public interface NoteMapper {
 
     int queryNoteCatByNoteCatName(String noteCatName);
 
+    /**
+     * 获取根节点 笔记分类
+     */
+    List<NoteCatBean> queryNoteCatRoot();
+
+    /**
+     * 获取下一层节点 笔记分类
+     *
+     * @param parentNoteCatNum 父节点编号
+     */
+    List<NoteCatBean> queryNoteCatNextByNum(String parentNoteCatNum);
+
     /************** 笔记 **************/
 
 }

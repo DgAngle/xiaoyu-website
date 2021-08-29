@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class NoteServiceImpl implements NoteService {
@@ -53,6 +55,23 @@ public class NoteServiceImpl implements NoteService {
         noteCatBean.setCreateDt(new Date());
         noteCatBean.setCreateBy("");
         return noteMapper.addNoteCat(noteCatBean);
+    }
+
+    /**
+     * TODO 笔记分类下拉树
+     *
+     * @return 下拉树
+     */
+    @Override
+    public Map<String, NoteCatBean> queryNoteCatTree() {
+
+        // 获取根节点
+        List<NoteCatBean> noteCatBeans = noteMapper.queryNoteCatRoot();
+
+
+        noteMapper.queryNoteCatNextByNum("0001");
+
+        return null;
     }
 
     /**

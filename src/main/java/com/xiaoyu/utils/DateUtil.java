@@ -31,7 +31,7 @@ public class DateUtil {
      * @param date Date日期
      * @return 一天的结束
      */
-    public static String getDayEndStr(Date date) {
+    public static String dateOfEnd(Date date) {
         if (date == null) return null;
         DateFormat simpleDateFormat = new SimpleDateFormat(default_format_date_day_End);
         return simpleDateFormat.format(date);
@@ -43,7 +43,7 @@ public class DateUtil {
      * @param date Date日期
      * @return 一天的开始
      */
-    public static String getDayBeginStr(Date date) {
+    public static String dateOfBegin(Date date) {
         if (date == null) return null;
         DateFormat simpleDateFormat = new SimpleDateFormat(default_format_date_day_begin);
         return simpleDateFormat.format(date);

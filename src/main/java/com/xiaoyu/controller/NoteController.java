@@ -42,13 +42,21 @@ public class NoteController {
                 .data("pagination", listResult.getPagination());
     }
 
-    // 笔记分类列表查询
+    // 笔记分类添加
     @RequestMapping("/cat/add")
     @ResponseBody
     public R addNoteCat(NoteCatBean noteCatBean) {
         int r = noteService.addNoteCat(noteCatBean);
         if (r == RCode.repeat_code) return R.error().message("笔记分类名称重复, 请重新输入！");
         return R.success().message("添加成功！");
+    }
+
+
+    // 笔记分类下拉树
+    @RequestMapping("/cat/tree")
+    @ResponseBody
+    public R noteCatTree() {
+        return R.success().data("noteCatTree", noteService.queryNoteCatTree());
     }
 
     /***************** 笔记 *****************/

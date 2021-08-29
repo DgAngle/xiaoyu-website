@@ -26,6 +26,7 @@ let listVm = new Vue({
         this.queryStatusList();
         this.queryPlanCatList();
         this.refreshPlanList();
+        this.$forceUpdate();
 
     },
     filters: {

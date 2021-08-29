@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <title>笔记分类</title>
     <!-- 公共 css -->
-    <link th:include="common/common_css"/>
+    <link th:replace="common/common_css"/>
 </head>
 <body>
 <div class="page-container">
-    <div th:include="layout/sidebar"></div>
-    <div th:include="layout/topMenu"></div>
+    <div th:replace="layout/sidebar"></div>
+    <div th:replace="layout/topMenu"></div>
 
     <!-- 内容区域 -->
     <div id="noteCatContainer" class="container-fluid">
+        <div th:replace="pageedit/note/notecatadd"></div>
+
         <div class="row comm-operate">
             <button class="btn btn-outline-primary btn-sm" @click="openNoteCatAdd()"><i class="fa fa-plus-square"></i>
                 添加笔记分类
@@ -41,78 +43,11 @@
             </tr>
             </tbody>
         </table>
-
     </div>
-
-    <!-- 新增页面 -->
-    <div class="modal fade" id="noteCatModal" tabindex="-1" aria-labelledby="noteCatModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <div class="modal-content comm-modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="noteCatModalLabel">新增笔记分类</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="row-form">
-                        <div class="form-group">
-                            <label for="noteCatNameEdit">笔记分类名称</label>
-                            <input type="text" class="form-control" id="noteCatNameEdit"
-                                   aria-describedby="emailHelp">
-                        </div>
-                        <div class="form-group">
-                            <label for="parentNoteCatEdit">父级分类</label>
-                            <input type="text" class="form-control" id="parentNoteCatEdit">
-                        </div>
-                        <div class="form-group">
-                            <label for="orderNum">排序号</label>
-                            <input type="text" class="form-control" id="orderNum">
-                        </div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">确认</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
 
 <!-- 公共 js -->
-<div th:include="common/common_js"></div>
+<div th:replace="common/common_js"></div>
 <script type="text/javascript" src="/js/pages/notecat.js"></script>
-<!--<script>-->
-<!--    let noteCatData = {-->
-<!--        noteCatList: [-->
-<!--            {noteCatNum: '0001', noteCatName: '学习笔记', orderNum: 100},-->
-<!--            {noteCatNum: '0002', noteCatName: '工作经验', orderNum: 800},-->
-<!--            {noteCatNum: '0003', noteCatName: '生活记事', orderNum: 60}-->
-<!--        ],-->
-<!--    };-->
-
-<!--    let noteCatAddData = {-->
-<!--        notCatName: '',-->
-<!--    }-->
-
-<!--    function openAdd() {-->
-<!--        $("#noteCatModal").modal({-->
-<!--            keyboard: true,-->
-<!--            backdrop: "static"-->
-<!--        })-->
-<!--    }-->
-
-<!--    new Vue({-->
-<!--        el: "#noteCatContainer",-->
-<!--        data: noteCatData-->
-<!--    })-->
-<!--    new Vue({-->
-<!--        el: "#noteCatModal",-->
-<!--        data: noteCatAddData-->
-<!--    })-->
-<!--</script>-->
 </body>
 </html>

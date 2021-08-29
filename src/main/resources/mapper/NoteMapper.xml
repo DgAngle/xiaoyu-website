@@ -45,4 +45,19 @@
                 #{createDt}, #{createBy})
     </insert>
 
+    <select id="queryNoteCatRoot" resultType="noteCatBean">
+        select noteCatId, noteCatName, noteCatNum, parentNoteCatNum, parentNoteCatId
+        from note_cat
+        where noteCatNum like '____'
+        order by orderNum desc
+    </select>
+
+    <select id="queryNoteCatNextByNum" parameterType="java.lang.String" resultType="noteCatBean">
+        select noteCatId, noteCatName, noteCatNum, parentNoteCatNum, parentNoteCatId
+        from note_cat
+        where parentNoteCatNum = #{parentNoteCatNum}
+        order by orderNum desc
+    </select>
+
+
 </mapper>
