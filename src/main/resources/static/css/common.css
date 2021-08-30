@@ -5,6 +5,16 @@
     /*font-family: "Lucida Console", "Courier New", monospace;*/
 }
 
+/* 顶部菜单提示语 */
+.top-menu-tip {
+    line-height: 35px;
+    font-size: 22px;
+    color: #ffffff;
+    text-shadow: 0 0 10px #ff0278, 0 0 20px #ff0278, 0 0 30px #ff0278, 0 0 40px #ff0278;
+    /*text-shadow: 0 0 10px #02bcff, 0 0 20px #02bcff, 0 0 30px #02bcff, 0 0 40px #02bcff;*/
+    /*text-shadow: 0 0 10px #ff0372, 0 0 20px #fd0000, 0 0 30px #f7ff00, 0 0 40px #02bcff;*/
+}
+
 /*搜索栏*/
 .comm-form-search {
     margin: 10px 0 10px 0;
@@ -339,10 +349,6 @@
 }
 
 .plan-item {
-
-}
-
-.plan-item {
     /*font-family: 'Audiowide';*/
     /*text-align: center;*/
     color: #c96d02;
@@ -361,6 +367,16 @@
     cursor: pointer;
     /*-webkit-animation: Glow 1.5s ease infinite alternate;*/
     /*animation: Glow 1.5s ease infinite alternate;*/
+}
+
+.plan-item-opr {
+    color: #0562ff;
+    /*height: 15px;*/
+    /*width: 30px;*/
+    /*border-radius: 50px;*/
+    /*font-size: 5px;*/
+    /*line-height: 5px;*/
+    /*text-align: left;*/
 }
 
 /*@-webkit-keyframes Glow {*/

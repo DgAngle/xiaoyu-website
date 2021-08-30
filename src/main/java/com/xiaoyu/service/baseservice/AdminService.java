@@ -14,4 +14,6 @@ public interface AdminService {
     List<CollectionTopVo> queryTopCollection();
 
     List<PlanTopVo> queryTopPlan();
+
+    int completePlanById(long planId);
 }

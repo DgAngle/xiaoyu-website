@@ -27,6 +27,7 @@
         </div>
     </div>-->
     <div id="indexContainer" class="main-content container-fluid">
+
         <div class="row">
             <div class="col-lg-9">
                 <div class="title-box style1">
@@ -43,7 +44,10 @@
                     <div class="box-content-title">{{topPlan.planCat.planCatName}}</div>
                     <div class="box-content">
                         <ul>
-                            <li class="plan-item" v-for="plan in topPlan.planList" :title="plan.planContent">📔&nbsp;{{plan.planName}}</li>
+                            <li class="plan-item" v-for="plan in topPlan.planList" :title="plan.planContent">
+                                📔&nbsp;{{plan.planName}}
+                                <a href="javascript:void(0);" @click="openConfirmFinish(plan.planId)"><i class="fa fa-check"></i></a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -77,7 +81,7 @@
             </div>
             <div class="col-lg-3">
                 <div class="box">
-                    <div class="box-content ">既许一人以偏爱，愿尽余生之慷慨</div>
+                    <!--<div class="box-content ">既许一人以偏爱，愿尽余生之慷慨</div>-->
                 </div>
             </div>
             <div class="col-lg-3">
@@ -96,6 +100,7 @@
 
 <!-- 公共 js -->
 <div th:include="common/common_js"></div>
+<div th:include="layout/component"></div>
 
 <script>
     new Vue({
@@ -126,9 +131,20 @@
                 let url = "/topPlan";
                 commonUtil.ajax(url, {}, function (res) {
                     _this.topPlanList = res.data.topPlanList;
-                    console.log(_this.topPlanList)
                 })
             },
+            openConfirmFinish(planId) {
+                // console.log(componentVm.confirm("完成确认", "是否完成该计划？"))
+                let _this = this;
+                if (confirm("是否完成该计划？")) {
+                    commonUtil.ajax("/completePlan", {'planId': planId}, function (res) {
+                        if (res && res.value) {
+                            Qmsg.success(res.message);
+                        }
+                        _this.refreshTopPLan();
+                    })
+                }
+            }
         }
     })
 

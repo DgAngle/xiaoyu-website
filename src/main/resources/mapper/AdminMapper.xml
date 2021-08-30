@@ -44,7 +44,14 @@
     <select id="queryPlanTop5" parameterType="java.lang.Long" resultType="planBean">
         select *
         from plan
-        where planCatId = #{planCatId} and status = 2
+        where planCatId = #{planCatId}
+          and status = 2
         order by createDt desc limit 5
     </select>
+
+    <update id="updatePlanStatusById">
+        update plan
+        set status=#{status}
+        where planId = #{planId}
+    </update>
 </mapper>

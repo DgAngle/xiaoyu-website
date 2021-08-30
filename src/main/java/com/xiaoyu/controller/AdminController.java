@@ -43,4 +43,13 @@ public class AdminController {
     public R queryTopNote() {
         return R.success();
     }
+
+    @RequestMapping("/completePlan")
+    @ResponseBody
+    public R completePlan(long planId) {
+        adminService.completePlanById(planId);
+        return R.success().message("操作成功！");
+    }
+
+
 }

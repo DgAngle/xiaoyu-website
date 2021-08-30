@@ -21,4 +21,6 @@ public interface AdminMapper {
     List<PlanCatBean> queryPlanCatTop2();
 
     List<PlanBean> queryPlanTop5(long planCatId);
+
+    int updatePlanStatusById(int status, long planId);
 }

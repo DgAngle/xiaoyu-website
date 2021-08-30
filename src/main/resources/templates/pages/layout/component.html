@@ -1,0 +1,51 @@
+<!-- 公共组件 -->
+
+<!-- confirm -->
+<div id="componentContainer">
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">{{title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">{{content}}</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" @click="confirmCallback()">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var componentVm = new Vue({
+        el: '#componentContainer',
+        data: {
+            title: '确认弹窗',
+            content: '确认信息',
+            flag: false,
+        },
+        methods: {
+            confirm(title, content) {
+                let _this = this;
+                _this.title = title;
+                _this.content = content;
+                $("#confirmModal").modal({
+                    keyboard: true,
+                    backdrop: "static"
+                })
+            },
+            confirmCallback() {
+                $("#confirmModal").modal('hide');
+                let _this = this;
+                _this.flag = true;
+                return _this.flag;
+            }
+        }
+
+    })
+</script>

@@ -5,6 +5,7 @@ import com.xiaoyu.entity.CollectionBean;
 import com.xiaoyu.entity.CollectionCatBean;
 import com.xiaoyu.entity.PlanCatBean;
 import com.xiaoyu.service.baseservice.AdminService;
+import com.xiaoyu.utils.ConstantUtil;
 import com.xiaoyu.vo.topvo.CollectionTopVo;
 import com.xiaoyu.vo.topvo.PlanTopVo;
 import org.springframework.stereotype.Service;
@@ -46,5 +47,10 @@ public class AdminServiceImpl implements AdminService {
             planTopVos.add(new PlanTopVo(planCat, adminMapper.queryPlanTop5(planCat.getPlanCatId())));
         });
         return planTopVos;
+    }
+
+    @Override
+    public int completePlanById(long planId) {
+        return adminMapper.updatePlanStatusById(ConstantUtil.plan_status_finished, planId);
     }
 }
