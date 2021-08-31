@@ -34,7 +34,6 @@
     </select>
 
     <!-- ********************* 计划相关 ********************* -->
-
     <select id="queryPlanCatTop2" resultType="planCatBean">
         select *
         from plan_cat
@@ -54,4 +53,25 @@
         set status=#{status}
         where planId = #{planId}
     </update>
+
+    <!-- ********************* 消费相关 ********************* -->
+    <select id="querySpendTop5" parameterType="spendBean" resultType="spendVo">
+        select sd.spendId,
+               sd.spendName,
+               sd.spendCatId,
+               sd.spendMoney,
+               sd.spendDate,
+               sd.spendContent,
+               sd.createDt,
+               sd.createBy,
+               sd.remark,
+               sdt.spendCatName
+        from spend sd
+                 inner join spend_cat sdt on sd.spendCatId = sdt.spendCatId
+        order by sd.createDt desc limit 5
+    </select>
+    <select id="queryTotalSpendMoney" resultType="java.math.BigDecimal">
+        select ifnull(sum(spendMoney), 0)
+        from spend
+    </select>
 </mapper>

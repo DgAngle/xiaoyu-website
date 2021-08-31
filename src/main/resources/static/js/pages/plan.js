@@ -1,4 +1,4 @@
-/* 收藏 */
+/* 计划 */
 let listVm = new Vue({
     el: "#planContainer",
     data: {
@@ -65,7 +65,7 @@ let listVm = new Vue({
         initAddForm() {
             let _this = this;
             _this.modalType = 'add';
-            _this.modalName = '新增收藏';
+            _this.modalName = '新增计划';
             _this.planForm = {
                 planName: '',
                 planCatId: null,
@@ -77,7 +77,7 @@ let listVm = new Vue({
         initEditForm(planDetail) {
             let _this = this;
             _this.modalType = 'edit';
-            _this.modalName = '修改收藏';
+            _this.modalName = '修改计划';
             _this.planForm = {
                 planId: planDetail.planId,
                 planName: planDetail.planName,

@@ -32,6 +32,14 @@ public class AdminController {
         return R.success().data("topPlanList", adminService.queryTopPlan());
     }
 
+    @RequestMapping("/topSpend")
+    @ResponseBody
+    public R queryTopSpend() {
+        return R.success()
+                .data("topSpendList", adminService.queryTopSpend())
+                .data("totalSpendMoney", adminService.queryTotalSpendMoney());
+    }
+
     @RequestMapping("/topCollection")
     @ResponseBody
     public R queryTopCollection() {

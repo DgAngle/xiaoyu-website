@@ -4,7 +4,9 @@ import com.xiaoyu.entity.CollectionBean;
 import com.xiaoyu.entity.CollectionCatBean;
 import com.xiaoyu.entity.PlanBean;
 import com.xiaoyu.entity.PlanCatBean;
+import com.xiaoyu.vo.basevo.SpendVo;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -23,4 +25,8 @@ public interface AdminMapper {
     List<PlanBean> queryPlanTop5(long planCatId);
 
     int updatePlanStatusById(int status, long planId);
+
+    List<SpendVo> querySpendTop5();
+
+    BigDecimal queryTotalSpendMoney();
 }

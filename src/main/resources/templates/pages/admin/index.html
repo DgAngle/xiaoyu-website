@@ -36,7 +36,7 @@
             </div>
             <div class="col-lg-3">
                 <div class="title-box style7">
-                    <span class="title-box-title"><a class="style-white" href="#">我的消费</a></span>
+                    <span class="title-box-title"><a class="style-white" href="/spend/goList">我的消费</a></span>
                 </div>
             </div>
             <div v-for="topPlan in topPlanList" class="col-lg-3">
@@ -53,7 +53,16 @@
                 </div>
             </div>
             <div class="col-lg-3">
-                <div class="box"></div>
+                <div class="box">
+                    <div class="box-content-title">合计消费：{{totalSpendMoney}} 元</div>
+                    <div class="box-content">
+                        <ul>
+                            <li class="spend-item" v-for="spend in topSpendList" :title="spend.spendContent">
+                                💰&nbsp;{{spend.spendName}} 【{{spend.spendMoney}}元】【{{spend.spendCatName}}】
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -109,6 +118,8 @@
             topCollectionIcon: ['🧡', '💜', '🤍', '💛', '🤎'],
             topCollectionList: {},
             topPlanList: {},
+            topSpendList: {},
+            totalSpendMoney: 0,
         },
         mounted: function () {
             this.refreshInit();
@@ -118,6 +129,7 @@
                 let _this = this;
                 _this.refreshTopCollection();
                 _this.refreshTopPLan();
+                _this.refreshTopSpend();
             },
             refreshTopCollection() {
                 let _this = this;
@@ -131,6 +143,14 @@
                 let url = "/topPlan";
                 commonUtil.ajax(url, {}, function (res) {
                     _this.topPlanList = res.data.topPlanList;
+                })
+            },
+            refreshTopSpend() {
+                let _this = this;
+                let url = "/topSpend";
+                commonUtil.ajax(url, {}, function (res) {
+                    _this.topSpendList = res.data.topSpendList;
+                    _this.totalSpendMoney = res.data.totalSpendMoney;
                 })
             },
             openConfirmFinish(planId) {

@@ -66,10 +66,10 @@
             and pn.planContent like concat('%',concat(#{planContent},'%'))
         </if>
         <if test="planStartDt != null">
-            and pn.planStartDt = #{planStartDt},
+            and pn.planStartDt = #{planStartDt}
         </if>
         <if test="planEndDt != null">
-            and pn.planEndDt = #{planEndDt},
+            and pn.planEndDt = #{planEndDt}
         </if>
     </sql>
     <sql id="plan_update_condition">

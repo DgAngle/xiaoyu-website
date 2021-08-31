@@ -6,11 +6,13 @@ import com.xiaoyu.entity.CollectionCatBean;
 import com.xiaoyu.entity.PlanCatBean;
 import com.xiaoyu.service.baseservice.AdminService;
 import com.xiaoyu.utils.ConstantUtil;
+import com.xiaoyu.vo.basevo.SpendVo;
 import com.xiaoyu.vo.topvo.CollectionTopVo;
 import com.xiaoyu.vo.topvo.PlanTopVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -50,7 +52,17 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public List<SpendVo> queryTopSpend() {
+        return adminMapper.querySpendTop5();
+    }
+
+    @Override
     public int completePlanById(long planId) {
         return adminMapper.updatePlanStatusById(ConstantUtil.plan_status_finished, planId);
+    }
+
+    @Override
+    public BigDecimal queryTotalSpendMoney() {
+        return adminMapper.queryTotalSpendMoney();
     }
 }

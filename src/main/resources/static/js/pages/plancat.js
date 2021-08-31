@@ -1,4 +1,4 @@
-/* 收藏分类 */
+/* 计划分类 */
 new Vue({
     el: "#planCatContainer",
     data: {

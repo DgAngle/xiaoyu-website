@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>消费</title>
+    <!-- 公共 css -->
+    <link th:replace="common/common_css"/>
+</head>
+<body>
+<div class="page-container ">
+    <div th:replace="layout/sidebar"></div>
+    <div th:replace="layout/topMenu"></div>
+
+    <!-- 内容区域 -->
+    <div class="container-fluid">
+        <div id="spendContainer">
+            <div th:replace="pageedit/spend/spendadd"></div>
+
+            <div class="row comm-operate">
+                <button class="btn btn-outline-primary btn-sm" @click="openSpendAdd()"><i class="fa fa-plus-square"></i>&nbsp;
+                    新增消费
+                </button>
+            </div>
+
+            <form class="form-inline form-search " onsubmit="return false;">
+                <div class="form-group col-sm-3 ">
+                    <label for="spendName" class="col-form-label ">消费名称:</label>
+                    <input type="text" class="form-control form-control-sm" id="spendName" v-model="spendQuery.spendName" placeholder="" autocomplete="off"
+                           @keyup.enter="refreshSpendList()">
+                </div>
+                <div class="form-group col-sm-3 ">
+                    <label for="spendCatName">消费分类:</label>
+                    <select class="form-control form-control-sm" id="spendCatName" v-model="spendQuery.spendCatId">
+                        <option value="-1"></option>
+                        <option v-for="spendCat in spendCatList" :value="spendCat.spendCatId">{{spendCat.spendCatName}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-2 ">
+                    <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshSpendList()">搜索</button>
+                </div>
+            </form>
+
+            <table class="table table-hover table-striped comm-table">
+                <thead class="thead-dark">
+                <tr>
+                    <th width="60">序号</th>
+                    <th width="180">消费名称</th>
+                    <th width="100">消费金额 (元)</th>
+                    <th width="100">消费分类</th>
+                    <th width="200">消费内容</th>
+                    <th width="60">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(spend, index) in spendList">
+                    <th>{{index + 1}}</th>
+                    <th>{{spend.spendName}}</th>
+                    <th>{{spend.spendMoney}}</th>
+                    <th>{{spend.spendCatName}}</th>
+                    <th :title="spend.spendContent">{{spend.spendContent | ellipsis}}</th>
+                    <th class="table-operate">
+                        <a href="#" title="修改" @click="openSpendEdit(spend.spendId)"><i class="fa fa-pencil"></i></a>
+                        <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+
+            <form id="queryForm">
+                <input hidden name="spendName" v-model="spendQuery.spendName">
+                <input hidden name="spendCatId" v-model="spendQuery.spendCatId">
+            </form>
+        </div>
+        <div th:include="common/common_js"></div>
+        <div th:replace="layout/pagnation"></div>
+    </div>
+</div>
+
+<!-- 公共 js -->
+<!--<div th:include="common/common_js"></div>-->
+<script type="text/javascript" src="/js/pages/spend.js"></script>
+</body>
+</html>

@@ -1,8 +1,10 @@
 package com.xiaoyu.service.baseservice;
 
+import com.xiaoyu.vo.basevo.SpendVo;
 import com.xiaoyu.vo.topvo.CollectionTopVo;
 import com.xiaoyu.vo.topvo.PlanTopVo;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -15,5 +17,9 @@ public interface AdminService {
 
     List<PlanTopVo> queryTopPlan();
 
+    List<SpendVo> queryTopSpend();
+
     int completePlanById(long planId);
+
+    BigDecimal queryTotalSpendMoney();
 }

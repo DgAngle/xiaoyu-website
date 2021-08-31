@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoyu.dao.SpendMapper">
+
+    <!-- ************************* 消费分类 ************************* -->
+    <sql id="spend_cat_query_condition">
+        <if test="spendCatName != null and spendCatName != ''">
+            and spendCatName like concat('%',concat(#{spendCatName},'%'))
+        </if>
+    </sql>
+    <sql id="spend_cat_update_condition">
+        <set>
+            <if test="spendCatName != null and spendCatName != ''">
+                spendCatName = #{spendCatName},
+            </if>
+            <if test="orderNum >= 0">
+                orderNum = #{orderNum},
+            </if>
+        </set>
+    </sql>
+
+    <select id="querySpendCatList" parameterType="spendCatBean" resultType="spendCatBean">
+        select *
+        from spend_cat
+        where 1=1
+        <include refid="spend_cat_query_condition"></include>
+        order by orderNum desc
+        limit #{start}, #{pageCount}
+    </select>
+
+    <insert id="addSpendCat" parameterType="spendCatBean">
+        insert into spend_cat(spendCatName, orderNum, createDt, createBy)
+        values (#{spendCatName}, #{orderNum}, #{createDt}, #{createBy})
+    </insert>
+
+    <select id="querySpendCatDetailById" resultType="spendCatBean">
+        select spendCatId, spendCatName, orderNum
+        from spend_cat
+        where spendCatId = #{spendCatId}
+    </select>
+
+    <update id="updateSpendCat" parameterType="spendCatBean">
+        update spend_cat
+        <include refid="spend_cat_update_condition"></include>
+        where spendCatId = #{spendCatId}
+    </update>
+
+    <delete id="deleteSpendCatById">
+        delete
+        from spend_cat
+        where spendCatId = #{spendCatId}
+    </delete>
+
+    <!-- ************************* 消费主表 ************************* -->
+    <sql id="spend_query_condition">
+        <if test="spendName != null and spendName != ''">
+            and sd.spendName like concat('%',concat(#{spendName},'%'))
+        </if>
+        <if test="spendCatId != null and spendCatId != -1 ">
+            and sd.spendCatId = #{spendCatId}
+        </if>
+        <if test="spendMoney != null and spendMoney != -1 ">
+            and sd.spendMoney = #{spendMoney}
+        </if>
+        <if test="spendContent != null and spendContent != ''">
+            and sd.spendContent like concat('%',concat(#{spendContent},'%'))
+        </if>
+        <if test="spendDate != null">
+            and sd.spendDate = #{spendDate}
+        </if>
+    </sql>
+    <sql id="spend_update_condition">
+        <set>
+            <if test="spendName != null and spendName != ''">
+                spendName = #{spendName},
+            </if>
+            <if test="spendCatId > 0">
+                spendCatId = #{spendCatId},
+            </if>
+            <if test="spendMoney != null and spendMoney != ''">
+                spendMoney = #{spendMoney},
+            </if>
+            <if test="spendDate != null">
+                spendDate = #{spendDate},
+            </if>
+            <if test="spendContent != null and spendContent != ''">
+                spendContent = #{spendContent},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+        </set>
+    </sql>
+
+    <select id="querySpendListCount" parameterType="spendBean" resultType="java.lang.Integer">
+        select count(1)
+        from spend sd
+        where 1=1
+        <include refid="spend_query_condition"></include>
+    </select>
+
+    <select id="querySpendList" parameterType="spendBean" resultType="spendVo">
+        select sd.spendId,
+        sd.spendName,
+        sd.spendCatId,
+        sd.spendMoney,
+        sd.spendDate,
+        sd.spendContent,
+        sd.createDt,
+        sd.createBy,
+        sd.remark,
+        sdt.spendCatName
+        from spend sd
+        inner join spend_cat sdt on sd.spendCatId = sdt.spendCatId
+        where 1=1
+        <include refid="spend_query_condition"></include>
+        order by sdt.orderNum desc, sd.spendCatId, sd.createDt desc limit #{start}, #{pageCount}
+    </select>
+
+    <insert id="addSpend" parameterType="spendBean">
+        insert into spend(spendId, spendName, spendCatId, spendMoney, spendDate, spendContent, createDt, createBy, remark)
+        values (#{spendId}, #{spendName}, #{spendCatId}, #{spendMoney}, #{spendDate}, #{spendContent}, #{createDt}, #{createBy}, #{remark})
+    </insert>
+
+    <select id="querySpendDetailById" resultType="spendBean">
+        select spendId,
+               spendName,
+               spendCatId,
+               spendMoney,
+               spendDate,
+               spendContent,
+               remark
+        from spend
+        where spendId = #{spendId}
+    </select>
+
+    <update id="updateSpend" parameterType="spendBean">
+        update spend
+        <include refid="spend_update_condition"></include>
+        where spendId = #{spendId}
+    </update>
+
+    <delete id="deleteSpendById">
+        delete
+        from spend
+        where spendId = #{spendId}
+    </delete>
+
+</mapper>
