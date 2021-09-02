@@ -86,7 +86,7 @@
             <if test="spendContent != null and spendContent != ''">
                 spendContent = #{spendContent},
             </if>
-            <if test="remark != null and remark != ''">
+            <if test="remark != null">
                 remark = #{remark},
             </if>
         </set>
@@ -145,5 +145,12 @@
         from spend
         where spendId = #{spendId}
     </delete>
+
+    <select id="queryTotalSpendMoney" parameterType="spendBean" resultType="java.math.BigDecimal">
+        select ifnull(sum(sd.spendMoney), 0)
+        from spend sd
+        where 1 = 1
+        <include refid="spend_query_condition"></include>
+    </select>
 
 </mapper>

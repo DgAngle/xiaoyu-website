@@ -4,6 +4,7 @@ import com.xiaoyu.common.ListResult;
 import com.xiaoyu.entity.SpendBean;
 import com.xiaoyu.entity.SpendCatBean;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -35,4 +36,6 @@ public interface SpendService {
     int updateSpend(SpendBean spendBean);
 
     int deleteSpendById(long spendId);
+
+    BigDecimal queryTotalSpendMoney(SpendBean spendBean);
 }

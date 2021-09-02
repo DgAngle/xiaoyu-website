@@ -10,6 +10,7 @@ import com.xiaoyu.utils.ConstantUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -87,5 +88,10 @@ public class SpendServiceImpl implements SpendService {
     @Override
     public int deleteSpendById(long spendId) {
         return spendMapper.deleteSpendById(spendId);
+    }
+
+    @Override
+    public BigDecimal queryTotalSpendMoney(SpendBean spendBean) {
+        return spendMapper.queryTotalSpendMoney(spendBean);
     }
 }

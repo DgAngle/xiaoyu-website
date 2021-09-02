@@ -98,7 +98,7 @@
             <if test="updateBy != null and updateBy != ''">
                 updateBy = #{updateBy},
             </if>
-            <if test="remark != null and remark != ''">
+            <if test="remark != null">
                 remark = #{remark},
             </if>
         </set>

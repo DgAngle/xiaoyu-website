@@ -77,6 +77,7 @@ public class SpendController {
         ListResult<SpendBean> listResult = spendService.querySpendList(spendBean);
         return R.success()
                 .data("spendList", listResult.getList())
+                .data("totalSpendMoney", spendService.queryTotalSpendMoney(spendBean))
                 .data("pagination", listResult.getPagination());
     }
 

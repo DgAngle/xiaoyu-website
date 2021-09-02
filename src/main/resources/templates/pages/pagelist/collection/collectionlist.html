@@ -10,9 +10,11 @@
 <div class="page-container ">
     <div th:replace="layout/sidebar"></div>
     <div th:replace="layout/topMenu"></div>
-
+    <!--<div th:include="common/common_js"></div>-->
     <!-- 内容区域 -->
     <div class="container-fluid">
+        <!--<div th:replace="layout/pagnation"></div>-->
+
         <div id="collectionContainer">
             <div th:replace="pageedit/collection/collectionadd"></div>
 
@@ -39,14 +41,13 @@
                     <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshCollationList()">搜索</button>
                 </div>
             </form>
-
             <table class="table table-hover table-striped comm-table">
                 <thead class="thead-dark">
                 <tr>
                     <th width="60">序号</th>
-                    <th width="200">收藏名称</th>
+                    <th width="250">收藏名称</th>
                     <th width="100">收藏分类</th>
-                    <th width="200">地址</th>
+                    <th width="150">地址</th>
                     <th width="180">备注</th>
                     <th width="100">操作</th>
                 </tr>
@@ -56,7 +57,7 @@
                     <th>{{index + 1}}</th>
                     <th>{{collect.collectionName}}</th>
                     <th>{{collect.collectionCatName}}</th>
-                    <th><a :href="collect.collectionUrl" style="text-decoration: underline;" target="_blank">{{collect.collectionUrl}}</a></th>
+                    <th><a :href="collect.collectionUrl" style="text-decoration: underline;" target="_blank">{{collect.collectionUrl | ellipsisUrl}}</a></th>
                     <th :title="collect.remark">{{collect.remark | ellipsis}}</th>
                     <th class="table-operate">
                         <a href="#" title="修改" @click="openCollectionEdit(collect.collectionId)"><i class="fa fa-pencil"></i></a>
@@ -71,13 +72,12 @@
                 <input hidden name="collectionCatId" v-model="collectionQuery.collectionCatId">
             </form>
         </div>
-        <div th:include="common/common_js"></div>
+        <div th:replace="common/common_js"></div>
         <div th:replace="layout/pagnation"></div>
     </div>
 </div>
 
 <!-- 公共 js -->
-<!--<div th:include="common/common_js"></div>-->
 <script type="text/javascript" src="/js/pages/collection.js"></script>
 </body>
 </html>

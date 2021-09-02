@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 27/08/2021 17:22:59
+ Date: 02/09/2021 15:46:40
 */
 
 SET NAMES utf8mb4;
@@ -33,7 +33,7 @@ CREATE TABLE `plan_cat`  (
 -- ----------------------------
 -- Records of plan_cat
 -- ----------------------------
-INSERT INTO `plan_cat` VALUES (1, '今日计划', 0000000008, '2021-08-19 13:30:39', NULL);
+INSERT INTO `plan_cat` VALUES (1, '每日计划', 0000000008, '2021-08-19 13:30:39', NULL);
 INSERT INTO `plan_cat` VALUES (2, '长期计划', 0000000000, '2021-08-19 13:30:50', NULL);
 INSERT INTO `plan_cat` VALUES (3, '短期计划', 0000000000, '2021-08-19 13:30:57', NULL);
 INSERT INTO `plan_cat` VALUES (4, '工作计划', 0000000010, '2021-08-26 14:38:18', NULL);

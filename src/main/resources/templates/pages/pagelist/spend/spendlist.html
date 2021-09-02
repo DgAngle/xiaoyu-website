@@ -5,6 +5,7 @@
     <title>消费</title>
     <!-- 公共 css -->
     <link th:replace="common/common_css"/>
+    <link rel="stylesheet" href="/css/pages/spend.css"/>
 </head>
 <body>
 <div class="page-container ">
@@ -39,6 +40,9 @@
                     <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshSpendList()">搜索</button>
                 </div>
             </form>
+            <div class="row">
+                <div class="col-md-3 spend-total">合计消费：{{totalSpendMoney}} 元</div>
+            </div>
 
             <table class="table table-hover table-striped comm-table">
                 <thead class="thead-dark">

@@ -28,6 +28,13 @@ let listVm = new Vue({
                 return value.slice(0, 15) + '...'
             }
             return value
+        },
+        ellipsisUrl(value) {
+            if (!value) return '';
+            if (value.length > 40) {
+                return value.slice(0, 40) + '...'
+            }
+            return value
         }
     },
     methods: {

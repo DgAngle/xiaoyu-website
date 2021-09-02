@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 25/08/2021 13:02:32
+ Date: 02/09/2021 15:46:49
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `collection`  (
   `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   PRIMARY KEY (`collectionId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 60 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of collection
@@ -41,7 +41,7 @@ INSERT INTO `collection` VALUES (3, 'Bootstrap4', 'https://v4.bootcss.com/', 1, 
 INSERT INTO `collection` VALUES (4, 'Leetcode', 'https://leetcode-cn.com/', 3, '算法学习以及练习网站', '2021-08-16 12:48:11', NULL);
 INSERT INTO `collection` VALUES (5, 'Tomcat下载', 'https://archive.apache.org/dist/tomcat/', 6, 'Tomcat历史版本下载', '2021-08-16 13:17:45', NULL);
 INSERT INTO `collection` VALUES (6, 'JQuery在线中文文档', 'https://jquery.cuishifeng.cn/', 7, 'JQuery 在线Api', '2021-08-16 13:21:45', NULL);
-INSERT INTO `collection` VALUES (7, 'Fontawesome', 'https://fontawesome.dashgame.com/', 1, 'fontawesome字体图标官网', '2021-08-16 13:22:56', NULL);
+INSERT INTO `collection` VALUES (7, 'Fontawesome-icon', 'https://fontawesome.dashgame.com/', 1, 'fontawesome字体图标官网', '2021-08-16 13:22:56', NULL);
 INSERT INTO `collection` VALUES (8, 'Google翻译', 'https://translate.google.cn/', 8, 'Google 在线翻译', '2021-08-16 13:40:36', NULL);
 INSERT INTO `collection` VALUES (9, '有道翻译', 'https://fanyi.youdao.com/', 8, '有道云在线翻译', '2021-08-16 13:40:58', NULL);
 INSERT INTO `collection` VALUES (10, 'ProcessOn', 'https://www.processon.com/', 5, 'ProcessOn在线流程图、脑图笔记', '2021-08-16 14:14:09', NULL);
@@ -70,7 +70,7 @@ INSERT INTO `collection` VALUES (32, 'JQuery消息提示弹窗插件VtMessage.js
 INSERT INTO `collection` VALUES (33, 'Loading&预警提示层Js插件', 'http://www.bootstrapmb.com/item/10817', 10, 'Loading&预警提示层js插件', '2021-08-19 15:34:56', NULL);
 INSERT INTO `collection` VALUES (34, 'Vue可爱动物卡片样式动画特效', 'http://www.bootstrapmb.com/item/10801', 10, 'Vue可爱动物卡片样式动画特效', '2021-08-19 16:10:52', NULL);
 INSERT INTO `collection` VALUES (35, 'Jquery插件库', 'https://www.jq22.com/', 1, 'Jquery插件', '2021-08-19 16:41:11', NULL);
-INSERT INTO `collection` VALUES (36, '原生JS消息提示插件Message.js(原创)', 'https://www.jq22.com/jquery-info23550', 10, '原生JS消息提示插件Message.js(原创)', '2021-08-19 16:56:33', NULL);
+INSERT INTO `collection` VALUES (36, 'JS消息提示插件Message.js', 'https://www.jq22.com/jquery-info23550', 10, '原生JS消息提示插件Message.js(原创)', '2021-08-19 16:56:33', NULL);
 INSERT INTO `collection` VALUES (37, '新拟物化登陆UI设计', 'https://www.jq22.com/demo/cssnwhdl202101040928/', 10, '新拟物化登陆UI设计\nhttps://www.jq22.com/jquery-info23579', '2021-08-19 17:02:06', NULL);
 INSERT INTO `collection` VALUES (38, 'labuladong的算法小抄', 'https://labuladong.gitbook.io/algo/', 4, '算法在线读，leetcode刷题', '2021-08-20 09:55:32', NULL);
 INSERT INTO `collection` VALUES (39, 'CSS阴影效果(Box-shadow)用法趣味讲解', 'https://www.webhek.com/post/css-box-shadow-property.html', 9, 'CSS 之 box-shadow 属性用法详解', '2021-08-24 13:41:29', NULL);
@@ -79,5 +79,20 @@ INSERT INTO `collection` VALUES (41, 'Centos 下载', 'http://mirrors.aliyun.com
 INSERT INTO `collection` VALUES (42, 'JQuery 下载', 'https://www.jq22.com/plugin/122', 6, 'JQuery 历史版本下载', '2021-08-25 12:03:18', NULL);
 INSERT INTO `collection` VALUES (43, 'Stackoverflow', 'https://stackoverflow.com/', 3, 'Stackoverflow，程序员的在线问答网站，解决各种BUG', '2021-08-25 12:05:14', NULL);
 INSERT INTO `collection` VALUES (44, 'ProcessOn', 'https://www.processon.com/', 1, 'ProcessOn官网，在线设计流程图，思维导图', '2021-08-25 12:08:31', NULL);
+INSERT INTO `collection` VALUES (45, 'Fontawesome-设计师入口', 'http://www.fontawesome.com.cn/icons-ui/', 1, 'Fontawesome设计师专用入口,可以进行搜索', '2021-08-30 09:43:09', NULL);
+INSERT INTO `collection` VALUES (46, 'jQuery自定义日历事项查看插件', 'http://www.bootstrapmb.com/item/2855', 10, 'jQuery自定义日历事项查看插件', '2021-09-02 13:29:17', NULL);
+INSERT INTO `collection` VALUES (47, 'Js单双日历插件日期范围选择 - When', 'http://www.bootstrapmb.com/item/1956', 10, 'Js单双日历插件日期范围选择 - When', '2021-09-02 13:29:54', NULL);
+INSERT INTO `collection` VALUES (48, 'calendar.js简单的日期选择插件', 'http://www.bootstrapmb.com/item/2346', 10, 'calendar.js简单的日期选择插件', '2021-09-02 13:30:18', NULL);
+INSERT INTO `collection` VALUES (49, 'bootstrap时间日期插件年度季度月度', 'http://www.bootstrapmb.com/item/8283', 10, 'bootstrap时间日期插件年度季度月度', '2021-09-02 13:30:48', NULL);
+INSERT INTO `collection` VALUES (50, 'jquery-datePicker日期范围选择插件', 'http://www.bootstrapmb.com/item/10064', 10, 'jquery-datePicker日期范围选择插件', '2021-09-02 13:31:45', NULL);
+INSERT INTO `collection` VALUES (51, '日期选择Js插件', 'http://www.bootstrapmb.com/item/10989', 10, '日期选择Js插件', '2021-09-02 13:32:02', NULL);
+INSERT INTO `collection` VALUES (52, 'FullCalendar.js中文版jQuery日历插件', 'http://www.bootstrapmb.com/item/8012', 10, 'FullCalendar.js中文版jQuery日历插件', '2021-09-02 13:58:27', NULL);
+INSERT INTO `collection` VALUES (53, 'jquery周日历插件带详细事件', 'http://www.bootstrapmb.com/item/5697', 10, 'jquery周日历插件带详细事件', '2021-09-02 13:58:42', NULL);
+INSERT INTO `collection` VALUES (54, 'Bootstrap全屏日历拖拽事件插件', 'http://www.bootstrapmb.com/item/2664', 10, 'Bootstrap全屏日历拖拽事件插件', '2021-09-02 13:58:59', NULL);
+INSERT INTO `collection` VALUES (55, '漂亮的CSS3日历插件代码', 'http://www.bootstrapmb.com/item/2494', 10, '漂亮的CSS3日历插件代码', '2021-09-02 13:59:15', NULL);
+INSERT INTO `collection` VALUES (56, 'JS签到日历插件代码', 'http://www.bootstrapmb.com/item/2437', 10, 'JS签到日历插件代码', '2021-09-02 13:59:34', NULL);
+INSERT INTO `collection` VALUES (57, 'jQuery多色日期日历插件 - jalendar', 'http://www.bootstrapmb.com/item/1984', 10, 'jQuery多色日期日历插件 - jalendar', '2021-09-02 13:59:48', NULL);
+INSERT INTO `collection` VALUES (58, 'js全屏日历弹出详情插件tui.calendar', 'http://www.bootstrapmb.com/item/10120', 10, 'js全屏日历弹出详情插件tui.calendar', '2021-09-02 14:01:45', NULL);
+INSERT INTO `collection` VALUES (59, 'jQuery全屏农历日历插件', 'http://www.bootstrapmb.com/item/1710', 10, 'FullCalendar.js中文版jQuery日历插件', '2021-09-02 14:02:34', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

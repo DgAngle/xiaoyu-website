@@ -14,6 +14,7 @@ let listVm = new Vue({
             remark: '',
         },
         spendId: null,
+        totalSpendMoney: 0,
         modalName: '',
         modalType: 'add',
         spendList: {},
@@ -112,6 +113,7 @@ let listVm = new Vue({
             let url = "/spend/list";
             commonUtil.ajax(url, _this.spendQuery, function (res) {
                 _this.spendList = res.data.spendList;
+                _this.totalSpendMoney = res.data.totalSpendMoney;
                 paginationVm.pagination = res.data.pagination;
                 paginationVm.initNumbers();
             })
@@ -120,6 +122,7 @@ let listVm = new Vue({
             let _this = this;
             commonUtil.ajax("/spend/list", pageQuery, function (res) {
                 _this.spendList = res.data.spendList;
+                _this.totalSpendMoney = res.data.totalSpendMoney;
                 paginationVm.pagination = res.data.pagination;
                 paginationVm.initNumbers();
             })
