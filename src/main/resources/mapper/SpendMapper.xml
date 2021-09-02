@@ -65,7 +65,7 @@
         <if test="spendContent != null and spendContent != ''">
             and sd.spendContent like concat('%',concat(#{spendContent},'%'))
         </if>
-        <if test="spendDate != null">
+        <if test="spendDate != null and spendDate != ''">
             and sd.spendDate = #{spendDate}
         </if>
     </sql>

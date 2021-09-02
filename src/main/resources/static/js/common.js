@@ -16,6 +16,14 @@ window.onload = function () {
         }
     });
 
+    // $(".datatimepicker").datetimepicker({
+    //     autoClose: true,
+    // });
+
+    $(".datetime").flatpickr({
+        locale:'zh',
+    });
+
     Qmsg.config({
         position: 'center',
         showClose: true,
@@ -31,6 +39,7 @@ window.onload = function () {
             commonUtil.statusList[i] = statusItem;
         }
     })
+
 }
 
 /*弹出模态框*/

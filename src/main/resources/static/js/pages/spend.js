@@ -5,11 +5,13 @@ let listVm = new Vue({
         spendQuery: {
             spendName: '',
             spendCatId: -1,
+            spendDate: null,
         },
         spendForm: {
             spendName: '',
             spendCatId: null,
             spendMoney: 0,
+            spendDate: null,
             spendContent: '',
             remark: '',
         },
@@ -55,6 +57,7 @@ let listVm = new Vue({
                 spendName: '',
                 spendCatId: null,
                 spendMoney: 0,
+                spendDate: null,
                 spendContent: '',
                 remark: '',
             };
@@ -68,6 +71,7 @@ let listVm = new Vue({
                 spendId: spendDetail.spendId,
                 spendName: spendDetail.spendName,
                 spendMoney: spendDetail.spendMoney,
+                spendDate: spendDetail.spendDate,
                 spendContent: spendDetail.spendContent,
                 spendCatId: spendDetail.spendCatId,
                 remark: spendDetail.remark,

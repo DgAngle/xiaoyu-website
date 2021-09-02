@@ -36,6 +36,13 @@
                         <option v-for="spendCat in spendCatList" :value="spendCat.spendCatId">{{spendCat.spendCatName}}</option>
                     </select>
                 </div>
+                <div class="form-group col-sm-3 ">
+                    <label for="spendDate" class="col-form-label ">消费日期:</label>
+                    <input type="text" class="form-control form-control-sm datetime" id="spendDate" v-model="spendQuery.spendDate" placeholder="" autocomplete="off">
+                    <a class="date-clear" @click="spendQuery.spendDate = null;">
+                        <i class="fa fa-close"></i>
+                    </a>
+                </div>
                 <div class="form-group col-sm-2 ">
                     <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshSpendList()">搜索</button>
                 </div>
@@ -51,6 +58,7 @@
                     <th width="180">消费名称</th>
                     <th width="100">消费金额 (元)</th>
                     <th width="100">消费分类</th>
+                    <th width="100">消费日期</th>
                     <th width="200">消费内容</th>
                     <th width="60">操作</th>
                 </tr>
@@ -61,6 +69,7 @@
                     <th>{{spend.spendName}}</th>
                     <th>{{spend.spendMoney}}</th>
                     <th>{{spend.spendCatName}}</th>
+                    <th>{{spend.spendDate}}</th>
                     <th :title="spend.spendContent">{{spend.spendContent | ellipsis}}</th>
                     <th class="table-operate">
                         <a href="#" title="修改" @click="openSpendEdit(spend.spendId)"><i class="fa fa-pencil"></i></a>
