@@ -399,5 +399,31 @@
 .date-clear {
     margin-left: -20px;
     cursor: pointer;
-    color: #868484
+}
+
+.date-clear i {
+    color: #d7d0d0;
+
+}
+
+.date-clear i:hover {
+    color: #f64598;
+}
+
+.date-line-clear {
+    font-size: 18px;
+    clear: both;
+    float: right;
+    margin-top: -35px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.date-line-clear i {
+    color: #d7d0d0;
+
+}
+
+.date-line-clear i:hover {
+    color: #f64598;
 }
