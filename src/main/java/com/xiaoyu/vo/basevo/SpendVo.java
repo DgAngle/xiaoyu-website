@@ -1,6 +1,7 @@
 package com.xiaoyu.vo.basevo;
 
 import com.xiaoyu.entity.SpendBean;
+import com.xiaoyu.utils.DateUtil;
 import lombok.Data;
 
 /**
@@ -11,4 +12,10 @@ import lombok.Data;
 @Data
 public class SpendVo extends SpendBean {
     private String spendCatName; // 分类名称
+    private String spendDateStr; // 日期格式化
+
+    public String getSpendDateStr() {
+        if (this.getSpendDate() != null) spendDateStr = DateUtil.dateToString(this.getSpendDate());
+        return spendDateStr;
+    }
 }

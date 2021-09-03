@@ -59,14 +59,25 @@
         <if test="spendCatId != null and spendCatId != -1 ">
             and sd.spendCatId = #{spendCatId}
         </if>
-        <if test="spendMoney != null and spendMoney != -1 ">
-            and sd.spendMoney = #{spendMoney}
+        <if test="spendMoney != null and spendMoney != -1">
+            <choose>
+                <when test="spendMoney != null and spendMoney != -1 and spendMoney == 1001">
+                    and sd.spendMoney >= #{spendMoney}
+                </when>
+                <otherwise>
+                    and sd.spendMoney <![CDATA[ <= ]]> #{spendMoney}
+                </otherwise>
+            </choose>
         </if>
+
         <if test="spendContent != null and spendContent != ''">
             and sd.spendContent like concat('%',concat(#{spendContent},'%'))
         </if>
-        <if test="spendDate != null and spendDate != ''">
-            and sd.spendDate = #{spendDate}
+        <if test="spendStartDate != null and spendStartDate != ''">
+            and sd.spendDate <![CDATA[ >= ]]> #{spendStartDate}
+        </if>
+        <if test="spendEndDate != null and spendEndDate != ''">
+            and sd.spendDate <![CDATA[ <= ]]> #{spendEndDate}
         </if>
     </sql>
     <sql id="spend_update_condition">
@@ -92,14 +103,14 @@
         </set>
     </sql>
 
-    <select id="querySpendListCount" parameterType="spendBean" resultType="java.lang.Integer">
+    <select id="querySpendListCount" parameterType="spendQuery" resultType="java.lang.Integer">
         select count(1)
         from spend sd
         where 1=1
         <include refid="spend_query_condition"></include>
     </select>
 
-    <select id="querySpendList" parameterType="spendBean" resultType="spendVo">
+    <select id="querySpendList" parameterType="spendQuery" resultType="spendVo">
         select sd.spendId,
         sd.spendName,
         sd.spendCatId,
@@ -122,7 +133,7 @@
         values (#{spendId}, #{spendName}, #{spendCatId}, #{spendMoney}, #{spendDate}, #{spendContent}, #{createDt}, #{createBy}, #{remark})
     </insert>
 
-    <select id="querySpendDetailById" resultType="spendBean">
+    <select id="querySpendDetailById" resultType="spendVo">
         select spendId,
                spendName,
                spendCatId,

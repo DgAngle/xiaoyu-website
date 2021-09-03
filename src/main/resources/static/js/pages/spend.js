@@ -5,7 +5,10 @@ let listVm = new Vue({
         spendQuery: {
             spendName: '',
             spendCatId: -1,
+            spendMoney: -1,
             spendDate: null,
+            spendStartDate: null,
+            spendEndDate: null,
         },
         spendForm: {
             spendName: '',
@@ -20,6 +23,15 @@ let listVm = new Vue({
         modalName: '',
         modalType: 'add',
         spendList: {},
+        spendMoneyArray: [
+            {text: "全部", value: -1},
+            {text: "10元及以下", value: 10},
+            {text: "20元及以下", value: 20},
+            {text: "50元及以下", value: 50},
+            {text: "100元及以下", value: 100},
+            {text: "1000元及以下", value: 1000},
+            {text: "1000元以上", value: 1001},
+        ],
         spendCatList: {},
         tableStatusList: [],
     },
@@ -71,11 +83,18 @@ let listVm = new Vue({
                 spendId: spendDetail.spendId,
                 spendName: spendDetail.spendName,
                 spendMoney: spendDetail.spendMoney,
-                spendDate: spendDetail.spendDate,
+                spendDate: spendDetail.spendDateStr,
                 spendContent: spendDetail.spendContent,
                 spendCatId: spendDetail.spendCatId,
                 remark: spendDetail.remark,
             };
+            $("#spendDateEdit").flatpickr({
+                locale: 'zh',
+                enableTime: true,
+                enableSeconds: true,
+                time_24hr: true,
+                defaultDate: spendDetail.spendDateStr,
+            })
         },
         // 打开新增模态框
         openSpendAdd() {

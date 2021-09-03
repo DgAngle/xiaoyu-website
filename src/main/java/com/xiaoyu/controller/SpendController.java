@@ -1,10 +1,13 @@
 package com.xiaoyu.controller;
 
 import com.xiaoyu.common.ListResult;
+import com.xiaoyu.common.Transform;
 import com.xiaoyu.entity.SpendBean;
 import com.xiaoyu.entity.SpendCatBean;
 import com.xiaoyu.service.baseservice.SpendService;
 import com.xiaoyu.utils.R;
+import com.xiaoyu.vo.basevo.SpendQuery;
+import com.xiaoyu.vo.transform.SpendTransform;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,18 +76,19 @@ public class SpendController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public R list(SpendBean spendBean) {
-        ListResult<SpendBean> listResult = spendService.querySpendList(spendBean);
+    public R list(SpendQuery spendQuery) {
+        // ListResult<SpendBean> listResult = spendService.querySpendList(new Transform<SpendBean, SpendTransform>().transformEntityStringToType(spendTransform, new SpendBean()));
+        ListResult<SpendBean> listResult = spendService.querySpendList(spendQuery);
         return R.success()
                 .data("spendList", listResult.getList())
-                .data("totalSpendMoney", spendService.queryTotalSpendMoney(spendBean))
+                .data("totalSpendMoney", spendService.queryTotalSpendMoney(spendQuery))
                 .data("pagination", listResult.getPagination());
     }
 
     @RequestMapping("/add")
     @ResponseBody
-    public R add(SpendBean spendBean) {
-        spendService.addSpend(spendBean);
+    public R add(SpendTransform spendTransform) {
+        spendService.addSpend(new Transform<SpendBean, SpendTransform>().transformEntityStringToType(spendTransform, new SpendBean()));
         return R.success().message("添加成功！");
     }
 
@@ -96,8 +100,8 @@ public class SpendController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public R update(SpendBean spendBean) {
-        spendService.updateSpend(spendBean);
+    public R update(SpendTransform spendTransform) {
+        spendService.updateSpend(new Transform<SpendBean, SpendTransform>().transformEntityStringToType(spendTransform, new SpendBean()));
         return R.success().message("修改成功！");
     }
 

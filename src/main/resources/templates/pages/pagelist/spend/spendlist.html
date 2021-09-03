@@ -22,31 +22,58 @@
                     新增消费
                 </button>
             </div>
-
-            <form class="form-inline form-search " onsubmit="return false;">
-                <div class="form-group col-sm-3 ">
-                    <label for="spendName" class="col-form-label ">消费名称:</label>
-                    <input type="text" class="form-control form-control-sm" id="spendName" v-model="spendQuery.spendName" placeholder="" autocomplete="off"
-                           @keyup.enter="refreshSpendList()">
+            <form class="form-search" onsubmit="return false;">
+                <div class="row form-inline">
+                    <div class="form-group col-md-3">
+                        <label for="spendName" class="col-form-label ">消费名称:</label>
+                        <input type="text" class="form-control form-control-sm" id="spendName" v-model="spendQuery.spendName" placeholder="" autocomplete="off"
+                               @keyup.enter="refreshSpendList()">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="spendCatName">消费分类:</label>
+                        <select class="form-control form-control-sm" id="spendCatName" v-model="spendQuery.spendCatId">
+                            <option value="-1">全部</option>
+                            <option v-for="spendCat in spendCatList" :value="spendCat.spendCatId">{{spendCat.spendCatName}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="spendMoney">消费金额:</label>
+                        <select class="form-control form-control-sm" id="spendMoney" v-model="spendQuery.spendMoney">
+                            <option v-for="spendMoney in spendMoneyArray" :value="spendMoney.value">{{spendMoney.text}}</option>
+                        </select>
+                        <!--<input type="text" class="form-control form-control-sm" id="spendMoney" v-model="spendQuery.spendMoney" placeholder="" autocomplete="off"-->
+                        <!--       @keyup.enter="refreshSpendList()">-->
+                    </div>
+                    <div class="form-group col-md-3">
+                        <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshSpendList()">搜索</button>
+                        <button type="button" class="btn btn-outline-info btn-sm" style="margin-left: 5px;" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                                aria-controls="collapseExample">
+                            高级搜索&nbsp;&nbsp;<i class="fa fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="form-group col-md-3">
+                    </div>
                 </div>
-                <div class="form-group col-sm-3 ">
-                    <label for="spendCatName">消费分类:</label>
-                    <select class="form-control form-control-sm" id="spendCatName" v-model="spendQuery.spendCatId">
-                        <option value="-1"></option>
-                        <option v-for="spendCat in spendCatList" :value="spendCat.spendCatId">{{spendCat.spendCatName}}</option>
-                    </select>
-                </div>
-                <div class="form-group col-sm-3 ">
-                    <label for="spendDate" class="col-form-label ">消费日期:</label>
-                    <input type="text" class="form-control form-control-sm datetime" id="spendDate" v-model="spendQuery.spendDate" placeholder="" autocomplete="off">
-                    <a class="date-clear" @click="spendQuery.spendDate = null;">
-                        <i class="fa fa-close"></i>
-                    </a>
-                </div>
-                <div class="form-group col-sm-2 ">
-                    <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshSpendList()">搜索</button>
+                <div class="collapse" id="collapseExample">
+                    <div class="row form-search form-inline">
+                        <div class="form-group col-md-3">
+                            <label for="spendStartDate" class="col-form-label ">开始日期:</label>
+                            <input type="text" class="form-control form-control-sm datetime-search" id="spendStartDate" v-model="spendQuery.spendStartDate" placeholder="" autocomplete="off">
+                            <a class="date-clear" @click="spendQuery.spendStartDate = null;">
+                                <i class="fa fa-times-circle-o"></i>
+                            </a>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="spendEndDate" class="col-form-label ">结束日期:</label>
+                            <input type="text" class="form-control form-control-sm datetime-search" id="spendEndDate" v-model="spendQuery.spendEndDate" placeholder="" autocomplete="off">
+                            <a class="date-clear" @click="spendQuery.spendEndDate = null;">
+                                <i class="fa fa-times-circle-o"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </form>
+
             <div class="row">
                 <div class="col-md-3 spend-total">合计消费：{{totalSpendMoney}} 元</div>
             </div>
@@ -69,7 +96,7 @@
                     <th>{{spend.spendName}}</th>
                     <th>{{spend.spendMoney}}</th>
                     <th>{{spend.spendCatName}}</th>
-                    <th>{{spend.spendDate}}</th>
+                    <th>{{spend.spendDateStr}}</th>
                     <th :title="spend.spendContent">{{spend.spendContent | ellipsis}}</th>
                     <th class="table-operate">
                         <a href="#" title="修改" @click="openSpendEdit(spend.spendId)"><i class="fa fa-pencil"></i></a>

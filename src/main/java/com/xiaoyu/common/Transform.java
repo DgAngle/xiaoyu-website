@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class Transform<T, S> {
      * @param stringEntity String字段实体
      * @return String字段实体
      */
-    public void transformEntityTypeToString(T typeEntity, S stringEntity) {
+    public S transformEntityTypeToString(T typeEntity, S stringEntity) {
         Class<?> stringClass = stringEntity.getClass();
         Class<?> typeClass = typeEntity.getClass();
         Field[] typeFields = typeClass.getDeclaredFields();
@@ -55,6 +56,7 @@ public class Transform<T, S> {
                 e.printStackTrace();
             }
         }
+        return stringEntity;
     }
 
     /**
@@ -64,7 +66,7 @@ public class Transform<T, S> {
      * @param typeEntity   不同类型字段实体
      * @return 不同类型字段实体
      */
-    public void transformEntityStringToType(S stringEntity, T typeEntity) {
+    public T transformEntityStringToType(S stringEntity, T typeEntity) {
         Class<?> stringClass = stringEntity.getClass();
         Class<?> typeClass = typeEntity.getClass();
         Field[] typeFields = typeClass.getDeclaredFields();
@@ -86,6 +88,7 @@ public class Transform<T, S> {
                 e.printStackTrace();
             }
         }
+        return typeEntity;
     }
 
     /**
@@ -106,6 +109,8 @@ public class Transform<T, S> {
                 return DateUtil.stringToDate(str.toString());
             case "long":
                 return Long.parseLong(str.toString());
+            case "bigdecimal":
+                return new BigDecimal(str.toString());
             default:
                 return null;
         }

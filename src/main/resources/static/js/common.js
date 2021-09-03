@@ -21,7 +21,14 @@ window.onload = function () {
     // });
 
     $(".datetime").flatpickr({
-        locale:'zh',
+        locale: 'zh',
+        enableTime: true,
+        defaultHour: 0,
+        enableSeconds: true,
+        time_24hr: true,
+    });
+    $(".datetime-search").flatpickr({
+        locale: 'zh',
     });
 
     Qmsg.config({

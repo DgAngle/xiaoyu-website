@@ -7,6 +7,8 @@ import com.xiaoyu.entity.SpendBean;
 import com.xiaoyu.entity.SpendCatBean;
 import com.xiaoyu.service.baseservice.SpendService;
 import com.xiaoyu.utils.ConstantUtil;
+import com.xiaoyu.vo.basevo.SpendQuery;
+import com.xiaoyu.vo.basevo.SpendVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -54,16 +56,16 @@ public class SpendServiceImpl implements SpendService {
     /************************* 消费主表 *************************/
 
     @Override
-    public ListResult<SpendBean> querySpendList(SpendBean spendBean) {
+    public ListResult<SpendBean> querySpendList(SpendQuery spendQuery) {
         ListResult<SpendBean> listResult = new ListResult<>();
-        int totalCount = spendMapper.querySpendListCount(spendBean);
-        if (totalCount > 0) listResult.setList(spendMapper.querySpendList(spendBean));
+        int totalCount = spendMapper.querySpendListCount(spendQuery);
+        if (totalCount > 0) listResult.setList(spendMapper.querySpendList(spendQuery));
 
         Pagination pagination = new Pagination();
         pagination.setTotalCount(totalCount);
-        pagination.setPageCount(spendBean.getPageCount());
-        pagination.setStart(spendBean.getStart());
-        pagination.setCurrentPage(spendBean.getCurrentPage());
+        pagination.setPageCount(spendQuery.getPageCount());
+        pagination.setStart(spendQuery.getStart());
+        pagination.setCurrentPage(spendQuery.getCurrentPage());
         listResult.setPagination(pagination);
         return listResult;
     }
@@ -76,7 +78,7 @@ public class SpendServiceImpl implements SpendService {
     }
 
     @Override
-    public SpendBean querySpendDetailById(long spendId) {
+    public SpendVo querySpendDetailById(long spendId) {
         return spendMapper.querySpendDetailById(spendId);
     }
 
@@ -91,7 +93,7 @@ public class SpendServiceImpl implements SpendService {
     }
 
     @Override
-    public BigDecimal queryTotalSpendMoney(SpendBean spendBean) {
-        return spendMapper.queryTotalSpendMoney(spendBean);
+    public BigDecimal queryTotalSpendMoney(SpendQuery spendQuery) {
+        return spendMapper.queryTotalSpendMoney(spendQuery);
     }
 }

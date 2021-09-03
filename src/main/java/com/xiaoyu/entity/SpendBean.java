@@ -19,7 +19,7 @@ public class SpendBean extends Pagination {
     private long spendCatId; // 消费分类主键
     private String spendName; // 消费名称
     private BigDecimal spendMoney; // 消费金额
-    private String spendDate; // 消费时间
+    private Date spendDate; // 消费时间
     private String spendContent; // 消费内容
     private Date createDt; // 创建时间
     private String createBy; // 创建人

@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 02/09/2021 15:46:49
+ Date: 03/09/2021 18:28:44
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `collection`  (
   `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   PRIMARY KEY (`collectionId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 60 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 61 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of collection
@@ -79,7 +79,7 @@ INSERT INTO `collection` VALUES (41, 'Centos 下载', 'http://mirrors.aliyun.com
 INSERT INTO `collection` VALUES (42, 'JQuery 下载', 'https://www.jq22.com/plugin/122', 6, 'JQuery 历史版本下载', '2021-08-25 12:03:18', NULL);
 INSERT INTO `collection` VALUES (43, 'Stackoverflow', 'https://stackoverflow.com/', 3, 'Stackoverflow，程序员的在线问答网站，解决各种BUG', '2021-08-25 12:05:14', NULL);
 INSERT INTO `collection` VALUES (44, 'ProcessOn', 'https://www.processon.com/', 1, 'ProcessOn官网，在线设计流程图，思维导图', '2021-08-25 12:08:31', NULL);
-INSERT INTO `collection` VALUES (45, 'Fontawesome-设计师入口', 'http://www.fontawesome.com.cn/icons-ui/', 1, 'Fontawesome设计师专用入口,可以进行搜索', '2021-08-30 09:43:09', NULL);
+INSERT INTO `collection` VALUES (45, 'Fontawesome-设计师入口-icon', 'http://www.fontawesome.com.cn/icons-ui/', 1, 'Fontawesome设计师专用入口,可以进行搜索', '2021-08-30 09:43:09', NULL);
 INSERT INTO `collection` VALUES (46, 'jQuery自定义日历事项查看插件', 'http://www.bootstrapmb.com/item/2855', 10, 'jQuery自定义日历事项查看插件', '2021-09-02 13:29:17', NULL);
 INSERT INTO `collection` VALUES (47, 'Js单双日历插件日期范围选择 - When', 'http://www.bootstrapmb.com/item/1956', 10, 'Js单双日历插件日期范围选择 - When', '2021-09-02 13:29:54', NULL);
 INSERT INTO `collection` VALUES (48, 'calendar.js简单的日期选择插件', 'http://www.bootstrapmb.com/item/2346', 10, 'calendar.js简单的日期选择插件', '2021-09-02 13:30:18', NULL);
@@ -94,5 +94,6 @@ INSERT INTO `collection` VALUES (56, 'JS签到日历插件代码', 'http://www.b
 INSERT INTO `collection` VALUES (57, 'jQuery多色日期日历插件 - jalendar', 'http://www.bootstrapmb.com/item/1984', 10, 'jQuery多色日期日历插件 - jalendar', '2021-09-02 13:59:48', NULL);
 INSERT INTO `collection` VALUES (58, 'js全屏日历弹出详情插件tui.calendar', 'http://www.bootstrapmb.com/item/10120', 10, 'js全屏日历弹出详情插件tui.calendar', '2021-09-02 14:01:45', NULL);
 INSERT INTO `collection` VALUES (59, 'jQuery全屏农历日历插件', 'http://www.bootstrapmb.com/item/1710', 10, 'FullCalendar.js中文版jQuery日历插件', '2021-09-02 14:02:34', NULL);
+INSERT INTO `collection` VALUES (60, 'Flatpickr中文文档', 'https://www.flatpickr.cn/', 1, 'flatpickr，日期插件中文文档', '2021-09-02 18:32:08', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
