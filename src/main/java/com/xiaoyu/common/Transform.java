@@ -4,6 +4,7 @@ import com.xiaoyu.entity.PlanBean;
 import com.xiaoyu.service.transform.TypeHandler;
 import com.xiaoyu.utils.DateUtil;
 import com.xiaoyu.vo.transform.PlanTransform;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.Field;
@@ -99,7 +100,7 @@ public class Transform<T, S> {
      * @return 返回转换后的类型结果
      */
     public Object typeTransform(Object str, String typeClass) {
-        if (str == null) return null;
+        if (StringUtils.isBlank((String) str)) return null;
         switch (typeClass.toLowerCase()) {
             case "string":
                 return str;

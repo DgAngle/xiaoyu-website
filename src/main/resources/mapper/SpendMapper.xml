@@ -62,7 +62,7 @@
         <if test="spendMoney != null and spendMoney != -1">
             <choose>
                 <when test="spendMoney != null and spendMoney != -1 and spendMoney == 1001">
-                    and sd.spendMoney >= #{spendMoney}
+                    and sd.spendMoney >= 1000
                 </when>
                 <otherwise>
                     and sd.spendMoney <![CDATA[ <= ]]> #{spendMoney}
@@ -125,7 +125,7 @@
         inner join spend_cat sdt on sd.spendCatId = sdt.spendCatId
         where 1=1
         <include refid="spend_query_condition"></include>
-        order by sdt.orderNum desc, sd.spendCatId, sd.createDt desc limit #{start}, #{pageCount}
+        order by sd.createDt desc limit #{start}, #{pageCount}
     </select>
 
     <insert id="addSpend" parameterType="spendBean">

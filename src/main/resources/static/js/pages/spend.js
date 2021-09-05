@@ -7,6 +7,7 @@ let listVm = new Vue({
             spendCatId: -1,
             spendMoney: -1,
             spendDate: null,
+            spendContent: null,
             spendStartDate: null,
             spendEndDate: null,
         },

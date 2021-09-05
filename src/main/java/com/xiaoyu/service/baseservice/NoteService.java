@@ -12,4 +12,10 @@ public interface NoteService {
     int addNoteCat(NoteCatBean noteCatBean);
 
     Map<String, NoteCatBean> queryNoteCatTree();
+
+    NoteCatBean queryNoteCatDetailById(long noteCatId);
+
+    int updateNoteCat(NoteCatBean noteCatBean);
+
+    int deleteNoteCatById(long noteCatId);
 }

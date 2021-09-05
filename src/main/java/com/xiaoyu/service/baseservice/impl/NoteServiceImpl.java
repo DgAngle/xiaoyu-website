@@ -74,6 +74,22 @@ public class NoteServiceImpl implements NoteService {
         return null;
     }
 
+    @Override
+    public NoteCatBean queryNoteCatDetailById(long noteCatId) {
+        return noteMapper.queryNoteCatDetailById(noteCatId);
+    }
+
+    @Override
+    public int updateNoteCat(NoteCatBean noteCatBean) {
+        noteCatBean.setNoteCatNum(getNoteCatNum(noteCatBean.getParentNoteCatNum()));
+        return noteMapper.updateNoteCat(noteCatBean);
+    }
+
+    @Override
+    public int deleteNoteCatById(long noteCatId) {
+        return noteMapper.deleteNoteCatById(noteCatId);
+    }
+
     /**
      * 获取同一父级分类下的最大编号
      *

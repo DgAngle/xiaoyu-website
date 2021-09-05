@@ -1,10 +1,13 @@
 package com.xiaoyu.controller;
 
 import com.xiaoyu.common.ListResult;
+import com.xiaoyu.common.Transform;
+import com.xiaoyu.entity.NoteCatBean;
 import com.xiaoyu.entity.NoteCatBean;
 import com.xiaoyu.service.baseservice.NoteService;
 import com.xiaoyu.utils.R;
 import com.xiaoyu.utils.RCode;
+import com.xiaoyu.vo.transform.NoteCatTransform;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,12 +48,31 @@ public class NoteController {
     // 笔记分类添加
     @RequestMapping("/cat/add")
     @ResponseBody
-    public R addNoteCat(NoteCatBean noteCatBean) {
-        int r = noteService.addNoteCat(noteCatBean);
+    public R addNoteCat(NoteCatTransform noteCatTransform) {
+        int r = noteService.addNoteCat(new Transform<NoteCatBean, NoteCatTransform>().transformEntityStringToType(noteCatTransform, new NoteCatBean()));
         if (r == RCode.repeat_code) return R.error().message("笔记分类名称重复, 请重新输入！");
         return R.success().message("添加成功！");
     }
 
+    @RequestMapping("/cat/detail")
+    @ResponseBody
+    public R catDetail(long noteCatId) {
+        return R.success().data("noteCatDetail", noteService.queryNoteCatDetailById(noteCatId));
+    }
+
+    @RequestMapping("/cat/update")
+    @ResponseBody
+    public R catUpdate(NoteCatTransform noteCatTransform) {
+        noteService.updateNoteCat(new Transform<NoteCatBean, NoteCatTransform>().transformEntityStringToType(noteCatTransform, new NoteCatBean()));
+        return R.success().message("修改成功！");
+    }
+
+    @RequestMapping("/cat/del")
+    @ResponseBody
+    public R catDel(long noteCatId) {
+        noteService.deleteNoteCatById(noteCatId);
+        return R.success().message("删除成功！");
+    }
 
     // 笔记分类下拉树
     @RequestMapping("/cat/tree")

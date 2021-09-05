@@ -50,7 +50,7 @@ public class StringUtil {
             String temp = maxNum.substring(maxNum.length() - ConstantUtil.cat_num_length);
             catNum = parentCatNum + String.format("%04d", Integer.parseInt(temp) + 1);
         } else {
-            catNum = ConstantUtil.cat_num_begin;
+            catNum = parentCatNum + ConstantUtil.cat_num_begin;
         }
         return catNum;
     }

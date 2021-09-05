@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xiaoyu.dao.NoteMapper">
+
+    <sql id="note_cat_query_condition">
+        <if test="noteCatName != null and noteCatName != ''">
+            and noteCatName like concat('%',concat(#{noteCatName},'%'))
+        </if>
+    </sql>
+    <sql id="note_cat_update_condition">
+        <set>
+            <if test="noteCatName != null and noteCatName != ''">
+                noteCatName = #{noteCatName},
+            </if>
+            <if test="noteCatNum != null and noteCatNum != ''">
+                noteCatNum = #{noteCatNum},
+            </if>
+            <if test="parentNoteCatNum != null and parentNoteCatNum != ''">
+                parentNoteCatNum = #{parentNoteCatNum},
+            </if>
+            <if test="parentNoteCatId != null">
+                parentNoteCatId = #{parentNoteCatId},
+            </if>
+            <if test="orderNum >= 0">
+                orderNum = #{orderNum},
+            </if>
+        </set>
+    </sql>
+
+
     <select id="queryNoteCatListCount" parameterType="noteCatBean" resultType="java.lang.Integer">
         select count(1)
         from note_cat limit #{start}, #{pageCount}
@@ -39,10 +66,9 @@
     </select>
 
     <insert id="addNoteCat" parameterType="roleBean">
-        insert into note_cat(noteCatId, noteCatName, noteCatNum, parentNoteCatNum, parentNoteCatId, orderNum, createDt,
-                             createBy)
-        values (#{noteCatId}, #{noteCatName}, #{noteCatNum}, #{parentNoteCatNum}, #{parentNoteCatId}, #{orderNum},
-                #{createDt}, #{createBy})
+        insert into note_cat(noteCatName, noteCatNum, parentNoteCatNum, parentNoteCatId, orderNum, createDt, createBy)
+        values (#{noteCatName}, #{noteCatNum}, #{parentNoteCatNum}, #{parentNoteCatId}, #{orderNum}, #{createDt},
+                #{createBy})
     </insert>
 
     <select id="queryNoteCatRoot" resultType="noteCatBean">
@@ -58,6 +84,24 @@
         where parentNoteCatNum = #{parentNoteCatNum}
         order by orderNum desc
     </select>
+
+    <select id="queryNoteCatDetailById" parameterType="java.lang.Long" resultType="noteCatBean">
+        select noteCatId, noteCatName, noteCatNum, parentNoteCatNum, parentNoteCatId
+        from note_cat
+        where noteCatId = #{noteCatId}
+    </select>
+
+    <update id="updateNoteCat" parameterType="noteCatBean">
+        update note_cat
+        <include refid="note_cat_update_condition"></include>
+        where noteCatId = #{noteCatId}
+    </update>
+
+    <delete id="deleteNoteCatById" parameterType="java.lang.Long">
+        delete
+        from note_cat
+        where noteCatId = #{noteCatId}
+    </delete>
 
 
 </mapper>

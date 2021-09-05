@@ -30,6 +30,12 @@ public interface NoteMapper {
      */
     List<NoteCatBean> queryNoteCatNextByNum(String parentNoteCatNum);
 
+    NoteCatBean queryNoteCatDetailById(long noteCatId);
+
+    int updateNoteCat(NoteCatBean noteCatBean);
+
+    int deleteNoteCatById(long noteCatId);
+
     /************** 笔记 **************/
 
 }

@@ -70,6 +70,11 @@
                                 <i class="fa fa-times-circle-o"></i>
                             </a>
                         </div>
+                        <div class="form-group col-md-3">
+                            <label for="spendContent" class="col-form-label ">消费内容:</label>
+                            <input type="text" class="form-control form-control-sm" id="spendContent" v-model="spendQuery.spendContent" placeholder="" autocomplete="off"
+                                   @keyup.enter="refreshSpendList()">
+                        </div>
                     </div>
                 </div>
             </form>

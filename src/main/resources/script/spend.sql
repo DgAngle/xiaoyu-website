@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 03/09/2021 18:28:56
+ Date: 06/09/2021 00:51:59
 */
 
 SET NAMES utf8mb4;
@@ -32,7 +32,7 @@ CREATE TABLE `spend`  (
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   `remark` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`spendId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '消费表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '消费表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of spend
@@ -47,5 +47,10 @@ INSERT INTO `spend` VALUES (7, 1, '韭菜炒蛋+米饭', 18.28, '2021-09-01 19:0
 INSERT INTO `spend` VALUES (8, 1, '回锅肉盖浇饭+手撕包菜', 28.00, '2021-09-01 20:00:00', '平台：美团外卖\n商家：明亮饭店', '2021-09-02 08:34:15', NULL, '时间：2021-09-01晚');
 INSERT INTO `spend` VALUES (9, 2, '王者皮肤', 45.00, '2021-09-01 20:00:00', '游戏：王者荣耀充值45元【QQ区】\n内容：购买【伽罗】55开黑节皮肤【箭羽风息】【44.4】元', '2021-09-02 08:39:20', NULL, '时间：2021-09-01晚');
 INSERT INTO `spend` VALUES (10, 1, '香脆锁骨鸡', 14.99, '2021-09-02 20:00:00', '平台：美团外卖\n商家：吧哩吧哩.炸鸡.烤鸡（青剑湖店）', '2021-09-03 09:31:07', NULL, '');
+INSERT INTO `spend` VALUES (11, 1, '炸串卷饼', 20.58, '2021-09-03 19:00:00', '平台：美团外卖\n商家：于飞成卷饼炸串拌饼（曼哈顿店）\n明细：【拌饼，2.98】+【金丝纯肉排，6.58】+【棒棒鸡，5.58】+【韭菜，2.98】\n           【兰花干，4.58】+【长沙黑色经典灌汤臭豆腐，12】+【热狗，3.58->0.1】', '2021-09-04 09:45:51', NULL, '');
+INSERT INTO `spend` VALUES (12, 1, '回锅肉盖浇饭+蒜苔肉丝', 27.00, '2021-09-03 19:00:00', '平台：美团外卖\n商家：明亮饭店', '2021-09-04 09:48:22', NULL, '');
+INSERT INTO `spend` VALUES (13, 1, '京东消费', 240.41, '2021-09-04 20:00:00', '平台：京东商城\n明细：【卡士.鲜酪乳，27】+【...】', '2021-09-05 11:58:47', NULL, NULL);
+INSERT INTO `spend` VALUES (14, 1, '黄焖鸡米饭', 17.46, '2021-09-05 11:00:00', '平台：饿了吗\n', '2021-09-05 11:59:38', NULL, NULL);
+INSERT INTO `spend` VALUES (15, 5, '京东白条还款', 1432.65, '2021-09-05 12:00:00', '平台：京东商城\n', '2021-09-05 12:00:48', NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
