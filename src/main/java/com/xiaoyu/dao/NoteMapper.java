@@ -1,6 +1,9 @@
 package com.xiaoyu.dao;
 
+import com.xiaoyu.entity.NoteBean;
 import com.xiaoyu.entity.NoteCatBean;
+import com.xiaoyu.vo.basevo.NoteQuery;
+import com.xiaoyu.vo.basevo.NoteVo;
 
 import java.util.List;
 
@@ -36,6 +39,19 @@ public interface NoteMapper {
 
     int deleteNoteCatById(long noteCatId);
 
+    String queryParentNoteCatNumById(long noteCatId);
+
     /************** 笔记 **************/
 
+    int queryNoteListCount(NoteQuery noteQuery);
+
+    List<NoteBean> queryNoteList(NoteQuery noteQuery);
+
+    int addNote(NoteBean noteBean);
+
+    NoteVo queryNoteDetailById(long noteId);
+
+    int updateNote(NoteBean noteBean);
+
+    int deleteNoteById(long noteId);
 }

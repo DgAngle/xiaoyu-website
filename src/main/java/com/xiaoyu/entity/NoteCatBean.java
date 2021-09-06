@@ -14,7 +14,7 @@ public class NoteCatBean extends Pagination {
     private String noteCatName; // 分类名称
     private String noteCatNum; // 笔记分类编号,四位一级,例：000100010001
     private long parentNoteCatId; // 父级主键
-    private String parentNoteCatNum; // 父级主键
+    private String parentNoteCatNum; // 父级编号
     private int orderNum; //排序号
     private Date createDt; // 创建时间
     private String createBy; // 创建人

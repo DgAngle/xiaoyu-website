@@ -86,22 +86,18 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="title-box style2">
-                    <span class="title-box-title">近期笔记</span>
+                    <span class="title-box-title"><a class="style-black-note" href="/note/goList">近期笔记</a></span>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div v-for="topNote in topNoteList" class="col-lg-3">
                 <div class="box">
-                    <!--<div class="box-content ">既许一人以偏爱，愿尽余生之慷慨</div>-->
+                    <div class="box-content-title">{{topNote.noteCat.noteCatName}}</div>
+                    <div class="box-content">
+                        <ul>
+                            <li v-for="note in topNote.noteList" :title="note.noteContent">📘&nbsp;{{note.noteName | ellipsis}}</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="box"></div>
-            </div>
-            <div class="col-lg-3">
-                <div class="box"></div>
-            </div>
-            <div class="col-lg-3">
-                <div class="box"></div>
             </div>
         </div>
         <div style="height: 30px;"></div>
@@ -120,6 +116,7 @@
             topCollectionList: {},
             topPlanList: {},
             topSpendList: {},
+            topNoteList: {},
             totalSpendMoney: 0,
         },
         mounted: function () {
@@ -140,6 +137,7 @@
                 _this.refreshTopCollection();
                 _this.refreshTopPLan();
                 _this.refreshTopSpend();
+                _this.refreshTopNote();
             },
             refreshTopCollection() {
                 let _this = this;
@@ -161,6 +159,13 @@
                 commonUtil.ajax(url, {}, function (res) {
                     _this.topSpendList = res.data.topSpendList;
                     _this.totalSpendMoney = res.data.totalSpendMoney;
+                })
+            },
+            refreshTopNote() {
+                let _this = this;
+                let url = "/topNote";
+                commonUtil.ajax(url, {}, function (res) {
+                    _this.topNoteList = res.data.topNoteList;
                 })
             },
             openConfirmFinish(planId) {

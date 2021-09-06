@@ -4,10 +4,14 @@ import com.xiaoyu.common.ListResult;
 import com.xiaoyu.common.Transform;
 import com.xiaoyu.entity.NoteCatBean;
 import com.xiaoyu.entity.NoteCatBean;
+import com.xiaoyu.entity.NoteBean;
+import com.xiaoyu.entity.NoteCatBean;
 import com.xiaoyu.service.baseservice.NoteService;
 import com.xiaoyu.utils.R;
 import com.xiaoyu.utils.RCode;
+import com.xiaoyu.vo.basevo.NoteQuery;
 import com.xiaoyu.vo.transform.NoteCatTransform;
+import com.xiaoyu.vo.transform.NoteTransform;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +43,6 @@ public class NoteController {
     @ResponseBody
     public R queryNoteCatList(NoteCatBean noteCatBean) {
         ListResult<NoteCatBean> listResult = noteService.queryNoteCatList(noteCatBean);
-
         return R.success()
                 .data("noteCatList", listResult.getList())
                 .data("pagination", listResult.getPagination());
@@ -87,4 +90,41 @@ public class NoteController {
     public String goNoteList() {
         return this.note_path + "/notelist";
     }
+
+    @RequestMapping("/list")
+    @ResponseBody
+    public R list(NoteQuery noteQuery) {
+        ListResult<NoteBean> listResult = noteService.queryNoteList(noteQuery);
+        return R.success()
+                .data("noteList", listResult.getList())
+                .data("pagination", listResult.getPagination());
+    }
+
+    @RequestMapping("/add")
+    @ResponseBody
+    public R add(NoteTransform noteTransform) {
+        noteService.addNote(new Transform<NoteBean, NoteTransform>().transformEntityStringToType(noteTransform, new NoteBean()));
+        return R.success().message("添加成功！");
+    }
+
+    @RequestMapping("/detail")
+    @ResponseBody
+    public R detail(long noteId) {
+        return R.success().data("noteDetail", noteService.queryNoteDetailById(noteId));
+    }
+
+    @RequestMapping("/update")
+    @ResponseBody
+    public R update(NoteTransform noteTransform) {
+        noteService.updateNote(new Transform<NoteBean, NoteTransform>().transformEntityStringToType(noteTransform, new NoteBean()));
+        return R.success().message("修改成功！");
+    }
+
+    @RequestMapping("/del")
+    @ResponseBody
+    public R del(long noteId) {
+        noteService.deleteNoteById(noteId);
+        return R.success().message("删除成功！");
+    }
+
 }

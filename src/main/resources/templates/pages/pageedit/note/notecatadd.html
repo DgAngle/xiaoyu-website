@@ -19,6 +19,7 @@
                         <label for="parentNoteCatEdit"><span style="color: red"></span>所属分类：</label>
                         <select class="form-control form-select-default" id="parentNoteCatEdit"
                                 v-model="parentNoteCatIdAndNum">
+                            <option :value="';'"></option>
                             <option v-for="parentNoteCat in parentNoteCatList"
                                     :value="parentNoteCat.noteCatId+';'+parentNoteCat.noteCatNum">
                                 {{parentNoteCat.noteCatName}}

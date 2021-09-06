@@ -37,12 +37,16 @@ new Vue({
             let _this = this;
             _this.modalType = 'edit';
             _this.modalName = '修改笔记分类';
-            _this.parentNoteCatIdAndNum = noteCatDetail.noteCatId + ";" + noteCatDetail.noteCatNum;
+            _this.parentNoteCatIdAndNum = noteCatDetail.parentNoteCatId + ";" + (noteCatDetail.parentNoteCatNum == null ? "" : noteCatDetail.parentNoteCatNum);
             _this.noteCatForm = {
                 noteCatId: noteCatDetail.noteCatId,
                 noteCatName: noteCatDetail.noteCatName,
+                noteCatNum: noteCatDetail.noteCatNum,
                 orderNum: noteCatDetail.orderNum,
             };
+            console.log(noteCatDetail);
+            console.log(_this.parentNoteCatIdAndNum);
+            console.log(_this.noteCatForm);
         },
         openNoteCatAdd() {
             let _this = this

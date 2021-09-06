@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xiaoyu.dao.NoteMapper">
 
+    <!-- ************************ 笔记分类 ************************ -->
     <sql id="note_cat_query_condition">
         <if test="noteCatName != null and noteCatName != ''">
             and noteCatName like concat('%',concat(#{noteCatName},'%'))
@@ -15,10 +16,10 @@
             <if test="noteCatNum != null and noteCatNum != ''">
                 noteCatNum = #{noteCatNum},
             </if>
-            <if test="parentNoteCatNum != null and parentNoteCatNum != ''">
+            <if test="parentNoteCatNum != null and parentNoteCatNum != '' and parentNoteCatId != 0">
                 parentNoteCatNum = #{parentNoteCatNum},
             </if>
-            <if test="parentNoteCatId != null">
+            <if test="parentNoteCatId != null and parentNoteCatId != 0">
                 parentNoteCatId = #{parentNoteCatId},
             </if>
             <if test="orderNum >= 0">
@@ -27,7 +28,6 @@
         </set>
     </sql>
 
-
     <select id="queryNoteCatListCount" parameterType="noteCatBean" resultType="java.lang.Integer">
         select count(1)
         from note_cat limit #{start}, #{pageCount}
@@ -35,16 +35,18 @@
 
     <select id="queryNoteCatList" parameterType="noteCatBean" resultType="noteCatBean">
         select noteCatId,
-               noteCatName,
-               noteCatNum,
-               parentNoteCatNum,
-               parentNoteCatId,
-               orderNum,
-               createDt,
-               createBy
+        noteCatName,
+        noteCatNum,
+        parentNoteCatNum,
+        parentNoteCatId,
+        orderNum,
+        createDt,
+        createBy
         from note_cat
+        where 1=1
+        <include refid="note_cat_query_condition"></include>
         order by length(noteCatNum), orderNum desc
-            limit #{start}, #{pageCount}
+        limit #{start}, #{pageCount}
     </select>
 
     <select id="queryNoteCatByNoteCatName" resultType="java.lang.Integer">
@@ -86,7 +88,7 @@
     </select>
 
     <select id="queryNoteCatDetailById" parameterType="java.lang.Long" resultType="noteCatBean">
-        select noteCatId, noteCatName, noteCatNum, parentNoteCatNum, parentNoteCatId
+        select noteCatId, noteCatName, noteCatNum, parentNoteCatNum, parentNoteCatId, orderNum
         from note_cat
         where noteCatId = #{noteCatId}
     </select>
@@ -103,5 +105,94 @@
         where noteCatId = #{noteCatId}
     </delete>
 
+    <select id="queryParentNoteCatNumById" parameterType="java.lang.Long" resultType="java.lang.String">
+        select ifNull(parentNoteCatNum, "")
+        from note_cat
+        where noteCatId = #{noteCatId}
+    </select>
+
+    <!-- ************************ 笔记主表 ************************ -->
+    <sql id="note_query_condition">
+        <if test="noteName != null and noteName != ''">
+            and ne.noteName like concat('%',concat(#{noteName},'%'))
+        </if>
+        <if test="noteCatId != null and noteCatId != -1 ">
+            and ne.noteCatId = #{noteCatId}
+        </if>
+        <if test="noteContent != null and noteContent != ''">
+            and ne.noteContent like concat('%',concat(#{noteContent},'%'))
+        </if>
+        <if test="createStartDt != null and createStartDt != ''">
+            and ne.createDt <![CDATA[ >= ]]> #{createStartDt}
+        </if>
+        <if test="createEndDt != null and createEndDt != ''">
+            and ne.createDt <![CDATA[ <= ]]> #{createEndDt}
+        </if>
+    </sql>
+    <sql id="note_update_condition">
+        <set>
+            <if test="noteName != null and noteName != ''">
+                noteName = #{noteName},
+            </if>
+            <if test="noteCatId > 0">
+                noteCatId = #{noteCatId},
+            </if>
+            noteContent = #{noteContent},
+        </set>
+    </sql>
+
+    <select id="queryNoteListCount" parameterType="noteQuery" resultType="java.lang.Integer">
+        select count(1)
+        from note ne
+        where 1=1
+        <include refid="note_query_condition"></include>
+    </select>
+
+    <select id="queryNoteList" parameterType="noteQuery" resultType="noteVo">
+        select ne.noteId,
+        ne.noteName,
+        ne.noteCatId,
+        ne.noteContent,
+        ne.level,
+        ne.isTop,
+        ne.createDt,
+        ne.createBy,
+        nct.noteCatName
+        from note ne
+        inner join note_cat nct on ne.noteCatId = nct.noteCatId
+        where 1=1
+        <include refid="note_query_condition"></include>
+        order by ne.createDt desc limit #{start}, #{pageCount}
+    </select>
+
+    <insert id="addNote" parameterType="noteBean">
+        insert into note(noteName, noteCatId, level, isTop, noteContent, createDt, createBy)
+        values (#{noteName}, #{noteCatId}, #{level}, #{isTop}, #{noteContent}, #{createDt}, #{createBy})
+    </insert>
+
+    <select id="queryNoteDetailById" resultType="noteVo">
+        select noteId,
+               noteName,
+               noteCatId,
+               noteContent,
+               level,
+               isTop,
+               createDt,
+               createBy
+        from note
+        where noteId = #{noteId}
+    </select>
+
+    <update id="updateNote" parameterType="noteBean">
+        update note
+        <include refid="note_update_condition"></include>
+        where noteId = #{noteId}
+    </update>
+
+    <delete id="deleteNoteById">
+        delete
+        from note
+        where noteId = #{noteId}
+    </delete>
 
 </mapper>
