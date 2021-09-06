@@ -1,13 +1,14 @@
 package com.xiaoyu.service.baseservice.impl;
 
 import com.xiaoyu.dao.AdminMapper;
-import com.xiaoyu.entity.CollectionBean;
 import com.xiaoyu.entity.CollectionCatBean;
+import com.xiaoyu.entity.NoteCatBean;
 import com.xiaoyu.entity.PlanCatBean;
 import com.xiaoyu.service.baseservice.AdminService;
 import com.xiaoyu.utils.ConstantUtil;
 import com.xiaoyu.vo.basevo.SpendVo;
 import com.xiaoyu.vo.topvo.CollectionTopVo;
+import com.xiaoyu.vo.topvo.NoteTopVo;
 import com.xiaoyu.vo.topvo.PlanTopVo;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +44,7 @@ public class AdminServiceImpl implements AdminService {
     public List<PlanTopVo> queryTopPlan() {
         List<PlanTopVo> planTopVos = new ArrayList<>();
         // 查询排序后的前2个计划分类
-        List<PlanCatBean> planCatBeans = adminMapper.queryPlanCatTop2();
+        List<PlanCatBean> planCatBeans = adminMapper.queryPlanCatTop3();
         Optional.ofNullable(planCatBeans).orElse(new ArrayList<>()).forEach((planCat) -> {
             // 一个分类对应多个收藏
             planTopVos.add(new PlanTopVo(planCat, adminMapper.queryPlanTop5(planCat.getPlanCatId())));
@@ -64,5 +65,17 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public BigDecimal queryTotalSpendMoney() {
         return adminMapper.queryTotalSpendMoney();
+    }
+
+    @Override
+    public List<NoteTopVo> queryTopNote() {
+        List<NoteTopVo> noteTopVos = new ArrayList<>();
+        // 查询排序后的前4个笔记分类
+        List<NoteCatBean> noteCatBeans = adminMapper.queryNoteCatTop4();
+        Optional.ofNullable(noteCatBeans).orElse(new ArrayList<>()).forEach((noteCat) -> {
+            // 一个分类对应多个笔记
+            noteTopVos.add(new NoteTopVo(noteCat, adminMapper.queryNoteTop5(noteCat.getNoteCatId())));
+        });
+        return noteTopVos;
     }
 }

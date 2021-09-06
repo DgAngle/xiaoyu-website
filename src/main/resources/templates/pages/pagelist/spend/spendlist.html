@@ -41,20 +41,16 @@
                         <select class="form-control form-control-sm" id="spendMoney" v-model="spendQuery.spendMoney">
                             <option v-for="spendMoney in spendMoneyArray" :value="spendMoney.value">{{spendMoney.text}}</option>
                         </select>
-                        <!--<input type="text" class="form-control form-control-sm" id="spendMoney" v-model="spendQuery.spendMoney" placeholder="" autocomplete="off"-->
-                        <!--       @keyup.enter="refreshSpendList()">-->
                     </div>
                     <div class="form-group col-md-3">
                         <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshSpendList()">搜索</button>
-                        <button type="button" class="btn btn-outline-info btn-sm" style="margin-left: 5px;" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
-                                aria-controls="collapseExample">
+                        <button type="button" class="btn btn-outline-info btn-sm" style="margin-left: 5px;" data-toggle="collapse" data-target="#collapseSpend" aria-expanded="false"
+                                aria-controls="collapseSpend">
                             高级搜索&nbsp;&nbsp;<i class="fa fa-chevron-down"></i>
                         </button>
                     </div>
-                    <div class="form-group col-md-3">
-                    </div>
                 </div>
-                <div class="collapse" id="collapseExample">
+                <div class="collapse" id="collapseSpend">
                     <div class="row form-search form-inline">
                         <div class="form-group col-md-3">
                             <label for="spendStartDate" class="col-form-label ">开始日期:</label>
@@ -111,9 +107,14 @@
                 </tbody>
             </table>
 
+            <!-- 用于分页拼接条件参数 -->
             <form id="queryForm">
                 <input hidden name="spendName" v-model="spendQuery.spendName">
                 <input hidden name="spendCatId" v-model="spendQuery.spendCatId">
+                <input hidden name="spendMoney" v-model="spendQuery.spendMoney">
+                <input hidden name="spendStartDate" v-model="spendQuery.spendStartDate">
+                <input hidden name="spendEndDate" v-model="spendQuery.spendEndDate">
+                <input hidden name="spendContent" v-model="spendQuery.spendContent">
             </form>
         </div>
         <div th:include="common/common_js"></div>

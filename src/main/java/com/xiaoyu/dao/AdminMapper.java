@@ -1,9 +1,6 @@
 package com.xiaoyu.dao;
 
-import com.xiaoyu.entity.CollectionBean;
-import com.xiaoyu.entity.CollectionCatBean;
-import com.xiaoyu.entity.PlanBean;
-import com.xiaoyu.entity.PlanCatBean;
+import com.xiaoyu.entity.*;
 import com.xiaoyu.vo.basevo.SpendVo;
 
 import java.math.BigDecimal;
@@ -20,7 +17,7 @@ public interface AdminMapper {
 
     List<CollectionBean> queryCollectionTop5(long collectionCatId);
 
-    List<PlanCatBean> queryPlanCatTop2();
+    List<PlanCatBean> queryPlanCatTop3();
 
     List<PlanBean> queryPlanTop5(long planCatId);
 
@@ -29,4 +26,8 @@ public interface AdminMapper {
     List<SpendVo> querySpendTop5();
 
     BigDecimal queryTotalSpendMoney();
+
+    List<NoteCatBean> queryNoteCatTop4();
+
+    List<NoteBean> queryNoteTop5(long noteCatId);
 }

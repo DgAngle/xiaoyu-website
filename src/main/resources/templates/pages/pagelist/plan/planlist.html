@@ -32,14 +32,14 @@
                 <div class="form-group col-sm-3 ">
                     <label for="planCatName">计划分类:</label>
                     <select class="form-control form-control-sm" id="planCatName" v-model="planQuery.planCatId">
-                        <option value="-1"></option>
+                        <option value="-1">全部</option>
                         <option v-for="planCat in planCatList" :value="planCat.planCatId">{{planCat.planCatName}}</option>
                     </select>
                 </div>
                 <div class="form-group col-sm-3 ">
                     <label for="planStatus">执行状态:</label>
                     <select class="form-control form-control-sm" id="planStatus" v-model="planQuery.status">
-                        <option value="-1"></option>
+                        <option value="-1">全部</option>
                         <option v-for="tableStatus in tableStatusList" :value="tableStatus.statusCode">{{tableStatus.statusMessage}}</option>
                     </select>
                 </div>
@@ -78,9 +78,11 @@
                 </tbody>
             </table>
 
+            <!-- 用于分页拼接条件参数 -->
             <form id="queryForm">
                 <input hidden name="planName" v-model="planQuery.planName">
                 <input hidden name="planCatId" v-model="planQuery.planCatId">
+                <input hidden name="status" v-model="planQuery.status">
             </form>
         </div>
         <div th:include="common/common_js"></div>

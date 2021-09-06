@@ -2,13 +2,10 @@ package com.xiaoyu.controller;
 
 import com.xiaoyu.service.baseservice.AdminService;
 import com.xiaoyu.utils.R;
-import com.xiaoyu.vo.topvo.CollectionTopVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("")
@@ -49,7 +46,7 @@ public class AdminController {
     @RequestMapping("/topNote")
     @ResponseBody
     public R queryTopNote() {
-        return R.success();
+        return R.success().data("topNoteList", adminService.queryTopNote());
     }
 
     @RequestMapping("/completePlan")

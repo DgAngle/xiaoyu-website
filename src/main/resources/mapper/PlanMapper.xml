@@ -98,9 +98,7 @@
             <if test="updateBy != null and updateBy != ''">
                 updateBy = #{updateBy},
             </if>
-            <if test="remark != null">
-                remark = #{remark},
-            </if>
+            remark = #{remark},
         </set>
     </sql>
 
@@ -130,7 +128,15 @@
         inner join plan_cat pct on pn.planCatId = pct.planCatId
         where 1=1
         <include refid="plan_query_condition"></include>
-        order by pct.orderNum desc, pn.planCatId, pn.createDt desc limit #{start}, #{pageCount}
+        order by (CASE
+        WHEN pn.status = 2 THEN 0
+        WHEN pn.status = 0 THEN 1
+        WHEN pn.status = 5 THEN 2
+        WHEN pn.status = 3 THEN 3
+        WHEN pn.status = 4 THEN 4
+        WHEN pn.status = 8 THEN 5
+        ELSE 6 END) asc,
+        pct.orderNum desc, pn.planCatId, pn.createDt desc limit #{start}, #{pageCount}
     </select>
 
     <insert id="addPlan" parameterType="planBean">

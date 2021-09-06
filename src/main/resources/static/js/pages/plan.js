@@ -5,7 +5,7 @@ let listVm = new Vue({
         planQuery: {
             planName: '',
             planCatId: -1,
-            status: 2,
+            status: -1,
         },
         planForm: {
             planName: '',

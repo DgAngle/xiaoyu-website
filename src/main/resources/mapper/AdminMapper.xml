@@ -34,7 +34,7 @@
     </select>
 
     <!-- ********************* 计划相关 ********************* -->
-    <select id="queryPlanCatTop2" resultType="planCatBean">
+    <select id="queryPlanCatTop3" resultType="planCatBean">
         select *
         from plan_cat
         order by orderNum desc limit 3
@@ -70,8 +70,32 @@
                  inner join spend_cat sdt on sd.spendCatId = sdt.spendCatId
         order by sd.createDt desc limit 5
     </select>
+
     <select id="queryTotalSpendMoney" resultType="java.math.BigDecimal">
         select ifnull(sum(spendMoney), 0)
         from spend
+    </select>
+
+    <!-- ********************* 笔记相关 ********************* -->
+    <select id="queryNoteCatTop4" resultType="noteCatBean">
+        select *
+        from note_cat
+        order by orderNum desc limit 4
+    </select>
+
+    <select id="queryNoteTop5" parameterType="noteBean" resultType="noteVo">
+        select ne.noteId,
+               ne.noteName,
+               ne.noteCatId,
+               ne.noteContent,
+               ne.level,
+               ne.isTop,
+               ne.createDt,
+               ne.createBy,
+               nct.noteCatName
+        from note ne
+                 inner join note_cat nct on ne.noteCatId = nct.noteCatId
+        where ne.noteCatId = #{noteCatId}
+        order by ne.createDt desc limit 5
     </select>
 </mapper>

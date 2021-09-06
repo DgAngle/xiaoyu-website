@@ -2,6 +2,7 @@ package com.xiaoyu.service.baseservice;
 
 import com.xiaoyu.vo.basevo.SpendVo;
 import com.xiaoyu.vo.topvo.CollectionTopVo;
+import com.xiaoyu.vo.topvo.NoteTopVo;
 import com.xiaoyu.vo.topvo.PlanTopVo;
 
 import java.math.BigDecimal;
@@ -22,4 +23,6 @@ public interface AdminService {
     int completePlanById(long planId);
 
     BigDecimal queryTotalSpendMoney();
+
+    List<NoteTopVo> queryTopNote();
 }

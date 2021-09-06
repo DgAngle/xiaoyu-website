@@ -94,12 +94,8 @@
             <if test="spendDate != null">
                 spendDate = #{spendDate},
             </if>
-            <if test="spendContent != null and spendContent != ''">
-                spendContent = #{spendContent},
-            </if>
-            <if test="remark != null">
-                remark = #{remark},
-            </if>
+            spendContent = #{spendContent},
+            remark = #{remark},
         </set>
     </sql>
 
