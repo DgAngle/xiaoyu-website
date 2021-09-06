@@ -26,6 +26,43 @@ public class DateUtil {
     public static final String default_format_date_cst = "EEE MMM dd HH:mm:ss zzz yyyy"; // cst 格式日期
 
     /**
+     * 判断日期是否是指定格式
+     *
+     * @param strDate 需要判断的日期字符串
+     * @param format  日期格式
+     * @return boolean
+     */
+    public static boolean isFormat(String strDate, String format) {
+        if (StringUtils.isBlank(strDate) || StringUtils.isBlank(format)) return false;
+        boolean flag = true;
+        DateFormat simpleDateFormat = new SimpleDateFormat(format);
+        try {
+            simpleDateFormat.parse(strDate);
+        } catch (ParseException e) {
+            flag = false;
+        }
+        return flag;
+    }
+
+    /**
+     * 判断日期是否是默认格式（yyyy:MM:dd HH:mm:ss）
+     *
+     * @param strDate 需要判断的日期字符串
+     * @return boolean
+     */
+    public static boolean isFormat(String strDate) {
+        if (StringUtils.isBlank(strDate)) return false;
+        boolean flag = true;
+        DateFormat simpleDateFormat = new SimpleDateFormat(default_format_date_seconds);
+        try {
+            simpleDateFormat.parse(strDate);
+        } catch (ParseException e) {
+            flag = false;
+        }
+        return flag;
+    }
+
+    /**
      * 获取日期天的结束时间
      *
      * @param date Date日期
@@ -120,7 +157,7 @@ public class DateUtil {
      * @param pattern 转换格式
      * @return String日期, 失败返回null
      */
-    public static String dateToString(String date, String pattern) {
+    public static String dateToString(Date date, String pattern) {
         if (date == null || StringUtils.isBlank(pattern)) return null;
         DateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         return simpleDateFormat.format(date);

@@ -15,7 +15,7 @@ public class SpendVo extends SpendBean {
     private String spendDateStr; // 日期格式化
 
     public String getSpendDateStr() {
-        if (this.getSpendDate() != null) spendDateStr = DateUtil.dateToString(this.getSpendDate());
+        if (this.getSpendDate() != null) spendDateStr = DateUtil.dateToString(this.getSpendDate(), DateUtil.default_format_date_min);
         return spendDateStr;
     }
 }

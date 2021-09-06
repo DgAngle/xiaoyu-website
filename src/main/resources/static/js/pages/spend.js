@@ -74,6 +74,13 @@ let listVm = new Vue({
                 spendContent: '',
                 remark: '',
             };
+            $("#spendDateEdit").flatpickr({
+                locale: 'zh',
+                enableTime: true,
+                // enableSeconds: true,
+                time_24hr: true,
+                defaultHour: 0,
+            })
         },
         // 初始化修改参数
         initEditForm(spendDetail) {
@@ -92,7 +99,7 @@ let listVm = new Vue({
             $("#spendDateEdit").flatpickr({
                 locale: 'zh',
                 enableTime: true,
-                enableSeconds: true,
+                // enableSeconds: true,
                 time_24hr: true,
                 defaultDate: spendDetail.spendDateStr,
             })

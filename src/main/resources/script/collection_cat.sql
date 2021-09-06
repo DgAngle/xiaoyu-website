@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 02/09/2021 15:46:56
+ Date: 06/09/2021 18:09:35
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,7 @@ CREATE TABLE `collection_cat`  (
   `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   PRIMARY KEY (`collectionCatId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏分类表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏分类表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of collection_cat
@@ -44,5 +44,6 @@ INSERT INTO `collection_cat` VALUES (8, '在线工具', 0, '2021-08-16 13:39:38'
 INSERT INTO `collection_cat` VALUES (9, '博客知识', 0, '2021-08-16 14:59:21', NULL);
 INSERT INTO `collection_cat` VALUES (10, '插件收藏', 1, '2021-08-19 15:04:41', NULL);
 INSERT INTO `collection_cat` VALUES (11, '在线娱乐', 0, '2021-08-23 16:04:57', NULL);
+INSERT INTO `collection_cat` VALUES (12, '道家玄学', 8, '2021-09-06 09:55:00', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

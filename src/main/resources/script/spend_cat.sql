@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 06/09/2021 00:52:05
+ Date: 06/09/2021 18:09:22
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,7 @@ CREATE TABLE `spend_cat`  (
   `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   PRIMARY KEY (`spendCatId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '消费分类表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '消费分类表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of spend_cat
@@ -38,5 +38,6 @@ INSERT INTO `spend_cat` VALUES (2, '游戏', 0, '2021-08-31 10:13:43', NULL);
 INSERT INTO `spend_cat` VALUES (3, '出行', 0, '2021-08-31 10:13:48', NULL);
 INSERT INTO `spend_cat` VALUES (4, '生活', 0, '2021-09-02 08:30:38', NULL);
 INSERT INTO `spend_cat` VALUES (5, '还款', 0, '2021-09-05 12:00:57', NULL);
+INSERT INTO `spend_cat` VALUES (6, '软件', 0, '2021-09-06 08:39:05', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 03/09/2021 18:28:44
+ Date: 06/09/2021 18:09:29
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `collection`  (
   `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   PRIMARY KEY (`collectionId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 61 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of collection
@@ -95,5 +95,6 @@ INSERT INTO `collection` VALUES (57, 'jQuery多色日期日历插件 - jalendar'
 INSERT INTO `collection` VALUES (58, 'js全屏日历弹出详情插件tui.calendar', 'http://www.bootstrapmb.com/item/10120', 10, 'js全屏日历弹出详情插件tui.calendar', '2021-09-02 14:01:45', NULL);
 INSERT INTO `collection` VALUES (59, 'jQuery全屏农历日历插件', 'http://www.bootstrapmb.com/item/1710', 10, 'FullCalendar.js中文版jQuery日历插件', '2021-09-02 14:02:34', NULL);
 INSERT INTO `collection` VALUES (60, 'Flatpickr中文文档', 'https://www.flatpickr.cn/', 1, 'flatpickr，日期插件中文文档', '2021-09-02 18:32:08', NULL);
+INSERT INTO `collection` VALUES (61, '九层炼心详解', 'https://mp.weixin.qq.com/s/gEySMuR28JpqPobF5Xgn_A', 12, '九层炼心详解，古传道家西派最完整的修炼功法！', '2021-09-06 09:55:26', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

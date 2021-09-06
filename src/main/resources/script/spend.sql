@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 06/09/2021 00:51:59
+ Date: 06/09/2021 18:09:15
 */
 
 SET NAMES utf8mb4;
@@ -32,7 +32,7 @@ CREATE TABLE `spend`  (
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   `remark` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`spendId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '消费表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '消费表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of spend
@@ -52,5 +52,6 @@ INSERT INTO `spend` VALUES (12, 1, '回锅肉盖浇饭+蒜苔肉丝', 27.00, '20
 INSERT INTO `spend` VALUES (13, 1, '京东消费', 240.41, '2021-09-04 20:00:00', '平台：京东商城\n明细：【卡士.鲜酪乳，27】+【...】', '2021-09-05 11:58:47', NULL, NULL);
 INSERT INTO `spend` VALUES (14, 1, '黄焖鸡米饭', 17.46, '2021-09-05 11:00:00', '平台：饿了吗\n', '2021-09-05 11:59:38', NULL, NULL);
 INSERT INTO `spend` VALUES (15, 5, '京东白条还款', 1432.65, '2021-09-05 12:00:00', '平台：京东商城\n', '2021-09-05 12:00:48', NULL, NULL);
+INSERT INTO `spend` VALUES (16, 6, '迅雷会员', 8.90, '2021-09-05 20:00:00', '平台：迅雷\n明细：一个月白金会员', '2021-09-06 08:39:39', NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

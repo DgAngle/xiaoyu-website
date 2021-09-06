@@ -5,6 +5,7 @@ import com.xiaoyu.common.Transform;
 import com.xiaoyu.entity.SpendBean;
 import com.xiaoyu.entity.SpendCatBean;
 import com.xiaoyu.service.baseservice.SpendService;
+import com.xiaoyu.utils.DateUtil;
 import com.xiaoyu.utils.R;
 import com.xiaoyu.vo.basevo.SpendQuery;
 import com.xiaoyu.vo.transform.SpendTransform;
@@ -88,6 +89,7 @@ public class SpendController {
     @RequestMapping("/add")
     @ResponseBody
     public R add(SpendTransform spendTransform) {
+        if (!DateUtil.isFormat(spendTransform.getSpendDate())) spendTransform.setSpendDate(spendTransform.getSpendDate() + ":00");
         spendService.addSpend(new Transform<SpendBean, SpendTransform>().transformEntityStringToType(spendTransform, new SpendBean()));
         return R.success().message("添加成功！");
     }
@@ -101,6 +103,7 @@ public class SpendController {
     @RequestMapping("/update")
     @ResponseBody
     public R update(SpendTransform spendTransform) {
+        if (!DateUtil.isFormat(spendTransform.getSpendDate())) spendTransform.setSpendDate(spendTransform.getSpendDate() + ":00");
         spendService.updateSpend(new Transform<SpendBean, SpendTransform>().transformEntityStringToType(spendTransform, new SpendBean()));
         return R.success().message("修改成功！");
     }
