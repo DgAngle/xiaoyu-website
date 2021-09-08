@@ -242,6 +242,16 @@
     background-color: #ffa300;
 }
 
+.style8 {
+    background-color: #f5eedf;
+}
+
+.style9 {
+    background-color: #000000;
+    /*border: 1px solid #ffffff;*/
+    /*box-shadow: 0px 0px 8px rgb(65, 66, 66);*/
+}
+
 .title-box .title-box-title {
     font-size: 20px;
     font-weight: 600;
@@ -252,9 +262,17 @@
     text-decoration: underline;
 }
 
+.title-box .title-box-title .style-white-n {
+    color: #FFFFFF;
+}
+
 .title-box .title-box-title .style-black {
     color: #000000;
     text-decoration: underline;
+}
+
+.title-box .title-box-title .style-black-n {
+    color: #000000;
 }
 
 .title-box .title-box-title .style-black-note {
@@ -281,6 +299,18 @@
     box-shadow: 0px 0px 10px rgb(4, 255, 215);
     /*font-size: 22px;*/
 }
+
+.title-box .title-box-title .style-white-n:hover {
+    color: #FFFFFF;
+    box-shadow: 0px 0px 10px rgb(255, 255, 255);
+    /*font-size: 22px;*/
+}
+
+.title-box .title-box-title .style-black-n:hover {
+    box-shadow: 0px 0px 10px rgb(4, 255, 215);
+    /*font-size: 22px;*/
+}
+
 .title-box .title-box-title .style-black-note:hover {
     box-shadow: 0px 0px 10px rgb(255, 251, 4);
     /*font-size: 22px;*/
