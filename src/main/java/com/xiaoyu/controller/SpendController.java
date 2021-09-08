@@ -28,7 +28,7 @@ public class SpendController {
     @Autowired
     private SpendService spendService;
 
-    /************************* 计划分类 *************************/
+    /************************* 消费分类 *************************/
 
     @RequestMapping("/cat/goList")
     public String goCatList(SpendCatBean spendCatBean) {
@@ -68,7 +68,7 @@ public class SpendController {
         return R.success().message("删除成功！");
     }
 
-    /************************* 计划主表 *************************/
+    /************************* 消费主表 *************************/
 
     @RequestMapping("/goList")
     public String goList(SpendCatBean spendCatBean) {

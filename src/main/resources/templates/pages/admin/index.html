@@ -11,32 +11,53 @@
 </head>
 
 <body>
-<!-- preloader area start -->
+
+<!-- 加载页面 -->
 <!--<div id="preloader">-->
 <!--    <div class="loader"></div>-->
 <!--</div>-->
-<!-- preloader area end -->
-<!-- page container area start -->
+
 <div class="page-container">
     <div th:include="layout/sidebar"></div>
     <div th:include="layout/topMenu"></div>
 
-    <!-- 内容区域 -->
-    <!--<div class="main-content">
-        <div class="breadcrumbs-area clearfix">
-        </div>
-    </div>-->
     <div id="indexContainer" class="main-content container-fluid">
-
         <div class="row">
-            <div class="col-lg-9">
-                <div class="title-box style1">
-                    <span class="title-box-title"><a class="style-black" href="/plan/goList">今日计划</a></span>
+            <div class="col-lg-12">
+                <div class="title-box style9">
+                    <span class="title-box-title"><a class="style-white-n">账户余额：{{totalIncomeMoney - totalSpendMoney}} 元</a></span>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <div class="title-box style7">
-                    <span class="title-box-title"><a class="style-white" href="/spend/goList">我的消费</a></span>
+            <div class="col-lg-6">
+                <div class="box">
+                    <div class="box-content-title"><a href="/income/goList">总计收入：{{totalIncomeMoney}} 元</a></div>
+                    <div class="box-content">
+                        <ul>
+                            <li class="spend-item" v-for="income in topIncomeList" :title="income.incomeContent">
+                                📑&nbsp;{{income.incomeName+ '【'+ income.incomeMoney +'元】' + '【'+ income.incomeCatName +'】' | ellipsisMoney}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="box">
+                    <div class="box-content-title"><a href="/spend/goList"> 总计消费：{{totalSpendMoney}} 元</a></div>
+                    <div class="box-content">
+                        <ul>
+                            <li class="spend-item" v-for="spend in topSpendList" :title="spend.spendContent">
+                                <!--📑&nbsp;{{spend.spendName}} 【{{spend.spendMoney}}元】【{{spend.spendCatName}}】-->
+                                📑&nbsp;{{spend.spendName+ '【'+ spend.spendMoney +'元】' + '【'+ spend.spendCatName +'】' | ellipsisMoney}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-box style1">
+                    <span class="title-box-title"><a class="style-black" href="/plan/goList">今日计划</a></span>
                 </div>
             </div>
             <div v-for="topPlan in topPlanList" class="col-lg-3">
@@ -47,19 +68,6 @@
                             <li class="plan-item" v-for="plan in topPlan.planList" :title="plan.planContent">
                                 📔&nbsp;{{plan.planName}}
                                 <a href="javascript:void(0);" @click="openConfirmFinish(plan.planId)"><i class="fa fa-check"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="box">
-                    <div class="box-content-title">总计消费：{{totalSpendMoney}} 元</div>
-                    <div class="box-content">
-                        <ul>
-                            <li class="spend-item" v-for="spend in topSpendList" :title="spend.spendContent">
-                                <!--📑&nbsp;{{spend.spendName}} 【{{spend.spendMoney}}元】【{{spend.spendCatName}}】-->
-                                📑&nbsp;{{spend.spendName+ '【'+ spend.spendMoney +'元】' + '【'+ spend.spendCatName +'】' | ellipsis}}
                             </li>
                         </ul>
                     </div>
@@ -116,13 +124,22 @@
             topCollectionList: {},
             topPlanList: {},
             topSpendList: {},
+            topIncomeList: {},
             topNoteList: {},
             totalSpendMoney: 0,
+            totalIncomeMoney: 0,
         },
         mounted: function () {
             this.refreshInit();
         },
         filters: {
+            ellipsisMoney(value) {
+                if (!value) return '';
+                if (value.length > 40) {
+                    return value.slice(0, 40) + '...'
+                }
+                return value
+            },
             ellipsis(value) {
                 if (!value) return '';
                 if (value.length > 16) {
@@ -137,6 +154,7 @@
                 _this.refreshTopCollection();
                 _this.refreshTopPLan();
                 _this.refreshTopSpend();
+                _this.refreshTopIncome();
                 _this.refreshTopNote();
             },
             refreshTopCollection() {
@@ -159,6 +177,14 @@
                 commonUtil.ajax(url, {}, function (res) {
                     _this.topSpendList = res.data.topSpendList;
                     _this.totalSpendMoney = res.data.totalSpendMoney;
+                })
+            },
+            refreshTopIncome() {
+                let _this = this;
+                let url = "/topIncome";
+                commonUtil.ajax(url, {}, function (res) {
+                    _this.topIncomeList = res.data.topIncomeList;
+                    _this.totalIncomeMoney = res.data.totalIncomeMoney;
                 })
             },
             refreshTopNote() {

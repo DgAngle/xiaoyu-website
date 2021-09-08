@@ -34,10 +34,10 @@
     </select>
 
     <!-- ********************* 计划相关 ********************* -->
-    <select id="queryPlanCatTop3" resultType="planCatBean">
+    <select id="queryPlanCatTop4" resultType="planCatBean">
         select *
         from plan_cat
-        order by orderNum desc limit 3
+        order by orderNum desc limit 4
     </select>
 
     <select id="queryPlanTop5" parameterType="java.lang.Long" resultType="planBean">
@@ -74,6 +74,28 @@
     <select id="queryTotalSpendMoney" resultType="java.math.BigDecimal">
         select ifnull(sum(spendMoney), 0)
         from spend
+    </select>
+
+    <!-- ********************* 收入相关 ********************* -->
+    <select id="queryIncomeTop5" parameterType="incomeBean" resultType="incomeVo">
+        select ie.incomeId,
+               ie.incomeName,
+               ie.incomeCatId,
+               ie.incomeMoney,
+               ie.incomeDate,
+               ie.incomeContent,
+               ie.createDt,
+               ie.createBy,
+               ie.remark,
+               ict.incomeCatName
+        from income ie
+                 inner join income_cat ict on ie.incomeCatId = ict.incomeCatId
+        order by ie.createDt desc limit 5
+    </select>
+
+    <select id="queryTotalIncomeMoney" resultType="java.math.BigDecimal">
+        select ifnull(sum(incomeMoney), 0)
+        from income
     </select>
 
     <!-- ********************* 笔记相关 ********************* -->

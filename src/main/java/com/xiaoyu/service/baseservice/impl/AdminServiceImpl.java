@@ -6,6 +6,7 @@ import com.xiaoyu.entity.NoteCatBean;
 import com.xiaoyu.entity.PlanCatBean;
 import com.xiaoyu.service.baseservice.AdminService;
 import com.xiaoyu.utils.ConstantUtil;
+import com.xiaoyu.vo.basevo.IncomeVo;
 import com.xiaoyu.vo.basevo.SpendVo;
 import com.xiaoyu.vo.topvo.CollectionTopVo;
 import com.xiaoyu.vo.topvo.NoteTopVo;
@@ -44,7 +45,8 @@ public class AdminServiceImpl implements AdminService {
     public List<PlanTopVo> queryTopPlan() {
         List<PlanTopVo> planTopVos = new ArrayList<>();
         // 查询排序后的前2个计划分类
-        List<PlanCatBean> planCatBeans = adminMapper.queryPlanCatTop3();
+        // List<PlanCatBean> planCatBeans = adminMapper.queryPlanCatTop3();
+        List<PlanCatBean> planCatBeans = adminMapper.queryPlanCatTop4();
         Optional.ofNullable(planCatBeans).orElse(new ArrayList<>()).forEach((planCat) -> {
             // 一个分类对应多个收藏
             planTopVos.add(new PlanTopVo(planCat, adminMapper.queryPlanTop5(planCat.getPlanCatId())));
@@ -58,13 +60,23 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public BigDecimal queryTotalSpendMoney() {
+        return adminMapper.queryTotalSpendMoney();
+    }
+
+    @Override
     public int completePlanById(long planId) {
         return adminMapper.updatePlanStatusById(ConstantUtil.plan_status_finished, planId);
     }
 
     @Override
-    public BigDecimal queryTotalSpendMoney() {
-        return adminMapper.queryTotalSpendMoney();
+    public List<IncomeVo> queryTopIncome() {
+        return adminMapper.queryIncomeTop5();
+    }
+
+    @Override
+    public BigDecimal queryTotalIncomeMoney() {
+        return adminMapper.queryTotalIncomeMoney();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.xiaoyu.service.baseservice;
 
+import com.xiaoyu.vo.basevo.IncomeVo;
 import com.xiaoyu.vo.basevo.SpendVo;
 import com.xiaoyu.vo.topvo.CollectionTopVo;
 import com.xiaoyu.vo.topvo.NoteTopVo;
@@ -20,9 +21,13 @@ public interface AdminService {
 
     List<SpendVo> queryTopSpend();
 
-    int completePlanById(long planId);
-
     BigDecimal queryTotalSpendMoney();
+
+    List<IncomeVo> queryTopIncome();
+
+    BigDecimal queryTotalIncomeMoney();
+
+    int completePlanById(long planId);
 
     List<NoteTopVo> queryTopNote();
 }

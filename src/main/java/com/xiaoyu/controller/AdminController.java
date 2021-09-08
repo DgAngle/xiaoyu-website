@@ -23,12 +23,14 @@ public class AdminController {
         return "admin/menuConfig";
     }
 
+    // 计划
     @RequestMapping("/topPlan")
     @ResponseBody
     public R queryTopPlan() {
         return R.success().data("topPlanList", adminService.queryTopPlan());
     }
 
+    // 消费
     @RequestMapping("/topSpend")
     @ResponseBody
     public R queryTopSpend() {
@@ -37,18 +39,30 @@ public class AdminController {
                 .data("totalSpendMoney", adminService.queryTotalSpendMoney());
     }
 
+    // 收入
+    @RequestMapping("/topIncome")
+    @ResponseBody
+    public R queryTopIncome() {
+        return R.success()
+                .data("topIncomeList", adminService.queryTopIncome())
+                .data("totalIncomeMoney", adminService.queryTotalIncomeMoney());
+    }
+
+    // 收藏
     @RequestMapping("/topCollection")
     @ResponseBody
     public R queryTopCollection() {
         return R.success().data("topCollectionList", adminService.queryTopCollection());
     }
 
+    // 笔记
     @RequestMapping("/topNote")
     @ResponseBody
     public R queryTopNote() {
         return R.success().data("topNoteList", adminService.queryTopNote());
     }
 
+    // 完成计划
     @RequestMapping("/completePlan")
     @ResponseBody
     public R completePlan(long planId) {
