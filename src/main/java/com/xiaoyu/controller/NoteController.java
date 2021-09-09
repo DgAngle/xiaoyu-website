@@ -81,7 +81,7 @@ public class NoteController {
     @RequestMapping("/cat/tree")
     @ResponseBody
     public R noteCatTree() {
-        return R.success().data("noteCatTree", noteService.queryNoteCatTree());
+        return R.success().data("noteCatTree", noteService.queryNoteCatTreeJson());
     }
 
     /***************** 笔记 *****************/

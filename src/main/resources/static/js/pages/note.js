@@ -1,10 +1,11 @@
 /* 笔记 */
+Vue.component('treeselect', VueTreeselect.Treeselect)
 let listVm = new Vue({
     el: "#noteContainer",
     data: {
         noteQuery: {
             noteName: '',
-            noteCatId: -1,
+            // noteCatId: null,
             noteContent: null,
             createStartDt: null,
             createEndDt: null,
@@ -19,10 +20,12 @@ let listVm = new Vue({
         modalType: 'add',
         noteList: {},
         noteCatList: {},
+        noteCatTree: {},
     },
     mounted: function () {
         this.queryNoteCatList();
         this.refreshNoteList();
+        this.queryNoteCatTree();
         // this.$forceUpdate();
     },
     filters: {
@@ -42,6 +45,16 @@ let listVm = new Vue({
             commonUtil.ajax(url, {}, function (res) {
                 if (res && res.value) {
                     _this.noteCatList = res.data.noteCatList;
+                }
+            })
+        },
+        // 下拉树
+        queryNoteCatTree() {
+            let _this = this;
+            let url = "/note/cat/tree";
+            commonUtil.ajax(url, {}, function (res) {
+                if (res && res.value) {
+                    _this.noteCatTree = res.data.noteCatTree;
                 }
             })
         },

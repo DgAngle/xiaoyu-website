@@ -41,6 +41,10 @@ public interface NoteMapper {
 
     String queryParentNoteCatNumById(long noteCatId);
 
+    String queryNoteCatNumById(long parentNoteCatId);
+
+    List<NoteCatBean> queryAllNoteCat();
+
     /************** 笔记 **************/
 
     int queryNoteListCount(NoteQuery noteQuery);
@@ -54,4 +58,5 @@ public interface NoteMapper {
     int updateNote(NoteBean noteBean);
 
     int deleteNoteById(long noteId);
+
 }

@@ -470,3 +470,10 @@
 .date-line-clear i:hover {
     color: #f64598;
 }
+
+/* Vue treeselect 插件 */
+.vue-treeselect__label {
+    /*min-width: 10px !important;*/
+    /*width: 10% !important;*/
+    float: left !important;
+}

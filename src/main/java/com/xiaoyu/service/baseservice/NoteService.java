@@ -1,11 +1,14 @@
 package com.xiaoyu.service.baseservice;
 
+import com.alibaba.fastjson.JSONObject;
 import com.xiaoyu.common.ListResult;
+import com.xiaoyu.common.TreeNode;
 import com.xiaoyu.entity.NoteBean;
 import com.xiaoyu.entity.NoteCatBean;
 import com.xiaoyu.vo.basevo.NoteQuery;
 import com.xiaoyu.vo.basevo.NoteVo;
 
+import java.util.List;
 import java.util.Map;
 
 public interface NoteService {
@@ -16,7 +19,9 @@ public interface NoteService {
 
     int addNoteCat(NoteCatBean noteCatBean);
 
-    Map<String, NoteCatBean> queryNoteCatTree();
+    List<TreeNode> queryNoteCatTreeNode();
+
+    List<JSONObject> queryNoteCatTreeJson();
 
     NoteCatBean queryNoteCatDetailById(long noteCatId);
 

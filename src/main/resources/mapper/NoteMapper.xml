@@ -111,13 +111,25 @@
         where noteCatId = #{noteCatId}
     </select>
 
+    <select id="queryAllNoteCat" resultType="noteCatBean">
+        select *
+        from note_cat
+        order by length(noteCatNum), orderNum desc
+    </select>
+    
+    <select id="queryNoteCatNumById" parameterType="java.lang.Long" resultType="java.lang.String">
+        select noteCatNum
+        from note_cat
+        where noteCatId = #{noteCatId}
+    </select>
+
     <!-- ************************ 笔记主表 ************************ -->
     <sql id="note_query_condition">
         <if test="noteName != null and noteName != ''">
             and ne.noteName like concat('%',concat(#{noteName},'%'))
         </if>
-        <if test="noteCatId != null and noteCatId != -1 ">
-            and ne.noteCatId = #{noteCatId}
+        <if test="noteCatId != null and noteCatId != -1 and noteCatId != 0">
+            and ne.noteCatId in (select noteCatId from note_cat where noteCatNum like CONCAT((select noteCatNum from note_cat where noteCatId = #{noteCatId}),'%'))
         </if>
         <if test="noteContent != null and noteContent != ''">
             and ne.noteContent like concat('%',concat(#{noteContent},'%'))

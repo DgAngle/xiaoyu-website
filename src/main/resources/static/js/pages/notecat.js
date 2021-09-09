@@ -1,4 +1,5 @@
 /* 笔记分类 */
+Vue.component('treeselect', VueTreeselect.Treeselect)
 new Vue({
     el: "#noteCatContainer",
     data: {
@@ -15,10 +16,12 @@ new Vue({
         modalType: 'add',
         noteCatList: 'add',
         parentNoteCatIdAndNum: null,
-        parentNoteCatList: {}
+        parentNoteCatList: {},
+        noteCatTree: {},
     },
     mounted: function () {
         this.refreshNoteCatList();
+        this.queryNoteCatTree();
     },
     methods: {
         // 初始化新增参数
@@ -37,16 +40,13 @@ new Vue({
             let _this = this;
             _this.modalType = 'edit';
             _this.modalName = '修改笔记分类';
-            _this.parentNoteCatIdAndNum = noteCatDetail.parentNoteCatId + ";" + (noteCatDetail.parentNoteCatNum == null ? "" : noteCatDetail.parentNoteCatNum);
             _this.noteCatForm = {
                 noteCatId: noteCatDetail.noteCatId,
                 noteCatName: noteCatDetail.noteCatName,
                 noteCatNum: noteCatDetail.noteCatNum,
                 orderNum: noteCatDetail.orderNum,
+                parentNoteCatId: noteCatDetail.parentNoteCatId == 0 ? null : noteCatDetail.parentNoteCatId,
             };
-            console.log(noteCatDetail);
-            console.log(_this.parentNoteCatIdAndNum);
-            console.log(_this.noteCatForm);
         },
         openNoteCatAdd() {
             let _this = this
@@ -72,17 +72,22 @@ new Vue({
             let url = '';
             if (_this.modalType == 'add') url = '/note/cat/add';
             else url = '/note/cat/update';
-            if (_this.parentNoteCatIdAndNum) {
-                let parentNoteInfo = _this.parentNoteCatIdAndNum.split(";");
-                _this.noteCatForm.parentNoteCatId = parentNoteInfo[0];
-                _this.noteCatForm.parentNoteCatNum = parentNoteInfo[1];
-            }
-            console.log(_this.noteCatForm)
             commonUtil.ajax(url, _this.noteCatForm, function (res) {
                 if (res && res.value) {
                     Qmsg.success(res.message);
                     $("#noteCatModal").modal('hide');
                     _this.refreshNoteCatList();
+                    _this.queryNoteCatTree();
+                }
+            })
+        },
+        // 下拉树
+        queryNoteCatTree() {
+            let _this = this;
+            let url = "/note/cat/tree";
+            commonUtil.ajax(url, {}, function (res) {
+                if (res && res.value) {
+                    _this.noteCatTree = res.data.noteCatTree;
                 }
             })
         },

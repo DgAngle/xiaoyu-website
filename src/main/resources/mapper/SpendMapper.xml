@@ -121,7 +121,7 @@
         inner join spend_cat sdt on sd.spendCatId = sdt.spendCatId
         where 1=1
         <include refid="spend_query_condition"></include>
-        order by sd.createDt desc limit #{start}, #{pageCount}
+        order by sd.spendDate desc limit #{start}, #{pageCount}
     </select>
 
     <insert id="addSpend" parameterType="spendBean">
