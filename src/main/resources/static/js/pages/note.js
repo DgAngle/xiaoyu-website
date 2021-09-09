@@ -21,11 +21,14 @@ let listVm = new Vue({
         noteList: {},
         noteCatList: {},
         noteCatTree: {},
+        editor: {},
     },
     mounted: function () {
-        this.queryNoteCatList();
-        this.refreshNoteList();
-        this.queryNoteCatTree();
+        let _this = this;
+        _this.queryNoteCatList();
+        _this.refreshNoteList();
+        _this.queryNoteCatTree();
+        _this.buttonEvent();
         // this.$forceUpdate();
     },
     filters: {
@@ -38,6 +41,37 @@ let listVm = new Vue({
         }
     },
     methods: {
+        buttonEvent() {
+            let _this = this;
+            $('#noteModal').on('shown.bs.modal', function (event) {
+                _this.initMarkdown();
+            });
+        },
+        // 获取分类列表
+        initMarkdown() {
+            let _this = this;
+            _this.editor = editormd("noteContentEditor", {
+                width: "100%",
+                height: 650,
+                path: "/plugs/editor/lib/",
+                saveHTMLToTextarea: true,    // 保存 HTML 到 Textarea
+                searchReplace: true,
+                // watch: true,      // 关闭实时预览
+                unwatch: true,      // 关闭实时预览
+                htmlDecode: "style,script,iframe|on*", // 开启 HTML 标签解析，为了安全性，默认不开启
+                onload: function () {
+                    // console.log('onload', this);
+                    // this.fullscreen();
+                    // this.unwatch();
+                    // this.watch().fullscreen();
+
+                    //this.setMarkdown("#PHP");
+                    // this.width("100%");
+                    // this.height(600);
+                    // this.resize("100%", 800);
+                },
+            });
+        },
         // 获取分类列表
         queryNoteCatList() {
             let _this = this;
@@ -80,13 +114,6 @@ let listVm = new Vue({
                 noteContent: noteDetail.noteContent,
                 noteCatId: noteDetail.noteCatId,
             };
-            // $("#noteDateEdit").flatpickr({
-            //     locale: 'zh',
-            //     enableTime: true,
-            //     enableSeconds: true,
-            //     time_24hr: true,
-            //     defaultDate: noteDetail.noteDateStr,
-            // })
         },
         // 打开新增模态框
         openNoteAdd() {
@@ -115,6 +142,8 @@ let listVm = new Vue({
             let url = '';
             if (_this.modalType == 'add') url = '/note/add';
             else url = '/note/update';
+            _this.noteForm.noteContent = _this.editor.getMarkdown();
+            console.log(_this.noteForm);
             commonUtil.ajax(url, _this.noteForm, function (res) {
                 if (res && res.value) {
                     Qmsg.success(res.message);

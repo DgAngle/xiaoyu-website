@@ -477,3 +477,8 @@
     /*width: 10% !important;*/
     float: left !important;
 }
+
+/* editor 插件 */
+.comm-editor {
+    height: 800px;
+}

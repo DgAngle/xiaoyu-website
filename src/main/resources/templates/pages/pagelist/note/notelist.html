@@ -20,9 +20,9 @@
                 <button class="btn btn-outline-primary btn-sm" @click="openNoteAdd()"><i class="fa fa-plus-square"></i>&nbsp;
                     新增笔记
                 </button>
-                <a class="btn btn-outline-primary btn-sm" href="/note/goMdNoteAdd" target="_blank"><i class="fa fa-plus-square"></i>&nbsp;
-                    新增MD笔记
-                </a>
+                <!--<a class="btn btn-outline-primary btn-sm" href="/note/goMdNoteAdd" target="_blank"><i class="fa fa-plus-square"></i>&nbsp;-->
+                <!--    新增MD笔记-->
+                <!--</a>-->
             </div>
             <form class="form-search" onsubmit="return false;">
                 <div class="row form-inline">
@@ -55,7 +55,7 @@
                     <th width="60">序号</th>
                     <th width="180">笔记名称</th>
                     <th width="100">笔记分类</th>
-                    <th width="200">笔记内容</th>
+                    <!--<th width="200">笔记内容</th>-->
                     <th width="100">记录日期</th>
                     <th width="60">操作</th>
                 </tr>
@@ -65,7 +65,7 @@
                     <th>{{index + 1}}</th>
                     <th>{{note.noteName}}</th>
                     <th>{{note.noteCatName}}</th>
-                    <th :title="note.noteContent">{{note.noteContent | ellipsis}}</th>
+                    <!--<th :title="note.noteContent">{{note.noteContent | ellipsis}}</th>-->
                     <th>{{note.createDtStr}}</th>
                     <th class="table-operate">
                         <a href="#" title="修改" @click="openNoteEdit(note.noteId)"><i class="fa fa-pencil"></i></a>
