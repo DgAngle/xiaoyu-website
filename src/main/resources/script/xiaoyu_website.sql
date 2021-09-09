@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 08/09/2021 17:36:12
+ Date: 09/09/2021 18:02:28
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `collection`  (
   `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   PRIMARY KEY (`collectionId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 63 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 70 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of collection
@@ -97,6 +97,13 @@ INSERT INTO `collection` VALUES (59, 'jQuery全屏农历日历插件', 'http://w
 INSERT INTO `collection` VALUES (60, 'Flatpickr中文文档', 'https://www.flatpickr.cn/', 1, 'flatpickr，日期插件中文文档', '2021-09-02 18:32:08', NULL);
 INSERT INTO `collection` VALUES (61, '九层炼心详解', 'https://mp.weixin.qq.com/s/gEySMuR28JpqPobF5Xgn_A', 12, '九层炼心详解，古传道家西派最完整的修炼功法！', '2021-09-06 09:55:26', NULL);
 INSERT INTO `collection` VALUES (62, 'Maven之Pom网站大全', 'https://mvnrepository.com/', 1, '包含了各种各样的pom', '2021-09-08 17:24:02', NULL);
+INSERT INTO `collection` VALUES (63, '考试功能调研-在线考试', 'https://github.com/YXJ2018/SpringBoot-Vue-OnlineExam', 13, '考试功能调研-在线考试系统', '2021-09-09 09:49:05', NULL);
+INSERT INTO `collection` VALUES (64, '前端每日3+1', 'https://github.com/haizlin/fe-interview', 9, '前端每日3+1', '2021-09-09 09:50:28', NULL);
+INSERT INTO `collection` VALUES (65, '考试功能调研-学之思', 'https://github.com/mindskip/xzs', 13, '学之思开源考试系统', '2021-09-09 09:51:08', NULL);
+INSERT INTO `collection` VALUES (66, '考试功能调研-online-exam', 'https://github.com/19920625lsg/spring-boot-online-exam', 13, 'spring-boot-online-exam', '2021-09-09 09:53:04', NULL);
+INSERT INTO `collection` VALUES (67, '考试功能调研-试卷Jquery模板', 'http://www.bootstrapmb.com/item/10241/preview', 13, 'Jquery试卷模板', '2021-09-09 09:54:12', NULL);
+INSERT INTO `collection` VALUES (68, 'vue下拉树【treeselect】', 'https://www.vue-treeselect.cn/', 7, 'vue-treeselect中文文档', '2021-09-09 10:00:35', NULL);
+INSERT INTO `collection` VALUES (69, 'Markdown插件【MD】', 'https://pandao.github.io/editor.md/', 10, '开源Markdown', '2021-09-09 17:40:03', NULL);
 
 -- ----------------------------
 -- Table structure for collection_cat
@@ -109,7 +116,7 @@ CREATE TABLE `collection_cat`  (
   `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   PRIMARY KEY (`collectionCatId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏分类表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏分类表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of collection_cat
@@ -126,6 +133,7 @@ INSERT INTO `collection_cat` VALUES (9, '博客知识', 0, '2021-08-16 14:59:21'
 INSERT INTO `collection_cat` VALUES (10, '插件收藏', 1, '2021-08-19 15:04:41', NULL);
 INSERT INTO `collection_cat` VALUES (11, '在线娱乐', 0, '2021-08-23 16:04:57', NULL);
 INSERT INTO `collection_cat` VALUES (12, '道家玄学', 8, '2021-09-06 09:55:00', NULL);
+INSERT INTO `collection_cat` VALUES (13, '项目调研', 0, '2021-09-09 09:54:39', NULL);
 
 -- ----------------------------
 -- Table structure for income
@@ -208,7 +216,7 @@ CREATE TABLE `note`  (
   `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   PRIMARY KEY (`noteId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '笔记表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '笔记表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of note
@@ -220,6 +228,7 @@ INSERT INTO `note` VALUES (4, '既许一人以偏爱，愿尽余生之慷慨', 7
 INSERT INTO `note` VALUES (5, 'Git提交报错', 8, NULL, '报错：OpenSSL SSL_read: Connection was reset, errno 10054\n解决：https://blog.csdn.net/weixin_43945983/article/details/110882074', 0, 0, '2021-09-06 11:13:18', NULL);
 INSERT INTO `note` VALUES (6, 'Post请求之 java.net', 1, NULL, '    /**\n     * 向指定 URL 发送POST方法的请求\n     *\n     * @param url   发送请求的 URL\n     * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。\n     * @return 所代表远程资源的响应结果\n     */\n    public static String sendPost(String url, JSONObject param) {\n        PrintWriter out = null;\n        BufferedReader in = null;\n        String result = \"\";\n        try {\n            URL realUrl = new URL(url);\n            // 打开和URL之间的连接\n            URLConnection conn = realUrl.openConnection();\n            // 设置通用的请求属性\n            conn.setRequestProperty(\"accept\", \"*/*\");\n            conn.setRequestProperty(\"connection\", \"Keep-Alive\");\n            conn.setRequestProperty(\"user-agent\", \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)\");\n            // 发送POST请求必须设置如下两行\n            conn.setDoOutput(true);\n            conn.setDoInput(true);\n            // 获取URLConnection对象对应的输出流\n            out = new PrintWriter(conn.getOutputStream());\n            // 发送请求参数\n            out.print(param);\n            // flush输出流的缓冲\n            out.flush();\n            // 定义BufferedReader输入流来读取URL的响应\n            in = new BufferedReader(new InputStreamReader(conn.getInputStream()));\n            String line;\n            while ((line = in.readLine()) != null) {\n                result += line;\n            }\n        } catch (Exception e) {\n            System.out.println(\"发送 POST 请求出现异常！\" + e);\n            e.printStackTrace();\n        }\n        // 使用finally块来关闭输出流、输入流\n        finally {\n            try {\n                if (out != null) {\n                    out.close();\n\n                }\n                if (in != null) {\n                    in.close();\n                }\n            } catch (IOException ex) {\n                ex.printStackTrace();\n            }\n        }\n        return result;\n    }', 0, 0, '2021-09-08 11:00:39', NULL);
 INSERT INTO `note` VALUES (7, 'Post请求之 Apache', 1, NULL, '/**\n     * 发送post请求\n     *\n     * @param url      路径\n     * @param params   参数(json类型)\n     * @param encoding 编码格式\n     * @return 响应报文\n     */\n    public static String sendPost(String url, JSONObject params, String encoding) {\n        String body = \"\";\n\n        //创建httpclient对象\n        CloseableHttpClient client = HttpClients.createDefault();\n        //创建post方式请求对象\n        HttpPost httpPost = new HttpPost(url);\n\n        //装填参数\n        StringEntity s = new StringEntity(params.toString(), \"utf-8\");\n        s.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, \"application/json\"));\n        //设置参数到请求对象中\n        httpPost.setEntity(s);\n        // System.out.println(\"请求地址：\" + url);\n        // System.out.println(\"请求参数：\"+ nvps.toString());\n\n        // 设置header信息\n        // 指定报文头【Content-type】、【User-Agent】\n        // httpPost.setHeader(\"Content-type\", \"application/x-www-form-urlencoded\");\n        httpPost.setHeader(\"Content-type\", \"application/json\");\n        httpPost.setHeader(\"User-Agent\", \"Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)\");\n\n        //执行请求操作，并拿到结果（同步阻塞）\n        CloseableHttpResponse response = null;\n        try {\n            response = client.execute(httpPost);\n            //获取结果实体\n            HttpEntity entity = response.getEntity();\n            if (entity != null) {\n                //按指定编码转换结果实体为String类型\n                body = EntityUtils.toString(entity, encoding);\n            }\n            EntityUtils.consume(entity);\n        } catch (IOException e) {\n            e.printStackTrace();\n        } finally {\n            //释放链接\n            try {\n                response.close();\n            } catch (IOException e) {\n                e.printStackTrace();\n            }\n        }\n        return body;\n    }', 0, 0, '2021-09-08 11:02:18', NULL);
+INSERT INTO `note` VALUES (8, 'HahsMap源码', 5, NULL, NULL, 0, 0, '2021-09-09 13:50:46', NULL);
 
 -- ----------------------------
 -- Table structure for note_cat
@@ -235,7 +244,7 @@ CREATE TABLE `note_cat`  (
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   `parentNoteCatNum` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '父级编号',
   PRIMARY KEY (`noteCatId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '笔记分类表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '笔记分类表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of note_cat
@@ -248,6 +257,7 @@ INSERT INTO `note_cat` VALUES (5, 'Java学习', '00010001', 1, 0, '2021-09-06 09
 INSERT INTO `note_cat` VALUES (6, '杂事百科', '0005', 0, 0, '2021-09-06 09:17:42', '', NULL);
 INSERT INTO `note_cat` VALUES (7, '句子笔记', '0006', 0, 0, '2021-09-06 10:59:55', '', NULL);
 INSERT INTO `note_cat` VALUES (8, 'Bug笔记', '0007', 0, 4, '2021-09-06 11:12:55', '', NULL);
+INSERT INTO `note_cat` VALUES (9, '国贸酝领', '00020001', 2, 0, '2021-09-09 14:06:32', '', '0002');
 
 -- ----------------------------
 -- Table structure for plan
@@ -344,7 +354,7 @@ CREATE TABLE `spend`  (
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   `remark` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`spendId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '消费表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '消费表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of spend
@@ -365,6 +375,9 @@ INSERT INTO `spend` VALUES (13, 1, '京东消费', 240.41, '2021-09-04 20:00:00'
 INSERT INTO `spend` VALUES (14, 1, '黄焖鸡米饭', 17.46, '2021-09-05 11:00:00', '平台：饿了吗\n', '2021-09-05 11:59:38', NULL, NULL);
 INSERT INTO `spend` VALUES (15, 5, '京东白条还款', 1432.65, '2021-09-05 12:00:00', '平台：京东商城\n', '2021-09-05 12:00:48', NULL, NULL);
 INSERT INTO `spend` VALUES (16, 6, '迅雷会员', 8.90, '2021-09-05 20:00:00', '平台：迅雷\n明细：一个月白金会员', '2021-09-06 08:39:39', NULL, NULL);
+INSERT INTO `spend` VALUES (17, 1, '沙拉鸡排饭+疯狂龙脆骨', 20.59, '2021-09-08 19:00:00', '平台：饿了吗\n商家：嘿米饭堂(跨塘店)', '2021-09-09 08:49:06', NULL, NULL);
+INSERT INTO `spend` VALUES (18, 2, '文明Ⅵ+DLC', 50.40, '2021-09-04 20:00:00', '平台：Steam\n', '2021-09-09 08:51:50', NULL, NULL);
+INSERT INTO `spend` VALUES (19, 1, '饿了吗-超级吃货卡【会员】', 0.90, '2021-09-05 11:00:00', '平台：饿了吗\n', '2021-09-09 08:56:48', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for spend_cat

@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 08/09/2021 17:36:55
+ Date: 09/09/2021 18:01:30
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `collection`  (
   `createDt` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   PRIMARY KEY (`collectionId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 63 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 70 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '收藏表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of collection
@@ -97,5 +97,12 @@ INSERT INTO `collection` VALUES (59, 'jQuery全屏农历日历插件', 'http://w
 INSERT INTO `collection` VALUES (60, 'Flatpickr中文文档', 'https://www.flatpickr.cn/', 1, 'flatpickr，日期插件中文文档', '2021-09-02 18:32:08', NULL);
 INSERT INTO `collection` VALUES (61, '九层炼心详解', 'https://mp.weixin.qq.com/s/gEySMuR28JpqPobF5Xgn_A', 12, '九层炼心详解，古传道家西派最完整的修炼功法！', '2021-09-06 09:55:26', NULL);
 INSERT INTO `collection` VALUES (62, 'Maven之Pom网站大全', 'https://mvnrepository.com/', 1, '包含了各种各样的pom', '2021-09-08 17:24:02', NULL);
+INSERT INTO `collection` VALUES (63, '考试功能调研-在线考试', 'https://github.com/YXJ2018/SpringBoot-Vue-OnlineExam', 13, '考试功能调研-在线考试系统', '2021-09-09 09:49:05', NULL);
+INSERT INTO `collection` VALUES (64, '前端每日3+1', 'https://github.com/haizlin/fe-interview', 9, '前端每日3+1', '2021-09-09 09:50:28', NULL);
+INSERT INTO `collection` VALUES (65, '考试功能调研-学之思', 'https://github.com/mindskip/xzs', 13, '学之思开源考试系统', '2021-09-09 09:51:08', NULL);
+INSERT INTO `collection` VALUES (66, '考试功能调研-online-exam', 'https://github.com/19920625lsg/spring-boot-online-exam', 13, 'spring-boot-online-exam', '2021-09-09 09:53:04', NULL);
+INSERT INTO `collection` VALUES (67, '考试功能调研-试卷Jquery模板', 'http://www.bootstrapmb.com/item/10241/preview', 13, 'Jquery试卷模板', '2021-09-09 09:54:12', NULL);
+INSERT INTO `collection` VALUES (68, 'vue下拉树【treeselect】', 'https://www.vue-treeselect.cn/', 7, 'vue-treeselect中文文档', '2021-09-09 10:00:35', NULL);
+INSERT INTO `collection` VALUES (69, 'Markdown插件【MD】', 'https://pandao.github.io/editor.md/', 10, '开源Markdown', '2021-09-09 17:40:03', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

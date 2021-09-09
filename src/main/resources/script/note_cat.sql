@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 08/09/2021 17:37:29
+ Date: 09/09/2021 18:01:51
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `note_cat`  (
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   `parentNoteCatNum` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '父级编号',
   PRIMARY KEY (`noteCatId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '笔记分类表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '笔记分类表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of note_cat
@@ -44,5 +44,6 @@ INSERT INTO `note_cat` VALUES (5, 'Java学习', '00010001', 1, 0, '2021-09-06 09
 INSERT INTO `note_cat` VALUES (6, '杂事百科', '0005', 0, 0, '2021-09-06 09:17:42', '', NULL);
 INSERT INTO `note_cat` VALUES (7, '句子笔记', '0006', 0, 0, '2021-09-06 10:59:55', '', NULL);
 INSERT INTO `note_cat` VALUES (8, 'Bug笔记', '0007', 0, 4, '2021-09-06 11:12:55', '', NULL);
+INSERT INTO `note_cat` VALUES (9, '国贸酝领', '00020001', 2, 0, '2021-09-09 14:06:32', '', '0002');
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 08/09/2021 17:37:49
+ Date: 09/09/2021 18:02:12
 */
 
 SET NAMES utf8mb4;
@@ -32,7 +32,7 @@ CREATE TABLE `spend`  (
   `createBy` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   `remark` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`spendId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '消费表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '消费表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of spend
@@ -53,5 +53,8 @@ INSERT INTO `spend` VALUES (13, 1, '京东消费', 240.41, '2021-09-04 20:00:00'
 INSERT INTO `spend` VALUES (14, 1, '黄焖鸡米饭', 17.46, '2021-09-05 11:00:00', '平台：饿了吗\n', '2021-09-05 11:59:38', NULL, NULL);
 INSERT INTO `spend` VALUES (15, 5, '京东白条还款', 1432.65, '2021-09-05 12:00:00', '平台：京东商城\n', '2021-09-05 12:00:48', NULL, NULL);
 INSERT INTO `spend` VALUES (16, 6, '迅雷会员', 8.90, '2021-09-05 20:00:00', '平台：迅雷\n明细：一个月白金会员', '2021-09-06 08:39:39', NULL, NULL);
+INSERT INTO `spend` VALUES (17, 1, '沙拉鸡排饭+疯狂龙脆骨', 20.59, '2021-09-08 19:00:00', '平台：饿了吗\n商家：嘿米饭堂(跨塘店)', '2021-09-09 08:49:06', NULL, NULL);
+INSERT INTO `spend` VALUES (18, 2, '文明Ⅵ+DLC', 50.40, '2021-09-04 20:00:00', '平台：Steam\n', '2021-09-09 08:51:50', NULL, NULL);
+INSERT INTO `spend` VALUES (19, 1, '饿了吗-超级吃货卡【会员】', 0.90, '2021-09-05 11:00:00', '平台：饿了吗\n', '2021-09-09 08:56:48', NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
