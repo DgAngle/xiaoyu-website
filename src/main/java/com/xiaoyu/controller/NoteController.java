@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class NoteController {
 
     private static final String note_path = "pagelist/note";
+    private static final String note_edit_path = "pageedit/note";
     private static final String note_cat_path = "pagelist/note";
 
     @Autowired
@@ -125,6 +126,17 @@ public class NoteController {
     public R del(long noteId) {
         noteService.deleteNoteById(noteId);
         return R.success().message("删除成功！");
+    }
+
+
+    @RequestMapping("/goMdNoteAdd")
+    public String goMdNoteAdd() {
+        return this.note_edit_path + "/notemdadd";
+    }
+
+    @RequestMapping("/goMdNoteView")
+    public String goMdNoteView() {
+        return this.note_path + "/notemdview";
     }
 
 }
