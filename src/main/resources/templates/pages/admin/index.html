@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="title-box style9">
-                    <span class="title-box-title"><a class="style-white-n">账户余额：{{totalIncomeMoney - totalSpendMoney}} 元</a></span>
+                    <span class="title-box-title"><a class="style-white-n">账户余额：{{totalIncomeMoney - totalSpendMoney | ellipsisBalance}} 元</a></span>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -102,7 +102,7 @@
                     <div class="box-content-title">{{topNote.noteCat.noteCatName}}</div>
                     <div class="box-content">
                         <ul>
-                            <li v-for="note in topNote.noteList" :title="note.noteContent">📘&nbsp;{{note.noteName | ellipsis}}</a></li>
+                            <li v-for="note in topNote.noteList" :title="note.noteContent"><a target="_blank" :href="'/note/goMdNoteView/' + note.noteId">📘&nbsp;{{note.noteName | ellipsis}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -139,6 +139,10 @@
                     return value.slice(0, 40) + '...'
                 }
                 return value
+            },
+            ellipsisBalance(value) {
+                if (!value) return '';
+                return Number(value).toFixed(2);
             },
             ellipsis(value) {
                 if (!value) return '';

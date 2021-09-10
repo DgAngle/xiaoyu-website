@@ -117,7 +117,7 @@
                nct.noteCatName
         from note ne
                  inner join note_cat nct on ne.noteCatId = nct.noteCatId
-        where ne.noteCatId = #{noteCatId}
+        where ne.noteCatId in (select noteCatId from note_cat where noteCatNum like CONCAT((select noteCatNum from note_cat where noteCatId = #{noteCatId}),'%'))
         order by ne.createDt desc limit 5
     </select>
 </mapper>
