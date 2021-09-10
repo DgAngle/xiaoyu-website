@@ -116,7 +116,7 @@
         from note_cat
         order by length(noteCatNum), orderNum desc
     </select>
-    
+
     <select id="queryNoteCatNumById" parameterType="java.lang.Long" resultType="java.lang.String">
         select noteCatNum
         from note_cat
@@ -193,6 +193,21 @@
                createBy
         from note
         where noteId = #{noteId}
+    </select>
+
+    <select id="queryNoteDetailMdById" resultType="noteVo">
+        select ne.noteId,
+               ne.noteName,
+               ne.noteCatId,
+               ne.noteContent,
+               ne.level,
+               ne.isTop,
+               ne.createDt,
+               ne.createBy,
+               nct.noteCatName
+        from note ne
+                 inner join note_cat nct on ne.noteCatId = nct.noteCatId
+        where ne.noteId = #{noteId}
     </select>
 
     <update id="updateNote" parameterType="noteBean">

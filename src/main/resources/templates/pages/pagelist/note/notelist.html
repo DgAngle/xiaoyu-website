@@ -69,6 +69,7 @@
                     <th>{{note.createDtStr}}</th>
                     <th class="table-operate">
                         <a href="#" title="修改" @click="openNoteEdit(note.noteId)"><i class="fa fa-pencil"></i></a>
+                        <a href="javascript:void(0);" title="查看" @click="openNoteDetail(note.noteId)"><i class="fa fa-search"></i></a>
                         <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
                     </th>
                 </tr>

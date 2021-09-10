@@ -1,10 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>MD笔记查看</title>
+    <!-- 公共 css -->
+    <link th:replace="common/common_css"/>
+    <style>
+        .note-title {
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 
+<div id="noteContentContainer">
+    <div class="note-title"><h2 id="noteTitle"></h2></div>
+    <div id="noteContent">
+        <textarea style="display: none" id="noteInfo"></textarea>
+    </div>
+</div>
+
+<!-- 公共 js -->
+<script src="/plugs/jquery/jquery-2.2.4.min.js"></script>
+<script src="/plugs/bootstrap/js/popper.min.js"></script>
+<script src="/plugs/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Markdown -->
+<script src="/plugs/editor/lib/marked.min.js"></script>
+<script src="/plugs/editor/lib/prettify.min.js"></script>
+<script src="/plugs/editor/lib/raphael.min.js"></script>
+<script src="/plugs/editor/lib/underscore.min.js"></script>
+<script src="/plugs/editor/lib/sequence-diagram.min.js"></script>
+<script src="/plugs/editor/lib/flowchart.min.js"></script>
+<script src="/plugs/editor/lib/jquery.flowchart.min.js"></script>
+<script src="/plugs/editor/js/editormd.min.js"></script>
+
+<script>
+    $(function () {
+        refreshContent();
+    })
+
+    /* 获取最后一个反斜杠"/"后的参数 */
+    function getUrlBackslashParams() {
+        // 获取页面路径
+        let url = window.location.href;
+        let lastIndex = url.lastIndexOf("\/");
+        return url.substring(lastIndex + 1, url.length);
+    }
+
+    function _ajax(url, data, successCallback) {
+        $.ajax({
+            // async: false, // 默认true, 异步执行
+            // traditional:true // 默认为false,是否使用传统的方式浅层序列化, 如果是数组, 设置为true
+            url: url,
+            data: data,
+            type: 'POST',
+            dataType: 'JSON',
+            success: successCallback,
+            error: function () {
+                alert("error!");
+            }
+        })
+    }
+
+    // 初始化修改参数
+    function refreshContent() {
+        let noteInfo;
+        let url = "/note/detailMD";
+        let noteId = getUrlBackslashParams();
+        _ajax(url, {'noteId': noteId}, function (res) {
+            noteInfo = res.data.noteDetail;
+            $('#noteTitle').text(noteInfo.noteName + "【" + noteInfo.noteCatName + "】");
+            $('#noteInfo').val(noteInfo.noteContent);
+            editormd.markdownToHTML("noteContent", {
+                htmlDecode: "style,script,iframe", // you can filter tags decode
+                emoji: true,
+                taskList: true,
+                tex: true, // 默认不解析
+                flowChart: true, // 默认不解析
+                sequenceDiagram: true, // 默认不解析
+            });
+        })
+    }
+</script>
 </body>
 </html>

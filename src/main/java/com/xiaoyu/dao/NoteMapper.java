@@ -55,6 +55,8 @@ public interface NoteMapper {
 
     NoteVo queryNoteDetailById(long noteId);
 
+    NoteVo queryNoteDetailMdById(long noteId);
+
     int updateNote(NoteBean noteBean);
 
     int deleteNoteById(long noteId);

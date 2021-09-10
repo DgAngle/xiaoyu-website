@@ -116,6 +116,10 @@ let listVm = new Vue({
             };
         },
         // 打开新增模态框
+        openNoteDetail(id) {
+            window.open("goMdNoteView/" + id);
+        },
+        // 打开新增模态框
         openNoteAdd() {
             let _this = this;
             _this.initAddForm();

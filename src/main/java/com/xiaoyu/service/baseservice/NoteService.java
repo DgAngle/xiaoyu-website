@@ -37,6 +37,8 @@ public interface NoteService {
     int addNote(NoteBean noteBean);
 
     NoteVo queryNoteDetailById(long noteId);
+    
+    NoteVo queryNoteDetailMdById(long noteId);
 
     int updateNote(NoteBean noteBean);
 

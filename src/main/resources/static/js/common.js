@@ -7,19 +7,16 @@ window.onload = function () {
     // 获取页面路径
     let url = window.location.href;
 
+    /* 激活菜单, 如果当前地址包含菜单地址, 证明目前在该菜单 */
     $("#menu").find("li>a").each(function () {
-        let href = $(this).attr("href");
+        let href = $(this).attr("href"); // 菜单跳转地址
         if (href && url.indexOf(href) != -1) {
             $(this).parent("li").addClass("active");
             $(this).parent("li").parent("ul").addClass("in");
             $(this).parent("li").parent("ul").parent("li").addClass("active");
         }
     });
-
-    // $(".datatimepicker").datetimepicker({
-    //     autoClose: true,
-    // });
-
+    /* 默认时间插件初始化 */
     $(".datetime").flatpickr({
         locale: 'zh',
         enableTime: true,
@@ -27,6 +24,7 @@ window.onload = function () {
         enableSeconds: true,
         time_24hr: true,
     });
+    /* 搜索栏时间插件初始化 */
     $(".datetime-search").flatpickr({
         locale: 'zh',
     });
@@ -70,5 +68,48 @@ commonUtil.ajax = function (url, data, successCallback) {
     })
 }
 
+/* 获取最后一个反斜杠"/"后的参数 */
+commonUtil.getUrlBackslashParams = function () {
+    // 获取页面路径
+    let url = window.location.href;
+    let lastIndex = url.lastIndexOf("\/");
+    return url.substring(lastIndex + 1, url.length);
+}
+
+/* 获取指定字符串后的反斜杠”/“参数值, 返回数组 */
+commonUtil.getUrlBackslashParam = function (param) {
+    // 获取页面路径
+    let url = window.location.href;
+    let lastIndex = url.lastIndexOf("param");
+    let str = url.substring(lastIndex + 1, url.length);
+    return str.split("\/");
+}
+
+/* 获取问号后面指定的参数, 返回对应的参数值, 没有则返回false */
+commonUtil.getUrlParam = function (paramName) {
+    // 获取页面路径
+    let urlParams = window.location.search.substring(1);
+    let vars = urlParams.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == paramName) {
+            return pair[1];
+        }
+    }
+    return (false);
+}
+
+/* 获取问号后面所有的参数, 返回参数值数组 */
+commonUtil.getUrlParams = function () {
+    // 获取页面路径
+    let params = [];
+    let urlParamStr = window.location.search.substring(1);
+    let vars = urlParamStr.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        params[i] = pair[1];
+    }
+    return params;
+}
 
 

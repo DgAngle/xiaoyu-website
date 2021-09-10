@@ -184,6 +184,11 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
+    public NoteVo queryNoteDetailMdById(long noteId) {
+        return noteMapper.queryNoteDetailMdById(noteId);
+    }
+
+    @Override
     public int updateNote(NoteBean noteBean) {
         return noteMapper.updateNote(noteBean);
     }
