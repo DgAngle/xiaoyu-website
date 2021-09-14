@@ -58,6 +58,7 @@ let listVm = new Vue({
                 searchReplace: true,
                 // watch: true,      // 关闭实时预览
                 unwatch: true,      // 关闭实时预览
+                tocm : true,
                 htmlDecode: "style,script,iframe|on*", // 开启 HTML 标签解析，为了安全性，默认不开启
                 onload: function () {
                     // console.log('onload', this);
