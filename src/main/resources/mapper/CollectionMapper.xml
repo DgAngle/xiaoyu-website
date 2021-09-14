@@ -71,6 +71,9 @@
             <if test="collectionCatId > 0">
                 collectionCatId = #{collectionCatId},
             </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
         </set>
     </sql>
 
