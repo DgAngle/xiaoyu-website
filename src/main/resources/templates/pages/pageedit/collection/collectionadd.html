@@ -1,0 +1,39 @@
+<!-- catAddModel -->
+<div class="modal fade" id="collectionModal" tabindex="-1" aria-labelledby="collectionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="collectionModalLabel">{{modalName}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="collectionNameEdit"><span style="color: red">*</span>收藏名称：</label>
+                        <input type="text" class="form-control" id="collectionNameEdit" aria-describedby="emailHelp" v-model="collectionForm.collectionName" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="collectionUrlEdit"><span style="color: red">*</span>收藏地址：</label>
+                        <input type="text" class="form-control" id="collectionUrlEdit" aria-describedby="emailHelp" v-model="collectionForm.collectionUrl" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="collectionCatEdit"><span style="color: red">*</span>收藏分类：</label>
+                        <select class="form-control form-select-default" id="collectionCatEdit" v-model="collectionForm.collectionCatId">
+                            <option v-for="collectionCat in collectionCatList" :value="collectionCat.collectionCatId">{{collectionCat.collectionCatName}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="remarkEdit"><span style="color: red"></span>描述：</label>
+                        <textarea class="form-control" id="remarkEdit" v-model="collectionForm.remark" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" @click="saveCollection()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>

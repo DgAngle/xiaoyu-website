@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>收藏</title>
+    <!-- 公共 css -->
+    <link th:replace="common/common_css"/>
+</head>
+<body>
+<div class="page-container ">
+    <div th:replace="layout/sidebar"></div>
+    <div th:replace="layout/topMenu"></div>
+    <!--<div th:include="common/common_js"></div>-->
+    <!-- 内容区域 -->
+    <div class="container-fluid">
+        <!--<div th:replace="layout/pagnation"></div>-->
+
+        <div id="collectionContainer">
+            <div th:replace="pageedit/collection/collectionadd"></div>
+
+            <div class="row comm-operate">
+                <button class="btn btn-outline-primary btn-sm" @click="openCollectionAdd()"><i class="fa fa-plus-square"></i>&nbsp;
+                    新增收藏
+                </button>
+            </div>
+
+            <form class="form-inline form-search " onsubmit="return false;">
+                <div class="form-group col-sm-3 ">
+                    <label for="collectionName" class="col-form-label ">收藏名称:</label>
+                    <input type="text" class="form-control form-control-sm" id="collectionName" v-model="collectionQuery.collectionName" placeholder="" autocomplete="off"
+                           @keyup.enter="refreshCollationList()">
+                </div>
+                <div class="form-group col-sm-3 ">
+                    <label for="collectionCatName">收藏分类:</label>
+                    <select class="form-control form-control-sm" id="collectionCatName" v-model="collectionQuery.collectionCatId">
+                        <option value="-1"></option>
+                        <option v-for="collectionCat in collectionCatList" :value="collectionCat.collectionCatId">{{collectionCat.collectionCatName}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-2 ">
+                    <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshCollationList()">搜索</button>
+                </div>
+            </form>
+            <table class="table table-hover table-striped comm-table">
+                <thead class="thead-dark">
+                <tr>
+                    <th width="60">序号</th>
+                    <th width="250">收藏名称</th>
+                    <th width="100">收藏分类</th>
+                    <th width="150">地址</th>
+                    <th width="200">备注</th>
+                    <th width="100">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(collect, index) in collectionList">
+                    <th>{{index + 1}}</th>
+                    <th>{{collect.collectionName}}</th>
+                    <th>{{collect.collectionCatName}}</th>
+                    <th><a :href="collect.collectionUrl" style="text-decoration: underline;" target="_blank">{{collect.collectionUrl | ellipsisUrl}}</a></th>
+                    <th :title="collect.remark">{{collect.remark | ellipsis}}</th>
+                    <th class="table-operate">
+                        <a href="#" title="修改" @click="openCollectionEdit(collect.collectionId)"><i class="fa fa-pencil"></i></a>
+                        <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+
+            <form id="queryForm">
+                <input hidden name="collectionName" v-model="collectionQuery.collectionName">
+                <input hidden name="collectionCatId" v-model="collectionQuery.collectionCatId">
+            </form>
+        </div>
+        <div th:replace="common/common_js"></div>
+        <div th:replace="layout/pagnation"></div>
+    </div>
+</div>
+
+<!-- 公共 js -->
+<script type="text/javascript" src="/js/pages/collection.js"></script>
+</body>
+</html>

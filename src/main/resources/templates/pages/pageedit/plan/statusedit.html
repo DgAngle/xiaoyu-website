@@ -1,0 +1,27 @@
+<!-- statusModal -->
+<div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="statusModalLabel">状态变更</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="statusEdit"><span style="color: red">*</span>状态设置：</label>
+                        <select class="form-control form-select-default" id="statusEdit" v-model="statusCode">
+                            <option v-for="status in statusList" :value="status.statusCode">{{status.statusMessage}}</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" @click="saveStatus()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>

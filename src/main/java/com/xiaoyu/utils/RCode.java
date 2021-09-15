@@ -1,7 +1,7 @@
 package com.xiaoyu.utils;
 
 /**
- * 返回代码
+ * 接口请求返回常量
  */
 public interface RCode {
     /************ 返回值 ************/
@@ -15,6 +15,7 @@ public interface RCode {
     public static final int not_found_code = 30404; // 请求未找到
     public static final int service_error_code = 30500; // 请求未找到
 
+    public static final int repeat_code = -1; // 重复
     /************ 返回提示信息 ************/
     public static final String success_message = "调用成功！";
     public static final String error_message = "调用失败！";

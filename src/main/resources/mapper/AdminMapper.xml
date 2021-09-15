@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoyu.dao.AdminMapper">
+
+    <!-- ********************* function top5 ********************* -->
+
+    <!-- ********************* 收藏相关 ********************* -->
+    <select id="queryCollectionCatTop4" resultType="collectionCatBean">
+        select *
+        from collection_cat
+        order by orderNum desc limit 4
+    </select>
+
+    <select id="queryCollectionTop5" parameterType="java.lang.Long" resultType="collectionBean">
+        select *
+        from collection
+        where collectionCatId = #{collectionCatId}
+        order by createDt desc limit 5
+    </select>
+
+    <select id="queryCollectionWithCatTop5" parameterType="java.lang.Long" resultType="collectionCatBean">
+        select cn.collectionId,
+               cn.collectionName,
+               cn.collectionUrl,
+               cn.collectionCatId,
+               cn.remark,
+               cn.createDt,
+               cn.createBy,
+               ccn.collectionCatName
+        from collection cn
+                 inner join collection_cat ccn on cn.collectionCatId = ccn.collectionCatId
+        where cn.collectionCatId = #{collectionCatId}
+        order by cn.createDt desc limit 5
+    </select>
+
+    <!-- ********************* 计划相关 ********************* -->
+    <select id="queryPlanCatTop4" resultType="planCatBean">
+        select *
+        from plan_cat
+        order by orderNum desc limit 4
+    </select>
+
+    <select id="queryPlanTop5" parameterType="java.lang.Long" resultType="planBean">
+        select *
+        from plan
+        where planCatId = #{planCatId}
+          and status = 2
+        order by createDt desc limit 5
+    </select>
+
+    <update id="updatePlanStatusById">
+        update plan
+        set status=#{status}
+        where planId = #{planId}
+    </update>
+
+    <!-- ********************* 消费相关 ********************* -->
+    <select id="querySpendTop5" parameterType="spendBean" resultType="spendVo">
+        select sd.spendId,
+               sd.spendName,
+               sd.spendCatId,
+               sd.spendMoney,
+               sd.spendDate,
+               sd.spendContent,
+               sd.createDt,
+               sd.createBy,
+               sd.remark,
+               sdt.spendCatName
+        from spend sd
+                 inner join spend_cat sdt on sd.spendCatId = sdt.spendCatId
+        order by sd.createDt desc limit 5
+    </select>
+
+    <select id="queryTotalSpendMoney" resultType="java.math.BigDecimal">
+        select ifnull(sum(spendMoney), 0)
+        from spend
+    </select>
+
+    <!-- ********************* 收入相关 ********************* -->
+    <select id="queryIncomeTop5" parameterType="incomeBean" resultType="incomeVo">
+        select ie.incomeId,
+               ie.incomeName,
+               ie.incomeCatId,
+               ie.incomeMoney,
+               ie.incomeDate,
+               ie.incomeContent,
+               ie.createDt,
+               ie.createBy,
+               ie.remark,
+               ict.incomeCatName
+        from income ie
+                 inner join income_cat ict on ie.incomeCatId = ict.incomeCatId
+        order by ie.createDt desc limit 5
+    </select>
+
+    <select id="queryTotalIncomeMoney" resultType="java.math.BigDecimal">
+        select ifnull(sum(incomeMoney), 0)
+        from income
+    </select>
+
+    <!-- ********************* 笔记相关 ********************* -->
+    <select id="queryNoteCatTop4" resultType="noteCatBean">
+        select *
+        from note_cat
+        order by orderNum desc limit 4
+    </select>
+
+    <select id="queryNoteTop5" parameterType="noteBean" resultType="noteVo">
+        select ne.noteId,
+               ne.noteName,
+               ne.noteCatId,
+               ne.noteContent,
+               ne.level,
+               ne.isTop,
+               ne.createDt,
+               ne.createBy,
+               nct.noteCatName
+        from note ne
+                 inner join note_cat nct on ne.noteCatId = nct.noteCatId
+        where ne.noteCatId in (select noteCatId from note_cat where noteCatNum like CONCAT((select noteCatNum from note_cat where noteCatId = #{noteCatId}),'%'))
+        order by ne.createDt desc limit 5
+    </select>
+</mapper>

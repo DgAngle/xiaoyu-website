@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>计划分类</title>
+    <!-- 公共 css -->
+    <link th:replace="common/common_css"/>
+</head>
+<body>
+<div class="page-container">
+    <div th:replace="layout/sidebar"></div>
+    <div th:replace="layout/topMenu"></div>
+
+    <!-- 内容区域 -->
+    <div id="planCatContainer" class="container-fluid">
+        <div th:replace="pageedit/plan/plancatadd"></div>
+
+        <div class="row comm-operate">
+            <button class="btn btn-outline-primary btn-sm" @click="openPlanCatAdd()"><i class="fa fa-plus-square"></i>&nbsp;
+                新增计划分类
+            </button>
+        </div>
+
+        <form class="form-inline form-search " onsubmit="return false;">
+            <div class="form-group col-sm-3 ">
+                <label for="planCatName" class="col-form-label ">分类名称:&nbsp;&nbsp;</label>
+                <input type="text" class="form-control form-control-sm" id="planCatName" placeholder="" autocomplete="off" v-model="planCatQuery.planCatName"
+                       @keyup.enter="refreshPlanCatList()">
+            </div>
+            <div class="form-group col-sm-2 ">
+                <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshPlanCatList()">搜索</button>
+            </div>
+        </form>
+
+        <table class="table table-hover table-striped comm-table">
+            <thead class="thead-dark">
+            <tr>
+                <th>序号</th>
+                <th>计划分类名称</th>
+                <th>排序号</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(planCat, index) in planCatList">
+                <th>{{index + 1}}</th>
+                <th>{{planCat.planCatName}}</th>
+                <th>{{planCat.orderNum}}</th>
+                <th class="table-operate">
+                    <a href="#" title="修改" @click="openPlanCatEdit(planCat.planCatId)"><i class="fa fa-pencil"></i></a>
+                    <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- 公共 js -->
+<div th:replace="common/common_js"></div>
+<script type="text/javascript" src="/js/pages/plancat.js"></script>
+</body>
+</html>

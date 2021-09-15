@@ -11,158 +11,217 @@
 </head>
 
 <body>
-<!-- preloader area start -->
+
+<!-- 加载页面 -->
 <!--<div id="preloader">-->
 <!--    <div class="loader"></div>-->
 <!--</div>-->
-<!-- preloader area end -->
-<!-- page container area start -->
+
 <div class="page-container">
     <div th:include="layout/sidebar"></div>
     <div th:include="layout/topMenu"></div>
 
-    <!-- 内容区域 -->
-    <!--<div class="main-content">
-        <div class="breadcrumbs-area clearfix">
-        </div>
-    </div>-->
-    <div class="main-content container-fluid">
+    <!-- 账户余额, 收入与消费 -->
+    <div id="indexContainer" class="main-content container-fluid">
         <div class="row">
-            <div class="col-lg-3">1</div>
-            <div class="col-lg-3">2</div>
-            <div class="col-lg-3">3</div>
-            <div class="col-lg-3">4</div>
-        </div>
-    </div>
-</div>
-<!-- page container area end -->
-<!-- offset area start -->
-<div class="offset-area">
-    <div class="offset-close"><i class="ti-close"></i></div>
-    <ul class="nav offset-menu-tab">
-        <li><a class="active" data-toggle="tab" href="#activity">记录</a></li>
-        <li><a data-toggle="tab" href="#settings">设置</a></li>
-    </ul>
-    <div class="offset-content tab-content">
-        <div id="activity" class="tab-pane fade in show active">
-            <div class="recent-activity">
-                <div class="timeline-task">
-                    <div class="icon bg1">
-                        <i class="fa fa-envelope"></i>
-                    </div>
-                    <div class="tm-title">
-                        <h4>Rashed sent you an email</h4>
-                        <span class="time"><i class="ti-time"></i>09:35</span>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio itaque at.
-                    </p>
-                </div>
-                <div class="timeline-task">
-                    <div class="icon bg2">
-                        <i class="fa fa-check"></i>
-                    </div>
-                    <div class="tm-title">
-                        <h4>Added</h4>
-                        <span class="time"><i class="ti-time"></i>7 Minutes Ago</span>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur.
-                    </p>
-                </div>
-                <div class="timeline-task">
-                    <div class="icon bg2">
-                        <i class="fa fa-exclamation-triangle"></i>
-                    </div>
-                    <div class="tm-title">
-                        <h4>You missed you Password!</h4>
-                        <span class="time"><i class="ti-time"></i>09:20 Am</span>
-                    </div>
-                </div>
-                <div class="timeline-task">
-                    <div class="icon bg3">
-                        <i class="fa fa-bomb"></i>
-                    </div>
-                    <div class="tm-title">
-                        <h4>Member waiting for you Attention</h4>
-                        <span class="time"><i class="ti-time"></i>09:35</span>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio itaque at.
-                    </p>
-                </div>
-                <div class="timeline-task">
-                    <div class="icon bg3">
-                        <i class="ti-signal"></i>
-                    </div>
-                    <div class="tm-title">
-                        <h4>You Added Kaji Patha few minutes ago</h4>
-                        <span class="time"><i class="ti-time"></i>01 minutes ago</span>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio itaque at.
-                    </p>
+            <div class="col-lg-12">
+                <div class="title-box style9">
+                    <span class="title-box-title"><a class="style-white-n">账户余额：{{totalIncomeMoney - totalSpendMoney | ellipsisBalance}} 元</a></span>
                 </div>
             </div>
-        </div>
-        <div id="settings" class="tab-pane fade">
-            <div class="offset-settings">
-                <h4>General Settings</h4>
-                <div class="settings-list">
-                    <div class="s-settings">
-                        <div class="s-sw-title">
-                            <h5>Notifications</h5>
-                            <div class="s-swtich">
-                                <input type="checkbox" id="switch1"/>
-                                <label for="switch1">Toggle</label>
-                            </div>
-                        </div>
-                        <p>Keep it 'On' When you want to get all the notification.</p>
+            <div class="col-lg-6">
+                <div class="box">
+                    <div class="box-content-title"><a href="/income/goList">总计收入：{{totalIncomeMoney}} 元</a></div>
+                    <div class="box-content">
+                        <ul>
+                            <li class="spend-item" v-for="income in topIncomeList" :title="income.incomeContent">
+                                📑&nbsp;{{income.incomeName+ '【'+ income.incomeMoney +'元】' + '【'+ income.incomeCatName +'】' | ellipsisMoney}}
+                            </li>
+                        </ul>
                     </div>
-                    <div class="s-settings">
-                        <div class="s-sw-title">
-                            <h5>Show recent activity</h5>
-                            <div class="s-swtich">
-                                <input type="checkbox" id="switch2"/>
-                                <label for="switch2">Toggle</label>
-                            </div>
-                        </div>
-                        <p>The for attribute is necessary to bind our custom checkbox with the input.</p>
-                    </div>
-                    <div class="s-settings">
-                        <div class="s-sw-title">
-                            <h5>Show your emails</h5>
-                            <div class="s-swtich">
-                                <input type="checkbox" id="switch3"/>
-                                <label for="switch3">Toggle</label>
-                            </div>
-                        </div>
-                        <p>Show email so that easily find you.</p>
-                    </div>
-                    <div class="s-settings">
-                        <div class="s-sw-title">
-                            <h5>Show Task statistics</h5>
-                            <div class="s-swtich">
-                                <input type="checkbox" id="switch4"/>
-                                <label for="switch4">Toggle</label>
-                            </div>
-                        </div>
-                        <p>The for attribute is necessary to bind our custom checkbox with the input.</p>
-                    </div>
-                    <div class="s-settings">
-                        <div class="s-sw-title">
-                            <h5>Notifications</h5>
-                            <div class="s-swtich">
-                                <input type="checkbox" id="switch5"/>
-                                <label for="switch5">Toggle</label>
-                            </div>
-                        </div>
-                        <p>Use checkboxes when looking for yes or no answers.</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="box">
+                    <div class="box-content-title"><a href="/spend/goList"> 总计消费：{{totalSpendMoney}} 元</a></div>
+                    <div class="box-content">
+                        <ul>
+                            <li class="spend-item" v-for="spend in topSpendList" :title="spend.spendContent">
+                                <!--📑&nbsp;{{spend.spendName}} 【{{spend.spendMoney}}元】【{{spend.spendCatName}}】-->
+                                📑&nbsp;{{spend.spendName+ '【'+ spend.spendMoney +'元】' + '【'+ spend.spendCatName +'】' | ellipsisMoney}}
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- 今日计划 -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-box style1">
+                    <span class="title-box-title"><a class="style-black" href="/plan/goList">今日计划</a></span>
+                </div>
+            </div>
+            <div v-for="topPlan in topPlanList" class="col-lg-3">
+                <div class="box">
+                    <div class="box-content-title">{{topPlan.planCat.planCatName}}</div>
+                    <div class="box-content">
+                        <ul>
+                            <li class="plan-item" v-for="plan in topPlan.planList" :title="plan.planContent">
+                                📔&nbsp;{{plan.planName}}
+                                <a href="javascript:void(0);" @click="openConfirmFinish(plan.planId)"><i class="fa fa-check"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 近期笔记 -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-box style2">
+                    <span class="title-box-title"><a class="style-black-note" href="/note/goList">近期笔记</a></span>
+                </div>
+            </div>
+            <div v-for="topNote in topNoteList" class="col-lg-3">
+                <div class="box">
+                    <div class="box-content-title">{{topNote.noteCat.noteCatName}}</div>
+                    <div class="box-content">
+                        <ul>
+                            <li v-for="note in topNote.noteList" :title="note.noteContent"><a target="_blank" :href="'/note/goMdNoteView/' + note.noteId">📘&nbsp;{{note.noteName | ellipsis}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 近期收藏 -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-box style3">
+                    <span class="title-box-title"><a class="style-white" href="/collect/goList">近期收藏</a></span>
+                </div>
+            </div>
+            <div v-for="topCollection in topCollectionList" class="col-lg-3">
+                <div class="box">
+                    <div class="box-content-title">{{topCollection.collectionCat.collectionCatName}}</div>
+                    <div class="box-content">
+                        <ul>
+                            <li v-for="collection in topCollection.collectionList"><a target="_blank" :href="collection.collectionUrl">⭐&nbsp;{{collection.collectionName | ellipsis}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="height: 30px;"></div>
     </div>
 </div>
 
 <!-- 公共 js -->
 <div th:include="common/common_js"></div>
+<div th:include="layout/component"></div>
+
+<script>
+    new Vue({
+        el: '#indexContainer',
+        data: {
+            topCollectionIcon: ['🧡', '💜', '🤍', '💛', '🤎'],
+            topCollectionList: {},
+            topPlanList: {},
+            topSpendList: {},
+            topIncomeList: {},
+            topNoteList: {},
+            totalSpendMoney: 0,
+            totalIncomeMoney: 0,
+        },
+        mounted: function () {
+            this.refreshInit();
+        },
+        filters: {
+            ellipsisMoney(value) {
+                if (!value) return '';
+                if (value.length > 40) {
+                    return value.slice(0, 40) + '...'
+                }
+                return value
+            },
+            ellipsisBalance(value) {
+                if (!value) return '';
+                return Number(value).toFixed(2);
+            },
+            ellipsis(value) {
+                if (!value) return '';
+                if (value.length > 16) {
+                    return value.slice(0, 16) + '...'
+                }
+                return value
+            }
+        },
+        methods: {
+            refreshInit() {
+                let _this = this;
+                _this.refreshTopCollection();
+                _this.refreshTopPLan();
+                _this.refreshTopSpend();
+                _this.refreshTopIncome();
+                _this.refreshTopNote();
+            },
+            refreshTopCollection() {
+                let _this = this;
+                let url = "/topCollection";
+                commonUtil.ajax(url, {}, function (res) {
+                    _this.topCollectionList = res.data.topCollectionList;
+                })
+            },
+            refreshTopPLan() {
+                let _this = this;
+                let url = "/topPlan";
+                commonUtil.ajax(url, {}, function (res) {
+                    _this.topPlanList = res.data.topPlanList;
+                })
+            },
+            refreshTopSpend() {
+                let _this = this;
+                let url = "/topSpend";
+                commonUtil.ajax(url, {}, function (res) {
+                    _this.topSpendList = res.data.topSpendList;
+                    _this.totalSpendMoney = res.data.totalSpendMoney;
+                })
+            },
+            refreshTopIncome() {
+                let _this = this;
+                let url = "/topIncome";
+                commonUtil.ajax(url, {}, function (res) {
+                    _this.topIncomeList = res.data.topIncomeList;
+                    _this.totalIncomeMoney = res.data.totalIncomeMoney;
+                })
+            },
+            refreshTopNote() {
+                let _this = this;
+                let url = "/topNote";
+                commonUtil.ajax(url, {}, function (res) {
+                    _this.topNoteList = res.data.topNoteList;
+                })
+            },
+            openConfirmFinish(planId) {
+                // console.log(componentVm.confirm("完成确认", "是否完成该计划？"))
+                let _this = this;
+                if (confirm("是否完成该计划？")) {
+                    commonUtil.ajax("/completePlan", {'planId': planId}, function (res) {
+                        if (res && res.value) {
+                            Qmsg.success(res.message);
+                        }
+                        _this.refreshTopPLan();
+                    })
+                }
+            }
+        }
+    })
+
+</script>
 
 </body>
 

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>收藏分类</title>
+    <!-- 公共 css -->
+    <link th:replace="common/common_css"/>
+</head>
+<body>
+<div class="page-container">
+    <div th:replace="layout/sidebar"></div>
+    <div th:replace="layout/topMenu"></div>
+
+    <!-- 内容区域 -->
+    <div id="userContainer" class="container-fluid">
+        <div th:replace="pageedit/user/useradd"></div>
+
+        <div class="row comm-operate">
+            <button class="btn btn-outline-primary btn-sm" @click="openUserAdd()"><i class="fa fa-plus-square"></i>&nbsp;
+                添加用户
+            </button>
+        </div>
+
+        <form class="form-inline form-search " action="userList">
+            <div class="form-group col-sm-3 ">
+                <label for="realName" class="col-form-label ">用户姓名:</label>
+                <input type="text" class="form-control form-control-sm" id="realName" placeholder="">
+            </div>
+            <div class="form-group col-sm-3 ">
+                <label for="userName" class="col-form-label ">用户名称:</label>
+                <input type="text" class="form-control form-control-sm" id="userName" placeholder="">
+            </div>
+            <div class="form-group col-sm-2 ">
+                <button type="submit" class="btn btn-outline-primary btn-sm">搜索</button>
+            </div>
+        </form>
+
+        <table class="table table-hover table-striped comm-table">
+            <thead class="thead-dark">
+            <tr>
+                <th>序号</th>
+                <th>姓名</th>
+                <th>用户名称</th>
+                <th>性别</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(user, index) in userList">
+                <th>{{index + 1}}</th>
+                <th>{{user.realname}}</th>
+                <th>{{user.username}}</th>
+                <th>{{user.sex == 0 ? '女' : '男' }}</th>
+                <th>
+                    <a href="#" title="修改"><i class="fa fa-pencil"></i></a>
+                    <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- 公共 js -->
+<div th:replace="common/common_js"></div>
+<script type="text/javascript" src="/js/pages/user.js"></script>
+</body>
+</html>

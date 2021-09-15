@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>笔记</title>
+    <!-- 公共 css -->
+    <link th:replace="common/common_css"/>
+</head>
+<body>
+<div class="page-container ">
+    <div th:replace="layout/sidebar"></div>
+    <div th:replace="layout/topMenu"></div>
+
+    <!-- 内容区域 -->
+    <div class="container-fluid">
+        <div id="noteContainer">
+            <div th:replace="pageedit/note/noteadd"></div>
+
+            <div class="row comm-operate">
+                <button class="btn btn-outline-primary btn-sm" @click="openNoteAdd()"><i class="fa fa-plus-square"></i>&nbsp;
+                    新增笔记
+                </button>
+                <!--<a class="btn btn-outline-primary btn-sm" href="/note/goMdNoteAdd" target="_blank"><i class="fa fa-plus-square"></i>&nbsp;-->
+                <!--    新增MD笔记-->
+                <!--</a>-->
+            </div>
+            <form class="form-search" onsubmit="return false;">
+                <div class="row form-inline">
+                    <div class="form-group col-md-3">
+                        <label for="noteName" class="col-form-label ">笔记名称:</label>
+                        <input type="text" class="form-control form-control-sm" id="noteName" v-model="noteQuery.noteName" placeholder="" autocomplete="off"
+                               @keyup.enter="refreshNoteList()">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label style="width: 20%;">笔记分类:</label>
+                        <div style="width: 78%; margin: 0px; padding: 0px;text-align: left;">
+                            <treeselect style="text-align: left;" v-model="noteQuery.noteCatId" :multiple="false" :options="noteCatTree"
+                                        placeholder="笔记分类" :always-open="false"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="noteContent" class="col-form-label ">笔记内容:</label>
+                        <input type="text" class="form-control form-control-sm" id="noteContent" v-model="noteQuery.noteContent" placeholder="" autocomplete="off"
+                               @keyup.enter="refreshNoteList()">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshNoteList()">搜索</button>
+                    </div>
+                </div>
+            </form>
+
+            <table class="table table-hover table-striped comm-table">
+                <thead class="thead-dark">
+                <tr>
+                    <th width="60">序号</th>
+                    <th width="180">笔记名称</th>
+                    <th width="100">笔记分类</th>
+                    <!--<th width="200">笔记内容</th>-->
+                    <th width="100">记录日期</th>
+                    <th width="60">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(note, index) in noteList">
+                    <th>{{index + 1}}</th>
+                    <th>{{note.noteName}}</th>
+                    <th>{{note.noteCatName}}</th>
+                    <!--<th :title="note.noteContent">{{note.noteContent | ellipsis}}</th>-->
+                    <th>{{note.createDtStr}}</th>
+                    <th class="table-operate">
+                        <a href="#" title="修改" @click="openNoteEdit(note.noteId)"><i class="fa fa-pencil"></i></a>
+                        <a href="javascript:void(0);" title="查看" @click="openNoteDetail(note.noteId)"><i class="fa fa-search"></i></a>
+                        <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- 用于分页拼接条件参数 -->
+            <form id="queryForm">
+                <input hidden name="noteName" v-model="noteQuery.noteName">
+                <input hidden name="noteCatId" v-model="noteQuery.noteCatId">
+                <input hidden name="noteMoney" v-model="noteQuery.noteMoney">
+                <input hidden name="noteStartDate" v-model="noteQuery.noteStartDate">
+                <input hidden name="noteEndDate" v-model="noteQuery.noteEndDate">
+                <input hidden name="noteContent" v-model="noteQuery.noteContent">
+            </form>
+        </div>
+        <div th:include="common/common_js"></div>
+        <div th:replace="layout/pagnation"></div>
+    </div>
+</div>
+
+<!-- 公共 js -->
+<!--<div th:include="common/common_js"></div>-->
+<script type="text/javascript" src="/js/pages/note.js"></script>
+<script>
+
+</script>
+</body>
+</html>

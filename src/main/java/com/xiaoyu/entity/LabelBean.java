@@ -1,5 +1,6 @@
 package com.xiaoyu.entity;
 
+import com.xiaoyu.common.Pagination;
 import lombok.Data;
 
 import java.util.Date;
@@ -8,7 +9,7 @@ import java.util.Date;
  * 笔记标签
  */
 @Data
-public class LabelBean {
+public class LabelBean extends Pagination {
     private long labelId; // 标签主键
     private String labelName; // 标签名称
     private int useCount; // 使用数量

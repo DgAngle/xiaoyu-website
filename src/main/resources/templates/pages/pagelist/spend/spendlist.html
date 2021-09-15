@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>消费</title>
+    <!-- 公共 css -->
+    <link th:replace="common/common_css"/>
+    <link rel="stylesheet" href="/css/pages/spend.css"/>
+</head>
+<body>
+<div class="page-container ">
+    <div th:replace="layout/sidebar"></div>
+    <div th:replace="layout/topMenu"></div>
+
+    <!-- 内容区域 -->
+    <div class="container-fluid">
+        <div id="spendContainer">
+            <div th:replace="pageedit/spend/spendadd"></div>
+
+            <div class="row comm-operate">
+                <button class="btn btn-outline-primary btn-sm" @click="openSpendAdd()"><i class="fa fa-plus-square"></i>&nbsp;
+                    新增消费
+                </button>
+            </div>
+            <form class="form-search" onsubmit="return false;">
+                <div class="row form-inline">
+                    <div class="form-group col-md-3">
+                        <label for="spendName" class="col-form-label ">消费名称:</label>
+                        <input type="text" class="form-control form-control-sm" id="spendName" v-model="spendQuery.spendName" placeholder="" autocomplete="off"
+                               @keyup.enter="refreshSpendList()">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="spendCatName">消费分类:</label>
+                        <select class="form-control form-control-sm" id="spendCatName" v-model="spendQuery.spendCatId">
+                            <option value="-1">全部</option>
+                            <option v-for="spendCat in spendCatList" :value="spendCat.spendCatId">{{spendCat.spendCatName}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="spendMoney">消费金额:</label>
+                        <select class="form-control form-control-sm" id="spendMoney" v-model="spendQuery.spendMoney">
+                            <option v-for="spendMoney in spendMoneyArray" :value="spendMoney.value">{{spendMoney.text}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshSpendList()">搜索</button>
+                        <button type="button" class="btn btn-outline-info btn-sm" style="margin-left: 5px;" data-toggle="collapse" data-target="#collapseSpend" aria-expanded="false"
+                                aria-controls="collapseSpend">
+                            高级搜索&nbsp;&nbsp;<i class="fa fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="collapse" id="collapseSpend">
+                    <div class="row form-search form-inline">
+                        <div class="form-group col-md-3">
+                            <label for="spendStartDate" class="col-form-label ">开始日期:</label>
+                            <input type="text" class="form-control form-control-sm datetime-search" id="spendStartDate" v-model="spendQuery.spendStartDate" placeholder="" autocomplete="off">
+                            <a class="date-clear" @click="spendQuery.spendStartDate = null;">
+                                <i class="fa fa-times-circle-o"></i>
+                            </a>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="spendEndDate" class="col-form-label ">结束日期:</label>
+                            <input type="text" class="form-control form-control-sm datetime-search" id="spendEndDate" v-model="spendQuery.spendEndDate" placeholder="" autocomplete="off">
+                            <a class="date-clear" @click="spendQuery.spendEndDate = null;">
+                                <i class="fa fa-times-circle-o"></i>
+                            </a>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="spendContent" class="col-form-label ">消费内容:</label>
+                            <input type="text" class="form-control form-control-sm" id="spendContent" v-model="spendQuery.spendContent" placeholder="" autocomplete="off"
+                                   @keyup.enter="refreshSpendList()">
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="col-md-3 spend-total">合计消费：{{totalSpendMoney}} 元</div>
+            </div>
+
+            <table class="table table-hover table-striped comm-table">
+                <thead class="thead-dark">
+                <tr>
+                    <th width="60">序号</th>
+                    <th width="180">消费名称</th>
+                    <th width="100">消费金额 (元)</th>
+                    <th width="100">消费分类</th>
+                    <th width="100">消费日期</th>
+                    <th width="200">消费内容</th>
+                    <th width="60">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(spend, index) in spendList">
+                    <th>{{index + 1}}</th>
+                    <th>{{spend.spendName}}</th>
+                    <th>{{spend.spendMoney}}</th>
+                    <th>{{spend.spendCatName}}</th>
+                    <th>{{spend.spendDateStr}}</th>
+                    <th :title="spend.spendContent">{{spend.spendContent | ellipsis}}</th>
+                    <th class="table-operate">
+                        <a href="#" title="修改" @click="openSpendEdit(spend.spendId)"><i class="fa fa-pencil"></i></a>
+                        <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- 用于分页拼接条件参数 -->
+            <form id="queryForm">
+                <input hidden name="spendName" v-model="spendQuery.spendName">
+                <input hidden name="spendCatId" v-model="spendQuery.spendCatId">
+                <input hidden name="spendMoney" v-model="spendQuery.spendMoney">
+                <input hidden name="spendStartDate" v-model="spendQuery.spendStartDate">
+                <input hidden name="spendEndDate" v-model="spendQuery.spendEndDate">
+                <input hidden name="spendContent" v-model="spendQuery.spendContent">
+            </form>
+        </div>
+        <div th:include="common/common_js"></div>
+        <div th:replace="layout/pagnation"></div>
+    </div>
+</div>
+
+<!-- 公共 js -->
+<!--<div th:include="common/common_js"></div>-->
+<script type="text/javascript" src="/js/pages/spend.js"></script>
+</body>
+</html>

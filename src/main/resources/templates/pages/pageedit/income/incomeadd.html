@@ -1,0 +1,50 @@
+<!-- catAddModel -->
+<div class="modal fade" id="incomeModal" tabindex="-1" aria-labelledby="incomeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="incomeModalLabel">{{modalName}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="incomeNameEdit"><span style="color: red">*</span>收入名称：</label>
+                        <input type="text" class="form-control" id="incomeNameEdit" aria-describedby="emailHelp" v-model="incomeForm.incomeName" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="incomeMoneyEdit"><span style="color: red">*</span>收入金额：</label>
+                        <input type="text" class="form-control" id="incomeMoneyEdit" aria-describedby="emailHelp" v-model="incomeForm.incomeMoney" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="incomeCatEdit"><span style="color: red">*</span>收入分类：</label>
+                        <select class="form-control form-select-default" id="incomeCatEdit" v-model="incomeForm.incomeCatId">
+                            <option v-for="incomeCat in incomeCatList" :value="incomeCat.incomeCatId">{{incomeCat.incomeCatName}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group line">
+                        <label for="incomeDateEdit"><span style="color: red">*</span>收入时间：</label>
+                        <input type="text" class="form-control datetime" id="incomeDateEdit" v-model="incomeForm.incomeDate" autoClear autocomplete="off">
+                        <a class="date-line-clear" @click="incomeForm.incomeDate = null;">
+                            <i class="fa fa-times-circle-o"></i>
+                        </a>
+                    </div>
+                    <div class="form-group">
+                        <label for="incomeContentEdit"><span style="color: red">*</span>收入内容：</label>
+                        <textarea type="text" class="form-control" id="incomeContentEdit" v-model="incomeForm.incomeContent" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="remarkEdit"><span style="color: red"></span>备注：</label>
+                        <textarea class="form-control" id="remarkEdit" v-model="incomeForm.remark" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" @click="saveIncome()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>

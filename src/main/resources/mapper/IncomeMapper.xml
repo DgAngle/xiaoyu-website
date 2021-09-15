@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoyu.dao.IncomeMapper">
+
+    <!-- ************************* 消费分类 ************************* -->
+    <sql id="income_cat_query_condition">
+        <if test="incomeCatName != null and incomeCatName != ''">
+            and incomeCatName like concat('%',concat(#{incomeCatName},'%'))
+        </if>
+    </sql>
+    <sql id="income_cat_update_condition">
+        <set>
+            <if test="incomeCatName != null and incomeCatName != ''">
+                incomeCatName = #{incomeCatName},
+            </if>
+            <if test="orderNum >= 0">
+                orderNum = #{orderNum},
+            </if>
+        </set>
+    </sql>
+
+    <select id="queryIncomeCatList" parameterType="incomeCatBean" resultType="incomeCatBean">
+        select *
+        from income_cat
+        where 1=1
+        <include refid="income_cat_query_condition"></include>
+        order by orderNum desc
+        limit #{start}, #{pageCount}
+    </select>
+
+    <insert id="addIncomeCat" parameterType="incomeCatBean">
+        insert into income_cat(incomeCatName, orderNum, createDt, createBy)
+        values (#{incomeCatName}, #{orderNum}, #{createDt}, #{createBy})
+    </insert>
+
+    <select id="queryIncomeCatDetailById" resultType="incomeCatBean">
+        select incomeCatId, incomeCatName, orderNum
+        from income_cat
+        where incomeCatId = #{incomeCatId}
+    </select>
+
+    <update id="updateIncomeCat" parameterType="incomeCatBean">
+        update income_cat
+        <include refid="income_cat_update_condition"></include>
+        where incomeCatId = #{incomeCatId}
+    </update>
+
+    <delete id="deleteIncomeCatById">
+        delete
+        from income_cat
+        where incomeCatId = #{incomeCatId}
+    </delete>
+
+    <!-- ************************* 消费主表 ************************* -->
+    <sql id="income_query_condition">
+        <if test="incomeName != null and incomeName != ''">
+            and sd.incomeName like concat('%',concat(#{incomeName},'%'))
+        </if>
+        <if test="incomeCatId != null and incomeCatId != -1 ">
+            and sd.incomeCatId = #{incomeCatId}
+        </if>
+        <if test="incomeMoney != null and incomeMoney != -1">
+            <choose>
+                <when test="incomeMoney != null and incomeMoney != -1 and incomeMoney == 10001">
+                    and sd.incomeMoney >= 10000
+                </when>
+                <otherwise>
+                    and sd.incomeMoney <![CDATA[ <= ]]> #{incomeMoney}
+                </otherwise>
+            </choose>
+        </if>
+
+        <if test="incomeContent != null and incomeContent != ''">
+            and sd.incomeContent like concat('%',concat(#{incomeContent},'%'))
+        </if>
+        <if test="incomeStartDate != null and incomeStartDate != ''">
+            and sd.incomeDate <![CDATA[ >= ]]> #{incomeStartDate}
+        </if>
+        <if test="incomeEndDate != null and incomeEndDate != ''">
+            and sd.incomeDate <![CDATA[ <= ]]> #{incomeEndDate}
+        </if>
+    </sql>
+    <sql id="income_update_condition">
+        <set>
+            <if test="incomeName != null and incomeName != ''">
+                incomeName = #{incomeName},
+            </if>
+            <if test="incomeCatId > 0">
+                incomeCatId = #{incomeCatId},
+            </if>
+            <if test="incomeMoney != null and incomeMoney != ''">
+                incomeMoney = #{incomeMoney},
+            </if>
+            <if test="incomeDate != null">
+                incomeDate = #{incomeDate},
+            </if>
+            incomeContent = #{incomeContent},
+            remark = #{remark},
+        </set>
+    </sql>
+
+    <select id="queryIncomeListCount" parameterType="incomeQuery" resultType="java.lang.Integer">
+        select count(1)
+        from income sd
+        where 1=1
+        <include refid="income_query_condition"></include>
+    </select>
+
+    <select id="queryIncomeList" parameterType="incomeQuery" resultType="incomeVo">
+        select sd.incomeId,
+        sd.incomeName,
+        sd.incomeCatId,
+        sd.incomeMoney,
+        sd.incomeDate,
+        sd.incomeContent,
+        sd.createDt,
+        sd.createBy,
+        sd.remark,
+        sdt.incomeCatName
+        from income sd
+        inner join income_cat sdt on sd.incomeCatId = sdt.incomeCatId
+        where 1=1
+        <include refid="income_query_condition"></include>
+        order by sd.createDt desc limit #{start}, #{pageCount}
+    </select>
+
+    <insert id="addIncome" parameterType="incomeBean">
+        insert into income(incomeId, incomeName, incomeCatId, incomeMoney, incomeDate, incomeContent, createDt, createBy, remark)
+        values (#{incomeId}, #{incomeName}, #{incomeCatId}, #{incomeMoney}, #{incomeDate}, #{incomeContent}, #{createDt}, #{createBy}, #{remark})
+    </insert>
+
+    <select id="queryIncomeDetailById" resultType="incomeVo">
+        select incomeId,
+               incomeName,
+               incomeCatId,
+               incomeMoney,
+               incomeDate,
+               incomeContent,
+               remark
+        from income
+        where incomeId = #{incomeId}
+    </select>
+
+    <update id="updateIncome" parameterType="incomeBean">
+        update income
+        <include refid="income_update_condition"></include>
+        where incomeId = #{incomeId}
+    </update>
+
+    <delete id="deleteIncomeById">
+        delete
+        from income
+        where incomeId = #{incomeId}
+    </delete>
+
+    <select id="queryTotalIncomeMoney" parameterType="incomeBean" resultType="java.math.BigDecimal">
+        select ifnull(sum(sd.incomeMoney), 0)
+        from income sd
+        where 1 = 1
+        <include refid="income_query_condition"></include>
+    </select>
+
+</mapper>

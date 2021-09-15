@@ -12,6 +12,7 @@
 <configuration>
     <typeAliases>
         <package name="com.xiaoyu.entity"/>
+        <package name="com.xiaoyu.vo.basevo"/>
         <!--<typeAlias type="com.yunkai.bookinghistory.BookingHistoryQuery" alias="bookingHistoryQuery"/>-->
     </typeAliases>
 </configuration>

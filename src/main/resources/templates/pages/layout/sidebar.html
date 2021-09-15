@@ -2,7 +2,7 @@
 <div class="sidebar-menu">
     <div class="sidebar-header">
         <div class="logo">
-            <a href="index.html">
+            <a href="/index">
                 <!-- <img src="images/icon/logo.png" alt="logo"> -->
                 <h3 style="color: #FFFFFF;">小羽网站</h3>
             </a>
@@ -13,21 +13,81 @@
             <nav>
                 <ul class="metismenu" id="menu">
                     <li>
-                        <a href="/index"><i class="ti-dashboard"></i><span>主页</span></a>
+                        <!-- ti-dashboard -->
+                        <a href="/index"><i class="fa fa-home"></i><span>个人主页</span></a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>系统管理</span></a>
+                        <!-- ti-dashboard -->
+                        <!--<a href="/chart"><i class="fa fa-bar-chart"></i><span>统计分析</span></a>-->
+                    </li>
+                    <li>
+                        <!-- ti-layout-sidebar-left -->
+                        <a href="javascript:void(0)" aria-expanded="true"><i
+                                class="fa fa-cogs"></i><span>系统管理</span></a>
                         <ul class="collapse">
-                            <li id="userList"><a href="/user/userList">用户管理</a></li>
-                            <!-- <li id="menuConfig"><a href="/menuConfig">菜单配置</a></li>-->
-                            <!-- <li id="systemConfig"><a href="index3-horizontalmenu.html">系统配置</a></li>-->
+                            <li id="userList"><a href="/user/goList">用户管理</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span>笔记管理</span></a>
+                        <!-- ti-pie-chart -->
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-pencil-square-o"></i><span>笔记管理</span></a>
                         <ul class="collapse">
-                            <li id="noteList"><a href="/note/noteList">笔记列表</a></li>
-                            <li id="noteCatList"><a href="/noteCat/noteCatList">笔记分类</a></li>
+                            <li id="noteCatList"><a href="/note/cat/goList">笔记分类</a></li>
+                            <li id="noteList"><a href="/note/goList">笔记列表</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-star"></i><span>收藏管理</span></a>
+                        <ul class="collapse">
+                            <li id="collectionCatList"><a href="/collect/cat/goList">收藏分类</a></li>
+                            <li id="collectionList"><a href="/collect/goList">收藏列表</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-tasks"></i><span>计划管理</span></a>
+                        <ul class="collapse">
+                            <li id="planCatList"><a href="/plan/cat/goList">计划分类</a></li>
+                            <li id="planList"><a href="/plan/goList">计划列表</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-credit-card"></i><span>消费管理</span></a>
+                        <ul class="collapse">
+                            <li id="spendCatList"><a href="/spend/cat/goList">消费分类</a></li>
+                            <li id="spendList"><a href="/spend/goList">消费列表</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-key"></i><span>收入管理</span></a>
+                        <ul class="collapse">
+                            <li id="incomeCatList"><a href="/income/cat/goList">收入分类</a></li>
+                            <li id="incomeList"><a href="/income/goList">收入列表</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-graduation-cap"></i><span>考试管理</span></a>
+                        <ul class="collapse">
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><span>试题库</span></a>
+                                <ul class="collapse">
+                                    <li><a href="javascript:void(0);">题目分类</a></li>
+                                    <li><a href="javascript:void(0);">题目列表</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><span>试卷库</span></a>
+                                <ul class="collapse">
+                                    <li><a href="javascript:void(0)">试卷分类</a></li>
+                                    <li><a href="javascript:void(0)">试卷列表</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><span>答卷库</span></a>
+                                <ul class="collapse">
+                                    <li><a href="javascript:void(0)">答卷分类</a></li>
+                                    <li><a href="javascript:void(0)">答卷列表</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                 </ul>

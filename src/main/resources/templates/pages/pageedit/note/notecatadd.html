@@ -1,0 +1,47 @@
+<!-- catAddModel -->
+<div class="modal fade" id="noteCatModal" tabindex="-1" aria-labelledby="noteCatModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="noteCatModalLabel">{{modalName}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="noteCatNameEdit"><span style="color: red">*</span>笔记分类名称：</label>
+                        <input type="text" class="form-control" id="noteCatNameEdit" aria-describedby="emailHelp"
+                               v-model="noteCatForm.noteCatName" autocomplete="off">
+                    </div>
+                    <!--<div class="form-group">-->
+                    <!--    <label for="parentNoteCatEdit"><span style="color: red"></span>所属分类：</label>-->
+                    <!--    <select class="form-control form-select-default" id="parentNoteCatEdit"-->
+                    <!--            v-model="parentNoteCatIdAndNum">-->
+                    <!--        <option :value="';'"></option>-->
+                    <!--        <option v-for="parentNoteCat in parentNoteCatList"-->
+                    <!--                :value="parentNoteCat.noteCatId+';'+parentNoteCat.noteCatNum">-->
+                    <!--            {{parentNoteCat.noteCatName}}-->
+                    <!--        </option>-->
+                    <!--    </select>-->
+                    <!--</div>-->
+                    <div class="form-group">
+                        <label><span style="color: red"></span>所属分类：</label>
+                        <treeselect style="text-align: left;" v-model="noteCatForm.parentNoteCatId" :multiple="false" :options="noteCatTree"
+                                    placeholder="" :always-open="false"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="orderNumEdit"><span style="color: red"></span>排序号：</label>
+                        <input type="text" class="form-control" id="orderNumEdit" v-model="noteCatForm.orderNum"
+                               autocomplete="off">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" @click="saveNoteCat()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>

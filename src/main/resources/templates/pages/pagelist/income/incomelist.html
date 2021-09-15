@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>收入</title>
+    <!-- 公共 css -->
+    <link th:replace="common/common_css"/>
+    <link rel="stylesheet" href="/css/pages/income.css"/>
+</head>
+<body>
+<div class="page-container ">
+    <div th:replace="layout/sidebar"></div>
+    <div th:replace="layout/topMenu"></div>
+
+    <!-- 内容区域 -->
+    <div class="container-fluid">
+        <div id="incomeContainer">
+            <div th:replace="pageedit/income/incomeadd"></div>
+
+            <div class="row comm-operate">
+                <button class="btn btn-outline-primary btn-sm" @click="openIncomeAdd()"><i class="fa fa-plus-square"></i>&nbsp;
+                    新增收入
+                </button>
+            </div>
+            <form class="form-search" onsubmit="return false;">
+                <div class="row form-inline">
+                    <div class="form-group col-md-3">
+                        <label for="incomeName" class="col-form-label ">收入名称:</label>
+                        <input type="text" class="form-control form-control-sm" id="incomeName" v-model="incomeQuery.incomeName" placeholder="" autocomplete="off"
+                               @keyup.enter="refreshIncomeList()">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="incomeCatName">收入分类:</label>
+                        <select class="form-control form-control-sm" id="incomeCatName" v-model="incomeQuery.incomeCatId">
+                            <option value="-1">全部</option>
+                            <option v-for="incomeCat in incomeCatList" :value="incomeCat.incomeCatId">{{incomeCat.incomeCatName}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="incomeMoney">收入金额:</label>
+                        <select class="form-control form-control-sm" id="incomeMoney" v-model="incomeQuery.incomeMoney">
+                            <option v-for="incomeMoney in incomeMoneyArray" :value="incomeMoney.value">{{incomeMoney.text}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshIncomeList()">搜索</button>
+                        <button type="button" class="btn btn-outline-info btn-sm" style="margin-left: 5px;" data-toggle="collapse" data-target="#collapseIncome" aria-expanded="false"
+                                aria-controls="collapseIncome">
+                            高级搜索&nbsp;&nbsp;<i class="fa fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="collapse" id="collapseIncome">
+                    <div class="row form-search form-inline">
+                        <div class="form-group col-md-3">
+                            <label for="incomeStartDate" class="col-form-label ">开始日期:</label>
+                            <input type="text" class="form-control form-control-sm datetime-search" id="incomeStartDate" v-model="incomeQuery.incomeStartDate" placeholder="" autocomplete="off">
+                            <a class="date-clear" @click="incomeQuery.incomeStartDate = null;">
+                                <i class="fa fa-times-circle-o"></i>
+                            </a>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="incomeEndDate" class="col-form-label ">结束日期:</label>
+                            <input type="text" class="form-control form-control-sm datetime-search" id="incomeEndDate" v-model="incomeQuery.incomeEndDate" placeholder="" autocomplete="off">
+                            <a class="date-clear" @click="incomeQuery.incomeEndDate = null;">
+                                <i class="fa fa-times-circle-o"></i>
+                            </a>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="incomeContent" class="col-form-label ">收入内容:</label>
+                            <input type="text" class="form-control form-control-sm" id="incomeContent" v-model="incomeQuery.incomeContent" placeholder="" autocomplete="off"
+                                   @keyup.enter="refreshIncomeList()">
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="col-md-3 income-total">合计收入：{{totalIncomeMoney}} 元</div>
+            </div>
+
+            <table class="table table-hover table-striped comm-table">
+                <thead class="thead-dark">
+                <tr>
+                    <th width="60">序号</th>
+                    <th width="180">收入名称</th>
+                    <th width="100">收入金额 (元)</th>
+                    <th width="100">收入分类</th>
+                    <th width="100">收入日期</th>
+                    <th width="200">收入内容</th>
+                    <th width="60">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(income, index) in incomeList">
+                    <th>{{index + 1}}</th>
+                    <th>{{income.incomeName}}</th>
+                    <th>{{income.incomeMoney}}</th>
+                    <th>{{income.incomeCatName}}</th>
+                    <th>{{income.incomeDateStr}}</th>
+                    <th :title="income.incomeContent">{{income.incomeContent | ellipsis}}</th>
+                    <th class="table-operate">
+                        <a href="#" title="修改" @click="openIncomeEdit(income.incomeId)"><i class="fa fa-pencil"></i></a>
+                        <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- 用于分页拼接条件参数 -->
+            <form id="queryForm">
+                <input hidden name="incomeName" v-model="incomeQuery.incomeName">
+                <input hidden name="incomeCatId" v-model="incomeQuery.incomeCatId">
+                <input hidden name="incomeMoney" v-model="incomeQuery.incomeMoney">
+                <input hidden name="incomeStartDate" v-model="incomeQuery.incomeStartDate">
+                <input hidden name="incomeEndDate" v-model="incomeQuery.incomeEndDate">
+                <input hidden name="incomeContent" v-model="incomeQuery.incomeContent">
+            </form>
+        </div>
+        <div th:include="common/common_js"></div>
+        <div th:replace="layout/pagnation"></div>
+    </div>
+</div>
+
+<!-- 公共 js -->
+<!--<div th:include="common/common_js"></div>-->
+<script type="text/javascript" src="/js/pages/income.js"></script>
+</body>
+</html>

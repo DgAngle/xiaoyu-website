@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoyu.dao.CollectionMapper">
+
+    <!-- ************************* 收藏分类 ************************* -->
+    <sql id="collection_cat_query_condition">
+        <if test="collectionCatName != null and collectionCatName != ''">
+            and collectionCatName like concat('%',concat(#{collectionCatName},'%'))
+        </if>
+    </sql>
+    <sql id="collection_cat_update_condition">
+        <set>
+            <if test="collectionCatName != null and collectionCatName != ''">
+                collectionCatName = #{collectionCatName},
+            </if>
+            <if test="orderNum >= 0">
+                orderNum = #{orderNum},
+            </if>
+        </set>
+    </sql>
+
+    <select id="queryCollectionCatList" parameterType="collectionCatBean" resultType="collectionCatBean">
+        select *
+        from collection_cat
+        where 1=1
+        <include refid="collection_cat_query_condition"></include>
+        order by orderNum desc
+        limit #{start}, #{pageCount}
+    </select>
+
+    <insert id="addCollectionCat" parameterType="collectionCatBean">
+        insert into collection_cat(collectionCatName, orderNum, createDt, createBy)
+        values (#{collectionCatName}, #{orderNum}, #{createDt}, #{createBy})
+    </insert>
+
+    <select id="queryCollectionCatDetailById" resultType="collectionCatBean">
+        select collectionCatId, collectionCatName, orderNum
+        from collection_cat
+        where collectionCatId = #{collectionCatId}
+    </select>
+
+    <update id="updateCollectionCat" parameterType="collectionCatBean">
+        update collection_cat
+        <include refid="collection_cat_update_condition"></include>
+        where collectionCatId = #{collectionCatId}
+    </update>
+
+    <delete id="deleteCollectionCatById">
+        delete
+        from collection_cat
+        where collectionCatId = #{collectionCatId}
+    </delete>
+
+    <!-- ************************* 收藏主表 ************************* -->
+    <sql id="collection_query_condition">
+        <if test="collectionName != null and collectionName != ''">
+            and cn.collectionName like concat('%',concat(#{collectionName},'%'))
+        </if>
+        <if test="collectionCatId != null and collectionCatId != -1 ">
+            and cn.collectionCatId = #{collectionCatId}
+        </if>
+    </sql>
+    <sql id="collection_update_condition">
+        <set>
+            <if test="collectionName != null and collectionName != ''">
+                collectionName = #{collectionName},
+            </if>
+            <if test="collectionUrl != null and collectionUrl != ''">
+                collectionUrl = #{collectionUrl},
+            </if>
+            <if test="collectionCatId > 0">
+                collectionCatId = #{collectionCatId},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+        </set>
+    </sql>
+
+    <select id="queryCollectionListCount" parameterType="collectionBean" resultType="java.lang.Integer">
+        select count(1)
+        from collection cn
+        where 1=1
+        <include refid="collection_query_condition"></include>
+    </select>
+
+    <select id="queryCollectionList" parameterType="collectionBean" resultType="collectionVo">
+        select cn.collectionId,
+        cn.collectionName,
+        cn.collectionUrl,
+        cn.collectionCatId,
+        cn.remark,
+        cn.createDt,
+        cn.createBy,
+        ccn.collectionCatName
+        from collection cn
+        inner join collection_cat ccn on cn.collectionCatId = ccn.collectionCatId
+        where 1=1
+        <include refid="collection_query_condition"></include>
+        order by ccn.orderNum desc, cn.collectionCatId, cn.createDt desc limit #{start}, #{pageCount}
+    </select>
+
+    <insert id="addCollection" parameterType="collectionBean">
+        insert into collection(collectionName, collectionUrl, collectionCatId, remark, createDt, createBy)
+        values (#{collectionName}, #{collectionUrl}, #{collectionCatId}, #{remark}, #{createDt}, #{createBy})
+    </insert>
+
+    <select id="queryCollectionDetailById" resultType="collectionBean">
+        select collectionId, collectionName, collectionUrl, collectionCatId, remark
+        from collection
+        where collectionId = #{collectionId}
+    </select>
+
+    <update id="updateCollection" parameterType="collectionBean">
+        update collection
+        <include refid="collection_update_condition"></include>
+        where collectionId = #{collectionId}
+    </update>
+
+    <delete id="deleteCollectionById">
+        delete
+        from collection
+        where collectionId = #{collectionId}
+    </delete>
+
+</mapper>
