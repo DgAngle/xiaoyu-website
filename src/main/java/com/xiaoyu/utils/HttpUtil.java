@@ -21,7 +21,6 @@ import java.io.IOException;
  */
 public class HttpUtil {
 
-
     /**
      * 发送post请求
      *
@@ -80,4 +79,25 @@ public class HttpUtil {
         }
         return body;
     }
+
+    /**
+     * TODO MD5加密
+     *
+     * @param str 需要加密的字符串
+     * @return 解密后的结果
+     */
+    public static String MD5Encrypt(String str) {
+        return "";
+    }
+
+    /**
+     * TODO MD5解密
+     *
+     * @param str 需要解密的字符串
+     * @return 解密后的结果
+     */
+    public static String MD5Decrypt(String str) {
+        return "";
+    }
+
 }

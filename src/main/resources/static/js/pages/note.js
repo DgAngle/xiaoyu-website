@@ -58,12 +58,14 @@ let listVm = new Vue({
                 searchReplace: true,
                 // watch: true,      // 关闭实时预览
                 unwatch: true,      // 关闭实时预览
-                tocm : true,
+                tocm: true,
                 htmlDecode: "style,script,iframe|on*", // 开启 HTML 标签解析，为了安全性，默认不开启
-                imageUpload : true,
-                imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                imageUploadURL : "/note/uploadImage",
+                imageUpload: true,
+                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                imageUploadURL: "/note/uploadImage",
                 onload: function () {
+                    // 初始化Markdown截图粘贴插件
+                    initPasteDragImg(_this.editor);
                     // console.log('onload', this);
                     // this.fullscreen();
                     // this.unwatch();
