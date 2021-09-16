@@ -9,13 +9,14 @@ import com.xiaoyu.dao.NoteMapper;
 import com.xiaoyu.entity.NoteBean;
 import com.xiaoyu.entity.NoteCatBean;
 import com.xiaoyu.service.baseservice.NoteService;
+import com.xiaoyu.utils.OssUtil;
 import com.xiaoyu.utils.RCode;
 import com.xiaoyu.utils.StringUtil;
 import com.xiaoyu.vo.basevo.NoteQuery;
 import com.xiaoyu.vo.basevo.NoteVo;
-import com.xiaoyu.vo.topvo.PlanTopVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -196,6 +197,21 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public int deleteNoteById(long noteId) {
         return noteMapper.deleteNoteById(noteId);
+    }
+
+    @Override
+    public JSONObject uploadImage(MultipartFile file) {
+        JSONObject jsonObject = new JSONObject();
+        String imageUrl = OssUtil.uploadImageFile(file);
+        if (StringUtils.isNotBlank(imageUrl)) {
+            jsonObject.put("success", 1);
+            jsonObject.put("message", "上传成功！");
+            jsonObject.put("url", imageUrl);
+        } else {
+            jsonObject.put("success", 0);
+            jsonObject.put("message", "上传失败！");
+        }
+        return jsonObject;
     }
 
 }

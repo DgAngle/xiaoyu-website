@@ -1,5 +1,6 @@
 package com.xiaoyu.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.xiaoyu.common.ListResult;
 import com.xiaoyu.common.Transform;
 import com.xiaoyu.entity.NoteCatBean;
@@ -16,7 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 笔记管理
@@ -137,6 +140,12 @@ public class NoteController {
     @RequestMapping("/goMdNoteView/{id}")
     public String goMdNoteView(@PathVariable("id") long id) {
         return this.note_path + "/notemdview";
+    }
+
+    @RequestMapping("/uploadImage")
+    @ResponseBody
+    public JSONObject uploadImage(@RequestParam("editormd-image-file") MultipartFile file) {
+        return noteService.uploadImage(file);
     }
 
 }

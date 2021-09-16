@@ -60,6 +60,9 @@ let listVm = new Vue({
                 unwatch: true,      // 关闭实时预览
                 tocm : true,
                 htmlDecode: "style,script,iframe|on*", // 开启 HTML 标签解析，为了安全性，默认不开启
+                imageUpload : true,
+                imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                imageUploadURL : "/note/uploadImage",
                 onload: function () {
                     // console.log('onload', this);
                     // this.fullscreen();

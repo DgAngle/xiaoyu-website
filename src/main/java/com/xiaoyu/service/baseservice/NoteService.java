@@ -7,9 +7,9 @@ import com.xiaoyu.entity.NoteBean;
 import com.xiaoyu.entity.NoteCatBean;
 import com.xiaoyu.vo.basevo.NoteQuery;
 import com.xiaoyu.vo.basevo.NoteVo;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Map;
 
 public interface NoteService {
 
@@ -43,4 +43,6 @@ public interface NoteService {
     int updateNote(NoteBean noteBean);
 
     int deleteNoteById(long noteId);
+
+    JSONObject uploadImage(MultipartFile file);
 }
