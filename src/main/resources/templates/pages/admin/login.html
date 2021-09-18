@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>小羽网站</title>
+    <!-- 公共 css -->
+    <link th:include="common/common_css"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* background-color: #fa72a1; */
+            background: linear-gradient(90deg, #f34d86, #f3ea98, #f6a54d, #31e7fc, #7d7ff8);
+            background-size: 800% 300%;
+            animation: mymove 20s ease infinite;
+            -webkit-animation: mymove 20s ease infinite;
+            -moz-animation: mymove 20s ease infinite;
+        }
+
+        @keyframes mymove {
+            0% {
+                background-position: 0% 0%;
+            }
+            50% {
+                background-position: 50% 100%;
+            }
+            100% {
+                background-position: 100% 0%;
+            }
+        }
+
+        /*body {*/
+        /*    margin: 0;*/
+        /*    padding: 0;*/
+        /*    font-family: "montserrat";*/
+        /*    background-image: linear-gradient(125deg, #fcf868, #fcae6a, #f66794, #61e5fa);*/
+        /*    background-size: 800% 300%;*/
+        /*    animation: bganimation 15s infinite;*/
+        /*}*/
+
+        /*@keyframes bganimation {*/
+        /*    0% {*/
+        /*        background-position: 0% 50%;*/
+        /*    }*/
+        /*    50% {*/
+        /*        background-position: 100% 50%;*/
+        /*    }*/
+        /*    100% {*/
+        /*        background-position: 0% 50%;*/
+        /*    }*/
+        /*}*/
+
+        .login-box {
+            background-color: #fcfcfc;;
+            /*position: absolute;*/
+            position: relative;
+            padding: 10px;
+            width: 500px;
+            height: 500px;
+            /*box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);*/
+            box-shadow: 0px 5px 15px rgba(250, 250, 250, 0.5);
+            border-radius: 10px;
+            /*top: 50%;*/
+            left: 50%;
+            transform: translate(-30%, 40%);
+            /*margin-top: 10%;*/
+            /*margin-left: 40%;*/
+            /*margin: 20px;*/
+            /*display: flex;*/
+            justify-content: center;
+            /*align-items: center;*/
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            border-left: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+            transform-style: preserve-3d;
+            /*transform: perspective(800px)*/
+        }
+
+        .login-box:hover {
+            /* box-shadow: 0px 0px 20px rgb(0, 146, 255); */
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .login-title {
+            text-align: center;
+            height: 25%;
+        }
+
+        .login-title h2 {
+            /* ine-height: 160px; */
+            /* color: transparent; */
+            /*设置背景渐变色*/
+            /*background-image: linear-gradient(to right, red, orange, yellow, green, yellow, orange, red, orange, yellow, green, yellow, orange, red);*/
+            /*background-image: linear-gradient(to right, #71dcee, #f5c05f, #fc4b96, #7d7ff8, #71dcee, #f5c05f, #fc4b96, #7d7ff8, #71dcee, #f5c05f, #fc4b96, #6bfc6d);*/
+            background-image: linear-gradient(90deg, #f34d86, #f6f591, #f6a54d, #31e7fc, #7d7ff8);
+            /*chrome私有样式，加前缀，文字显示背景图片*/
+            -webkit-background-clip: text;
+            animation: move 5s infinite;
+            /*文字颜色设为透明*/
+            color: transparent;
+            /*宽度固定*/
+            /*width: 300px;*/
+            line-height: 160px;
+        }
+
+        @keyframes move {
+            0% {
+                background-position: 0 0;
+            }
+            /*50% {*/
+            /*    background-position: 50% 100%;*/
+            /*    !*background-position: -300px -150px;*!*/
+            /*}*/
+            100% {
+                /*宽度固定，如果为百分比背景不会滚动*/
+                /*background-position: 100% 0%;*/
+                background-position: -500px 0;
+            }
+        }
+
+        .login-form {
+            text-align: center;
+            padding: 20px;
+            height: 60%;
+        }
+
+        .login-form form {
+            margin-top: 10px;
+        }
+
+        .login-form form label {
+            text-align: left;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .login-footer {
+            text-align: center;
+            height: 15%;
+        }
+    </style>
+</head>
+<body>
+
+<div id="loginContainer">
+    <div class="login-box">
+        <div class="login-title">
+            <h2>欢迎登录小羽的网站</h2>
+        </div>
+        <div class="login-form">
+            <form>
+                <div class="form-group row">
+                    <label for="username" class="col-sm-3 col-form-label">用户名称：</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="username" placeholder="" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password" class="col-sm-3 col-form-label">用户密码：</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" id="password" placeholder="" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-12" style="margin-top: 20px;">
+                        <!--<button class="btn btn-outline-primary btn-block" style="font-size: 18px;">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>-->
+                        <button class="btn btn-outline-primary btn-block" style="font-size: 18px;">登录</button>
+                        <a class="btn btn-outline-info btn-block" style="font-size: 18px;" href="/register">去注册</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="login-footer"></div>
+    </div>
+
+</div>
+
+<!-- 公共 js -->
+<div th:include="common/common_js"></div>
+<script>
+    new Vue({
+        el: '#loginContainer',
+        data: {}
+    })
+</script>
+</body>
+</html>
