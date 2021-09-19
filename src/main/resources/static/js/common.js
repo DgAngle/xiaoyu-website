@@ -63,7 +63,7 @@ commonUtil.ajax = function (url, data, successCallback) {
         dataType: 'JSON',
         success: successCallback,
         error: function () {
-            alert("error!");
+            // alert("error!");
         }
     })
 }

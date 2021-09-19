@@ -35,4 +35,11 @@ public class UserController {
         return R.success().data("userList", userService.queryUserList(userBean)).data("roleList", roleService.queryRole(new RoleBean()));
     }
 
+    @RequestMapping("/add")
+    @ResponseBody
+    public R add(UserBean userBean) {
+        userService.addUser(userBean);
+        return R.success().data("msg", "添加成功！");
+    }
+
 }

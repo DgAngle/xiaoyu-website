@@ -24,8 +24,13 @@ public class LoginConfig implements WebMvcConfigurer {
                 "/"
                 , "/goLogin"
                 , "/goRegister"
+                , "/user/add"
+                , "/login/doLogin"
                 , "/static/**"
                 , "/plugs/**"
+                , "/js/**"
+                , "/**.js"
+                , "/**.css"
         );
 
     }

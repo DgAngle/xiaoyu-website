@@ -1,7 +1,9 @@
 package com.xiaoyu.controller;
 
 import com.xiaoyu.entity.UserBean;
+import com.xiaoyu.service.baseservice.UserService;
 import com.xiaoyu.utils.R;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,19 +22,15 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("")
 public class LoginController {
 
+    @Autowired
+    private UserService userService;
+
 
     /******************** 注册 ********************/
     @RequestMapping({"/goRegister"})
     public String goRegister() {
         return "admin/register";
     }
-
-    @RequestMapping({"/register/userAdd"})
-    @ResponseBody
-    public R register(UserBean userBean) {
-        return R.success().data("msg", "注册成功！");
-    }
-
 
     /******************** 登录 ********************/
     @RequestMapping({"", "/goLogin"})
@@ -43,6 +41,11 @@ public class LoginController {
     @RequestMapping({"/login/doLogin"})
     @ResponseBody
     public R login(UserBean userBean, HttpSession session) {
+        System.out.println("doLogin user = " + userBean);
+        if (StringUtils.isBlank(userBean.getUsername()) || StringUtils.isNotBlank(userBean.getPassword()))
+            return R.error();
+
+        userService.queryUser(userBean);
 
         session.setAttribute("userInfo", userBean);
         return R.success().data("msg", "登录成功！");
