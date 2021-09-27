@@ -32,4 +32,9 @@ public class UserServiceImpl implements UserService {
     public UserBean queryUser(UserBean userBean) {
         return userMapper.queryUser(userBean);
     }
+
+    @Override
+    public int queryUserByUsername(String username) {
+        return userMapper.queryUserByUsername(username);
+    }
 }

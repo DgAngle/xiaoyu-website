@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @version 1.0
  * @date 2021/9/18 16:32
  */
-@Configuration
+// @Configuration
 public class LoginConfig implements WebMvcConfigurer {
 
     @Override
@@ -26,9 +26,12 @@ public class LoginConfig implements WebMvcConfigurer {
                 , "/goRegister"
                 , "/user/add"
                 , "/login/doLogin"
+                , "/code/statusList"
+                , "/favicon.ico"
                 , "/static/**"
                 , "/plugs/**"
                 , "/js/**"
+                , "/css/**"
                 , "/**.js"
                 , "/**.css"
         );

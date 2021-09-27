@@ -5,6 +5,7 @@ import com.xiaoyu.entity.UserBean;
 import com.xiaoyu.service.baseservice.RoleService;
 import com.xiaoyu.service.baseservice.UserService;
 import com.xiaoyu.utils.R;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,10 @@ public class UserController {
     @RequestMapping("/add")
     @ResponseBody
     public R add(UserBean userBean) {
+        if (StringUtils.isBlank(userBean.getUsername()) || StringUtils.isBlank(userBean.getPassword()))
+            return R.error().data("msg", "添加失败");
+        int queryRes = userService.queryUserByUsername(userBean.getUsername());
+        if (queryRes > 0) return R.error().data("msg", "用户名重复，请重新添加！");
         userService.addUser(userBean);
         return R.success().data("msg", "添加成功！");
     }

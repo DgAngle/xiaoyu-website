@@ -19,6 +19,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         UserBean user = (UserBean) request.getSession().getAttribute("userInfo");
         System.out.println("LoginInterceptor user = " + user);
+        System.out.println("LoginInterceptor user uri = " + request.getRequestURI());
         if (user != null) return true;
         else request.getRequestDispatcher("/").forward(request, response);
         return false;

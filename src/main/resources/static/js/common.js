@@ -112,4 +112,11 @@ commonUtil.getUrlParams = function () {
     return params;
 }
 
+commonUtil.keyDown = function (domId) {
+    // console.log(event.key) 按键
+    // console.log(event.keyCode) 按键对应的code
+    if (event.key == 'Enter') {
+        document.getElementById(domId).click();
+    }
+}
 

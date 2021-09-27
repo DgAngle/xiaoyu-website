@@ -10,4 +10,6 @@ public interface UserMapper {
     int addUser(UserBean userBean);
 
     UserBean queryUser(UserBean userBean);
+
+    int queryUserByUsername(String username);
 }

@@ -10,4 +10,6 @@ public interface UserService {
     int addUser(UserBean userBean);
 
     UserBean queryUser(UserBean userBean);
+
+    int queryUserByUsername(String username);
 }

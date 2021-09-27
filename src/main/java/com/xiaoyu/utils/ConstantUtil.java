@@ -9,20 +9,10 @@ import java.util.Map;
 /**
  * 常量工具类
  */
-public class ConstantUtil implements InitializingBean {
+public class ConstantUtil {
 
-    // 读取配置文件内容
-    @Value("${aliyun.oss.file.endpoint}")
-    private String endpoint;
-
-    @Value("${aliyun.oss.file.keyid}")
-    private String keyId;
-
-    @Value("${aliyun.oss.file.keysecret}")
-    private String keySecret;
-
-    @Value("${aliyun.oss.file.bucketname}")
-    private String bucketName;
+    // 配置表 configName 索引
+    public static String CONFIG_ALIYUN_OSS = "aliyun_oss"; // 阿里云OSS
 
     // 定义公开的静态常量
     public static String END_POINT;
@@ -30,18 +20,6 @@ public class ConstantUtil implements InitializingBean {
     public static String ACCESS_KEY_SECRET;
     public static String BUCKET_NAME;
 
-    /**
-     * 当值初始化后执行该方法
-     *
-     * @throws Exception
-     */
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        END_POINT = this.endpoint;
-        ACCESS_KEY_ID = this.keyId;
-        ACCESS_KEY_SECRET = this.keySecret;
-        BUCKET_NAME = this.bucketName;
-    }
 
     // 小写字母数组
     public static final char[] letter_lowercase_array = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
