@@ -1,5 +1,6 @@
 package com.xiaoyu.service.baseservice;
 
+import com.alibaba.fastjson.JSONObject;
 import com.xiaoyu.common.ListResult;
 import com.xiaoyu.entity.CollectionBean;
 import com.xiaoyu.entity.CollectionCatBean;
@@ -14,7 +15,7 @@ import java.util.List;
 public interface CollectionService {
     /************************* 收藏分类 *************************/
 
-    List<CollectionCatBean> queryCollectionCatList(CollectionCatBean collectionCatBean);
+    ListResult<CollectionCatBean> queryCollectionCatList(CollectionCatBean collectionCatBean);
 
     int addCollectionCat(CollectionCatBean collectionCatBean);
 
@@ -23,6 +24,8 @@ public interface CollectionService {
     int updateCollectionCat(CollectionCatBean collectionCatBean);
 
     int deleteCollectionCatById(long collectionCatId);
+
+    List<JSONObject>  queryCollectionCatTreeJson();
 
     /************************* 收藏主表 *************************/
 

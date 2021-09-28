@@ -13,28 +13,44 @@
             <if test="collectionCatName != null and collectionCatName != ''">
                 collectionCatName = #{collectionCatName},
             </if>
+            <if test="collectionCatNum != null and collectionCatNum != ''">
+                collectionCatNum = #{collectionCatNum},
+            </if>
+            <if test="parentCollectionCatNum != null and parentCollectionCatNum != '' and parentCollectionCatId != 0">
+                parentCollectionCatNum = #{parentCollectionCatNum},
+            </if>
+            <if test="parentCollectionCatId != null and parentCollectionCatId != 0">
+                parentCollectionCatId = #{parentCollectionCatId},
+            </if>
             <if test="orderNum >= 0">
                 orderNum = #{orderNum},
             </if>
         </set>
     </sql>
 
+    <select id="queryCollectionCatListCount" parameterType="collectionCatBean" resultType="java.lang.Integer">
+        select count(1)
+        from collection_cat
+        where 1=1
+        <include refid="collection_cat_query_condition"></include>
+    </select>
+
     <select id="queryCollectionCatList" parameterType="collectionCatBean" resultType="collectionCatBean">
         select *
         from collection_cat
         where 1=1
         <include refid="collection_cat_query_condition"></include>
-        order by orderNum desc
+        order by length(collectionCatNum), orderNum desc
         limit #{start}, #{pageCount}
     </select>
 
     <insert id="addCollectionCat" parameterType="collectionCatBean">
-        insert into collection_cat(collectionCatName, orderNum, createDt, createBy)
-        values (#{collectionCatName}, #{orderNum}, #{createDt}, #{createBy})
+        insert into collection_cat(collectionCatName, collectionCatNum, parentCollectionCatId, parentCollectionCatNum, orderNum, createDt, createBy)
+        values (#{collectionCatName}, #{collectionCatNum}, #{parentCollectionCatId}, #{parentCollectionCatNum}, #{orderNum}, #{createDt}, #{createBy})
     </insert>
 
     <select id="queryCollectionCatDetailById" resultType="collectionCatBean">
-        select collectionCatId, collectionCatName, orderNum
+        select collectionCatId, collectionCatName, collectionCatNum, parentCollectionCatId, parentCollectionCatNum, orderNum
         from collection_cat
         where collectionCatId = #{collectionCatId}
     </select>
@@ -50,6 +66,36 @@
         from collection_cat
         where collectionCatId = #{collectionCatId}
     </delete>
+
+    <select id="queryMaxCollectionCatNum" resultType="java.lang.String">
+        select max(collectionCatNum)
+        from collection_cat
+        where collectionCatNum like concat(#{collectionCatNum}, '____')
+    </select>
+
+    <select id="queryCollectionCatByCollectionCatName" resultType="java.lang.Integer">
+        select count(1)
+        from collection_cat
+        where collectionCatName = #{collectionCatName}
+    </select>
+
+    <select id="queryParentCollectionCatNumById" parameterType="java.lang.Long" resultType="java.lang.String">
+        select ifNull(parentCollectionCatNum, "")
+        from collection_cat
+        where collectionCatId = #{collectionCatId}
+    </select>
+
+    <select id="queryCollectionCatNumById" parameterType="java.lang.Long" resultType="java.lang.String">
+        select collectionCatNum
+        from collection_cat
+        where collectionCatId = #{collectionCatId}
+    </select>
+
+    <select id="queryAllCollectionCat" resultType="collectionCatBean">
+        select *
+        from collection_cat
+        order by length(collectionCatNum), orderNum desc
+    </select>
 
     <!-- ************************* 收藏主表 ************************* -->
     <sql id="collection_query_condition">

@@ -1,6 +1,8 @@
 package com.xiaoyu.utils;
 
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -54,6 +56,22 @@ public class StringUtil {
             catNum = parentCatNum + ConstantUtil.cat_num_begin;
         }
         return catNum;
+    }
+
+    /**
+     * 封装下拉树节点
+     *
+     * @param id       主键
+     * @param label    名称
+     * @param children 子节点
+     * @return 节点
+     */
+    public static JSONObject createNode(String id, String label, JSONArray children) {
+        JSONObject jsonObject = new JSONObject();
+        if (StringUtils.isNotBlank(id)) jsonObject.put("id", id);
+        if (StringUtils.isNotBlank(label)) jsonObject.put("label", label);
+        if (children != null) jsonObject.put("children", children);
+        return jsonObject;
     }
 
 }

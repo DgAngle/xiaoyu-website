@@ -14,7 +14,7 @@ new Vue({
         },
         modalName: '',
         modalType: 'add',
-        noteCatList: 'add',
+        noteCatList: {},
         parentNoteCatIdAndNum: null,
         parentNoteCatList: {},
         noteCatTree: {},

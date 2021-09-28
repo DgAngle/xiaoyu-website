@@ -12,51 +12,63 @@
     <div th:replace="layout/topMenu"></div>
 
     <!-- 内容区域 -->
-    <div id="collectionCatContainer" class="container-fluid">
-        <div th:replace="pageedit/collection/collectioncatadd"></div>
+    <div class="container-fluid">
+        <div id="collectionCatContainer">
 
-        <div class="row comm-operate">
-            <button class="btn btn-outline-primary btn-sm" @click="openCollectionCatAdd()"><i class="fa fa-plus-square"></i>&nbsp;
-                新增收藏分类
-            </button>
+            <div th:replace="pageedit/collection/collectioncatadd"></div>
+
+            <div class="row comm-operate">
+                <button class="btn btn-outline-primary btn-sm" @click="openCollectionCatAdd()"><i class="fa fa-plus-square"></i>&nbsp;
+                    新增收藏分类
+                </button>
+            </div>
+
+            <form class="form-search" onsubmit="return false;">
+                <div class="row form-inline">
+                    <div class="form-group col-md-3">
+                        <label for="collectionCatName" class="col-form-label">收藏分类名称:</label>
+                        <input type="text" class="form-control form-control-sm" id="collectionCatName" placeholder="" autocomplete="off" v-model="collectionCatQuery.collectionCatName"
+                               @keyup.enter="refreshCollationCatList()">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshCollationCatList()">搜索</button>
+                    </div>
+                </div>
+            </form>
+
+            <table class="table table-hover table-striped comm-table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>序号</th>
+                    <th>收藏分类名称</th>
+                    <th>收藏分类编号</th>
+                    <th>排序号</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(collectCat, index) in collectionCatList">
+                    <th>{{index + 1}}</th>
+                    <th>{{collectCat.collectionCatName}}</th>
+                    <th>{{collectCat.collectionCatNum}}</th>
+                    <th>{{collectCat.orderNum}}</th>
+                    <th class="table-operate">
+                        <a href="#" title="修改" @click="openCollectionCatEdit(collectCat.collectionCatId)"><i class="fa fa-pencil"></i></a>
+                        <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+            <form id="queryForm">
+                <input hidden name="collectionCatName" v-model="collectionCatQuery.collectionCatName">
+            </form>
         </div>
-
-        <form class="form-inline form-search " onsubmit="return false;">
-            <div class="form-group col-sm-3 ">
-                <label for="collectionCatName" class="col-form-label ">收藏分类名称:&nbsp;&nbsp;</label>
-                <input type="text" class="form-control form-control-sm" id="collectionCatName" placeholder="" autocomplete="off" v-model="collectionCatQuery.collectionCatName"
-                       @keyup.enter="refreshCollationCatList()">
-            </div>
-            <div class="form-group col-sm-2 ">
-                <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshCollationCatList()">搜索</button>
-            </div>
-        </form>
-
-        <table class="table table-hover table-striped comm-table">
-            <thead class="thead-dark">
-            <tr>
-                <th>序号</th>
-                <th>收藏分类名称</th>
-                <th>排序号</th>
-                <th>操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="(collectCat, index) in collectionCatList">
-                <th>{{index + 1}}</th>
-                <th>{{collectCat.collectionCatName}}</th>
-                <th>{{collectCat.orderNum}}</th>
-                <th class="table-operate">
-                    <a href="#" title="修改" @click="openCollectionCatEdit(collectCat.collectionCatId)"><i class="fa fa-pencil"></i></a>
-                    <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
-                </th>
-            </tr>
-            </tbody>
-        </table>
+        <div th:replace="common/common_js"></div>
+        <div th:replace="layout/pagnation"></div>
     </div>
 </div>
 <!-- 公共 js -->
-<div th:replace="common/common_js"></div>
+<!--<div th:replace="common/common_js"></div>-->
 <script type="text/javascript" src="/js/pages/collectioncat.js"></script>
 </body>
 </html>

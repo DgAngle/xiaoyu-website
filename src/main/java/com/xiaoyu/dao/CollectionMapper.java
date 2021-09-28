@@ -14,6 +14,8 @@ public interface CollectionMapper {
 
     /************************* 收藏分类 *************************/
 
+    int queryCollectionCatListCount(CollectionCatBean collectionCatBean);
+
     List<CollectionCatBean> queryCollectionCatList(CollectionCatBean collectionCatBean);
 
     int addCollectionCat(CollectionCatBean collectionCatBean);
@@ -23,6 +25,16 @@ public interface CollectionMapper {
     int updateCollectionCat(CollectionCatBean collectionCatBean);
 
     int deleteCollectionCatById(long collectionCatId);
+
+    String queryParentCollectionCatNumById(long collectionCatId);
+
+    String queryCollectionCatNumById(long parentCollectionCatId);
+
+    String queryMaxCollectionCatNum(String parentCollectionCatNum);
+
+    int queryCollectionCatByCollectionCatName(String collectionCatName);
+
+    List<CollectionCatBean> queryAllCollectionCat();
 
     /************************* 收藏主表 *************************/
 
@@ -37,6 +49,4 @@ public interface CollectionMapper {
     int updateCollection(CollectionBean collectionBean);
 
     int deleteCollectionById(long collectionId);
-
-
 }

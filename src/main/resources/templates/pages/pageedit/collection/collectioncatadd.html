@@ -16,6 +16,11 @@
                         <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
                     </div>
                     <div class="form-group">
+                        <label><span style="color: red"></span>所属分类：</label>
+                        <treeselect style="text-align: left;" v-model="collectionCatForm.parentCollectionCatId" :multiple="false" :options="collectionCatTree"
+                                    placeholder="" :always-open="false"/>
+                    </div>
+                    <div class="form-group">
                         <label for="orderNumEdit"><span style="color: red"></span>排序号：</label>
                         <input type="text" class="form-control" id="orderNumEdit" v-model="collectionCatForm.orderNum" autocomplete="off">
                     </div>

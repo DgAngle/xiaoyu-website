@@ -102,7 +102,8 @@ public class NoteServiceImpl implements NoteService {
         List<NoteCatBean> noteCatBeans = noteMapper.queryAllNoteCat();
         Optional.ofNullable(noteCatBeans).orElse(new ArrayList<>()).forEach((noteCat) -> {
             // 创建节点
-            JSONObject node = createNode(String.valueOf(noteCat.getNoteCatId()), noteCat.getNoteCatName(), null);
+            JSONObject node = StringUtil.createNode(String.valueOf(noteCat.getNoteCatId()), noteCat.getNoteCatName(), null);
+            // 如果存在相同的父节点
             if (map.containsKey(noteCat.getParentNoteCatNum())) {
                 if (map.get(noteCat.getParentNoteCatNum()).getJSONArray("children") == null) map.get(noteCat.getParentNoteCatNum()).put("children", new JSONArray());
                 map.get(noteCat.getParentNoteCatNum()).getJSONArray("children").add(node);
@@ -110,14 +111,6 @@ public class NoteServiceImpl implements NoteService {
             map.put(noteCat.getNoteCatNum(), node);
         });
         return treeNodeList;
-    }
-
-    public JSONObject createNode(String id, String label, JSONArray children) {
-        JSONObject jsonObject = new JSONObject();
-        if (StringUtils.isNotBlank(id)) jsonObject.put("id", id);
-        if (StringUtils.isNotBlank(label)) jsonObject.put("label", label);
-        if (children != null) jsonObject.put("children", children);
-        return jsonObject;
     }
 
     @Override

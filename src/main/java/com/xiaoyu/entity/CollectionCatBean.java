@@ -16,6 +16,9 @@ import java.util.Date;
 public class CollectionCatBean extends Pagination {
     private long collectionCatId; // 收藏分类主键
     private String collectionCatName; // 收藏分类名称
+    private String collectionCatNum; // 收藏分类编号,四位一级,例：000100010001
+    private long parentCollectionCatId; // 父级收藏主键
+    private String parentCollectionCatNum; // 父级收藏编号
     private int orderNum; // 排序号
     private Date createDt; // 创建时间
     private String createBy; // 创建人

@@ -1,5 +1,7 @@
 package com.xiaoyu.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.aliyun.oss.common.utils.LogUtils;
 import com.xiaoyu.common.ListResult;
 import com.xiaoyu.entity.CollectionBean;
 import com.xiaoyu.entity.CollectionCatBean;
@@ -36,7 +38,12 @@ public class CollectionController {
     @RequestMapping("/cat/list")
     @ResponseBody
     public R catList(CollectionCatBean collectionCatBean) {
-        return R.success().data("collectionCatList", collectionService.queryCollectionCatList(collectionCatBean));
+        // LogUtils.getLog().info("接收参数：" + JSON.toJSON(collectionCatBean));
+        ListResult<CollectionCatBean> listResult = collectionService.queryCollectionCatList(collectionCatBean);
+        return R.success()
+                .data("collectionCatList", listResult.getList())
+                .data("pagination", listResult.getPagination());
+        // return R.success().data("collectionCatList", collectionService.queryCollectionCatList(collectionCatBean));
     }
 
     @RequestMapping("/cat/add")
@@ -66,6 +73,12 @@ public class CollectionController {
         return R.success().message("删除成功！");
     }
 
+    // 笔记分类下拉树
+    @RequestMapping("/cat/tree")
+    @ResponseBody
+    public R noteCatTree() {
+        return R.success().data("collectionCatTree", collectionService.queryCollectionCatTreeJson());
+    }
 
     /************************* 收藏主表 *************************/
 
