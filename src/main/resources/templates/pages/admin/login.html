@@ -15,23 +15,20 @@
             /* background-color: #fa72a1; */
             background: linear-gradient(90deg, #f34d86, #f3ea98, #f6a54d, #31e7fc, #7d7ff8);
             background-size: 800% 300%;
-            /*animation: backgroundMove 10s ease infinite;*/
-            -webkit-animation: backgroundMove 10s ease infinite;
-            -moz-animation: backgroundMove 10s ease infinite;
+            animation: mymove 20s ease infinite;
+            -webkit-animation: mymove 20s ease infinite;
+            -moz-animation: mymove 20s ease infinite;
         }
 
-        @keyframes backgroundMove {
+        @keyframes mymove {
             0% {
-                background-position: 0% 50%;
+                background-position: 0% 0%;
             }
-            33% {
+            50% {
                 background-position: 50% 100%;
             }
-            66% {
-                background-position: 100% 50%;
-            }
             100% {
-                background-position: 50% 0%;
+                background-position: 100% 0%;
             }
         }
 
@@ -98,8 +95,7 @@
             /*设置背景渐变色*/
             /*background-image: linear-gradient(to right, red, orange, yellow, green, yellow, orange, red, orange, yellow, green, yellow, orange, red);*/
             /*background-image: linear-gradient(to right, #71dcee, #f5c05f, #fc4b96, #7d7ff8, #71dcee, #f5c05f, #fc4b96, #7d7ff8, #71dcee, #f5c05f, #fc4b96, #6bfc6d);*/
-            /*background-image: linear-gradient(90deg, #f34d86, #f6f591, #f6a54d, #31e7fc, #7d7ff8);*/
-            background-image: linear-gradient(90deg, #f34d86, #f6a54d, #31e7fc, #7d7ff8);
+            background-image: linear-gradient(90deg, #f34d86, #f6f591, #f6a54d, #31e7fc, #7d7ff8);
             /*chrome私有样式，加前缀，文字显示背景图片*/
             -webkit-background-clip: text;
             animation: move 5s infinite;
@@ -147,7 +143,7 @@
         }
     </style>
 </head>
-<body onkeydown="commonUtil.keyDown('loginBtn')">
+<body>
 
 <div id="loginContainer">
     <div class="login-box">
@@ -159,26 +155,23 @@
                 <div class="form-group row">
                     <label for="username" class="col-sm-3 col-form-label">用户名称：</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="username" v-model="loginForm.username"
-                               placeholder="" autocomplete="off">
+                        <input type="text" class="form-control" id="username" placeholder="" autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="password" class="col-sm-3 col-form-label">用户密码：</label>
                     <div class="col-sm-9">
-                        <input type="password" class="form-control" id="password" v-model="loginForm.password"
-                               placeholder="" autocomplete="off">
+                        <input type="password" class="form-control" id="password" placeholder="" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-12" style="margin-top: 20px;">
+                        <!--<button class="btn btn-outline-primary btn-block" style="font-size: 18px;">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>-->
+                        <button class="btn btn-outline-primary btn-block" style="font-size: 18px;">登录</button>
+                        <a class="btn btn-outline-info btn-block" style="font-size: 18px;" href="/register">去注册</a>
                     </div>
                 </div>
             </form>
-            <div class="form-group row">
-                <div class="col-sm-12" style="margin-top: 20px;">
-                    <!--<button class="btn btn-outline-primary btn-block" style="font-size: 18px;">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>-->
-                    <button id="loginBtn" class="btn btn-outline-primary btn-block" style="font-size: 18px;" @click="login()">登录
-                    </button>
-                    <a class="btn btn-outline-info btn-block" style="font-size: 18px;" href="/goRegister">去注册</a>
-                </div>
-            </div>
         </div>
         <div class="login-footer"></div>
     </div>
@@ -190,32 +183,8 @@
 <script>
     new Vue({
         el: '#loginContainer',
-        data: {
-            loginForm: {
-                username: '',
-                password: '',
-            }
-        },
-        methods: {
-            login() {
-                let _this = this;
-                let url = "/login/doLogin"
-                if (!_this.loginForm.username) {
-                    Qmsg.error("用户名不能为空！");
-                    return;
-                }
-                if (!_this.loginForm.password) {
-                    Qmsg.error("密码不能为空！");
-                    return;
-                }
-                commonUtil.ajax(url, _this.loginForm, function (res) {
-                    if (res && res.data && res.data.msg) Qmsg.error(res.data.msg);
-                    if (res && res.value) window.location.href = "/index";
-                })
-            }
-        }
+        data: {}
     })
-
 </script>
 </body>
 </html>
