@@ -1,10 +1,11 @@
 /* 收藏 */
+Vue.component('treeselect', VueTreeselect.Treeselect)
 let listVm = new Vue({
     el: "#collectionContainer",
     data: {
         collectionQuery: {
             collectionName: '',
-            collectionCatId: -1,
+            // collectionCatId: null,
         },
         collectionForm: {
             collectionName: '',
@@ -15,11 +16,13 @@ let listVm = new Vue({
         modalName: '',
         modalType: 'add',
         collectionList: {},
-        collectionCatList: {}
+        collectionCatList: {},
+        collectionCatTree: {},
     },
     mounted: function () {
         this.queryCollectionCatList();
         this.refreshCollationList();
+        this.queryCollectionCatTree();
     },
     filters: {
         ellipsis(value) {
@@ -105,6 +108,16 @@ let listVm = new Vue({
                     Qmsg.success(res.message);
                     $("#collectionModal").modal('hide');
                     _this.refreshCollationList();
+                }
+            })
+        },
+        // 下拉树
+        queryCollectionCatTree() {
+            let _this = this;
+            let url = "/collect/cat/tree";
+            commonUtil.ajax(url, {}, function (res) {
+                if (res && res.value) {
+                    _this.collectionCatTree = res.data.collectionCatTree;
                 }
             })
         },

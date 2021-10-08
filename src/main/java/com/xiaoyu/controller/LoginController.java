@@ -1,7 +1,12 @@
 package com.xiaoyu.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.aliyun.oss.common.utils.LogUtils;
 import com.xiaoyu.entity.UserBean;
+import com.xiaoyu.service.baseservice.UserService;
 import com.xiaoyu.utils.R;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,19 +25,15 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("")
 public class LoginController {
 
+    @Autowired
+    private UserService userService;
+
 
     /******************** 注册 ********************/
     @RequestMapping({"/goRegister"})
     public String goRegister() {
         return "admin/register";
     }
-
-    @RequestMapping({"/register/userAdd"})
-    @ResponseBody
-    public R register(UserBean userBean) {
-        return R.success().data("msg", "注册成功！");
-    }
-
 
     /******************** 登录 ********************/
     @RequestMapping({"", "/goLogin"})
@@ -43,8 +44,15 @@ public class LoginController {
     @RequestMapping({"/login/doLogin"})
     @ResponseBody
     public R login(UserBean userBean, HttpSession session) {
+        LogUtils.getLog().info("接收参数：" + JSON.toJSON(userBean));
+        if (StringUtils.isBlank(userBean.getUsername()) || StringUtils.isBlank(userBean.getPassword()))
+            return R.error();
 
-        session.setAttribute("userInfo", userBean);
-        return R.success().data("msg", "登录成功！");
+        UserBean user = userService.queryUser(userBean);
+        LogUtils.getLog().info("查询结果：" + JSON.toJSON(user));
+        if (user == null) return R.error().data("msg", "用户名或密码错误！");
+
+        session.setAttribute("userInfo", user);
+        return R.success().data("msg", "登录成功！").data("user", user);
     }
 }

@@ -45,8 +45,8 @@ let listVm = new Vue({
                 collectionCatName: collectionCatDetail.collectionCatName,
                 collectionCatNum: collectionCatDetail.noteCatNum,
                 orderNum: collectionCatDetail.orderNum,
+                // parentCollectionCatId: collectionCatDetail.parentCollectionCatId,
                 parentCollectionCatId: collectionCatDetail.parentCollectionCatId == 0 ? null : collectionCatDetail.parentCollectionCatId,
-
             };
         },
         openCollectionCatAdd() {
@@ -73,6 +73,7 @@ let listVm = new Vue({
             let url = '';
             if (_this.modalType == 'add') url = '/collect/cat/add';
             else url = '/collect/cat/update';
+            console.log(_this.collectionCatForm);
             commonUtil.ajax(url, _this.collectionCatForm, function (res) {
                 if (res && res.value) {
                     Qmsg.success(res.message);

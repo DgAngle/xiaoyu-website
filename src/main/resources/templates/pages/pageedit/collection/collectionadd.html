@@ -19,10 +19,9 @@
                         <input type="text" class="form-control" id="collectionUrlEdit" aria-describedby="emailHelp" v-model="collectionForm.collectionUrl" autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label for="collectionCatEdit"><span style="color: red">*</span>收藏分类：</label>
-                        <select class="form-control form-select-default" id="collectionCatEdit" v-model="collectionForm.collectionCatId">
-                            <option v-for="collectionCat in collectionCatList" :value="collectionCat.collectionCatId">{{collectionCat.collectionCatName}}</option>
-                        </select>
+                        <label><span style="color: red"></span>收藏分类：</label>
+                        <treeselect style="text-align: left;" v-model="collectionForm.collectionCatId" :multiple="false" :options="collectionCatTree"
+                                    placeholder="" :always-open="false"/>
                     </div>
                     <div class="form-group">
                         <label for="remarkEdit"><span style="color: red"></span>描述：</label>

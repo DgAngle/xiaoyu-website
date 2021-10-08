@@ -11,6 +11,7 @@ import com.xiaoyu.entity.CollectionCatBean;
 import com.xiaoyu.service.baseservice.CollectionService;
 import com.xiaoyu.utils.RCode;
 import com.xiaoyu.utils.StringUtil;
+import com.xiaoyu.vo.basevo.CollectionQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -119,16 +120,16 @@ public class CollectionServiceImpl implements CollectionService {
     /************************* 收藏主表 *************************/
 
     @Override
-    public ListResult<CollectionBean> queryCollectionList(CollectionBean collectionBean) {
+    public ListResult<CollectionBean> queryCollectionList(CollectionQuery collectionQuery) {
         ListResult<CollectionBean> listResult = new ListResult<>();
-        int totalCount = collectionMapper.queryCollectionListCount(collectionBean);
-        if (totalCount > 0) listResult.setList(collectionMapper.queryCollectionList(collectionBean));
+        int totalCount = collectionMapper.queryCollectionListCount(collectionQuery);
+        if (totalCount > 0) listResult.setList(collectionMapper.queryCollectionList(collectionQuery));
 
         Pagination pagination = new Pagination();
         pagination.setTotalCount(totalCount);
-        pagination.setPageCount(collectionBean.getPageCount());
-        pagination.setStart(collectionBean.getStart());
-        pagination.setCurrentPage(collectionBean.getCurrentPage());
+        pagination.setPageCount(collectionQuery.getPageCount());
+        pagination.setStart(collectionQuery.getStart());
+        pagination.setCurrentPage(collectionQuery.getCurrentPage());
         listResult.setPagination(pagination);
         return listResult;
     }

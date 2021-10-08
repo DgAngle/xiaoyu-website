@@ -2,6 +2,7 @@ package com.xiaoyu.dao;
 
 import com.xiaoyu.entity.CollectionBean;
 import com.xiaoyu.entity.CollectionCatBean;
+import com.xiaoyu.vo.basevo.CollectionQuery;
 
 import java.util.List;
 
@@ -38,9 +39,9 @@ public interface CollectionMapper {
 
     /************************* 收藏主表 *************************/
 
-    int queryCollectionListCount(CollectionBean collectionBean);
+    int queryCollectionListCount(CollectionQuery collectionQuery);
 
-    List<CollectionBean> queryCollectionList(CollectionBean collectionBean);
+    List<CollectionBean> queryCollectionList(CollectionQuery collectionQuery);
 
     int addCollection(CollectionBean collectionBean);
 

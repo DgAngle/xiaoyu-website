@@ -102,8 +102,12 @@
         <if test="collectionName != null and collectionName != ''">
             and cn.collectionName like concat('%',concat(#{collectionName},'%'))
         </if>
-        <if test="collectionCatId != null and collectionCatId != -1 ">
-            and cn.collectionCatId = #{collectionCatId}
+        <!--        <if test="collectionCatId != null and collectionCatId != -1 ">-->
+        <!--            and cn.collectionCatId = #{collectionCatId}-->
+        <!--        </if>-->
+        <if test="collectionCatId != null and collectionCatId != -1 and collectionCatId != 0">
+            and cn.collectionCatId in (select collectionCatId from collection_cat where collectionCatNum like CONCAT((select collectionCatNum from collection_cat where collectionCatId =
+            #{collectionCatId}),'%'))
         </if>
     </sql>
     <sql id="collection_update_condition">
@@ -117,20 +121,18 @@
             <if test="collectionCatId > 0">
                 collectionCatId = #{collectionCatId},
             </if>
-            <if test="remark != null and remark != ''">
-                remark = #{remark},
-            </if>
+            remark = #{remark},
         </set>
     </sql>
 
-    <select id="queryCollectionListCount" parameterType="collectionBean" resultType="java.lang.Integer">
+    <select id="queryCollectionListCount" parameterType="collectionQuery" resultType="java.lang.Integer">
         select count(1)
         from collection cn
         where 1=1
         <include refid="collection_query_condition"></include>
     </select>
 
-    <select id="queryCollectionList" parameterType="collectionBean" resultType="collectionVo">
+    <select id="queryCollectionList" parameterType="collectionQuery" resultType="collectionVo">
         select cn.collectionId,
         cn.collectionName,
         cn.collectionUrl,
@@ -140,7 +142,7 @@
         cn.createBy,
         ccn.collectionCatName
         from collection cn
-        inner join collection_cat ccn on cn.collectionCatId = ccn.collectionCatId
+        left join collection_cat ccn on cn.collectionCatId = ccn.collectionCatId
         where 1=1
         <include refid="collection_query_condition"></include>
         order by ccn.orderNum desc, cn.collectionCatId, cn.createDt desc limit #{start}, #{pageCount}

@@ -30,13 +30,20 @@
                     <input type="text" class="form-control form-control-sm" id="collectionName" v-model="collectionQuery.collectionName" placeholder="" autocomplete="off"
                            @keyup.enter="refreshCollationList()">
                 </div>
-                <div class="form-group col-sm-3 ">
-                    <label for="collectionCatName">收藏分类:</label>
-                    <select class="form-control form-control-sm" id="collectionCatName" v-model="collectionQuery.collectionCatId">
-                        <option value="-1"></option>
-                        <option v-for="collectionCat in collectionCatList" :value="collectionCat.collectionCatId">{{collectionCat.collectionCatName}}</option>
-                    </select>
+                <div class="form-group col-md-3">
+                    <label style="width: 20%;">收藏分类:</label>
+                    <div style="width: 78%; margin: 0px; padding: 0px;text-align: left;">
+                        <treeselect style="text-align: left;" v-model="collectionQuery.collectionCatId" :multiple="false" :options="collectionCatTree"
+                                    placeholder="笔记分类" :always-open="false"/>
+                    </div>
                 </div>
+                <!--<div class="form-group col-sm-3 ">-->
+                <!--    <label for="collectionCatName">收藏分类:</label>-->
+                <!--    <select class="form-control form-control-sm" id="collectionCatName" v-model="collectionQuery.collectionCatId">-->
+                <!--        <option value="-1"></option>-->
+                <!--        <option v-for="collectionCat in collectionCatList" :value="collectionCat.collectionCatId">{{collectionCat.collectionCatName}}</option>-->
+                <!--    </select>-->
+                <!--</div>-->
                 <div class="form-group col-sm-2 ">
                     <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshCollationList()">搜索</button>
                 </div>

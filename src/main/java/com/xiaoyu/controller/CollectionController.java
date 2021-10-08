@@ -3,10 +3,15 @@ package com.xiaoyu.controller;
 import com.alibaba.fastjson.JSON;
 import com.aliyun.oss.common.utils.LogUtils;
 import com.xiaoyu.common.ListResult;
+import com.xiaoyu.common.Transform;
 import com.xiaoyu.entity.CollectionBean;
 import com.xiaoyu.entity.CollectionCatBean;
+import com.xiaoyu.entity.NoteCatBean;
 import com.xiaoyu.service.baseservice.CollectionService;
 import com.xiaoyu.utils.R;
+import com.xiaoyu.vo.basevo.CollectionQuery;
+import com.xiaoyu.vo.transform.CollectionCatTransform;
+import com.xiaoyu.vo.transform.NoteCatTransform;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,8 +53,8 @@ public class CollectionController {
 
     @RequestMapping("/cat/add")
     @ResponseBody
-    public R catAdd(CollectionCatBean collectionCatBean) {
-        collectionService.addCollectionCat(collectionCatBean);
+    public R catAdd(CollectionCatTransform collectionCatTransform) {
+        collectionService.addCollectionCat(new Transform<CollectionCatBean, CollectionCatTransform>().transformEntityStringToType(collectionCatTransform, new CollectionCatBean()));
         return R.success().message("添加成功！");
     }
 
@@ -61,8 +66,8 @@ public class CollectionController {
 
     @RequestMapping("/cat/update")
     @ResponseBody
-    public R catUpdate(CollectionCatBean collectionCatBean) {
-        collectionService.updateCollectionCat(collectionCatBean);
+    public R catUpdate(CollectionCatTransform collectionCatTransform) {
+        collectionService.updateCollectionCat(new Transform<CollectionCatBean, CollectionCatTransform>().transformEntityStringToType(collectionCatTransform, new CollectionCatBean()));
         return R.success().message("修改成功！");
     }
 
@@ -89,8 +94,8 @@ public class CollectionController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public R list(CollectionBean collectionBean) {
-        ListResult<CollectionBean> listResult = collectionService.queryCollectionList(collectionBean);
+    public R list(CollectionQuery collectionQuery) {
+        ListResult<CollectionBean> listResult = collectionService.queryCollectionList(collectionQuery);
         return R.success()
                 .data("collectionList", listResult.getList())
                 .data("pagination", listResult.getPagination());

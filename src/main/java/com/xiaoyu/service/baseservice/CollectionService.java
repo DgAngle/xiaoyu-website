@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.xiaoyu.common.ListResult;
 import com.xiaoyu.entity.CollectionBean;
 import com.xiaoyu.entity.CollectionCatBean;
+import com.xiaoyu.vo.basevo.CollectionQuery;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public interface CollectionService {
 
     /************************* 收藏主表 *************************/
 
-    ListResult<CollectionBean> queryCollectionList(CollectionBean collectionBean);
+    ListResult<CollectionBean> queryCollectionList(CollectionQuery collectionQuery);
 
     int addCollection(CollectionBean collectionBean);
 
