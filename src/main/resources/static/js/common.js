@@ -120,3 +120,21 @@ commonUtil.keyDown = function (domId) {
     }
 }
 
+
+commonUtil.getFormatDate = function (format) {
+    let curDate = new Date();
+    let year = curDate.getFullYear();
+    let month = curDate.getMonth() + 1;
+    let day = curDate.getDate();
+
+    let hour = curDate.getHours();
+    let minutes = curDate.getMinutes();
+    let seconds = curDate.getSeconds();
+
+    if (format == "yyyy-MM-dd HH:mm:ss") return year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds;
+    if (format == "yyyy-MM-dd HH:mm") return year + "-" + month + "-" + day + " " + hour + ":" + minutes;
+    if (format == "yyyy-MM-dd") return year + "-" + month + "-" + day;
+
+    return year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds
+
+}

@@ -200,7 +200,17 @@
                 let _this = this;
                 let url = "/user/add";
                 commonUtil.ajax(url, _this.registerForm, function (res) {
-                    console.log(res);
+                    if (res.code == httpRequest.success_code) {
+                        let loadingMsg = Qmsg.loading(res.data.msg + "正在加载跳转登录页...")
+                        setTimeout(function () {
+                            loadingMsg.close();
+                            window.location.href = "/goLogin";
+                        }, 2 * 1000)
+                        // Qmsg.success(res.data.msg);
+                        // window.location.href = "/goLogin";
+                    } else {
+                        Qmsg.err(res.data.msg);
+                    }
                 })
             }
         }

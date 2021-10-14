@@ -42,44 +42,46 @@ let listVm = new Vue({
         // 初始化新增参数
         initAddForm() {
             let _this = this;
-            let curDate = new Date();
+            let timeRecordDt = commonUtil.getFormatDate("yyyy-MM-dd");
             _this.modalType = 'add';
             _this.modalName = '新增时间记录';
             _this.timeRecordForm = {
                 timeRecordAddress: '江苏苏州',
-                timeRecordDt: curDate.getFullYear() + '-' + curDate.getMonth() + '-' + curDate.getDay() + " 00:00:00",
+                timeRecordDt: timeRecordDt,
                 timeRecordName: '',
                 spendTimeHour: 0,
                 spendTimeMin: 0,
                 remark: '',
             };
-            $("#timeRecordDateEdit").flatpickr({
+            $("#timeRecordDtEdit").flatpickr({
                 locale: 'zh',
-                enableTime: false,
+                // enableTime: false,
                 // enableSeconds: true,
-                time_24hr: true,
-                defaultHour: 0,
+                // time_24hr: true,
+                defaultDate: timeRecordDt,
             })
         },
         // 初始化修改参数
         initEditForm(timeRecordDetail) {
+            console.log(timeRecordDetail)
             let _this = this;
             _this.modalType = 'edit';
             _this.modalName = '修改时间记录';
             _this.timeRecordForm = {
+                timeRecordId: timeRecordDetail.timeRecordId,
                 timeRecordAddress: timeRecordDetail.timeRecordAddress,
-                timeRecordDt: timeRecordDetail.timeRecordDt,
+                timeRecordDt: timeRecordDetail.timeRecordDtStr,
                 timeRecordName: timeRecordDetail.timeRecordName,
                 spendTimeHour: timeRecordDetail.spendTimeHour,
                 spendTimeMin: timeRecordDetail.spendTimeMin,
                 remark: timeRecordDetail.remark,
             };
-            $("#timeRecordDateEdit").flatpickr({
+            $("#timeRecordDtEdit").flatpickr({
                 locale: 'zh',
-                enableTime: false,
+                // enableTime: false,
                 // enableSeconds: true,
-                time_24hr: true,
-                defaultDate: timeRecordDetail.timeRecordDt,
+                // time_24hr: true,
+                defaultDate: timeRecordDetail.timeRecordDtStr,
             })
         },
         // 打开新增模态框

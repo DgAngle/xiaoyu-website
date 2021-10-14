@@ -76,6 +76,14 @@ public class TimeRecordServiceImpl implements TimeRecordService {
                 timeMap.put("sumMin", sumMin);
             });
         }
+        // 将分钟换算成小时
+        long sumHour = timeMap.get("sumHour") == null ? 0 : timeMap.get("sumHour");
+        long sumMin = timeMap.get("sumMin") == null ? 0 : timeMap.get("sumMin");
+        sumHour += sumMin / 60;
+        sumMin = sumMin % 60;
+        timeMap.put("sumHour", sumHour);
+        timeMap.put("sumMin", sumMin);
+
         // timeMap.get("sumHour") + "小时, " + timeMap.get("sumMin") + "分钟"
         return timeMap;
     }

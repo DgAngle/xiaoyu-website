@@ -44,7 +44,7 @@
         <include refid="timeRecord_query_condition"></include>
     </select>
 
-    <select id="queryTimeRecordList" parameterType="timeRecordQuery" resultType="timeRecordBean">
+    <select id="queryTimeRecordList" parameterType="timeRecordQuery" resultType="timeRecordVo">
         select timeRecordId, timeRecordName, timeRecordDt, timeRecordAddress, spendTimeHour, spendTimeMin, remark
         from time_record
         where 1=1
@@ -57,7 +57,7 @@
         values (#{timeRecordId}, #{timeRecordName}, #{timeRecordDt}, #{timeRecordAddress}, #{spendTimeHour}, #{spendTimeMin}, #{createDt}, #{createBy}, #{remark})
     </insert>
 
-    <select id="queryTimeRecordDetailById" resultType="timeRecordBean">
+    <select id="queryTimeRecordDetailById" resultType="timeRecordVo">
         select timeRecordId, timeRecordName, timeRecordDt, timeRecordAddress, spendTimeHour, spendTimeMin, remark
         from time_record
         where timeRecordId = #{timeRecordId}
