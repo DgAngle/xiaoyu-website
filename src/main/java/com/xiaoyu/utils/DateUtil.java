@@ -1,5 +1,7 @@
 package com.xiaoyu.utils;
 
+import com.aliyun.oss.common.utils.LogUtils;
+import org.apache.commons.logging.Log;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.DateFormat;
@@ -13,6 +15,8 @@ import java.util.Locale;
  * 日期工具类
  */
 public class DateUtil {
+
+    private final static Log log = LogUtils.getLog();
 
     public static final String default_format_seconds = "HH:mm:ss"; // 时:分:秒
     public static final String default_format_min = "HH:mm"; // 时:分
@@ -33,6 +37,7 @@ public class DateUtil {
      * @return boolean
      */
     public static boolean isFormat(String strDate, String format) {
+
         if (StringUtils.isBlank(strDate) || StringUtils.isBlank(format)) return false;
         boolean flag = true;
         DateFormat simpleDateFormat = new SimpleDateFormat(format);
@@ -98,7 +103,7 @@ public class DateUtil {
         try {
             return simpleDateFormat.parse(strDate);
         } catch (ParseException e) {
-            System.out.println("日期转换错误：String转Date出错");
+            log.info("日期转换错误：String转Date出错");
         }
         return null;
     }
@@ -115,7 +120,7 @@ public class DateUtil {
         try {
             return simpleDateFormat.parse(strDate);
         } catch (ParseException e) {
-            System.out.println("日期转换错误：cst格式String转Date出错");
+            log.info("日期转换错误：cst格式String转Date出错");
         }
         return null;
     }
@@ -133,7 +138,7 @@ public class DateUtil {
         try {
             return simpleDateFormat.parse(strDate);
         } catch (ParseException e) {
-            System.out.println("日期转换错误：String转Date出错");
+            log.info("日期转换错误：String转Date出错");
         }
         return null;
     }

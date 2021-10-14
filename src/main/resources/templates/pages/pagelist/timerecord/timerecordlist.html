@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>消费</title>
+    <!-- 公共 css -->
+    <link th:replace="common/common_css"/>
+    <!--<link rel="stylesheet" href="/css/pages/timeRecord.css"/>-->
+</head>
+<body>
+<div class="page-container ">
+    <div th:replace="layout/sidebar"></div>
+    <div th:replace="layout/topMenu"></div>
+
+    <!-- 内容区域 -->
+    <div class="container-fluid">
+        <div id="timeRecordContainer">
+            <div th:replace="pageedit/timerecord/timerecordadd"></div>
+
+            <div class="row comm-operate">
+                <button class="btn btn-outline-primary btn-sm" @click="openTimeRecordAdd()"><i class="fa fa-plus-square"></i>&nbsp;
+                    新增时间记录
+                </button>
+            </div>
+            <form class="form-search" onsubmit="return false;">
+                <div class="row form-inline">
+                    <div class="form-group col-md-3">
+                        <label for="timeRecordAddress" class="col-form-label ">记录地点:</label>
+                        <input type="text" class="form-control form-control-sm" id="timeRecordAddress" v-model="timeRecordQuery.timeRecordAddress" placeholder="" autocomplete="off"
+                               @keyup.enter="refreshTimeRecordList()">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="timeRecordStartDt">开始日期:</label>
+                        <input type="text" class="form-control form-control-sm" id="timeRecordStartDt" v-model="timeRecordQuery.timeRecordStartDt" placeholder="" autocomplete="off"
+                               @keyup.enter="refreshTimeRecordList()">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="timeRecordEndDt">结束日期:</label>
+                        <input type="text" class="form-control form-control-sm" id="timeRecordEndDt" v-model="timeRecordQuery.timeRecordEndDt" placeholder="" autocomplete="off"
+                               @keyup.enter="refreshTimeRecordList()">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="timeRecordName">记录名称:</label>
+                        <input type="text" class="form-control form-control-sm" id="timeRecordName" v-model="timeRecordQuery.timeRecordName" placeholder="" autocomplete="off"
+                               @keyup.enter="refreshTimeRecordList()">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshTimeRecordList()">搜索</button>
+                        <!--<button type="button" class="btn btn-outline-info btn-sm" style="margin-left: 5px;" data-toggle="collapse" data-target="#collapseTimeRecord" aria-expanded="false"-->
+                        <!--        aria-controls="collapseTimeRecord">-->
+                        <!--    高级搜索&nbsp;&nbsp;<i class="fa fa-chevron-down"></i>-->
+                        <!--</button>-->
+                    </div>
+                </div>
+                <!--<div class="collapse" id="collapseTimeRecord">-->
+                <!--    <div class="row form-search form-inline">-->
+                <!--        <div class="form-group col-md-3">-->
+                <!--            <label for="timeRecordStartDate" class="col-form-label ">开始日期:</label>-->
+                <!--            <input type="text" class="form-control form-control-sm datetime-search" id="timeRecordStartDate" v-model="timeRecordQuery.timeRecordStartDate" placeholder=""-->
+                <!--                   autocomplete="off">-->
+                <!--            <a class="date-clear" @click="timeRecordQuery.timeRecordStartDate = null;">-->
+                <!--                <i class="fa fa-times-circle-o"></i>-->
+                <!--            </a>-->
+                <!--        </div>-->
+                <!--        <div class="form-group col-md-3">-->
+                <!--            <label for="timeRecordEndDate" class="col-form-label ">结束日期:</label>-->
+                <!--            <input type="text" class="form-control form-control-sm datetime-search" id="timeRecordEndDate" v-model="timeRecordQuery.timeRecordEndDate" placeholder=""-->
+                <!--                   autocomplete="off">-->
+                <!--            <a class="date-clear" @click="timeRecordQuery.timeRecordEndDate = null;">-->
+                <!--                <i class="fa fa-times-circle-o"></i>-->
+                <!--            </a>-->
+                <!--        </div>-->
+                <!--        <div class="form-group col-md-3">-->
+                <!--            <label for="timeRecordContent" class="col-form-label ">消费内容:</label>-->
+                <!--            <input type="text" class="form-control form-control-sm" id="timeRecordContent" v-model="timeRecordQuery.timeRecordContent" placeholder="" autocomplete="off"-->
+                <!--                   @keyup.enter="refreshTimeRecordList()">-->
+                <!--        </div>-->
+                <!--    </div>-->
+                <!--</div>-->
+            </form>
+
+            <div class="row">
+                <div class="col-md-3 common-total">时间统计：{{totalTimeRecordDt}}</div>
+            </div>
+
+            <table class="table table-hover table-striped comm-table">
+                <thead class="thead-dark">
+                <tr>
+                    <th width="60">序号</th>
+                    <th width="100">记录地点</th>
+                    <th width="100">记录日期</th>
+                    <th width="100">记录名称</th>
+                    <th width="60">时</th>
+                    <th width="60">分</th>
+                    <th width="60">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(timeRecord, index) in timeRecordList">
+                    <th>{{index + 1}}</th>
+                    <th>{{timeRecord.timeRecordAddress}}</th>
+                    <th>{{timeRecord.timeRecordDt}}</th>
+                    <th>{{timeRecord.timeRecordName}}</th>
+                    <th>{{timeRecord.spendTimeHour}}</th>
+                    <th>{{timeRecord.spendTimeMin}}</th>
+                    <th class="table-operate">
+                        <a href="#" title="修改" @click="openTimeRecordEdit(timeRecord.timeRecordId)"><i class="fa fa-pencil"></i></a>
+                        <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- 用于分页拼接条件参数 -->
+            <form id="queryForm">
+                <input hidden name="timeRecordAddress" v-model="timeRecordQuery.timeRecordAddress">
+                <!--<input hidden name="timeRecordDt" v-model="timeRecordQuery.timeRecordDt">-->
+                <input hidden name="timeRecordName" v-model="timeRecordQuery.timeRecordName">
+                <input hidden name="timeRecordStartDt" v-model="timeRecordQuery.timeRecordStartDate">
+                <input hidden name="timeRecordEndDt" v-model="timeRecordQuery.timeRecordEndDate">
+            </form>
+        </div>
+        <div th:include="common/common_js"></div>
+        <div th:replace="layout/pagnation"></div>
+    </div>
+</div>
+
+<!-- 公共 js -->
+<!--<div th:include="common/common_js"></div>-->
+<script type="text/javascript" src="/js/pages/timerecord.js"></script>
+</body>
+</html>

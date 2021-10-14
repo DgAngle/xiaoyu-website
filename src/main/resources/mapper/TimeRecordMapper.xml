@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoyu.dao.TimeRecordMapper">
+
+    <sql id="timeRecord_query_condition">
+        <if test="timeRecordName != null and timeRecordName != ''">
+            and timeRecordName like concat('%',concat(#{timeRecordName},'%'))
+        </if>
+        <if test="timeRecordAddress != null and timeRecordAddress != ''">
+            and timeRecordAddress like concat('%',concat(#{timeRecordAddress},'%'))
+        </if>
+        <if test="timeRecordStartDt != null and timeRecordStartDt != ''">
+            and timeRecordDt <![CDATA[ >= ]]> #{timeRecordStartDt}
+        </if>
+        <if test="timeRecordEndDt != null and timeRecordEndDt != ''">
+            and timeRecordDt <![CDATA[ <= ]]> #{timeRecordEndDt}
+        </if>
+    </sql>
+    <sql id="timeRecord_update_condition">
+        <set>
+            <if test="timeRecordName != null and timeRecordName != ''">
+                timeRecordName = #{timeRecordName},
+            </if>
+            <if test="timeRecordAddress != null and timeRecordAddress != ''">
+                timeRecordAddress = #{timeRecordAddress},
+            </if>
+            <if test="timeRecordDt != null">
+                timeRecordDt = #{timeRecordDt},
+            </if>
+            <if test="spendTimeHour >= 0">
+                spendTimeHour = #{spendTimeHour},
+            </if>
+            <if test="spendTimeMin >= 0">
+                spendTimeMin = #{spendTimeMin},
+            </if>
+            remark = #{remark},
+        </set>
+    </sql>
+
+    <select id="queryTimeRecordListCount" parameterType="timeRecordQuery" resultType="java.lang.Integer">
+        select count(1)
+        from time_record
+        where 1=1
+        <include refid="timeRecord_query_condition"></include>
+    </select>
+
+    <select id="queryTimeRecordList" parameterType="timeRecordQuery" resultType="timeRecordBean">
+        select timeRecordId, timeRecordName, timeRecordDt, timeRecordAddress, spendTimeHour, spendTimeMin, remark
+        from time_record
+        where 1=1
+        <include refid="timeRecord_query_condition"></include>
+        order by timeRecordDt desc limit #{start}, #{pageCount}
+    </select>
+
+    <insert id="addTimeRecord" parameterType="timeRecordBean">
+        insert into time_record(timeRecordId, timeRecordName, timeRecordDt, timeRecordAddress, spendTimeHour, spendTimeMin, createDt, createBy, remark)
+        values (#{timeRecordId}, #{timeRecordName}, #{timeRecordDt}, #{timeRecordAddress}, #{spendTimeHour}, #{spendTimeMin}, #{createDt}, #{createBy}, #{remark})
+    </insert>
+
+    <select id="queryTimeRecordDetailById" resultType="timeRecordBean">
+        select timeRecordId, timeRecordName, timeRecordDt, timeRecordAddress, spendTimeHour, spendTimeMin, remark
+        from time_record
+        where timeRecordId = #{timeRecordId}
+    </select>
+
+    <update id="updateTimeRecord" parameterType="timeRecordBean">
+        update time_record
+        <include refid="timeRecord_update_condition"></include>
+        where timeRecordId = #{timeRecordId}
+    </update>
+
+    <delete id="deleteSpendById">
+        delete
+        from time_record
+        where timeRecordId = #{timeRecordId}
+    </delete>
+
+    <select id="queryTotalTime" parameterType="timeRecordBean" resultType="timeRecordBean">
+        select timeRecordId, timeRecordName, timeRecordDt, timeRecordAddress, spendTimeHour, spendTimeMin
+        from time_record
+        where 1 = 1
+        <include refid="timeRecord_query_condition"></include>
+    </select>
+
+</mapper>
