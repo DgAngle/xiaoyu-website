@@ -107,6 +107,8 @@ public class Transform<T, S> {
             case "int":
                 return Integer.parseInt(str.toString());
             case "date":
+                if (DateUtil.isFormat(str.toString(), DateUtil.default_format_date_day)) return DateUtil.stringToDate(str.toString(), DateUtil.default_format_date_day);
+                if (DateUtil.isFormat(str.toString(), DateUtil.default_format_date_min)) return DateUtil.stringToDate(str.toString(), DateUtil.default_format_date_min);
                 return DateUtil.stringToDate(str.toString());
             case "long":
                 return Long.parseLong(str.toString());
