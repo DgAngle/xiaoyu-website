@@ -4,10 +4,13 @@ import com.xiaoyu.common.ListResult;
 import com.xiaoyu.common.Transform;
 import com.xiaoyu.entity.SpendBean;
 import com.xiaoyu.entity.SpendCatBean;
+import com.xiaoyu.entity.SpendChildBean;
 import com.xiaoyu.service.baseservice.SpendService;
 import com.xiaoyu.utils.DateUtil;
 import com.xiaoyu.utils.R;
+import com.xiaoyu.vo.basevo.SpendChildQuery;
 import com.xiaoyu.vo.basevo.SpendQuery;
+import com.xiaoyu.vo.transform.SpendChildTransform;
 import com.xiaoyu.vo.transform.SpendTransform;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -112,6 +115,47 @@ public class SpendController {
     @ResponseBody
     public R del(long spendId) {
         spendService.deleteSpendById(spendId);
+        return R.success().message("删除成功！");
+    }
+
+    /************************* 子消费表 *************************/
+
+    @RequestMapping("/childList")
+    @ResponseBody
+    public R childList(SpendChildQuery spendChildQuery) {
+        ListResult<SpendChildBean> listResult = spendService.querySpendChildList(spendChildQuery);
+        return R.success()
+                .data("spendChildList", listResult.getList())
+                .data("totalSpendChildMoney", spendService.queryTotalSpendChildMoney(spendChildQuery))
+                .data("paginationChild", listResult.getPagination());
+    }
+
+    @RequestMapping("/addChild")
+    @ResponseBody
+    public R addChild(SpendChildTransform spendChildTransform) {
+        if (!DateUtil.isFormat(spendChildTransform.getSpendChildDate())) spendChildTransform.setSpendChildDate(spendChildTransform.getSpendChildDate() + ":00");
+        spendService.addSpendChild(new Transform<SpendChildBean, SpendChildTransform>().transformEntityStringToType(spendChildTransform, new SpendChildBean()));
+        return R.success().message("添加成功！");
+    }
+
+    @RequestMapping("/detailChild")
+    @ResponseBody
+    public R detailChild(long spendChildId) {
+        return R.success().data("spendDetail", spendService.querySpendChildDetailById(spendChildId));
+    }
+
+    @RequestMapping("/updateChild")
+    @ResponseBody
+    public R updateChild(SpendChildTransform spendChildTransform) {
+        if (!DateUtil.isFormat(spendChildTransform.getSpendChildDate())) spendChildTransform.setSpendChildDate(spendChildTransform.getSpendChildDate() + ":00");
+        spendService.updateSpendChild(new Transform<SpendChildBean, SpendChildTransform>().transformEntityStringToType(spendChildTransform, new SpendChildBean()));
+        return R.success().message("修改成功！");
+    }
+
+    @RequestMapping("/delChild")
+    @ResponseBody
+    public R delChild(long spendChildId) {
+        spendService.deleteSpendChildById(spendChildId);
         return R.success().message("删除成功！");
     }
 }

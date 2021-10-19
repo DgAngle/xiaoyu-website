@@ -16,6 +16,7 @@
     <div class="container-fluid">
         <div id="spendContainer">
             <div th:replace="pageedit/spend/spendadd"></div>
+            <div th:replace="pageedit/spend/spendchild"></div>
 
             <div class="row comm-operate">
                 <button class="btn btn-outline-primary btn-sm" @click="openSpendAdd()"><i class="fa fa-plus-square"></i>&nbsp;
@@ -82,13 +83,14 @@
             <table class="table table-hover table-striped comm-table">
                 <thead class="thead-dark">
                 <tr>
-                    <th width="60">序号</th>
+                    <th width="30">序号</th>
                     <th width="180">消费名称</th>
                     <th width="100">消费金额 (元)</th>
-                    <th width="100">消费分类</th>
+                    <th width="80">消费分类</th>
                     <th width="100">消费日期</th>
                     <th width="200">消费内容</th>
-                    <th width="60">操作</th>
+                    <th width="60">关联消费</th>
+                    <th width="80">操作</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -99,6 +101,9 @@
                     <th>{{spend.spendCatName}}</th>
                     <th>{{spend.spendDateStr}}</th>
                     <th :title="spend.spendContent">{{spend.spendContent | ellipsis}}</th>
+                    <th class="table-operate" style="text-align: center">
+                        <a href="#" title="配置" @click="openSpendChildList(spend.spendId)"><i class="fa fa-cog"></i></a>
+                    </th>
                     <th class="table-operate">
                         <a href="#" title="修改" @click="openSpendEdit(spend.spendId)"><i class="fa fa-pencil"></i></a>
                         <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>

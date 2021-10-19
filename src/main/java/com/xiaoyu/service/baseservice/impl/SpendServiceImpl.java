@@ -5,8 +5,10 @@ import com.xiaoyu.common.Pagination;
 import com.xiaoyu.dao.SpendMapper;
 import com.xiaoyu.entity.SpendBean;
 import com.xiaoyu.entity.SpendCatBean;
+import com.xiaoyu.entity.SpendChildBean;
 import com.xiaoyu.service.baseservice.SpendService;
-import com.xiaoyu.utils.ConstantUtil;
+import com.xiaoyu.vo.basevo.SpendChildQuery;
+import com.xiaoyu.vo.basevo.SpendChildVo;
 import com.xiaoyu.vo.basevo.SpendQuery;
 import com.xiaoyu.vo.basevo.SpendVo;
 import org.springframework.stereotype.Service;
@@ -96,4 +98,48 @@ public class SpendServiceImpl implements SpendService {
     public BigDecimal queryTotalSpendMoney(SpendQuery spendQuery) {
         return spendMapper.queryTotalSpendMoney(spendQuery);
     }
+
+    /************************* 子消费表 *************************/
+    @Override
+    public ListResult<SpendChildBean> querySpendChildList(SpendChildQuery spendChildQuery) {
+        ListResult<SpendChildBean> listResult = new ListResult<>();
+        int totalCount = spendMapper.querySpendChildListCount(spendChildQuery);
+        if (totalCount > 0) listResult.setList(spendMapper.querySpendChildList(spendChildQuery));
+
+        Pagination pagination = new Pagination();
+        pagination.setTotalCount(totalCount);
+        pagination.setPageCount(spendChildQuery.getPageCount());
+        pagination.setStart(spendChildQuery.getStart());
+        pagination.setCurrentPage(spendChildQuery.getCurrentPage());
+        listResult.setPagination(pagination);
+        return listResult;
+    }
+
+    @Override
+    public int addSpendChild(SpendChildBean spendChildBean) {
+        Date date = new Date();
+        spendChildBean.setCreateDt(date);
+        return spendMapper.addSpendChild(spendChildBean);
+    }
+
+    @Override
+    public SpendChildVo querySpendChildDetailById(long spendChildId) {
+        return spendMapper.querySpendChildDetailById(spendChildId);
+    }
+
+    @Override
+    public int updateSpendChild(SpendChildBean spendChildBean) {
+        return spendMapper.updateSpendChild(spendChildBean);
+    }
+
+    @Override
+    public int deleteSpendChildById(long spendChildId) {
+        return spendMapper.deleteSpendChildById(spendChildId);
+    }
+
+    @Override
+    public BigDecimal queryTotalSpendChildMoney(SpendChildQuery spendChildQuery) {
+        return spendMapper.queryTotalSpendChildMoney(spendChildQuery);
+    }
+
 }

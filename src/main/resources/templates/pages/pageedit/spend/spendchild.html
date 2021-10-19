@@ -1,0 +1,164 @@
+<div class="modal fade" id="spendChildModal" tabindex="-1" aria-labelledby="spendChildModalLabel" aria-hidden="true" style="margin-left: 20px;">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable" style="margin:1.3rem auto;">
+        <div class="modal-content" style="min-height: 70vh;max-height: 95vh;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="spendChildModalLabel">{{modalChildName}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="overflow:auto;">
+                <div class="row comm-operate" style="margin-top: 0px;">
+                    <button class="btn btn-outline-primary btn-sm" @click="openSpendChildAdd()"><i class="fa fa-plus-square"></i>&nbsp;
+                        新增子消费
+                    </button>
+                </div>
+                <form class="form-search" onsubmit="return false;">
+                    <div class="row form-inline">
+                        <div class="form-group col-md-3">
+                            <label for="spendChildName" class="col-form-label ">子消费名称:</label>
+                            <input type="text" class="form-control form-control-sm" id="spendChildName" v-model="spendChildQuery.spendChildName" placeholder="" autocomplete="off"
+                                   @keyup.enter="refreshSpendChildList(spendId)">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="spendCatName">子消费分类:</label>
+                            <select class="form-control form-control-sm" id="spendCatName" v-model="spendChildQuery.spendCatId">
+                                <option value="-1">全部</option>
+                                <option v-for="spendCat in spendCatList" :value="spendCat.spendCatId">{{spendCat.spendCatName}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="spendChildMoney">子消费金额:</label>
+                            <select class="form-control form-control-sm" id="spendChildMoney" v-model="spendChildQuery.spendChildMoney">
+                                <option v-for="spendChildMoney in spendChildMoneyArray" :value="spendChildMoney.value">{{spendChildMoney.text}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshSpendChildList(spendId)">搜索</button>
+                            <button type="button" class="btn btn-outline-info btn-sm" style="margin-left: 5px;" data-toggle="collapse" data-target="#collapseSpendChild"
+                                    aria-expanded="false"
+                                    aria-controls="collapseSpendChild">
+                                高级搜索&nbsp;&nbsp;<i class="fa fa-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="collapse" id="collapseSpendChild">
+                        <div class="row form-search form-inline">
+                            <div class="form-group col-md-3">
+                                <label for="spendChildStartDate" class="col-form-label ">开始日期:</label>
+                                <input type="text" class="form-control form-control-sm datetime-search" id="spendChildStartDate" v-model="spendChildQuery.spendChildStartDate"
+                                       placeholder=""
+                                       autocomplete="off">
+                                <a class="date-clear" @click="spendChildQuery.spendChildStartDate = null;">
+                                    <i class="fa fa-times-circle-o"></i>
+                                </a>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="spendChildEndDate" class="col-form-label ">结束日期:</label>
+                                <input type="text" class="form-control form-control-sm datetime-search" id="spendChildEndDate" v-model="spendChildQuery.spendChildEndDate" placeholder=""
+                                       autocomplete="off">
+                                <a class="date-clear" @click="spendChildQuery.spendChildEndDate = null;">
+                                    <i class="fa fa-times-circle-o"></i>
+                                </a>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="spendChildContent" class="col-form-label ">子消费内容:</label>
+                                <input type="text" class="form-control form-control-sm" id="spendChildContent" v-model="spendChildQuery.spendChildContent" placeholder="" autocomplete="off"
+                                       @keyup.enter="refreshSpendChildList(spendId)">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="row">
+                    <div class="col-md-3 common-total">合计子消费：{{totalSpendChildMoney}} 元</div>
+                </div>
+
+                <table class="table table-hover table-striped comm-table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th width="30">序号</th>
+                        <th width="150">子消费名称</th>
+                        <th width="80">子消费金额 (元)</th>
+                        <th width="60">子消费分类</th>
+                        <th width="100">子消费日期</th>
+                        <th width="200">子消费内容</th>
+                        <th width="80">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(spendChild, index) in spendChildList">
+                        <th>{{index + 1}}</th>
+                        <th>{{spendChild.spendChildName}}</th>
+                        <th>{{spendChild.spendChildMoney}}</th>
+                        <th>{{spendChild.spendCatName}}</th>
+                        <th>{{spendChild.spendChildDateStr}}</th>
+                        <th :title="spendChild.spendChildContent">{{spendChild.spendChildContent | ellipsis}}</th>
+                        <th class="table-operate">
+                            <a href="#" title="修改" @click="openSpendChildEdit(spendChild.spendChildId)"><i class="fa fa-pencil"></i></a>
+                            <a href="#" title="删除" @click="openSpendChildDel(spendChild.spendChildId)"><i class="fa fa-trash-o"></i></a>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div :hidden="spendChildList != null" class="pagination-no-content">没有符合的条件</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- spendChildChildAddModel -->
+<div class="modal fade" id="spendChildAddModal" tabindex="-1" aria-labelledby="spendChildAddModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="spendChildAddModalLabel">{{modalChildAddName}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="spendChildNameEdit"><span style="color: red">*</span>子消费名称：</label>
+                        <input type="text" class="form-control" id="spendChildNameEdit" aria-describedby="emailHelp" v-model="spendChildForm.spendChildName" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="spendChildMoneyEdit"><span style="color: red">*</span>子消费金额：</label>
+                        <input type="text" class="form-control" id="spendChildMoneyEdit" aria-describedby="emailHelp" v-model="spendChildForm.spendChildMoney" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="spendCatEdit"><span style="color: red">*</span>子消费分类：</label>
+                        <select class="form-control form-select-default" id="spendCatEdit" v-model="spendChildForm.spendCatId">
+                            <option v-for="spendCat in spendCatList" :value="spendCat.spendCatId">{{spendCat.spendCatName}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group line">
+                        <label for="spendChildDateEdit"><span style="color: red">*</span>子消费时间：</label>
+                        <input type="text" class="form-control datetime" id="spendChildDateEdit" v-model="spendChildForm.spendChildDate" autoClear autocomplete="off">
+                        <a class="date-line-clear" @click="spendChildForm.spendChildDate = null;">
+                            <i class="fa fa-times-circle-o"></i>
+                        </a>
+                    </div>
+                    <div class="form-group">
+                        <label for="spendChildContentEdit"><span style="color: red">*</span>子消费内容：</label>
+                        <textarea type="text" class="form-control" id="spendChildContentEdit" v-model="spendChildForm.spendChildContent" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="remarkEdit"><span style="color: red"></span>备注：</label>
+                        <textarea class="form-control" id="remarkEdit" v-model="spendChildForm.remark" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" @click="saveSpendChild()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

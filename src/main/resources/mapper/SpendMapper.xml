@@ -125,8 +125,8 @@
     </select>
 
     <insert id="addSpend" parameterType="spendBean">
-        insert into spend(spendId, spendName, spendCatId, spendMoney, spendDate, spendContent, createDt, createBy, remark)
-        values (#{spendId}, #{spendName}, #{spendCatId}, #{spendMoney}, #{spendDate}, #{spendContent}, #{createDt}, #{createBy}, #{remark})
+        insert into spend(spendName, spendCatId, spendMoney, spendDate, spendContent, createDt, createBy, remark)
+        values (#{spendName}, #{spendCatId}, #{spendMoney}, #{spendDate}, #{spendContent}, #{createDt}, #{createBy}, #{remark})
     </insert>
 
     <select id="querySpendDetailById" resultType="spendVo">
@@ -158,6 +158,119 @@
         from spend sd
         where 1 = 1
         <include refid="spend_query_condition"></include>
+    </select>
+
+    <!-- ************************* 子消费表 ************************* -->
+    <sql id="spend_child_query_condition">
+        <if test="spendId > 0">
+            and sdc.spendId = #{spendId}
+        </if>
+        <if test="spendChildName != null and spendChildName != ''">
+            and sdc.spendChildName like concat('%',concat(#{spendChildName},'%'))
+        </if>
+        <if test="spendCatId != null and spendCatId != -1 ">
+            and sdc.spendCatId = #{spendCatId}
+        </if>
+        <if test="spendChildMoney != null and spendChildMoney != -1">
+            <choose>
+                <when test="spendChildMoney != null and spendChildMoney != -1 and spendChildMoney == 1001">
+                    and sdc.spendChildMoney >= 1000
+                </when>
+                <otherwise>
+                    and sdc.spendChildMoney <![CDATA[ <= ]]> #{spendChildMoney}
+                </otherwise>
+            </choose>
+        </if>
+
+        <if test="spendChildContent != null and spendChildContent != ''">
+            and sdc.spendChildContent like concat('%',concat(#{spendChildContent},'%'))
+        </if>
+        <if test="spendChildStartDate != null and spendChildStartDate != ''">
+            and sdc.spendChildDate <![CDATA[ >= ]]> #{spendChildStartDate}
+        </if>
+        <if test="spendChildEndDate != null and spendChildEndDate != ''">
+            and sdc.spendChildDate <![CDATA[ <= ]]> #{spendChildEndDate}
+        </if>
+    </sql>
+    <sql id="spend_child_update_condition">
+        <set>
+            <if test="spendChildName != null and spendChildName != ''">
+                spendChildName = #{spendChildName},
+            </if>
+            <if test="spendCatId > 0">
+                spendCatId = #{spendCatId},
+            </if>
+            <if test="spendChildMoney != null and spendChildMoney != ''">
+                spendChildMoney = #{spendChildMoney},
+            </if>
+            <if test="spendChildDate != null">
+                spendChildDate = #{spendChildDate},
+            </if>
+            spendChildContent = #{spendChildContent},
+            remark = #{remark},
+        </set>
+    </sql>
+
+    <select id="querySpendChildListCount" parameterType="spendChildQuery" resultType="java.lang.Integer">
+        select count(1)
+        from spend_child sdc
+        where 1=1
+        <include refid="spend_child_query_condition"></include>
+    </select>
+
+    <select id="querySpendChildList" parameterType="spendChildQuery" resultType="spendChildVo">
+        select sdc.spendChildId,
+        sdc.spendChildName,
+        sdc.spendId,
+        sdc.spendCatId,
+        sdc.spendChildMoney,
+        sdc.spendChildDate,
+        sdc.spendChildContent,
+        sdc.createDt,
+        sdc.createBy,
+        sdc.remark,
+        sdct.spendCatName
+        from spend_child sdc
+        inner join spend_cat sdct on sdc.spendCatId = sdct.spendCatId
+        where 1=1
+        <include refid="spend_child_query_condition"></include>
+        order by sdc.spendChildDate desc
+    </select>
+
+    <insert id="addSpendChild" parameterType="spendChildBean">
+        insert into spend_child(spendId, spendChildName, spendCatId, spendChildMoney, spendChildDate, spendChildContent, createDt, createBy, remark)
+        values (#{spendId}, #{spendChildName}, #{spendCatId}, #{spendChildMoney}, #{spendChildDate}, #{spendChildContent}, #{createDt}, #{createBy}, #{remark})
+    </insert>
+
+    <select id="querySpendChildDetailById" resultType="spendChildVo">
+        select spendChildId,
+               spendChildName,
+               spendCatId,
+               spendChildMoney,
+               spendChildDate,
+               spendChildContent,
+               remark
+        from spend_child
+        where spendChildId = #{spendChildId}
+    </select>
+
+    <update id="updateSpendChild" parameterType="spendChildBean">
+        update spend_child
+        <include refid="spend_child_update_condition"></include>
+        where spendChildId = #{spendChildId}
+    </update>
+
+    <delete id="deleteSpendChildById">
+        delete
+        from spend_child
+        where spendChildId = #{spendChildId}
+    </delete>
+
+    <select id="queryTotalSpendChildMoney" parameterType="spendChildBean" resultType="java.math.BigDecimal">
+        select ifnull(sum(sdc.spendChildMoney), 0)
+        from spend_child sdc
+        where 1 = 1
+        <include refid="spend_child_query_condition"></include>
     </select>
 
 </mapper>

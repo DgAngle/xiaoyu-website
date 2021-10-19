@@ -3,6 +3,9 @@ package com.xiaoyu.service.baseservice;
 import com.xiaoyu.common.ListResult;
 import com.xiaoyu.entity.SpendBean;
 import com.xiaoyu.entity.SpendCatBean;
+import com.xiaoyu.entity.SpendChildBean;
+import com.xiaoyu.vo.basevo.SpendChildQuery;
+import com.xiaoyu.vo.basevo.SpendChildVo;
 import com.xiaoyu.vo.basevo.SpendQuery;
 import com.xiaoyu.vo.basevo.SpendVo;
 
@@ -44,6 +47,20 @@ public interface SpendService {
     // BigDecimal queryTotalSpendMoney(SpendBean spendBean);
 
     BigDecimal queryTotalSpendMoney(SpendQuery spendQuery);
+
+    /************************* 子消费表 *************************/
+
+    ListResult<SpendChildBean> querySpendChildList(SpendChildQuery spendChildQuery);
+
+    int addSpendChild(SpendChildBean spendChildBean);
+
+    SpendChildVo querySpendChildDetailById(long spendChildId);
+
+    int updateSpendChild(SpendChildBean spendChildBean);
+
+    int deleteSpendChildById(long spendChildId);
+
+    BigDecimal queryTotalSpendChildMoney(SpendChildQuery spendChildQuery);
 
 
 }
