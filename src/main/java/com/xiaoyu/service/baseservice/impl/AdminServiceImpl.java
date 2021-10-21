@@ -70,6 +70,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public int updatePlanStatusById(long planId, int status) {
+        return adminMapper.updatePlanStatusById(status, planId);
+    }
+
+    @Override
     public List<IncomeVo> queryTopIncome() {
         return adminMapper.queryIncomeTop5();
     }

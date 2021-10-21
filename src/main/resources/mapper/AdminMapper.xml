@@ -14,7 +14,9 @@
     <select id="queryCollectionTop5" parameterType="java.lang.Long" resultType="collectionBean">
         select *
         from collection
-        where collectionCatId = #{collectionCatId}
+        where collectionCatId in (select collectionCatId
+                                  from collection_cat
+                                  where collectionCatNum like CONCAT((select collectionCatNum from collection_cat where collectionCatId = #{collectionCatId}), '%'))
         order by createDt desc limit 5
     </select>
 
@@ -29,7 +31,9 @@
                ccn.collectionCatName
         from collection cn
                  inner join collection_cat ccn on cn.collectionCatId = ccn.collectionCatId
-        where cn.collectionCatId = #{collectionCatId}
+        where cn.collectionCatId in (select collectionCatId
+                                     from collection_cat
+                                     where collectionCatNum like CONCAT((select collectionCatNum from collection_cat where collectionCatId = #{collectionCatId}), '%'))
         order by cn.createDt desc limit 5
     </select>
 
@@ -117,7 +121,7 @@
                nct.noteCatName
         from note ne
                  inner join note_cat nct on ne.noteCatId = nct.noteCatId
-        where ne.noteCatId in (select noteCatId from note_cat where noteCatNum like CONCAT((select noteCatNum from note_cat where noteCatId = #{noteCatId}),'%'))
+        where ne.noteCatId in (select noteCatId from note_cat where noteCatNum like CONCAT((select noteCatNum from note_cat where noteCatId = #{noteCatId}), '%'))
         order by ne.createDt desc limit 5
     </select>
 </mapper>

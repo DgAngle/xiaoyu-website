@@ -1,0 +1,24 @@
+<!-- Model -->
+<div class="modal fade" id="planDetailModal" tabindex="-1" aria-labelledby="planDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" style="margin-top: 80px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="font-weight: 600; color: #c16903;" id="planDetailModalLabel">{{planModalName}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="margin-bottom: 15px;">
+                <!--planContent-->
+                <div style="white-space: pre-wrap;font-weight: 500;font-size: 16px;">{{planDetail.planContent}}</div>
+
+                <!--remark-->
+                <div style="white-space: pre-wrap;">{{planDetail.remark}}</div>
+            </div>
+            <!--<div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" @click="saveplan()">确认</button>
+            </div>-->
+        </div>
+    </div>
+</div>

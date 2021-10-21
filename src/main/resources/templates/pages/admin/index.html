@@ -69,13 +69,15 @@
                     <div class="box-content">
                         <ul>
                             <li class="plan-item" v-for="plan in topPlan.planList" :title="plan.planContent">
-                                📔&nbsp;{{plan.planName}}
+                                📔&nbsp;<span @click="viewPlanDetail(plan.planId, plan.planName)">{{plan.planName}}</span>
                                 <a href="javascript:void(0);" @click="openConfirmFinish(plan.planId)"><i class="fa fa-check"></i></a>
+                                <a href="javascript:void(0);" @click="openConfirmCancel(plan.planId)"><i class="fa fa-times"></i></a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
+            <div th:include="pageedit/admin/viewplan"></div>
         </div>
 
         <!-- 近期笔记 -->
@@ -136,6 +138,11 @@
             topNoteList: {},
             totalSpendMoney: 0,
             totalIncomeMoney: 0,
+            planModalName: '计划明细',
+            planDetail: {
+                planContent: '',
+                remark: '',
+            },
         },
         mounted: function () {
             this.refreshInit();
@@ -217,6 +224,37 @@
                         _this.refreshTopPLan();
                     })
                 }
+            },
+            openConfirmCancel(planId) {
+                let _this = this;
+                if (confirm("是否取消该计划？")) {
+                    commonUtil.ajax("/updatePlanStatus", {'planId': planId, 'status': commonUtil.statusCode.plan_status_cancel}, function (res) {
+                        if (res && res.value) {
+                            Qmsg.success(res.message);
+                        }
+                        _this.refreshTopPLan();
+                    })
+                }
+            },
+            viewPlanDetail(planId, planName) {
+                let _this = this;
+                if (planName) _this.planModalName = planName;
+                // _this.planDetail = {};
+                commonUtil.ajax("/plan/detail", {'planId': planId}, function (res) {
+                    // if (res && res.value) {
+                    //     Qmsg.success(res.message);
+                    // }
+                    _this.planDetail.planContent = res.data.planDetail.planContent
+                    _this.planDetail.remark = res.data.planDetail.remark
+                    if (!_this.planDetail.planContent && !_this.planDetail.remark) {
+                        _this.planDetail.planContent = "该计划无内容";
+                    }
+                })
+
+                $("#planDetailModal").modal({
+                    keyboard: true,
+                    // backdrop: "static",
+                })
             }
         }
     })

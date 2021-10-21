@@ -29,5 +29,7 @@ public interface AdminService {
 
     int completePlanById(long planId);
 
+    int updatePlanStatusById(long planId, int status);
+
     List<NoteTopVo> queryTopNote();
 }

@@ -70,5 +70,13 @@ public class AdminController {
         return R.success().message("操作成功！");
     }
 
+    // 更改计划状态
+    @RequestMapping("/updatePlanStatus")
+    @ResponseBody
+    public R updatePlanStatus(long planId, int status) {
+        adminService.updatePlanStatusById(planId, status);
+        return R.success().message("操作成功！");
+    }
+
 
 }

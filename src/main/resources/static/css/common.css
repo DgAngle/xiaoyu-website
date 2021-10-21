@@ -98,6 +98,13 @@
 /* 表格区域 */
 .comm-table {
     margin-top: 10px;
+    margin-bottom: 0px !important;
+}
+
+.comm-table-content {
+    overflow: auto;
+    min-height: 68vh;
+    max-height: 68vh;
 }
 
 /* 顶部菜单 */

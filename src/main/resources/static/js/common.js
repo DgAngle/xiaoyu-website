@@ -2,7 +2,14 @@ var commonUtil = commonUtil || {};
 
 commonUtil.statusList = [];
 commonUtil.status = [0, 2, 3, 4, 5, 8]
-
+commonUtil.statusCode = {
+    plan_status_not_start: 0, // 计划未开始
+    plan_status_underway: 2,  // 计划进行中
+    plan_status_unfinished: 3,  // 计划未完成
+    plan_status_cancel: 4, // 计划取消
+    plan_status_delay: 5, // 计划延期
+    plan_status_finished: 8,  // 计划已完成
+}
 window.onload = function () {
     // 获取页面路径
     let url = window.location.href;
