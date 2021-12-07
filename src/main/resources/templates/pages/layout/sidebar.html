@@ -17,8 +17,15 @@
                         <a href="/index"><i class="fa fa-home"></i><span>个人主页</span></a>
                     </li>
                     <li>
-                        <!-- ti-dashboard -->
-                        <!--<a href="/chart"><i class="fa fa-bar-chart"></i><span>统计分析</span></a>-->
+                        <!-- ti-pie-chart -->
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-calendar"></i><span>日历管理</span></a>
+                        <ul class="collapse">
+                            <li id="noteCalendar"><a href="/calendar/openNoteCalendar">笔记日历</a></li>
+                            <li id="collectionCalendar"><a href="/calendar/openCollectionCalendar">收藏日历</a></li>
+                            <li id="planCalendar"><a href="/calendar/openPlanCalendar">计划日历</a></li>
+                            <li id="timeCalendar"><a href="/calendar/openTimeCalendar">时间记录日历</a></li>
+                            <li id="spendCalendar"><a href="/calendar/openSpendCalendar">收入与消费日历</a></li>
+                        </ul>
                     </li>
                     <li>
                         <!-- ti-layout-sidebar-left -->
@@ -68,6 +75,13 @@
                         <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-clock-o"></i><span>时间管理</span></a>
                         <ul class="collapse">
                             <li id="timeRecordList"><a href="/timeRecord/goList">时间记录</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-clock-o"></i><span>文件管理</span></a>
+                        <ul class="collapse">
+                            <li id="fileCat"><a href="#">文件分类</a></li>
+                            <li id="fileList"><a href="#">文件列表</a></li>
                         </ul>
                     </li>
                     <!--<li>-->

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <!-- 公共 css -->
+    <link th:replace="common/common_css"/>
+</head>
+<body>
+<div class="page-container">
+    <div th:replace="layout/sidebar"></div>
+    <div th:replace="layout/topMenu"></div>
+
+    <!-- 内容区域 -->
+    <div class="container-fluid">
+        <div id="app">
+            <!-- 日历控件 -->
+            <div id="calendar" style="padding: 15px;"></div>
+        </div>
+    </div>
+</div>
+
+<!-- 公共 js -->
+<div th:replace="common/common_js"></div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                url: {
+                    // queryCollectionCalendar: "/calendar/queryCollectionCalendar",
+                    querySpendCalendar: "/calendar/querySpendCalendar",
+                    // queryNoteCalendar: "/calendar/queryNoteCalendar",
+                    // queryPlanCalendar: "/calendar/queryPlanCalendar",
+                    // queryTimeCalendar: "/calendar/queryTimeCalendar",
+                },
+            }
+        },
+        mounted() {
+            this.initCalendar()
+        },
+        filters: {},
+        methods: {
+            initCalendar() {
+                let _this = this;
+                var calendarEl = document.getElementById('calendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    headerToolbar: {
+                        left: 'prev next today',
+                        center: 'title',
+                        right: 'dayGridMonth timeGridWeek timeGridDay' // timeGridDay
+                        // left: 'prev today',
+                        // center: 'title',
+                        // right: 'next',
+                    },
+                    eventColor: '#03b5ff',
+                    // eventBackgroundColor: '#f3df55',
+                    height: 800,
+                    locale: 'zh-cn', //
+                    initialView: 'dayGridMonth',
+                    themeSystem: 'bootstrap',
+                    weekends: true,
+                    events: function (info, callback) {
+                        let query = {
+                            startDate: _this.formatDate(info.start),
+                            endDate: _this.formatDate(info.end),
+                        };
+                        commonUtil.ajax(_this.url.querySpendCalendar, query, function (res) {
+                            if (res && res.value) {
+                                callback(res.data.calendarList);
+                            }
+                        })
+                    },
+                    eventTimeFormat: { // like '14:30:00'
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        meridiem: false
+                    },
+                    dayMaxEventRows: true,
+                    // dayMaxEvents: 3, // 与 dayMaxEventRows 只能生效一个
+                    eventClick: function (info) {
+                        console.log(info);
+                        // let split = info.event.id.split("-");
+                        // commonutil.doAjax(_this.url.queryMeetingDetail, {meetingId: split[1]}, function (res) {
+                        //     console.log(res);
+                        //     if (res && res.value) {
+                        //         _this.meetingDetail = res.data.meetingDetail;
+                        //         // $("#meetingDetailModal").modal({'show': true, backdrop: 'static',})
+                        //         $("#meetingDetailModal").modal({'show': true,})
+                        //     }
+                        // })
+                    }
+
+                });
+                calendar.render();
+            },
+            // 格式化日期
+            formatDate(date) {
+                let year = date.getFullYear();
+                let month = date.getMonth() + 1;
+                let day = date.getDate();
+                let hour = date.getHours();
+                let min = date.getMinutes();
+                let dataStr = year + "-" + (month < 10 ? ('0' + month) : month) + "-" + (day < 10 ? ('0' + day) : day) + " "
+                    + (hour < 10 ? ('0' + hour) : hour) + ":" + (min < 10 ? ('0' + min) : min) + ":00"
+                return dataStr;
+            },
+        }
+    });
+</script>
+</body>
+</html>
