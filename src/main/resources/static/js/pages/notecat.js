@@ -1,6 +1,6 @@
 /* 笔记分类 */
 Vue.component('treeselect', VueTreeselect.Treeselect)
-new Vue({
+let listVm = new Vue({
     el: "#noteCatContainer",
     data: {
         noteCatQuery: {
@@ -97,7 +97,19 @@ new Vue({
             commonUtil.ajax(url, _this.noteCatQuery, function (res) {
                 _this.noteCatList = res.data.noteCatList;
                 _this.parentNoteCatList = res.data.noteCatList;
+                paginationVm.pagination = res.data.pagination;
+                paginationVm.initNumbers();
             })
         },
+        refreshPaginationList(pageQuery) {
+            let _this = this;
+            commonUtil.ajax("/note/cat/list", pageQuery, function (res) {
+                console.log(res)
+                _this.noteCatList = res.data.noteCatList;
+                _this.parentNoteCatList = res.data.noteCatList;
+                paginationVm.pagination = res.data.pagination;
+                paginationVm.initNumbers();
+            })
+        }
     }
 })

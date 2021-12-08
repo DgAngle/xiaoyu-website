@@ -153,7 +153,7 @@ let listVm = new Vue({
             if (_this.modalType == 'add') url = '/note/add';
             else url = '/note/update';
             _this.noteForm.noteContent = _this.editor.getMarkdown();
-            console.log(_this.noteForm);
+            // console.log(_this.noteForm);
             commonUtil.ajax(url, _this.noteForm, function (res) {
                 if (res && res.value) {
                     Qmsg.success(res.message);

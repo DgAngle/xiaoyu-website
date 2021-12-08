@@ -12,56 +12,64 @@
     <div th:replace="layout/topMenu"></div>
 
     <!-- 内容区域 -->
-    <div id="noteCatContainer" class="container-fluid">
-        <div th:replace="pageedit/note/notecatadd"></div>
+    <div class="container-fluid">
+        <div id="noteCatContainer">
+            <div th:replace="pageedit/note/notecatadd"></div>
 
-        <div class="row comm-operate">
-            <button class="btn btn-outline-primary btn-sm" @click="openNoteCatAdd()"><i class="fa fa-plus-square"></i>
-                添加笔记分类
-            </button>
-        </div>
-        <form class="form-search" onsubmit="return false;">
-            <div class="row form-inline">
-                <div class="form-group col-md-3">
-                    <label for="noteCatName" class="col-form-label ">分类名称:</label>
-                    <input type="text" class="form-control form-control-sm" id="noteCatName" v-model="noteCatQuery.noteCatName" placeholder="" autocomplete="off"
-                           @keyup.enter="refreshNoteCatList()">
-                </div>
-                <div class="form-group col-md-3">
-                    <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshNoteCatList()">搜索</button>
-                </div>
+            <div class="row comm-operate">
+                <button class="btn btn-outline-primary btn-sm" @click="openNoteCatAdd()"><i class="fa fa-plus-square"></i>
+                    添加笔记分类
+                </button>
             </div>
-        </form>
-        <div class="comm-table-content">
-            <table class="table table-hover table-striped comm-table">
-                <thead class="thead-dark">
-                <tr>
-                    <th>序号</th>
-                    <th>笔记分类名称</th>
-                    <th>笔记编号</th>
-                    <th>排序号</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(noteCat, index) in noteCatList">
-                    <th>{{index + 1}}</th>
-                    <th>{{noteCat.noteCatName}}</th>
-                    <th>{{noteCat.noteCatNum}}</th>
-                    <th>{{noteCat.orderNum}}</th>
-                    <th class="table-operate">
-                        <a href="#" title="修改" @click="openNoteCatEdit(noteCat.noteCatId)"><i class="fa fa-pencil"></i></a>
-                        <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
-                    </th>
-                </tr>
-                </tbody>
-            </table>
+            <form class="form-search" onsubmit="return false;">
+                <div class="row form-inline">
+                    <div class="form-group col-md-3">
+                        <label for="noteCatName" class="col-form-label ">分类名称:</label>
+                        <input type="text" class="form-control form-control-sm" id="noteCatName" v-model="noteCatQuery.noteCatName" placeholder="" autocomplete="off"
+                               @keyup.enter="refreshNoteCatList()">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshNoteCatList()">搜索</button>
+                    </div>
+                </div>
+            </form>
+            <div class="comm-table-content">
+                <table class="table table-hover table-striped comm-table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>序号</th>
+                        <th>笔记分类名称</th>
+                        <th>笔记编号</th>
+                        <th>排序号</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(noteCat, index) in noteCatList">
+                        <th>{{index + 1}}</th>
+                        <th>{{noteCat.noteCatName}}</th>
+                        <th>{{noteCat.noteCatNum}}</th>
+                        <th>{{noteCat.orderNum}}</th>
+                        <th class="table-operate">
+                            <a href="#" title="修改" @click="openNoteCatEdit(noteCat.noteCatId)"><i class="fa fa-pencil"></i></a>
+                            <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- 用于分页拼接条件参数 -->
+            <form id="queryForm">
+                <input hidden name="noteCatName" v-model="noteCatQuery.noteCatName">
+            </form>
         </div>
+        <div th:replace="common/common_js"></div>
+        <div th:replace="layout/pagnation"></div>
     </div>
 </div>
 
 <!-- 公共 js -->
-<div th:replace="common/common_js"></div>
+<!--<div th:replace="common/common_js"></div>-->
 <script type="text/javascript" src="/js/pages/notecat.js"></script>
 </body>
 </html>
