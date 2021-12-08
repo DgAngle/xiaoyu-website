@@ -23,7 +23,7 @@
 
         <form class="form-inline form-search " onsubmit="return false;">
             <div class="form-group col-sm-3 ">
-                <label for="spendCatName" class="col-form-label ">消费分类名称:&nbsp;&nbsp;</label>
+                <label for="spendCatName" class="col-form-label ">消费分类:&nbsp;&nbsp;</label>
                 <input type="text" class="form-control form-control-sm" id="spendCatName" placeholder="" autocomplete="off" v-model="spendCatQuery.spendCatName"
                        @keyup.enter="refreshSpendCatList()">
             </div>
@@ -31,28 +31,29 @@
                 <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshSpendCatList()">搜索</button>
             </div>
         </form>
-
-        <table class="table table-hover table-striped comm-table">
-            <thead class="thead-dark">
-            <tr>
-                <th>序号</th>
-                <th>消费分类名称</th>
-                <th>排序号</th>
-                <th>操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="(spendCat, index) in spendCatList">
-                <th>{{index + 1}}</th>
-                <th>{{spendCat.spendCatName}}</th>
-                <th>{{spendCat.orderNum}}</th>
-                <th class="table-operate">
-                    <a href="#" title="修改" @click="openSpendCatEdit(spendCat.spendCatId)"><i class="fa fa-pencil"></i></a>
-                    <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
-                </th>
-            </tr>
-            </tbody>
-        </table>
+        <div class="comm-table-content">
+            <table class="table table-hover table-striped comm-table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>序号</th>
+                    <th>消费分类名称</th>
+                    <th>排序号</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(spendCat, index) in spendCatList">
+                    <th>{{index + 1}}</th>
+                    <th>{{spendCat.spendCatName}}</th>
+                    <th>{{spendCat.orderNum}}</th>
+                    <th class="table-operate">
+                        <a href="#" title="修改" @click="openSpendCatEdit(spendCat.spendCatId)"><i class="fa fa-pencil"></i></a>
+                        <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <!-- 公共 js -->

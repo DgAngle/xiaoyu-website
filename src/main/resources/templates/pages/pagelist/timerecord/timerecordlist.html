@@ -89,35 +89,36 @@
                 <div class="col-md-3 common-total">时间统计：{{sumHour}}小时，{{sumMin}}分钟</div>
             </div>
 
-            <table class="table table-hover table-striped comm-table">
-                <thead class="thead-dark">
-                <tr>
-                    <th width="60">序号</th>
-                    <th width="100">记录地点</th>
-                    <th width="100">记录日期</th>
-                    <th width="100">记录名称</th>
-                    <th width="60">时</th>
-                    <th width="60">分</th>
-                    <th width="60">操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(timeRecord, index) in timeRecordList">
-                    <th>{{index + 1}}</th>
-                    <th>{{timeRecord.timeRecordAddress}}</th>
-                    <th>{{timeRecord.timeRecordDtStr}}</th>
-                    <th>{{timeRecord.timeRecordName}}</th>
-                    <th>{{timeRecord.spendTimeHour}}</th>
-                    <th>{{timeRecord.spendTimeMin}}</th>
-                    <th class="table-operate">
-                        <a href="#" title="修改" @click="openTimeRecordEdit(timeRecord.timeRecordId)"><i
-                                class="fa fa-pencil"></i></a>
-                        <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
-                    </th>
-                </tr>
-                </tbody>
-            </table>
-
+            <div class="comm-table-content-total">
+                <table class="table table-hover table-striped comm-table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th width="60">序号</th>
+                        <th width="100">记录地点</th>
+                        <th width="100">记录日期</th>
+                        <th width="100">记录名称</th>
+                        <th width="60">时</th>
+                        <th width="60">分</th>
+                        <th width="60">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(timeRecord, index) in timeRecordList">
+                        <th>{{index + 1}}</th>
+                        <th>{{timeRecord.timeRecordAddress}}</th>
+                        <th>{{timeRecord.timeRecordDtStr}}</th>
+                        <th>{{timeRecord.timeRecordName}}</th>
+                        <th>{{timeRecord.spendTimeHour}}</th>
+                        <th>{{timeRecord.spendTimeMin}}</th>
+                        <th class="table-operate">
+                            <a href="#" title="修改" @click="openTimeRecordEdit(timeRecord.timeRecordId)"><i
+                                    class="fa fa-pencil"></i></a>
+                            <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <!-- 用于分页拼接条件参数 -->
             <form id="queryForm">
                 <input hidden name="timeRecordAddress" v-model="timeRecordQuery.timeRecordAddress">

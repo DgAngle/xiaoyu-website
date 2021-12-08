@@ -79,39 +79,39 @@
             <div class="row">
                 <div class="col-md-3 spend-total">合计消费：{{totalSpendMoney}} 元</div>
             </div>
-
-            <table class="table table-hover table-striped comm-table">
-                <thead class="thead-dark">
-                <tr>
-                    <th width="30">序号</th>
-                    <th width="180">消费名称</th>
-                    <th width="100">消费金额 (元)</th>
-                    <th width="80">消费分类</th>
-                    <th width="100">消费日期</th>
-                    <th width="200">消费内容</th>
-                    <th width="60">关联消费</th>
-                    <th width="80">操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(spend, index) in spendList">
-                    <th>{{index + 1}}</th>
-                    <th>{{spend.spendName}}</th>
-                    <th>{{spend.spendMoney}}</th>
-                    <th>{{spend.spendCatName}}</th>
-                    <th>{{spend.spendDateStr}}</th>
-                    <th :title="spend.spendContent">{{spend.spendContent | ellipsis}}</th>
-                    <th class="table-operate" style="text-align: center">
-                        <a href="#" title="配置" @click="openSpendChildList(spend.spendId)"><i class="fa fa-cog"></i></a>
-                    </th>
-                    <th class="table-operate">
-                        <a href="#" title="修改" @click="openSpendEdit(spend.spendId)"><i class="fa fa-pencil"></i></a>
-                        <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
-                    </th>
-                </tr>
-                </tbody>
-            </table>
-
+            <div class="comm-table-content-total">
+                <table class="table table-hover table-striped comm-table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th width="30">序号</th>
+                        <th width="180">消费名称</th>
+                        <th width="100">消费金额 (元)</th>
+                        <th width="80">消费分类</th>
+                        <th width="100">消费日期</th>
+                        <th width="200">消费内容</th>
+                        <th width="60">关联消费</th>
+                        <th width="80" style="text-align: center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(spend, index) in spendList">
+                        <th>{{index + 1}}</th>
+                        <th>{{spend.spendName}}</th>
+                        <th>{{spend.spendMoney}}</th>
+                        <th>{{spend.spendCatName}}</th>
+                        <th>{{spend.spendDateStr}}</th>
+                        <th :title="spend.spendContent">{{spend.spendContent | ellipsis}}</th>
+                        <th class="table-operate" style="text-align: center">
+                            <a href="#" title="配置" @click="openSpendChildList(spend.spendId)"><i class="fa fa-cog"></i></a>
+                        </th>
+                        <th class="table-operate" style="text-align: center">
+                            <a href="#" title="修改" @click="openSpendEdit(spend.spendId)"><i class="fa fa-pencil"></i></a>
+                            <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <!-- 用于分页拼接条件参数 -->
             <form id="queryForm">
                 <input hidden name="spendName" v-model="spendQuery.spendName">

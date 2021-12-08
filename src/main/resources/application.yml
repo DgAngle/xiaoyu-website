@@ -1,7 +1,7 @@
 server:
   port: 8091
-  servlet:
-#    context-path: /xiaoyu_website
+#  servlet:
+#  context-path: /xiaoyu_website
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource

@@ -48,32 +48,34 @@
                     <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshCollationList()">搜索</button>
                 </div>
             </form>
-            <table class="table table-hover table-striped comm-table">
-                <thead class="thead-dark">
-                <tr>
-                    <th width="60">序号</th>
-                    <th width="250">收藏名称</th>
-                    <th width="100">收藏分类</th>
-                    <th width="150">地址</th>
-                    <th width="200">备注</th>
-                    <th width="100">操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(collect, index) in collectionList">
-                    <th>{{index + 1}}</th>
-                    <th>{{collect.collectionName}}</th>
-                    <th>{{collect.collectionCatName}}</th>
-                    <th><a :href="collect.collectionUrl" style="text-decoration: underline;" target="_blank">{{collect.collectionUrl | ellipsisUrl}}</a></th>
-                    <th :title="collect.remark">{{collect.remark | ellipsis}}</th>
-                    <th class="table-operate">
-                        <a href="#" title="修改" @click="openCollectionEdit(collect.collectionId)"><i class="fa fa-pencil"></i></a>
-                        <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
-                    </th>
-                </tr>
-                </tbody>
-            </table>
 
+            <div class="comm-table-content">
+                <table class="table table-hover table-striped comm-table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th width="60">序号</th>
+                        <th width="250">收藏名称</th>
+                        <th width="100">收藏分类</th>
+                        <th width="150">地址</th>
+                        <th width="200">备注</th>
+                        <th width="100">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(collect, index) in collectionList">
+                        <th>{{index + 1}}</th>
+                        <th>{{collect.collectionName}}</th>
+                        <th>{{collect.collectionCatName}}</th>
+                        <th><a :href="collect.collectionUrl" style="text-decoration: underline;" target="_blank">{{collect.collectionUrl | ellipsisUrl}}</a></th>
+                        <th :title="collect.remark">{{collect.remark | ellipsis}}</th>
+                        <th class="table-operate">
+                            <a href="#" title="修改" @click="openCollectionEdit(collect.collectionId)"><i class="fa fa-pencil"></i></a>
+                            <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <form id="queryForm">
                 <input hidden name="collectionName" v-model="collectionQuery.collectionName">
                 <input hidden name="collectionCatId" v-model="collectionQuery.collectionCatId">

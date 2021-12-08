@@ -103,8 +103,15 @@
 
 .comm-table-content {
     overflow: auto;
-    min-height: 68vh;
-    max-height: 68vh;
+    margin-top: 10px;
+    min-height: 74vh;
+    max-height: 74vh;
+}
+
+.comm-table-content-total {
+    overflow: auto;
+    min-height: 70vh;
+    max-height: 70vh;
 }
 
 /* 顶部菜单 */

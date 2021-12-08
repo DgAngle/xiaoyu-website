@@ -48,33 +48,34 @@
                     </div>
                 </div>
             </form>
-
-            <table class="table table-hover table-striped comm-table">
-                <thead class="thead-dark">
-                <tr>
-                    <th width="60">序号</th>
-                    <th width="180">笔记名称</th>
-                    <th width="100">笔记分类</th>
-                    <!--<th width="200">笔记内容</th>-->
-                    <th width="100">记录日期</th>
-                    <th width="60">操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(note, index) in noteList">
-                    <th>{{index + 1}}</th>
-                    <th>{{note.noteName}}</th>
-                    <th>{{note.noteCatName}}</th>
-                    <!--<th :title="note.noteContent">{{note.noteContent | ellipsis}}</th>-->
-                    <th>{{note.createDtStr}}</th>
-                    <th class="table-operate">
-                        <a href="#" title="修改" @click="openNoteEdit(note.noteId)"><i class="fa fa-pencil"></i></a>
-                        <a href="javascript:void(0);" title="查看" @click="openNoteDetail(note.noteId)"><i class="fa fa-search"></i></a>
-                        <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
-                    </th>
-                </tr>
-                </tbody>
-            </table>
+            <div class="comm-table-content">
+                <table class="table table-hover table-striped comm-table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th width="60">序号</th>
+                        <th width="180">笔记名称</th>
+                        <th width="100">笔记分类</th>
+                        <!--<th width="200">笔记内容</th>-->
+                        <th width="100">记录日期</th>
+                        <th width="60">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(note, index) in noteList">
+                        <th>{{index + 1}}</th>
+                        <th>{{note.noteName}}</th>
+                        <th>{{note.noteCatName}}</th>
+                        <!--<th :title="note.noteContent">{{note.noteContent | ellipsis}}</th>-->
+                        <th>{{note.createDtStr}}</th>
+                        <th class="table-operate">
+                            <a href="#" title="修改" @click="openNoteEdit(note.noteId)"><i class="fa fa-pencil"></i></a>
+                            <a href="javascript:void(0);" title="查看" @click="openNoteDetail(note.noteId)"><i class="fa fa-search"></i></a>
+                            <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <!-- 用于分页拼接条件参数 -->
             <form id="queryForm">

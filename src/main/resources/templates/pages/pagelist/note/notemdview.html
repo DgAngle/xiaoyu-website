@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>MD笔记查看</title>
+    <title id="tab-title">MD笔记查看</title>
     <!-- 公共 css -->
     <link th:replace="common/common_css"/>
     <style>
@@ -71,6 +71,7 @@
         let noteId = getUrlBackslashParams();
         _ajax(url, {'noteId': noteId}, function (res) {
             noteInfo = res.data.noteDetail;
+            $("#tab-title").text(noteInfo.noteName);
             $('#noteTitle').text(noteInfo.noteName + "【" + noteInfo.noteCatName + "】");
             $('#noteInfo').val(noteInfo.noteContent);
             editormd.markdownToHTML("noteContent", {

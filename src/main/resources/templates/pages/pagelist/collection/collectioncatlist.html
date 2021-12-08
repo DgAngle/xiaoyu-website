@@ -35,30 +35,31 @@
                     </div>
                 </div>
             </form>
-
-            <table class="table table-hover table-striped comm-table">
-                <thead class="thead-dark">
-                <tr>
-                    <th>序号</th>
-                    <th>收藏分类名称</th>
-                    <th>收藏分类编号</th>
-                    <th>排序号</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(collectCat, index) in collectionCatList">
-                    <th>{{index + 1}}</th>
-                    <th>{{collectCat.collectionCatName}}</th>
-                    <th>{{collectCat.collectionCatNum}}</th>
-                    <th>{{collectCat.orderNum}}</th>
-                    <th class="table-operate">
-                        <a href="#" title="修改" @click="openCollectionCatEdit(collectCat.collectionCatId)"><i class="fa fa-pencil"></i></a>
-                        <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
-                    </th>
-                </tr>
-                </tbody>
-            </table>
+            <div class="comm-table-content">
+                <table class="table table-hover table-striped comm-table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>序号</th>
+                        <th>收藏分类名称</th>
+                        <th>收藏分类编号</th>
+                        <th>排序号</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(collectCat, index) in collectionCatList">
+                        <th>{{index + 1}}</th>
+                        <th>{{collectCat.collectionCatName}}</th>
+                        <th>{{collectCat.collectionCatNum}}</th>
+                        <th>{{collectCat.orderNum}}</th>
+                        <th class="table-operate">
+                            <a href="#" title="修改" @click="openCollectionCatEdit(collectCat.collectionCatId)"><i class="fa fa-pencil"></i></a>
+                            <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <form id="queryForm">
                 <input hidden name="collectionCatName" v-model="collectionCatQuery.collectionCatName">
             </form>

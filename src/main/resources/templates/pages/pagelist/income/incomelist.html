@@ -78,35 +78,35 @@
             <div class="row">
                 <div class="col-md-3 income-total">合计收入：{{totalIncomeMoney}} 元</div>
             </div>
-
-            <table class="table table-hover table-striped comm-table">
-                <thead class="thead-dark">
-                <tr>
-                    <th width="60">序号</th>
-                    <th width="180">收入名称</th>
-                    <th width="100">收入金额 (元)</th>
-                    <th width="100">收入分类</th>
-                    <th width="100">收入日期</th>
-                    <th width="200">收入内容</th>
-                    <th width="60">操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(income, index) in incomeList">
-                    <th>{{index + 1}}</th>
-                    <th>{{income.incomeName}}</th>
-                    <th>{{income.incomeMoney}}</th>
-                    <th>{{income.incomeCatName}}</th>
-                    <th>{{income.incomeDateStr}}</th>
-                    <th :title="income.incomeContent">{{income.incomeContent | ellipsis}}</th>
-                    <th class="table-operate">
-                        <a href="#" title="修改" @click="openIncomeEdit(income.incomeId)"><i class="fa fa-pencil"></i></a>
-                        <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
-                    </th>
-                </tr>
-                </tbody>
-            </table>
-
+            <div class="comm-table-content-total">
+                <table class="table table-hover table-striped comm-table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th width="60">序号</th>
+                        <th width="180">收入名称</th>
+                        <th width="100">收入金额 (元)</th>
+                        <th width="100">收入分类</th>
+                        <th width="100">收入日期</th>
+                        <th width="200">收入内容</th>
+                        <th width="60">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(income, index) in incomeList">
+                        <th>{{index + 1}}</th>
+                        <th>{{income.incomeName}}</th>
+                        <th>{{income.incomeMoney}}</th>
+                        <th>{{income.incomeCatName}}</th>
+                        <th>{{income.incomeDateStr}}</th>
+                        <th :title="income.incomeContent">{{income.incomeContent | ellipsis}}</th>
+                        <th class="table-operate">
+                            <a href="#" title="修改" @click="openIncomeEdit(income.incomeId)"><i class="fa fa-pencil"></i></a>
+                            <a href="#" title="删除"><i class="fa fa-trash-o"></i></a>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <!-- 用于分页拼接条件参数 -->
             <form id="queryForm">
                 <input hidden name="incomeName" v-model="incomeQuery.incomeName">
