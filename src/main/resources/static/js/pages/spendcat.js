@@ -74,7 +74,6 @@ new Vue({
             let _this = this;
             let url = "/spend/cat/list";
             commonUtil.ajax(url, _this.spendCatQuery, function (res) {
-                console.log(res);
                 _this.spendCatList = res.data.spendCatList;
             })
         }

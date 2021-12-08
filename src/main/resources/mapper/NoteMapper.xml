@@ -30,7 +30,9 @@
 
     <select id="queryNoteCatListCount" parameterType="noteCatBean" resultType="java.lang.Integer">
         select count(1)
-        from note_cat limit #{start}, #{pageCount}
+        from note_cat
+        where 1=1
+        <include refid="note_cat_query_condition"></include>
     </select>
 
     <select id="queryNoteCatList" parameterType="noteCatBean" resultType="noteCatBean">

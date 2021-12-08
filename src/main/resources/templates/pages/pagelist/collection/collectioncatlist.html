@@ -59,6 +59,7 @@
                     </tr>
                     </tbody>
                 </table>
+                <div v-if="!collectionCatList" class="pagination-no-content">没有符合的条件</div>
             </div>
             <form id="queryForm">
                 <input hidden name="collectionCatName" v-model="collectionCatQuery.collectionCatName">
