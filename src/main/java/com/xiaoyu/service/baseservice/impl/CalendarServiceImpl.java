@@ -4,6 +4,7 @@ import com.xiaoyu.dao.CalendarMapper;
 import com.xiaoyu.service.baseservice.CalendarService;
 import com.xiaoyu.utils.DateUtil;
 import com.xiaoyu.utils.R;
+import com.xiaoyu.utils.UserUtil;
 import com.xiaoyu.vo.basevo.*;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class CalendarServiceImpl implements CalendarService {
     // 收藏日历
     @Override
     public R queryCollectionCalendar(CalendarQuery calendarQuery) {
+        if (!UserUtil.isAdmin()) calendarQuery.setUserId(UserUtil.getUser().getUserId());
         List<CollectionVo> collectionVos = calendarMapper.queryCollectionCalendar(calendarQuery);
         List<CalendarVo> calendarList = new ArrayList<>();
         Optional.ofNullable(collectionVos).orElse(new ArrayList<>()).forEach((collection) -> {
@@ -41,7 +43,7 @@ public class CalendarServiceImpl implements CalendarService {
     @Override
     public R querySpendCalendar(CalendarQuery calendarQuery) {
         List<CalendarVo> calendarList = new ArrayList<>();
-
+        if (!UserUtil.isAdmin()) calendarQuery.setUserId(UserUtil.getUser().getUserId());
         // 消费
         List<SpendVo> spendVos = calendarMapper.querySpendCalendar(calendarQuery);
         // List<CalendarVo> spendCalendarList = new ArrayList<>();
@@ -73,6 +75,7 @@ public class CalendarServiceImpl implements CalendarService {
     // 笔记日历
     @Override
     public R queryNoteCalendar(CalendarQuery calendarQuery) {
+        if (!UserUtil.isAdmin()) calendarQuery.setUserId(UserUtil.getUser().getUserId());
         List<NoteVo> noteVos = calendarMapper.queryNoteCalendar(calendarQuery);
         List<CalendarVo> calendarList = new ArrayList<>();
         Optional.ofNullable(noteVos).orElse(new ArrayList<>()).forEach((note) -> {
@@ -88,6 +91,7 @@ public class CalendarServiceImpl implements CalendarService {
     // 计划日历
     @Override
     public R queryPlanCalendar(CalendarQuery calendarQuery) {
+        if (!UserUtil.isAdmin()) calendarQuery.setUserId(UserUtil.getUser().getUserId());
         List<PlanVo> planVos = calendarMapper.queryPlanCalendar(calendarQuery);
         List<CalendarVo> calendarList = new ArrayList<>();
         Optional.ofNullable(planVos).orElse(new ArrayList<>()).forEach((plan) -> {
@@ -103,6 +107,7 @@ public class CalendarServiceImpl implements CalendarService {
     // 时间记录日历
     @Override
     public R queryTimeCalendar(CalendarQuery calendarQuery) {
+        if (!UserUtil.isAdmin()) calendarQuery.setUserId(UserUtil.getUser().getUserId());
         List<TimeRecordVo> timeRecordVo = calendarMapper.queryTimeCalendar(calendarQuery);
         List<CalendarVo> calendarList = new ArrayList<>();
         Optional.ofNullable(timeRecordVo).orElse(new ArrayList<>()).forEach((timeRecord) -> {

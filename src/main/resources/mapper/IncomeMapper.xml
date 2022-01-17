@@ -7,6 +7,9 @@
         <if test="incomeCatName != null and incomeCatName != ''">
             and incomeCatName like concat('%',concat(#{incomeCatName},'%'))
         </if>
+        <if test="createBy != null and createBy != ''">
+            and createBy = #{createBy}
+        </if>
     </sql>
     <sql id="income_cat_update_condition">
         <set>
@@ -78,6 +81,9 @@
         </if>
         <if test="incomeEndDate != null and incomeEndDate != ''">
             and sd.incomeDate <![CDATA[ <= ]]> #{incomeEndDate}
+        </if>
+        <if test="createBy != null and createBy != ''">
+            and sd.createBy = #{createBy}
         </if>
     </sql>
     <sql id="income_update_condition">

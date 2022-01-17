@@ -15,6 +15,9 @@
         <if test="timeRecordEndDt != null and timeRecordEndDt != ''">
             and timeRecordDt <![CDATA[ <= ]]> #{timeRecordEndDt}
         </if>
+        <if test="createBy != null and createBy != ''">
+            and createBy = #{createBy}
+        </if>
     </sql>
     <sql id="timeRecord_update_condition">
         <set>

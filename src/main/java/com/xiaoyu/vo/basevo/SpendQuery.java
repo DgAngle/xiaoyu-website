@@ -21,6 +21,7 @@ public class SpendQuery extends Pagination {
     private String spendContent; // 消费内容
     private String spendStartDate; // 开始日期
     private String spendEndDate; // 结束日期
+    private String createBy; // 创建人
 
     public String getSpendStartDate() {
         if (StringUtils.isNotBlank(spendStartDate)) spendStartDate = DateUtil.dateOfBegin(DateUtil.stringToDate(spendStartDate, DateUtil.default_format_date_day));

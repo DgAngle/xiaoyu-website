@@ -3,95 +3,113 @@
 <mapper namespace="com.xiaoyu.dao.CalendarMapper">
     <select id="queryCollectionCalendar" parameterType="calendarQuery" resultType="collectionVo">
         select cn.collectionId,
-               cn.collectionName,
-               cn.collectionUrl,
-               cn.collectionCatId,
-               cn.remark,
-               cn.createDt,
-               cn.createBy,
-               ccn.collectionCatName
+        cn.collectionName,
+        cn.collectionUrl,
+        cn.collectionCatId,
+        cn.remark,
+        cn.createDt,
+        cn.createBy,
+        ccn.collectionCatName
         from collection cn
-                 left join collection_cat ccn on cn.collectionCatId = ccn.collectionCatId
+        left join collection_cat ccn on cn.collectionCatId = ccn.collectionCatId
         where cn.createDt <![CDATA[ >= ]]> #{startDate}
-          and cn.createDt <![CDATA[ <= ]]> #{endDate}
+        and cn.createDt <![CDATA[ <= ]]> #{endDate}
+        <if test="userId != null and userId != ''">
+            and cn.createBy = #{userId}
+        </if>
     </select>
 
     <select id="querySpendCalendar" parameterType="calendarQuery" resultType="spendVo">
         select sd.spendId,
-               sd.spendName,
-               sd.spendCatId,
-               sd.spendMoney,
-               sd.spendDate,
-               sd.spendContent,
-               sd.createDt,
-               sd.createBy,
-               sd.remark,
-               sdt.spendCatName
+        sd.spendName,
+        sd.spendCatId,
+        sd.spendMoney,
+        sd.spendDate,
+        sd.spendContent,
+        sd.createDt,
+        sd.createBy,
+        sd.remark,
+        sdt.spendCatName
         from spend sd
-                 inner join spend_cat sdt on sd.spendCatId = sdt.spendCatId
+        inner join spend_cat sdt on sd.spendCatId = sdt.spendCatId
         where sd.spendDate <![CDATA[ >= ]]> #{startDate}
-          and sd.spendDate  <![CDATA[ <= ]]> #{endDate}
+        and sd.spendDate  <![CDATA[ <= ]]> #{endDate}
+        <if test="userId != null and userId != ''">
+            and sd.createBy = #{userId}
+        </if>
     </select>
 
     <select id="queryIncomeCalendar" parameterType="calendarQuery" resultType="incomeVo">
         select sd.incomeId,
-               sd.incomeName,
-               sd.incomeCatId,
-               sd.incomeMoney,
-               sd.incomeDate,
-               sd.incomeContent,
-               sd.createDt,
-               sd.createBy,
-               sd.remark,
-               sdt.incomeCatName
+        sd.incomeName,
+        sd.incomeCatId,
+        sd.incomeMoney,
+        sd.incomeDate,
+        sd.incomeContent,
+        sd.createDt,
+        sd.createBy,
+        sd.remark,
+        sdt.incomeCatName
         from income sd
-                 inner join income_cat sdt on sd.incomeCatId = sdt.incomeCatId
+        inner join income_cat sdt on sd.incomeCatId = sdt.incomeCatId
         where sd.incomeDate <![CDATA[ >= ]]> #{startDate}
-          and sd.incomeDate <![CDATA[ <= ]]> #{endDate}
+        and sd.incomeDate <![CDATA[ <= ]]> #{endDate}
+        <if test="userId != null and userId != ''">
+            and sd.createBy = #{userId}
+        </if>
     </select>
 
     <select id="queryNoteCalendar" parameterType="calendarQuery" resultType="noteVo">
         select ne.noteId,
-               ne.noteName,
-               ne.noteCatId,
-               ne.noteContent,
-               ne.level,
-               ne.isTop,
-               ne.createDt,
-               ne.createBy,
-               nct.noteCatName
+        ne.noteName,
+        ne.noteCatId,
+        ne.noteContent,
+        ne.level,
+        ne.isTop,
+        ne.createDt,
+        ne.createBy,
+        nct.noteCatName
         from note ne
-                 inner join note_cat nct on ne.noteCatId = nct.noteCatId
+        inner join note_cat nct on ne.noteCatId = nct.noteCatId
         where ne.createDt <![CDATA[ >= ]]> #{startDate}
-          and ne.createDt <![CDATA[ <= ]]> #{endDate}
+        and ne.createDt <![CDATA[ <= ]]> #{endDate}
+        <if test="userId != null and userId != ''">
+            and ne.createBy = #{userId}
+        </if>
     </select>
 
     <select id="queryPlanCalendar" parameterType="calendarQuery" resultType="planVo">
         select pn.planId,
-               pn.planName,
-               pn.planCatId,
-               pn.planContent,
-               pn.planStartDt,
-               pn.planEndDt,
-               pn.status,
-               pn.planFinishedDt,
-               pn.updateDt,
-               pn.updateBy,
-               pn.createDt,
-               pn.createBy,
-               pn.remark,
-               pct.planCatName
+        pn.planName,
+        pn.planCatId,
+        pn.planContent,
+        pn.planStartDt,
+        pn.planEndDt,
+        pn.status,
+        pn.planFinishedDt,
+        pn.updateDt,
+        pn.updateBy,
+        pn.createDt,
+        pn.createBy,
+        pn.remark,
+        pct.planCatName
         from plan pn
-                 inner join plan_cat pct on pn.planCatId = pct.planCatId
+        inner join plan_cat pct on pn.planCatId = pct.planCatId
         where pn.createDt <![CDATA[ >= ]]> #{startDate}
-          and pn.createDt <![CDATA[ <= ]]> #{endDate}
+        and pn.createDt <![CDATA[ <= ]]> #{endDate}
+        <if test="userId != null and userId != ''">
+            and pn.createBy = #{userId}
+        </if>
     </select>
 
     <select id="queryTimeCalendar" parameterType="calendarQuery" resultType="timeRecordVo">
         select timeRecordId, timeRecordName, timeRecordDt, timeRecordAddress, spendTimeHour, spendTimeMin, remark
         from time_record
         where timeRecordDt <![CDATA[ >= ]]> #{startDate}
-          and timeRecordDt <![CDATA[ <= ]]> #{endDate}
+        and timeRecordDt <![CDATA[ <= ]]> #{endDate}
+        <if test="userId != null and userId != ''">
+            and createBy = #{userId}
+        </if>
     </select>
 
 </mapper>

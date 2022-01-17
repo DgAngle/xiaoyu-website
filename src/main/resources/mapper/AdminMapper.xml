@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xiaoyu.dao.AdminMapper">
 
-    <!-- ********************* function top5 ********************* -->
+    <!-- ********************* isAdmin function top5 ********************* -->
 
     <!-- ********************* 收藏相关 ********************* -->
     <select id="queryCollectionCatTop4" resultType="collectionCatBean">
@@ -124,4 +124,134 @@
         where ne.noteCatId in (select noteCatId from note_cat where noteCatNum like CONCAT((select noteCatNum from note_cat where noteCatId = #{noteCatId}), '%'))
         order by ne.createDt desc limit 5
     </select>
+
+
+    <!-- ********************* not Admin function top5 ********************* -->
+
+    <!-- ********************* 收藏相关 ********************* -->
+    <select id="queryCollectionCatTop4ByUserId" resultType="collectionCatBean" parameterType="java.lang.String">
+        select *
+        from collection_cat
+        where createBy = #{userId}
+        order by orderNum desc limit 4
+    </select>
+
+    <select id="queryCollectionTop5ByUserId" resultType="collectionBean">
+        select *
+        from collection
+        where collectionCatId in (select collectionCatId
+                                  from collection_cat
+                                  where collectionCatNum like CONCAT((select collectionCatNum from collection_cat where collectionCatId = #{collectionCatId}), '%'))
+          and createBy = #{userId}
+        order by createDt desc limit 5
+    </select>
+
+    <select id="queryCollectionWithCatTop5ByUserId" resultType="collectionCatBean">
+        select cn.collectionId,
+               cn.collectionName,
+               cn.collectionUrl,
+               cn.collectionCatId,
+               cn.remark,
+               cn.createDt,
+               cn.createBy,
+               ccn.collectionCatName
+        from collection cn
+                 inner join collection_cat ccn on cn.collectionCatId = ccn.collectionCatId
+        where cn.collectionCatId in (select collectionCatId
+                                     from collection_cat
+                                     where collectionCatNum like CONCAT((select collectionCatNum from collection_cat where collectionCatId = #{collectionCatId}), '%'))
+          and cn.createBy = #{userId}
+        order by cn.createDt desc limit 5
+    </select>
+
+    <!-- ********************* 计划相关 ********************* -->
+    <select id="queryPlanCatTop4ByUserId" resultType="planCatBean" parameterType="java.lang.String">
+        select *
+        from plan_cat
+        where createBy = #{userId}
+        order by orderNum desc limit 4
+    </select>
+
+    <select id="queryPlanTop5ByUserId" resultType="planBean">
+        select *
+        from plan
+        where planCatId = #{planCatId}
+          and status = 2
+          and createBy = #{userId}
+        order by createDt desc limit 5
+    </select>
+
+    <!-- ********************* 消费相关 ********************* -->
+    <select id="querySpendTop5ByUserId" parameterType="java.lang.String" resultType="spendVo">
+        select sd.spendId,
+               sd.spendName,
+               sd.spendCatId,
+               sd.spendMoney,
+               sd.spendDate,
+               sd.spendContent,
+               sd.createDt,
+               sd.createBy,
+               sd.remark,
+               sdt.spendCatName
+        from spend sd
+                 inner join spend_cat sdt on sd.spendCatId = sdt.spendCatId
+        where sd.createBy = #{userId}
+        order by sd.createDt desc limit 5
+    </select>
+
+    <select id="queryTotalSpendMoneyByUserId" resultType="java.math.BigDecimal" parameterType="java.lang.String">
+        select ifnull(sum(spendMoney), 0)
+        from spend
+        where createBy = #{userId}
+    </select>
+
+    <!-- ********************* 收入相关 ********************* -->
+    <select id="queryIncomeTop5ByUserId" parameterType="java.lang.String" resultType="incomeVo">
+        select ie.incomeId,
+               ie.incomeName,
+               ie.incomeCatId,
+               ie.incomeMoney,
+               ie.incomeDate,
+               ie.incomeContent,
+               ie.createDt,
+               ie.createBy,
+               ie.remark,
+               ict.incomeCatName
+        from income ie
+                 inner join income_cat ict on ie.incomeCatId = ict.incomeCatId
+        where ie.createBy = #{userId}
+        order by ie.createDt desc limit 5
+    </select>
+
+    <select id="queryTotalIncomeMoneyByUserId" resultType="java.math.BigDecimal" parameterType="java.lang.String">
+        select ifnull(sum(incomeMoney), 0)
+        from income
+        where createBy = #{userId}
+    </select>
+
+    <!-- ********************* 笔记相关 ********************* -->
+    <select id="queryNoteCatTop4ByUserId" resultType="noteCatBean" parameterType="java.lang.String">
+        select *
+        from note_cat
+        where createBy = #{userId}
+        order by orderNum desc limit 4
+    </select>
+
+    <select id="queryNoteTop5ByUserId" resultType="noteVo">
+        select ne.noteId,
+               ne.noteName,
+               ne.noteCatId,
+               ne.noteContent,
+               ne.level,
+               ne.isTop,
+               ne.createDt,
+               ne.createBy,
+               nct.noteCatName
+        from note ne
+                 inner join note_cat nct on ne.noteCatId = nct.noteCatId
+        where ne.noteCatId in (select noteCatId from note_cat where noteCatNum like CONCAT((select noteCatNum from note_cat where noteCatId = #{noteCatId}), '%'))
+          and ne.createBy = #{userId}
+        order by ne.createDt desc limit 5
+    </select>
+
 </mapper>

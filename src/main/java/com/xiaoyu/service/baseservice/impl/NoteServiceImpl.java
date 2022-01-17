@@ -12,6 +12,7 @@ import com.xiaoyu.service.baseservice.NoteService;
 import com.xiaoyu.utils.OssUtil;
 import com.xiaoyu.utils.RCode;
 import com.xiaoyu.utils.StringUtil;
+import com.xiaoyu.utils.UserUtil;
 import com.xiaoyu.vo.basevo.NoteQuery;
 import com.xiaoyu.vo.basevo.NoteVo;
 import org.apache.commons.lang3.StringUtils;
@@ -37,6 +38,7 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public ListResult<NoteCatBean> queryNoteCatList(NoteCatBean noteCatBean) {
         ListResult<NoteCatBean> listResult = new ListResult<>();
+        if (!UserUtil.isAdmin()) noteCatBean.setCreateBy(UserUtil.getUser().getUserId());
         int totalCount = noteMapper.queryNoteCatListCount(noteCatBean);
         if (totalCount > 0) listResult.setList(noteMapper.queryNoteCatList(noteCatBean));
 
@@ -62,7 +64,7 @@ public class NoteServiceImpl implements NoteService {
         noteCatBean.setParentNoteCatNum(noteMapper.queryNoteCatNumById(noteCatBean.getParentNoteCatId()));
         noteCatBean.setNoteCatNum(getNoteCatNum(noteCatBean.getParentNoteCatNum()));
         noteCatBean.setCreateDt(new Date());
-        noteCatBean.setCreateBy("");
+        noteCatBean.setCreateBy(UserUtil.getUser().getUserId());
         return noteMapper.addNoteCat(noteCatBean);
     }
 
@@ -152,6 +154,7 @@ public class NoteServiceImpl implements NoteService {
     /*********************** 笔记 ***********************/
     @Override
     public ListResult<NoteBean> queryNoteList(NoteQuery noteQuery) {
+        if (!UserUtil.isAdmin()) noteQuery.setCreateBy(UserUtil.getUser().getUserId());
         ListResult<NoteBean> listResult = new ListResult<>();
         int totalCount = noteMapper.queryNoteListCount(noteQuery);
         if (totalCount > 0) listResult.setList(noteMapper.queryNoteList(noteQuery));
@@ -169,6 +172,7 @@ public class NoteServiceImpl implements NoteService {
     public int addNote(NoteBean noteBean) {
         Date date = new Date();
         noteBean.setCreateDt(date);
+        noteBean.setCreateBy(UserUtil.getUser().getUserId());
         return noteMapper.addNote(noteBean);
     }
 

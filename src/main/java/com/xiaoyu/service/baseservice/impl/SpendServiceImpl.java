@@ -7,6 +7,7 @@ import com.xiaoyu.entity.SpendBean;
 import com.xiaoyu.entity.SpendCatBean;
 import com.xiaoyu.entity.SpendChildBean;
 import com.xiaoyu.service.baseservice.SpendService;
+import com.xiaoyu.utils.UserUtil;
 import com.xiaoyu.vo.basevo.SpendChildQuery;
 import com.xiaoyu.vo.basevo.SpendChildVo;
 import com.xiaoyu.vo.basevo.SpendQuery;
@@ -31,12 +32,14 @@ public class SpendServiceImpl implements SpendService {
     /************************* 消费分类 *************************/
     @Override
     public List<SpendCatBean> querySpendCatList(SpendCatBean spendCatBean) {
+        if (!UserUtil.isAdmin()) spendCatBean.setCreateBy(UserUtil.getUser().getUserId());
         return spendMapper.querySpendCatList(spendCatBean);
     }
 
     @Override
     public int addSpendCat(SpendCatBean spendCatBean) {
         spendCatBean.setCreateDt(new Date());
+        spendCatBean.setCreateBy(UserUtil.getUser().getUserId());
         return spendMapper.addSpendCat(spendCatBean);
     }
 
@@ -60,6 +63,7 @@ public class SpendServiceImpl implements SpendService {
     @Override
     public ListResult<SpendBean> querySpendList(SpendQuery spendQuery) {
         ListResult<SpendBean> listResult = new ListResult<>();
+        if (!UserUtil.isAdmin()) spendQuery.setCreateBy(UserUtil.getUser().getUserId());
         int totalCount = spendMapper.querySpendListCount(spendQuery);
         if (totalCount > 0) listResult.setList(spendMapper.querySpendList(spendQuery));
 
@@ -76,6 +80,7 @@ public class SpendServiceImpl implements SpendService {
     public int addSpend(SpendBean spendBean) {
         Date date = new Date();
         spendBean.setCreateDt(date);
+        spendBean.setCreateBy(UserUtil.getUser().getUserId());
         return spendMapper.addSpend(spendBean);
     }
 

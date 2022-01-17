@@ -7,6 +7,9 @@
         <if test="noteCatName != null and noteCatName != ''">
             and noteCatName like concat('%',concat(#{noteCatName},'%'))
         </if>
+        <if test="noteCatNum != null and noteCatNum != ''">
+            and noteCatNum like concat(concat(#{noteCatNum},'%'))
+        </if>
     </sql>
     <sql id="note_cat_update_condition">
         <set>
@@ -141,6 +144,9 @@
         </if>
         <if test="createEndDt != null and createEndDt != ''">
             and ne.createDt <![CDATA[ <= ]]> #{createEndDt}
+        </if>
+        <if test="createBy != null and createBy != ''">
+            and ne.createBy = #{createBy}
         </if>
     </sql>
     <sql id="note_update_condition">

@@ -26,6 +26,11 @@ public class UserUtil {
         return (UserBean) getSession().getAttribute(USER_ATTRIBUTE);
     }
 
+    // 判断当前用户是否超级管理员
+    public static boolean isAdmin() {
+        return "xiaoYu@Admin".equals(getUser().getUsername());
+    }
+
     // 获取HttpSession
     public static HttpSession getSession() {
         return getRequest().getSession();

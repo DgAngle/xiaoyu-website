@@ -7,6 +7,9 @@
         <if test="planCatName != null and planCatName != ''">
             and planCatName like concat('%',concat(#{planCatName},'%'))
         </if>
+        <if test="createBy != null and createBy != ''">
+            and createBy = #{createBy}
+        </if>
     </sql>
     <sql id="plan_cat_update_condition">
         <set>
@@ -70,6 +73,9 @@
         </if>
         <if test="planEndDt != null">
             and pn.planEndDt = #{planEndDt}
+        </if>
+        <if test="createBy != null and createBy != ''">
+            and pn.createBy = #{createBy}
         </if>
     </sql>
     <sql id="plan_update_condition">

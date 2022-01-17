@@ -21,6 +21,7 @@ public class IncomeQuery extends Pagination {
     private String incomeContent; // 收入内容
     private String incomeStartDate; // 开始日期
     private String incomeEndDate; // 结束日期
+    private String createBy;
 
     public String getIncomeStartDate() {
         if (StringUtils.isNotBlank(incomeStartDate)) incomeStartDate = DateUtil.dateOfBegin(DateUtil.stringToDate(incomeStartDate, DateUtil.default_format_date_day));

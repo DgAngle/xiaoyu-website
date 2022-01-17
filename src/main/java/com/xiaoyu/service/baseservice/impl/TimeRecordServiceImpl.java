@@ -6,6 +6,7 @@ import com.xiaoyu.dao.TimeRecordMapper;
 import com.xiaoyu.entity.TimeRecordBean;
 import com.xiaoyu.entity.TimeRecordBean;
 import com.xiaoyu.service.baseservice.TimeRecordService;
+import com.xiaoyu.utils.UserUtil;
 import com.xiaoyu.vo.basevo.TimeRecordQuery;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,7 @@ public class TimeRecordServiceImpl implements TimeRecordService {
     @Override
     public ListResult<TimeRecordBean> queryTimeRecordList(TimeRecordQuery timeRecordQuery) {
         ListResult<TimeRecordBean> listResult = new ListResult<>();
+        if (!UserUtil.isAdmin()) timeRecordQuery.setCreateBy(UserUtil.getUser().getUserId());
         int totalCount = timeRecordMapper.queryTimeRecordListCount(timeRecordQuery);
         if (totalCount > 0) listResult.setList(timeRecordMapper.queryTimeRecordList(timeRecordQuery));
 
@@ -42,6 +44,7 @@ public class TimeRecordServiceImpl implements TimeRecordService {
     public int addTimeRecord(TimeRecordBean timeRecordBean) {
         Date date = new Date();
         timeRecordBean.setCreateDt(date);
+        timeRecordBean.setCreateBy(UserUtil.getUser().getUserId());
         return timeRecordMapper.addTimeRecord(timeRecordBean);
     }
 

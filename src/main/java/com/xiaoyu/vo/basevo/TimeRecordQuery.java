@@ -22,6 +22,8 @@ public class TimeRecordQuery extends Pagination {
     private String timeRecordStartDt; // 开始日期
     private String timeRecordEndDt; // 结束日期
 
+    private String createBy; // 创建人
+
     public String getTimeRecordStartDt() {
         if (StringUtils.isNotBlank(timeRecordDt)) timeRecordStartDt = DateUtil.dateOfBegin(DateUtil.stringToDate(timeRecordDt, DateUtil.default_format_date_day));
         return timeRecordStartDt;

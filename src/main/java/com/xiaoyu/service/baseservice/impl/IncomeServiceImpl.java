@@ -6,6 +6,7 @@ import com.xiaoyu.dao.IncomeMapper;
 import com.xiaoyu.entity.IncomeBean;
 import com.xiaoyu.entity.IncomeCatBean;
 import com.xiaoyu.service.baseservice.IncomeService;
+import com.xiaoyu.utils.UserUtil;
 import com.xiaoyu.vo.basevo.IncomeQuery;
 import com.xiaoyu.vo.basevo.IncomeVo;
 import org.springframework.stereotype.Service;
@@ -27,12 +28,14 @@ public class IncomeServiceImpl implements IncomeService {
 
     @Override
     public List<IncomeCatBean> queryIncomeCatList(IncomeCatBean incomeCatBean) {
+        if (!UserUtil.isAdmin()) incomeCatBean.setCreateBy(UserUtil.getUser().getUserId());
         return incomeMapper.queryIncomeCatList(incomeCatBean);
     }
 
     @Override
     public int addIncomeCat(IncomeCatBean incomeCatBean) {
         incomeCatBean.setCreateDt(new Date());
+        incomeCatBean.setCreateBy(UserUtil.getUser().getUserId());
         return incomeMapper.addIncomeCat(incomeCatBean);
     }
 
@@ -56,6 +59,7 @@ public class IncomeServiceImpl implements IncomeService {
     @Override
     public ListResult<IncomeBean> queryIncomeList(IncomeQuery incomeQuery) {
         ListResult<IncomeBean> listResult = new ListResult<>();
+        if (!UserUtil.isAdmin()) incomeQuery.setCreateBy(UserUtil.getUser().getUserId());
         int totalCount = incomeMapper.queryIncomeListCount(incomeQuery);
         if (totalCount > 0) listResult.setList(incomeMapper.queryIncomeList(incomeQuery));
 
@@ -72,6 +76,7 @@ public class IncomeServiceImpl implements IncomeService {
     public int addIncome(IncomeBean incomeBean) {
         Date date = new Date();
         incomeBean.setCreateDt(date);
+        incomeBean.setCreateBy(UserUtil.getUser().getUserId());
         return incomeMapper.addIncome(incomeBean);
     }
 

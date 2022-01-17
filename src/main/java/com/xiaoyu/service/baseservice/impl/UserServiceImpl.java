@@ -3,6 +3,7 @@ package com.xiaoyu.service.baseservice.impl;
 import com.xiaoyu.dao.UserMapper;
 import com.xiaoyu.entity.UserBean;
 import com.xiaoyu.service.baseservice.UserService;
+import com.xiaoyu.utils.UserUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService {
         userBean.setUserId(UUID.randomUUID().toString());
         userBean.setIsDel(0);
         userBean.setCreateDt(new Date());
+        // userBean.setCreateBy(UserUtil.getUser().getUserId());
         return userMapper.addUser(userBean);
     }
 

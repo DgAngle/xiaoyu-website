@@ -29,6 +29,11 @@
                                @keyup.enter="refreshNoteCatList()">
                     </div>
                     <div class="form-group col-md-3">
+                        <label for="noteCatName" class="col-form-label ">分类编号:</label>
+                        <input type="text" class="form-control form-control-sm" id="noteCatNum" v-model="noteCatQuery.noteCatNum" placeholder="" autocomplete="off"
+                               @keyup.enter="refreshNoteCatList()">
+                    </div>
+                    <div class="form-group col-md-3">
                         <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshNoteCatList()">搜索</button>
                     </div>
                 </div>

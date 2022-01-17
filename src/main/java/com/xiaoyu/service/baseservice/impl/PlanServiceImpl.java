@@ -7,6 +7,7 @@ import com.xiaoyu.entity.PlanBean;
 import com.xiaoyu.entity.PlanCatBean;
 import com.xiaoyu.service.baseservice.PlanService;
 import com.xiaoyu.utils.ConstantUtil;
+import com.xiaoyu.utils.UserUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,12 +27,14 @@ public class PlanServiceImpl implements PlanService {
     /************************* 计划分类 *************************/
     @Override
     public List<PlanCatBean> queryPlanCatList(PlanCatBean planCatBean) {
+        if (!UserUtil.isAdmin()) planCatBean.setCreateBy(UserUtil.getUser().getUserId());
         return planMapper.queryPlanCatList(planCatBean);
     }
 
     @Override
     public int addPlanCat(PlanCatBean planCatBean) {
         planCatBean.setCreateDt(new Date());
+        planCatBean.setCreateBy(UserUtil.getUser().getUserId());
         return planMapper.addPlanCat(planCatBean);
     }
 
@@ -55,6 +58,7 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public ListResult<PlanBean> queryPlanList(PlanBean planBean) {
         ListResult<PlanBean> listResult = new ListResult<>();
+        if (!UserUtil.isAdmin()) planBean.setCreateBy(UserUtil.getUser().getUserId());
         int totalCount = planMapper.queryPlanListCount(planBean);
         if (totalCount > 0) listResult.setList(planMapper.queryPlanList(planBean));
 
@@ -71,7 +75,9 @@ public class PlanServiceImpl implements PlanService {
     public int addPlan(PlanBean planBean) {
         Date date = new Date();
         planBean.setCreateDt(date);
+        planBean.setCreateBy(UserUtil.getUser().getUserId());
         planBean.setUpdateDt(date);
+        planBean.setUpdateBy(UserUtil.getUser().getUserId());
         planBean.setStatus(ConstantUtil.plan_status_not_start);
         return planMapper.addPlan(planBean);
     }

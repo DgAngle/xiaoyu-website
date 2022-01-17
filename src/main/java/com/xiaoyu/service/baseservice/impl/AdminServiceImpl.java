@@ -6,6 +6,7 @@ import com.xiaoyu.entity.NoteCatBean;
 import com.xiaoyu.entity.PlanCatBean;
 import com.xiaoyu.service.baseservice.AdminService;
 import com.xiaoyu.utils.ConstantUtil;
+import com.xiaoyu.utils.UserUtil;
 import com.xiaoyu.vo.basevo.IncomeVo;
 import com.xiaoyu.vo.basevo.SpendVo;
 import com.xiaoyu.vo.topvo.CollectionTopVo;
@@ -33,10 +34,17 @@ public class AdminServiceImpl implements AdminService {
     public List<CollectionTopVo> queryTopCollection() {
         List<CollectionTopVo> collectionTopVos = new ArrayList<>();
         // 查询排序后的前4个收藏分类
-        List<CollectionCatBean> collectionCatBeans = adminMapper.queryCollectionCatTop4();
-        Optional.ofNullable(collectionCatBeans).orElse(new ArrayList<>()).forEach((collectionCat) -> {
+        if (UserUtil.isAdmin()) {
+            Optional.ofNullable(adminMapper.queryCollectionCatTop4()).orElse(new ArrayList<>()).forEach((collectionCat) -> {
+                // 一个分类对应多个收藏
+                collectionTopVos.add(new CollectionTopVo(collectionCat, adminMapper.queryCollectionTop5(collectionCat.getCollectionCatId())));
+            });
+            return collectionTopVos;
+        }
+        String userId = UserUtil.getUser().getUserId();
+        Optional.ofNullable(adminMapper.queryCollectionCatTop4ByUserId(userId)).orElse(new ArrayList<>()).forEach((collectionCat) -> {
             // 一个分类对应多个收藏
-            collectionTopVos.add(new CollectionTopVo(collectionCat, adminMapper.queryCollectionTop5(collectionCat.getCollectionCatId())));
+            collectionTopVos.add(new CollectionTopVo(collectionCat, adminMapper.queryCollectionTop5ByUserId(collectionCat.getCollectionCatId(), userId)));
         });
         return collectionTopVos;
     }
@@ -45,23 +53,33 @@ public class AdminServiceImpl implements AdminService {
     public List<PlanTopVo> queryTopPlan() {
         List<PlanTopVo> planTopVos = new ArrayList<>();
         // 查询排序后的前2个计划分类
-        // List<PlanCatBean> planCatBeans = adminMapper.queryPlanCatTop3();
-        List<PlanCatBean> planCatBeans = adminMapper.queryPlanCatTop4();
-        Optional.ofNullable(planCatBeans).orElse(new ArrayList<>()).forEach((planCat) -> {
+        if (UserUtil.isAdmin()) {
+            // List<PlanCatBean> planCatBeans = adminMapper.queryPlanCatTop3();
+            Optional.ofNullable(adminMapper.queryPlanCatTop4()).orElse(new ArrayList<>()).forEach((planCat) -> {
+                // 一个分类对应多个收藏
+                planTopVos.add(new PlanTopVo(planCat, adminMapper.queryPlanTop5(planCat.getPlanCatId())));
+            });
+            return planTopVos;
+        }
+        // 非超级管理员
+        String userId = UserUtil.getUser().getUserId();
+        Optional.ofNullable(adminMapper.queryPlanCatTop4ByUserId(userId)).orElse(new ArrayList<>()).forEach((planCat) -> {
             // 一个分类对应多个收藏
-            planTopVos.add(new PlanTopVo(planCat, adminMapper.queryPlanTop5(planCat.getPlanCatId())));
+            planTopVos.add(new PlanTopVo(planCat, adminMapper.queryPlanTop5ByUserId(planCat.getPlanCatId(), userId)));
         });
         return planTopVos;
     }
 
     @Override
     public List<SpendVo> queryTopSpend() {
-        return adminMapper.querySpendTop5();
+        if (UserUtil.isAdmin()) return adminMapper.querySpendTop5();
+        return adminMapper.querySpendTop5ByUserId(UserUtil.getUser().getUserId());
     }
 
     @Override
     public BigDecimal queryTotalSpendMoney() {
-        return adminMapper.queryTotalSpendMoney();
+        if (UserUtil.isAdmin()) return adminMapper.queryTotalSpendMoney();
+        return adminMapper.queryTotalSpendMoneyByUserId(UserUtil.getUser().getUserId());
     }
 
     @Override
@@ -76,22 +94,32 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<IncomeVo> queryTopIncome() {
-        return adminMapper.queryIncomeTop5();
+        if (UserUtil.isAdmin()) return adminMapper.queryIncomeTop5();
+        return adminMapper.queryIncomeTop5ByUserId(UserUtil.getUser().getUserId());
     }
 
     @Override
     public BigDecimal queryTotalIncomeMoney() {
-        return adminMapper.queryTotalIncomeMoney();
+        if (UserUtil.isAdmin()) return adminMapper.queryTotalIncomeMoney();
+        return adminMapper.queryTotalIncomeMoneyByUserId(UserUtil.getUser().getUserId());
     }
 
     @Override
     public List<NoteTopVo> queryTopNote() {
         List<NoteTopVo> noteTopVos = new ArrayList<>();
         // 查询排序后的前4个笔记分类
-        List<NoteCatBean> noteCatBeans = adminMapper.queryNoteCatTop4();
-        Optional.ofNullable(noteCatBeans).orElse(new ArrayList<>()).forEach((noteCat) -> {
+        if (UserUtil.isAdmin()) {
+            Optional.ofNullable(adminMapper.queryNoteCatTop4()).orElse(new ArrayList<>()).forEach((noteCat) -> {
+                // 一个分类对应多个笔记
+                noteTopVos.add(new NoteTopVo(noteCat, adminMapper.queryNoteTop5(noteCat.getNoteCatId())));
+            });
+            return noteTopVos;
+        }
+        // 非超级管理员
+        String userId = UserUtil.getUser().getUserId();
+        Optional.ofNullable(adminMapper.queryNoteCatTop4ByUserId(userId)).orElse(new ArrayList<>()).forEach((noteCat) -> {
             // 一个分类对应多个笔记
-            noteTopVos.add(new NoteTopVo(noteCat, adminMapper.queryNoteTop5(noteCat.getNoteCatId())));
+            noteTopVos.add(new NoteTopVo(noteCat, adminMapper.queryNoteTop5ByUserId(noteCat.getNoteCatId(), userId)));
         });
         return noteTopVos;
     }

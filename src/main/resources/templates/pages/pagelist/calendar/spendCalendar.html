@@ -61,6 +61,16 @@
                     initialView: 'dayGridMonth',
                     themeSystem: 'bootstrap',
                     weekends: true,
+                    slotLabelFormat: [
+                        {
+                            hour: 'numeric',
+                            minute: '2-digit',
+                            omitZeroMinute: false,
+                            meridiem: 'numeric',
+                            // timeFormat: 'H(:mm)',
+                            hour12: false,
+                        },
+                    ],
                     events: function (info, callback) {
                         let query = {
                             startDate: _this.formatDate(info.start),
@@ -73,9 +83,13 @@
                         })
                     },
                     eventTimeFormat: { // like '14:30:00'
-                        hour: '2-digit',
+                        hour: 'numeric',
                         minute: '2-digit',
-                        meridiem: false
+                        // second: '2-digit',
+                        omitZeroMinute: false,
+                        meridiem: 'numeric',
+                        // timeFormat: 'H(:mm)',
+                        hour12: false,
                     },
                     dayMaxEventRows: true,
                     // dayMaxEvents: 3, // 与 dayMaxEventRows 只能生效一个

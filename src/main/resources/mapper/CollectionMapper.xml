@@ -7,6 +7,9 @@
         <if test="collectionCatName != null and collectionCatName != ''">
             and collectionCatName like concat('%',concat(#{collectionCatName},'%'))
         </if>
+        <if test="createBy != null and createBy != ''">
+            and createBy = #{createBy}
+        </if>
     </sql>
     <sql id="collection_cat_update_condition">
         <set>
@@ -108,6 +111,9 @@
         <if test="collectionCatId != null and collectionCatId != -1 and collectionCatId != 0">
             and cn.collectionCatId in (select collectionCatId from collection_cat where collectionCatNum like CONCAT((select collectionCatNum from collection_cat where collectionCatId =
             #{collectionCatId}),'%'))
+        </if>
+        <if test="createBy != null and createBy != ''">
+            and cn.createBy = #{createBy}
         </if>
     </sql>
     <sql id="collection_update_condition">

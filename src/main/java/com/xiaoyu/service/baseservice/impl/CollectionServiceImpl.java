@@ -11,6 +11,7 @@ import com.xiaoyu.entity.CollectionCatBean;
 import com.xiaoyu.service.baseservice.CollectionService;
 import com.xiaoyu.utils.RCode;
 import com.xiaoyu.utils.StringUtil;
+import com.xiaoyu.utils.UserUtil;
 import com.xiaoyu.vo.basevo.CollectionQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,7 @@ public class CollectionServiceImpl implements CollectionService {
     @Override
     public ListResult<CollectionCatBean> queryCollectionCatList(CollectionCatBean collectionCatBean) {
         // return collectionMapper.queryCollectionCatList(collectionCatBean);
-
+        if (!UserUtil.isAdmin()) collectionCatBean.setCreateBy(UserUtil.getUser().getUserId());
         ListResult<CollectionCatBean> listResult = new ListResult<>();
         int totalCount = collectionMapper.queryCollectionCatListCount(collectionCatBean);
         if (totalCount > 0) listResult.setList(collectionMapper.queryCollectionCatList(collectionCatBean));
@@ -53,7 +54,7 @@ public class CollectionServiceImpl implements CollectionService {
         collectionCatBean.setParentCollectionCatNum(collectionMapper.queryCollectionCatNumById(collectionCatBean.getParentCollectionCatId()));
         collectionCatBean.setCollectionCatNum(getCollectionCatNum(collectionCatBean.getParentCollectionCatNum()));
         collectionCatBean.setCreateDt(new Date());
-        collectionCatBean.setCreateBy("");
+        collectionCatBean.setCreateBy(UserUtil.getUser().getUserId());
         return collectionMapper.addCollectionCat(collectionCatBean);
     }
 
@@ -121,6 +122,7 @@ public class CollectionServiceImpl implements CollectionService {
 
     @Override
     public ListResult<CollectionBean> queryCollectionList(CollectionQuery collectionQuery) {
+        if (!UserUtil.isAdmin()) collectionQuery.setCreateBy(UserUtil.getUser().getUserId());
         ListResult<CollectionBean> listResult = new ListResult<>();
         int totalCount = collectionMapper.queryCollectionListCount(collectionQuery);
         if (totalCount > 0) listResult.setList(collectionMapper.queryCollectionList(collectionQuery));
@@ -137,6 +139,7 @@ public class CollectionServiceImpl implements CollectionService {
     @Override
     public int addCollection(CollectionBean collectionBean) {
         collectionBean.setCreateDt(new Date());
+        collectionBean.setCreateBy(UserUtil.getUser().getUserId());
         return collectionMapper.addCollection(collectionBean);
     }
 

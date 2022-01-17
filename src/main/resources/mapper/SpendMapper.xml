@@ -7,6 +7,9 @@
         <if test="spendCatName != null and spendCatName != ''">
             and spendCatName like concat('%',concat(#{spendCatName},'%'))
         </if>
+        <if test="createBy != null and createBy != ''">
+            and createBy = #{createBy}
+        </if>
     </sql>
     <sql id="spend_cat_update_condition">
         <set>
@@ -78,6 +81,9 @@
         </if>
         <if test="spendEndDate != null and spendEndDate != ''">
             and sd.spendDate <![CDATA[ <= ]]> #{spendEndDate}
+        </if>
+        <if test="createBy != null and createBy != ''">
+            and sd.createBy = #{createBy}
         </if>
     </sql>
     <sql id="spend_update_condition">

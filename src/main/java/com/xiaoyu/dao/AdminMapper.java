@@ -14,6 +14,7 @@ import java.util.List;
  */
 public interface AdminMapper {
 
+    /*********************** 超级管理员 ***********************/
     // 收藏
     List<CollectionCatBean> queryCollectionCatTop4();
 
@@ -41,4 +42,30 @@ public interface AdminMapper {
     List<NoteCatBean> queryNoteCatTop4();
 
     List<NoteBean> queryNoteTop5(long noteCatId);
+
+    /*********************** 单独用户 ***********************/
+    // 收藏
+    List<CollectionCatBean> queryCollectionCatTop4ByUserId(String userId);
+
+    List<CollectionBean> queryCollectionTop5ByUserId(long collectionCatId, String userId);
+
+    // 计划
+    List<PlanCatBean> queryPlanCatTop4ByUserId(String userId);
+
+    List<PlanBean> queryPlanTop5ByUserId(long planCatId, String userId);
+
+    // 消费
+    List<SpendVo> querySpendTop5ByUserId(String userId);
+
+    BigDecimal queryTotalSpendMoneyByUserId(String userId);
+
+    // 收入
+    List<IncomeVo> queryIncomeTop5ByUserId(String userId);
+
+    BigDecimal queryTotalIncomeMoneyByUserId(String userId);
+
+    // 笔记
+    List<NoteCatBean> queryNoteCatTop4ByUserId(String userId);
+
+    List<NoteBean> queryNoteTop5ByUserId(long noteCatId, String userId);
 }
