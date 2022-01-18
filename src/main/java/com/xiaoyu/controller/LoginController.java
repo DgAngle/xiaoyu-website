@@ -1,6 +1,7 @@
 package com.xiaoyu.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.xiaoyu.config.SysParamConfig;
 import com.xiaoyu.entity.UserBean;
 import com.xiaoyu.service.baseservice.UserService;
 import com.xiaoyu.utils.R;
