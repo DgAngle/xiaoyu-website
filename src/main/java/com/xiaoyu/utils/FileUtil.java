@@ -1,5 +1,12 @@
 package com.xiaoyu.utils;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
 /**
@@ -78,5 +85,57 @@ public class FileUtil {
                 }
             }
         }
+    }
+
+    // 获取 HttpServletResponse
+    public static HttpServletResponse getResponse() {
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        return requestAttributes.getResponse();
+    }
+
+    /**
+     * @param filePath
+     */
+    public static void getResponseFile(String filePath) {
+        if (StringUtils.isBlank(filePath)) return;
+        FileInputStream in = null;
+        ServletOutputStream out = null;
+        try {
+            File resFile = new File(filePath);
+            in = new FileInputStream(resFile);
+            out = getResponse().getOutputStream();
+            byte[] bytes = new byte[1024 * 10];
+            int len = 0;
+            while ((len = in.read(bytes)) != -1) {
+                out.write(bytes, 0, len);
+            }
+            out.flush();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    /**
+     * TODO
+     * 生成文件识别码
+     */
+    public static String createCode() {
+        return "";
     }
 }

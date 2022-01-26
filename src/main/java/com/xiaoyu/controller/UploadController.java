@@ -1,6 +1,8 @@
 package com.xiaoyu.controller;
 
+import com.xiaoyu.entity.FileBean;
 import com.xiaoyu.service.baseservice.UploadService;
+import com.xiaoyu.utils.FileUtil;
 import com.xiaoyu.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -10,7 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 /**
  * @author gqshuang
@@ -29,5 +36,13 @@ public class UploadController {
     public R userInfoUpload(MultipartFile multipartFile) {
         // HttpServletRequest request
         return uploadService.avatarUpload(multipartFile);
+    }
+
+    // 读取文件
+    @RequestMapping("/getFile")
+    @ResponseBody
+    public void getFile(Long fileId) {
+        FileBean file = uploadService.getFile(fileId);
+        if (file != null) FileUtil.getResponseFile(file.getFileSavePath());
     }
 }

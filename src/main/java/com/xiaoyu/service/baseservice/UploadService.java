@@ -1,5 +1,6 @@
 package com.xiaoyu.service.baseservice;
 
+import com.xiaoyu.entity.FileBean;
 import com.xiaoyu.utils.R;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,4 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface UploadService {
     R avatarUpload(MultipartFile multipartFile);
+
+    FileBean getFile(Long fileId);
 }
