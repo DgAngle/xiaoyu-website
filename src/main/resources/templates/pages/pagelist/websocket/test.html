@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <!-- 公共 css -->
+    <link th:replace="common/common_css"/>
+</head>
+<body>
+<!--<div class="page-container">-->
+<div id="app">
+    <!--<div th:replace="layout/sidebar"></div>-->
+    <!--<div th:replace="layout/topMenu"></div>-->
+    <!-- 内容区域 -->
+    <div class="container-fluid" style="padding-top: 20px;">
+        <h2 style="text-align: center;">{{title}}</h2>
+
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <input class="form-control" type="text" v-model="sendMessage"/>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-primary btn-sm" @click="websocketSend()">发送</button>
+                <button class="btn btn-primary btn-sm" @click="closeWebsocket()">关闭</button>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-3"></div>
+            <div class="col-6"><textarea class="form-control" rows="5" v-model="receiveMessage"></textarea></div>
+            <div class="col"></div>
+            <!--<div id="message">{{receiveMessage}}</div>-->
+        </div>
+    </div>
+</div>
+<!-- 公共 js -->
+<div th:replace="common/common_js"></div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            title: "Websocket测试",
+            sendMessage: "",
+            receiveMessage: "",
+            websocket: null,
+            url: {
+                wsUri: "ws://127.0.0.1:8091",
+            },
+        },
+        mounted: function () {
+            let _this = this;
+            _this.initWebSocket();
+        },
+        methods: {
+            initWebSocket() {
+                let _this = this;
+                if ('WebSocket' in window) {
+                    const wsUri = "ws://localhost:8091/test/oneToMany";
+                    _this.websocket = new WebSocket(wsUri);
+                } else {
+                    alert('Not support websocket')
+                    return;
+                }
+                //连接发生错误的回调方法
+                _this.websocket.onerror = this.websocketOnError;
+                //连接成功建立的回调方法
+                _this.websocket.onopen = this.websocketOnOpen;
+                //接收到消息的回调方法
+                _this.websocket.onmessage = this.websocketOnMessage;
+                //连接关闭的回调方法
+                _this.websocket.onclose = this.websocketOnClose;
+
+                //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+                window.onbeforeunload = function () {
+                    _this.websocket.close();
+                }
+            },
+            websocketOnOpen() {
+            },
+            websocketOnError() {
+            },
+            websocketOnMessage(e) {
+                console.log(e);
+                console.log(e.data);
+                this.receiveMessage += e.data + "\n"
+            },
+            websocketOnClose(e) {
+                alert("执行关闭");
+                console.log(e);
+                this.receiveMessage += "连接关闭";
+            },
+            closeWebsocket() {
+                this.websocket.close();
+            },
+            websocketSend() {
+                console.log(this.sendMessage)
+                this.websocket.send(this.sendMessage);
+            },
+        }
+    })
+</script>
+</body>
+</html>

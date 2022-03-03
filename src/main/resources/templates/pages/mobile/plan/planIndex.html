@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0">
+    <title>计划目标</title>
+    <!-- 公共 css -->
+    <link th:replace="common/common_css"/>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background-color: #d2d2d2;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+
+        #app {
+            padding-top: 20px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+            padding: 0 10px;
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .plan .week-label {
+            background-color: #16b7ff;
+            padding: 3px 15px;
+            margin-top: 10px;
+            color: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(224, 224, 224, 0.5);
+        }
+
+        .plan .day-label {
+            background-color: #13dcdc;
+            padding: 3px 15px;
+            margin-top: 10px;
+            color: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(224, 224, 224, 0.5);
+        }
+    </style>
+</head>
+<body>
+<div class="page-container">
+    <!-- 内容区域 -->
+    <div id="app" class="container-fluid" v-cloak>
+        <div class="card">
+            <div class="card-body">
+                {{curDay}}
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body plan">
+                <!-- 日历 -->
+                <div>
+                    <table>
+                        <thead></thead>
+                        <tbody>
+                        <tr>
+                            <td>日</td>
+                            <td>一</td>
+                            <td>二</td>
+                            <td>三</td>
+                            <td>四</td>
+                            <td>五</td>
+                            <td>六</td>
+                        </tr>
+                        <tr>
+                            <td>28</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <button type="button" class="btn btn-primary btn-sm"><span>打卡</span></button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body plan">
+                每周计划
+                <div class="row">
+                    <div class="col week-label">练字3篇</div>
+                </div>
+                <div class="row">
+                    <div class="col week-label">健身1小时</div>
+                </div>
+                <div class="row">
+                    <div class="col week-label">学习10小时</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body plan">
+                每日计划
+                <div class="row">
+                    <div class="col day-label">练字1篇</div>
+                </div>
+                <div class="row">
+                    <div class="col day-label">健身10分钟</div>
+                </div>
+                <div class="row">
+                    <div class="col day-label">学习1小时</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 公共 js -->
+<div th:replace="common/common_js"></div>
+<script>
+    /* 收藏分类 */
+    new Vue({
+        el: "#app",
+        data: {
+            curDay: null,
+            calendarDateArr: [],
+        },
+        mounted: function () {
+            this.curDay = this.getFormatDate();
+            this.initCalendar();
+            this.getCalendarDate();
+            this.getWeek(new Date("2022-02-26"));
+        },
+        methods: {
+            initCalendar: function () {
+            },
+            // 获取格式化日期”yyyy-MM-dd“, 空值默认今天
+            getFormatDate: function (date) {
+                date = date || new Date();
+                let year = date.getFullYear();
+                let month = date.getMonth() + 1;
+                let day = date.getDate();
+                month = month < 10 ? "0" + month : month;
+                day = day < 10 ? "0" + day : day;
+                return year + "-" + month + "-" + day;
+            },
+            // 获取某个月的日历, 空值默认当月
+            getCalendarDate: function (month) {
+                // TODO
+                month = month || new Date().getMonth(); // 当前月份
+                let calendarDate = [];
+                let firstDayWeek = this.getMonthFirstDayWeek(month);
+                let k = 1;
+                // 第1排日历
+                calendarDate[0] = [];
+                for (let j = 0; j < 7; j++) {
+                    if (j < firstDayWeek - 1) {
+                        calendarDate[0][j] = new Date().getDate();
+                    } else calendarDate[0][j] = k++;
+                }
+                // 第2-5排日历
+                for (let i = 1; i < 5; i++) {
+                    calendarDate[i] = [];
+                    for (let j = 0; j < 7; j++) {
+                        calendarDate[i][j] = k++;
+                    }
+                }
+                console.log(calendarDate);
+                return calendarDate;
+            },
+            // 获取指定月份的第一天的星期数, 空值默认当月
+            getMonthFirstDayWeek(month) {
+                month = month || new Date().getMonth();
+                // 获取本月第一天星期数
+                return this.getWeek(new Date(new Date().setDate(1)));
+            },
+            // 获取指定月份上月份的最后一天, 空值默认当月
+            getPreMonthEndDay(month) {
+            },
+            // 获取指定月份下月份的第一天, 空值默认当月
+            getNextMonthFirstDay(month) {
+            },
+            // 获取指定日期是星期几, 传空默认为今天
+            getWeek(date) {
+                date = date || new Date();
+                console.log("星期" + date.getDay());
+                return date.getDay();
+            },
+
+        }
+    })
+</script>
+</body>
+</html>

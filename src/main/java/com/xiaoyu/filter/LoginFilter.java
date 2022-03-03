@@ -21,7 +21,7 @@ import java.io.IOException;
  * @version 1.0
  * @date 2021/12/16 13:47
  */
-@Configuration
+// @Configuration
 public class LoginFilter implements WebMvcConfigurer {
 
     @Resource
