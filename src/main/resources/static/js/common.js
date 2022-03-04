@@ -1,7 +1,8 @@
 var commonUtil = commonUtil || {};
 
 commonUtil.statusList = [];
-commonUtil.status = [0, 2, 3, 4, 5, 8]
+commonUtil.status = [0, 2, 3, 4, 5, 8];
+commonUtil.dateFormat = {formatDefault: 'yyyy-MM-dd HH:mm:ss', formatDay: 'yyyy-MM-dd', formatMin: 'yyyy-MM-dd HH:mm'};
 commonUtil.statusCode = {
     plan_status_not_start: 0, // 计划未开始
     plan_status_underway: 2,  // 计划进行中
@@ -138,9 +139,9 @@ commonUtil.getFormatDate = function (format) {
     let minutes = curDate.getMinutes();
     let seconds = curDate.getSeconds();
 
-    if (format == "yyyy-MM-dd HH:mm:ss") return year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds;
-    if (format == "yyyy-MM-dd HH:mm") return year + "-" + month + "-" + day + " " + hour + ":" + minutes;
-    if (format == "yyyy-MM-dd") return year + "-" + month + "-" + day;
+    if (format === "yyyy-MM-dd HH:mm:ss") return year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds;
+    if (format === "yyyy-MM-dd HH:mm") return year + "-" + month + "-" + day + " " + hour + ":" + minutes;
+    if (format === "yyyy-MM-dd") return year + "-" + month + "-" + day;
 
     return year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds
 
