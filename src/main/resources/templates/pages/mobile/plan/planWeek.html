@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0">-->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+    <title>周计划</title>
+    <!-- 公共 css -->
+    <link th:replace="common/mobileCommon_css"/>
+    <style>
+    </style>
+</head>
+<body>
+<div class="page-container">
+    <!-- 内容区域 -->
+    <div id="app" class="container-fluid" v-cloak>
+        <div class="card">
+            <div class="card-body plan">
+                本周计划
+            </div>
+        </div>
+
+        <!-- 底部菜单 -->
+        <div class="bottom-menu">
+            <nav>
+                <div class="nav-item" onclick="commonUtil.openToPlanIndex()">
+                    <div class="icon"><i class="fa fa-home"></i></div>
+                    <div class="label">主页</div>
+                </div>
+                <div class="nav-item selected">
+                    <div class="icon"><i class="fa fa-calendar-minus-o"></i></div>
+                    <div class="label">周计划</div>
+                </div>
+                <div class="nav-item " onclick="commonUtil.openToPlanDaily()">
+                    <div class="icon"><i class="fa fa-book"></i></div>
+                    <div class="label">日计划</div>
+                </div>
+                <div class="nav-item">
+                    <div class="icon"><i class="fa fa-user"></i></div>
+                    <div class="label">我的</div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- 公共 js -->
+<div th:replace="common/mobileCommon_js"></div>
+<script>
+    /* 收藏分类 */
+    new Vue({
+        el: "#app",
+        data: {},
+        mounted: function () {
+        },
+        methods: {}
+    })
+</script>
+</body>
+</html>

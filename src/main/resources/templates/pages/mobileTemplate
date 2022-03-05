@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0">-->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+    <title>日计划</title>
+    <!-- 公共 css -->
+    <link th:replace="common/mobileCommon_css"/>
+    <style>
+    </style>
+</head>
+<body>
+<div class="page-container">
+    <!-- 内容区域 -->
+    <div id="app" class="container-fluid" v-cloak>
+        <div class="card">
+            <div class="card-body">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 公共 js -->
+<div th:replace="common/mobileCommon_js"></div>
+<script>
+    /* 收藏分类 */
+    new Vue({
+        el: "#app",
+        data: {},
+        mounted: function () {
+        },
+        methods: {}
+    })
+</script>
+</body>
+</html>

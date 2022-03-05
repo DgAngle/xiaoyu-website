@@ -128,7 +128,6 @@ commonUtil.keyDown = function (domId) {
     }
 }
 
-
 commonUtil.getFormatDate = function (format) {
     let curDate = new Date();
     let year = curDate.getFullYear();

@@ -1,0 +1,166 @@
+/* 日历样式 */
+.xyu-calendar {
+    margin: 10px 0;
+    width: 100%;
+    border: 0;
+}
+
+.xyu-calendar tr {
+    width: 100%;
+    /*border: 1px solid #dedcdc;*/
+    border: 1px solid #ffffff;
+}
+
+.xyu-calendar thead tr {
+    /*border: 1px solid #dedcdc;*/
+    font-weight: 700;
+    color: #a5a5a5;
+}
+
+.xyu-calendar tr td {
+    /*border: 1px solid #dedcdc;*/
+    /*padding: 10px 12px;*/
+    padding: 10px 5px;
+    text-align: center;
+}
+
+/*选择样式*/
+/*.xyu-calendar tbody tr td:hover {*/
+/*    background-color: #04cdf1;*/
+/*    !*border-radius: 20px;*!*/
+/*    color: #FFFFFF;*/
+/*    !*box-shadow: 0 0 15px rgba(3, 234, 252, 0.5);*!*/
+/*    box-shadow: 0 0 15px rgb(9, 220, 250);*/
+/*}*/
+
+/* 日历标题 */
+.calendar-title {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+/* 日历操作按钮 */
+.calendar-opera {
+    display: flex;
+    justify-content: flex-end;
+    /*text-align: right;*/
+    /*float: right;*/
+    padding: 0;
+}
+
+.calendar-btn {
+    /*display: flex;*/
+    cursor: pointer;
+    padding: 2px 10px;
+    background-color: #00b7ff;
+    border-radius: 6px;
+    color: #FFFFFF;
+    font-weight: 700;
+    text-align: center;
+    margin-left: 5px;
+    box-shadow: 0 0 3px rgb(186, 186, 186);
+}
+
+.calendar-btn:hover {
+    /*display: flex;*/
+    background-color: #0090ff;
+}
+
+/*选择样式*/
+.calendar-month-content:hover {
+    background-color: #04cdf1;
+    /*border-radius: 20px;*/
+    border-radius: 6px;
+    color: #FFFFFF;
+    /*box-shadow: 0 0 15px rgba(3, 234, 252, 0.5);*/
+    box-shadow: 0 0 5px rgb(9, 220, 250);
+}
+
+/*今天*/
+.calendar-today {
+    background-color: #f1049a;
+    /*border-radius: 25px;*/
+    border-radius: 6px;
+    color: #FFFFFF;
+    box-shadow: 0 0 5px rgb(255, 78, 196);
+}
+
+.calendar-today-style1 {
+    color: #f1049a;
+}
+
+/*周末*/
+.calendar-weekend {
+    color: #cdcdcd;
+}
+
+.calendar-weekend:hover {
+    color: #ffffff;
+}
+
+/* 阳历 */
+.calendar-month-solar {
+    font-weight: 700;
+    /*background-color: #04cdf1;*/
+    /*border-radius: 20px;*/
+    /*color: #FFFFFF;*/
+    /*!*box-shadow: 0 0 15px rgba(3, 234, 252, 0.5);*!*/
+    /*box-shadow: 0 0 15px rgb(9, 220, 250);*/
+}
+
+/* 阴历 */
+.calendar-month-lunar {
+    /*font-weight: 700;*/
+    /*background-color: #04cdf1;*/
+    /*border-radius: 20px;*/
+    color: #cdcdcd;
+    font-size: 8px;
+    /*!*box-shadow: 0 0 15px rgba(3, 234, 252, 0.5);*!*/
+    /*box-shadow: 0 0 15px rgb(9, 220, 250);*/
+}
+
+.calendar-month-lunar:hover {
+    color: #ffffff;
+}
+
+/* 缺勤 */
+.calendar-month-lack {
+    font-weight: 700;
+    color: #ff7903;
+    font-size: 8px;
+}
+
+.calendar-month-lack:hover {
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 8px;
+}
+
+/* 打卡 */
+.calendar-month-sign {
+    font-weight: 700;
+    color: #03eaff;
+    font-size: 8px;
+}
+
+.calendar-month-sign:hover {
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 8px;
+}
+
+
+/* 月日历标签 */
+.calendar-month-tag {
+    /*position: absolute;*/
+    /*float: right;*/
+    text-align: right;
+    margin-top: -20px;
+    z-index: 999;
+    font-size: 3px;
+    /*background-color: #f1049a;*/
+    /*!*border-radius: 25px;*!*/
+    /*border-radius: 2px;*/
+    /*color: #FFFFFF;*/
+    /*box-shadow: 0 0 2px rgb(255, 78, 196);*/
+}

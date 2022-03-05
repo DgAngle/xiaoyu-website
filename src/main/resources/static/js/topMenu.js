@@ -1,3 +1,6 @@
+var formUserId = "top-userInfo";
+
+
 function openUserModal() {
     $("#topUserModal").modal({
         keyboard: true,
@@ -33,3 +36,7 @@ function initFileInput(inputId, uploadUrl) {
 $(function () {
     initFileInput("user-avatar", "/upload/avatar")
 })
+
+function saveUserInfo() {
+    $("#formUserId");
+}

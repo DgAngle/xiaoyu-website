@@ -58,7 +58,8 @@
                 </li>
                 <li class="full-view ">
                     <!--<img class="comm-avatar" style="height: 35px; width:35px;" src="/images/avatar3.jpg" alt="avatar">-->
-                    <img class="comm-avatar" style="height: 35px; width:35px;" src="/upload/getFile?fileId=1" alt="avatar">
+                    <img class="comm-avatar" style="height: 35px; width:35px;" src="/upload/getFile?fileId=1"
+                         alt="avatar">
                     <i class="fa fa-angle-down dropdown-toggle" data-toggle="dropdown"
                        style="color: #000000;"></i>
                     <div class="dropdown-menu" style="right: 0px !important;">
@@ -209,7 +210,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="top-userInfo">
                     <div class="row">
                         <div class="col form-group">
                             <label><span style="color: red">*</span>头像：</label>
@@ -236,7 +237,7 @@
                             </div>
                             <div class="row">
                                 <div class="col form-group">
-                                    <label><span style="color: red">*</span>用户名：</label>
+                                    <label><span style="color: red">*</span>密码：</label>
                                     <input type="text" class="form-control" autocomplete="off">
                                 </div>
                             </div>
@@ -246,7 +247,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" @click="saveCollection()">确认</button>
+                <button type="button" class="btn btn-primary" onClick="saveUserInfo()">确认</button>
             </div>
         </div>
     </div>
