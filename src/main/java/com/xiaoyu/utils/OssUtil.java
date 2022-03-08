@@ -22,15 +22,10 @@ public class OssUtil {
      */
     public static String uploadImageFile(MultipartFile file) {
         // 1. 使用工具类取值
-        // String endpoint = ConstantUtil.END_POINT;
-        // String accessKeyId = ConstantUtil.ACCESS_KEY_ID;
-        // String accessKeySecret = ConstantUtil.ACCESS_KEY_SECRET;
-        // String bucketName = ConstantUtil.BUCKET_NAME;
-
-        String endpoint = "oss-cn-beijing.aliyuncs.com";
-        String accessKeyId = "LTAI4GFgk5bf4zVfoGC5SfU8";
-        String accessKeySecret = "RT2ygiMkeC3w9SY4QZJ9EgEeeO1i8W";
-        String bucketName = "xiaoyu-website";
+        String endpoint = ConstantUtil.END_POINT;
+        String accessKeyId = ConstantUtil.ACCESS_KEY_ID;
+        String accessKeySecret = ConstantUtil.ACCESS_KEY_SECRET;
+        String bucketName = ConstantUtil.BUCKET_NAME;
 
         String url = "";
 
