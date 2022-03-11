@@ -11,6 +11,6 @@ import org.springframework.context.annotation.Configuration;
  * @date 2022/3/3 14:35
  */
 @Configuration
-@MapperScan("com.xiaoyu.mobile.*.mapper")
+@MapperScan({"com.xiaoyu.mobile.*.mapper", "com.xiaoyu.web.*.mapper"})
 public class MapperConfig {
 }
