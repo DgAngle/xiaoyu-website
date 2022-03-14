@@ -15,7 +15,7 @@ import java.util.List;
  * @version 1.0
  * @date 2022/3/11 13:34
  */
-public class DBUtils {
+public class DBUtil {
     public static final String MYSQL_DRIVER_OLD = "com.mysql.jdbc.Driver"; // 老版本
     public static final String MYSQL_DRIVER_NEW = "com.mysql.cj.jdbc.Driver"; // 新版本
     public static final String MYSQL_URL_prefix = "jdbc:mysql://"; // 前缀

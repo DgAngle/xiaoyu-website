@@ -12,13 +12,24 @@ spring:
   web:
     resources:
       static-locations: classpath:/templates/, classpath:/static/
+  # thymeleaf 模板引擎配置
   thymeleaf:
     cache: false
     prefix: classpath:/templates/pages/
     suffix: .html
     encoding: UTF-8
     mode: HTML
-
+  # freemarker 模板引擎配置
+  freemarker:
+    template-loader-path: classpath:/templates/
+    cache: false
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: true
+    expose-session-attributes: true
+    request-context-attribute: request
+    suffix: .ftl
 
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
@@ -30,3 +41,6 @@ logging:
     com:
       xiaoyu:
         dao: debug
+
+
+
