@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>代码生成</title>
+    <!-- 公共 css -->
+    <link th:replace="common/common_css"/>
+</head>
+<body>
+<div class="page-container ">
+    <div th:replace="layout/sidebar"></div>
+    <div th:replace="layout/topMenu"></div>
+    <!--<div th:include="common/common_js"></div>-->
+    <!-- 内容区域 -->
+    <div class="container-fluid">
+        <!--<div th:replace="layout/pagnation"></div>-->
+
+        <div id="app">
+            <!--<div th:replace="pageedit/connect/connectModal"></div>-->
+
+            <!-- 默认展示本次连接的数据库 -->
+            <div class="row comm-operate"></div>
+            <form class="form-inline form-search " onsubmit="return false;">
+                <div class="form-group col-sm-3 ">
+                    <label class="col-form-label ">数据库名称:</label>
+                    <input type="text" class="form-control form-control-sm" v-model="dbConfigQuery.dbName" placeholder="" autocomplete="off"
+                           @keyup.enter="refreshTableList()">
+                </div>
+                <div class="form-group col-sm-2 ">
+                    <button type="button" class="btn btn-outline-primary btn-sm" @click="refreshConnectList()">搜索</button>
+                </div>
+            </form>
+
+            <div class="comm-table-content">
+                <table class="table table-hover table-striped comm-table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th width="60">序号</th>
+                        <!--<th width="30"><input type="checkbox"></th>-->
+                        <th width="120">表名</th>
+                        <th width="120">表备注</th>
+                        <th width="120">表引擎</th>
+                        <th width="120">创建时间</th>
+                        <th width="100">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(table, index) in tableList">
+                        <th>{{index + 1}}</th>
+                        <!--<th><input type="checkbox"></th>-->
+                        <td>{{table.tableName}}</td>
+                        <td>{{table.tableComment}}</td>
+                        <td>{{table.engine}}</td>
+                        <td>{{table.createTimeStr}}</td>
+                        <td class="table-operate">
+                            <a href="#" title="生成代码" @click="generateCode(table)">生成代码</a>
+                            <!--<a href="#" title="修改" @click="openCollectionEdit(collect.collectionId)"><i class="fa fa-pencil"></i></a>-->
+                            <!--<a href="#" title="删除"><i class="fa fa-trash-o"></i></a>-->
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div v-if="!collectionList" class="pagination-no-content">没有符合的条件</div>
+            </div>
+            <form id="queryForm">
+                <input hidden name="dbName" v-model="dbConfigQuery.dbName">
+            </form>
+        </div>
+        <div th:replace="common/common_js"></div>
+        <!--<div th:replace="layout/pagnation"></div>-->
+    </div>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            dbConfigQuery: {}, // 数据库查询项
+            dbConfig: {}, // 数据库配置
+            tableList: [], // 数据库中的列表
+            url: {
+                queryTableList: "/connect/queryTableList",
+                generateCode: "/connect/generateCode",
+            },
+        },
+        mounted: function () {
+            this.initList();
+        },
+        methods: {
+            // 初始化列表页
+            initList() {
+                let _this = this;
+                commonUtil.ajax(_this.url.queryTableList, _this.dbConfig, function (res) {
+                    // console.log(res);
+                    if (res && res.value) {
+                        _this.tableList = res.data.tableList;
+                    }
+                })
+            },
+            // 代码生成
+            generateCode(tableInfo) {
+                // console.log(tableInfo);
+                let _this = this;
+                commonUtil.ajax(_this.url.generateCode, tableInfo, function (res) {
+                    console.log(res);
+                    if (res && res.value) {
+                        Qmsg.success(res.message);
+                    }
+                })
+            },
+            // 刷新列表
+            refreshTableList() {
+            },
+        }
+    })
+</script>
+</body>
+</html>

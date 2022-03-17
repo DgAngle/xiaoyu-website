@@ -1,6 +1,10 @@
 package com.xiaoyu.web.connect.bean;
 
+import com.xiaoyu.utils.DateUtil;
 import lombok.Data;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * 数据表信息
@@ -11,10 +15,19 @@ import lombok.Data;
  */
 @Data
 public class TableInfo {
-    private String field; // 英文字段
-    private String type; // 字段类型
-    private boolean isNull; // 字段是否允许为空
-    private boolean isKey; // 字段是否是主键
-    private boolean isAutoIncrement; // 字段是否自增长
-    private String comment; // 中文注释
+    private String tableName; // 表的名称
+    private String tableComment; // 表的备注
+    private String engine; // 数据库引擎
+    private Date createTime; // 数据库引擎
+    private String createTimeStr; // 数据库引擎
+
+    private ColumnInfo primaryKey; // 表的主键
+    private List<ColumnInfo> columns; //表的列名(不包含主键)
+    private String classUppercaseName; //类名(第一个字母大写)，如：sys_user => SysUser
+    private String classLowercaseName;  //类名(第一个字母小写)，如：sys_user => sysUser
+
+    public String getCreateTimeStr() {
+        if (createTime != null) return DateUtil.dateToString(createTime);
+        return createTimeStr;
+    }
 }

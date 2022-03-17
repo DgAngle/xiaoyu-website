@@ -2,7 +2,9 @@ package com.xiaoyu.web.connect.service;
 
 import com.xiaoyu.utils.UserUtil;
 import com.xiaoyu.web.connect.bean.DBConfig;
+import com.xiaoyu.web.connect.bean.TableInfo;
 import com.xiaoyu.web.connect.mapper.ConnectMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,5 +36,12 @@ public class ConnectService {
         dbConfig.setUpdateBy(UserUtil.getUser().getUserId());
         dbConfig.setUpdateDt(new Date());
         return connectMapper.updateConnect(dbConfig);
+    }
+
+    // 获取所有的表信息 TODO 暂未兼容其他数据库
+    public List<TableInfo> queryTableList(DBConfig dbConfig) {
+        if (dbConfig == null || (dbConfig.getDbConfigId() == null && StringUtils.isBlank(dbConfig.getDbName())))
+            return connectMapper.queryDefaultTableList();
+        return connectMapper.queryDefaultTableList();
     }
 }

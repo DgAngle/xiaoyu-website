@@ -29,6 +29,19 @@ public class ConnectController {
         return connect_path + "/connectlist";
     }
 
+    // 打开代码生成列表
+    @RequestMapping("connect/goCodeGenerateList")
+    public String goCodeGenerateList() {
+        return connect_path + "/codeGenerateList";
+    }
+
+    // 数据库表列表 - 默认当前数据库
+    @RequestMapping("connect/queryTableList")
+    @ResponseBody
+    public R queryTableList(DBConfig dbConfig) {
+        return R.success().data("tableList", connectService.queryTableList(dbConfig));
+    }
+
     // 查询连接配置列表
     @RequestMapping("connect/queryConnectList")
     @ResponseBody

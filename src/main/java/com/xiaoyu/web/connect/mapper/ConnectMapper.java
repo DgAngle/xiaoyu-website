@@ -1,6 +1,7 @@
 package com.xiaoyu.web.connect.mapper;
 
 import com.xiaoyu.web.connect.bean.DBConfig;
+import com.xiaoyu.web.connect.bean.TableInfo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -30,4 +31,8 @@ public interface ConnectMapper {
             + " url=#{url},remark=#{remark},updateDt=#{updateDt},updateBy=#{updateDt} "
             + " where dbConfigId=#{dbConfigId}")
     int updateConnect(DBConfig dbConfig);
+
+    // 获取当前数据库表信息
+    @Select("select table_name as tableName, table_comment as tableComment, engine as engine, create_time as createTime from information_schema.tables where table_schema = (select dataBase())")
+    List<TableInfo> queryDefaultTableList();
 }

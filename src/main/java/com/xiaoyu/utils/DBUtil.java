@@ -1,7 +1,7 @@
 package com.xiaoyu.utils;
 
+import com.xiaoyu.web.connect.bean.ColumnInfo;
 import com.xiaoyu.web.connect.bean.DBConfig;
-import com.xiaoyu.web.connect.bean.TableInfo;
 import org.apache.commons.lang3.StringUtils;
 
 import java.sql.*;
@@ -90,9 +90,9 @@ public class DBUtil {
      * @param tableName 表名
      * @return 字段信息 List
      */
-    public static List<TableInfo> getFieldInfoFromTable(DBConfig dbConfig, String tableName) {
+    public static List<ColumnInfo> getFieldInfoFromTable(DBConfig dbConfig, String tableName) {
         String sql = "show full columns from " + tableName;
-        List<TableInfo> tableInfos = new ArrayList<>();
+        List<ColumnInfo> columnInfos = new ArrayList<>();
         ResultSet rs = null;
         Connection conn = null;
         Statement stat = null;
@@ -107,14 +107,14 @@ public class DBUtil {
             rs = stat.executeQuery(sql);
             // 5. 遍历
             while (rs.next()) {
-                TableInfo tableInfo = new TableInfo();
-                tableInfo.setField(rs.getString("Field"));
-                tableInfo.setType(rs.getString("Type"));
-                tableInfo.setKey(StringUtils.isNotBlank(rs.getString("Key")));
-                tableInfo.setNull("NO".equalsIgnoreCase(rs.getString("Null")));
-                tableInfo.setAutoIncrement((StringUtils.isNotBlank(rs.getString("Extra")) && rs.getString("Extra").contentEquals("auto_increment")));
-                tableInfo.setComment(rs.getString("Comment"));
-                tableInfos.add(tableInfo);
+                ColumnInfo columnInfo = new ColumnInfo();
+                columnInfo.setField(rs.getString("Field"));
+                columnInfo.setType(rs.getString("Type"));
+                columnInfo.setKey(StringUtils.isNotBlank(rs.getString("Key")));
+                columnInfo.setNull("NO".equalsIgnoreCase(rs.getString("Null")));
+                columnInfo.setAutoIncrement((StringUtils.isNotBlank(rs.getString("Extra")) && rs.getString("Extra").contentEquals("auto_increment")));
+                columnInfo.setComment(rs.getString("Comment"));
+                columnInfos.add(columnInfo);
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -136,7 +136,7 @@ public class DBUtil {
                 throwables.printStackTrace();
             }
         }
-        return tableInfos;
+        return columnInfos;
     }
 
 }
