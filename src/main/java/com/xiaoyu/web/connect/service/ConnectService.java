@@ -44,4 +44,10 @@ public class ConnectService {
             return connectMapper.queryDefaultTableList();
         return connectMapper.queryDefaultTableList();
     }
+
+    // 代码生成
+    public Boolean generateCode(DBConfig dbConfig) {
+
+        return null;
+    }
 }

@@ -15,6 +15,8 @@ import java.util.List;
  */
 @Data
 public class TableInfo {
+    // select dataBase(); 当前连接的数据库
+    // select * from information_schema.tables where table_schema='数据库' and table_name = '表'
     private String tableName; // 表的名称
     private String tableComment; // 表的备注
     private String engine; // 数据库引擎
@@ -25,6 +27,10 @@ public class TableInfo {
     private List<ColumnInfo> columns; //表的列名(不包含主键)
     private String classUppercaseName; //类名(第一个字母大写)，如：sys_user => SysUser
     private String classLowercaseName;  //类名(第一个字母小写)，如：sys_user => sysUser
+
+    private String insertSql; // 插入SQL
+    private String deleteByIdSql; // 删除SQL
+    private String selectByIdSql; // 根据主键查询SQL
 
     public String getCreateTimeStr() {
         if (createTime != null) return DateUtil.dateToString(createTime);

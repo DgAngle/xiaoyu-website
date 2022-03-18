@@ -1,15 +1,18 @@
 package com.xiaoyu.utils.generate;
 
+import com.xiaoyu.utils.DBUtil;
+import com.xiaoyu.utils.DateUtil;
+import com.xiaoyu.utils.FileUtil;
+import com.xiaoyu.web.connect.bean.ColumnInfo;
 import com.xiaoyu.web.connect.bean.DBConfig;
+import com.xiaoyu.web.connect.bean.TableInfo;
 import freemarker.template.Template;
-import org.apache.commons.lang3.StringUtils;
+import freemarker.template.TemplateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 基于 Freemarker 的代码生成器
@@ -20,159 +23,225 @@ import java.util.Map;
  * @date 2022/3/14 15:25
  */
 public class CodeGenerateUtil {
+    private static Logger logger = LoggerFactory.getLogger(CodeGenerateUtil.class); // 日志
 
-    private static final String AUTHOR = "Ay";
-    private static final String CURRENT_DATE = "2017/05/03";
-    private static final String tableName = "tm_project_quality_problem";
-    private static final String packageName = "com.evada.pm.process.manage";
-    private static final String tableAnnotation = "质量问题";
-    private static final String URL = "jdbc:postgresql://192.168.3.160:10655/cibpm";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "888888";
-    private static final String DRIVER = "org.postgresql.Driver";
-    private static final String diskPath = "D://";
-    private static final String changeTableName = replaceUnderLineAndUpperCase(tableName);
+    private static final String encoding = "utf-8"; // 文件编码
+    private static final String author = "gqshuang"; // 作者
+    private static final String currentDate = DateUtil.dateToString(new Date(), "yyyy/MM/dd HH:mm"); // 文件生成时间
+    private static final String packageName = "com.xiaoyu.web"; // 包路径
+    private static final String diskPath = "D://GenerateCode//"; // 本地磁盘(存储)路径
 
-    // 获取连接
-    public static Connection getConnection(DBConfig dbConfig) {
-
-        Connection connection = null;
-        try {
-            Class.forName(dbConfig.getDriver());
-            connection = DriverManager.getConnection(dbConfig.getUrl(), dbConfig.getUsername(), dbConfig.getPassword());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return connection;
+    // 生成代码 - 整个数据库
+    public static void generateCode(DBConfig dbConfig) {
+        logger.info("生成代码 Begin");
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("author", author);
+        dataMap.put("date", currentDate);
+        dataMap.put("packageName", packageName);
+        List<TableInfo> tableInfos = getTableInfo(dbConfig); // 获取表和对应属性信息
+        Optional.ofNullable(tableInfos).orElse(new ArrayList<>()).forEach(tableInfo -> {
+            // 后端代码生成
+            generateBean(tableInfo, dataMap); // 生成Bean
+            generateController(tableInfo, dataMap); // 生成Controller
+            generateService(tableInfo, dataMap); // 生成Service
+            generateMapper(tableInfo, dataMap); // 生成Mapper
+            // 前端页面生成
+            generateHtmlList(tableInfo, dataMap); // 生成Html->List前端页面
+            generateHtmlModal(tableInfo, dataMap); // 生成Html->Modal前端页面
+        });
+        logger.info("生成代码 End");
     }
 
-    // 生成代码
-    public static void generateCode() {
-        DBConfig dbConfig = new DBConfig();
-        dbConfig.setUrl("");
-        dbConfig.setDriver("");
-        dbConfig.setUsername("");
-        dbConfig.setPassword("");
-        dbConfig.setDbName("");
-        Connection connection = getConnection(dbConfig);
-        DatabaseMetaData databaseMetaData = null;
-        ResultSet resultSet = null;
-        try {
-            databaseMetaData = connection.getMetaData();
-            resultSet = databaseMetaData.getColumns(null, "%", dbConfig.getDbName(), "%");
+    // 生成代码 - 单张表
+    public static void generateCode(DBConfig dbConfig, String tableName) {
+        logger.info("Begin 生成代码, 表->{}", tableName);
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("author", author);
+        dataMap.put("date", currentDate);
+        dataMap.put("packageName", packageName);
+        TableInfo tableInfo = getTableInfo(dbConfig, tableName); // 获取表和对应属性信息
+        // 后端代码生成
+        generateBean(tableInfo, dataMap); // 生成Bean
+        generateController(tableInfo, dataMap); // 生成Controller
+        generateService(tableInfo, dataMap); // 生成Service
+        generateMapper(tableInfo, dataMap); // 生成Mapper
+        // 前端页面生成
+        generateHtmlList(tableInfo, dataMap); // 生成Html->List前端页面
+        generateHtmlModal(tableInfo, dataMap); // 生成Html->Modal前端页面
+        logger.info("End 生成代码, 表->{}", tableName);
+    }
 
-            generateBean(resultSet); // 生成实体类
-            // generateController(resultSet);
-            // generateService(resultSet);
-            // generateMapper(resultSet);
+    // 获取表和对应属性信息
+    private static List<TableInfo> getTableInfo(DBConfig dbConfig) {
+        List<TableInfo> tableInfos = DBUtil.getTableInfos(dbConfig);
+        Optional.ofNullable(tableInfos).orElse(new ArrayList<>()).forEach(tableInfo -> {
+            List<ColumnInfo> columnInfos = DBUtil.getColumnInfosFromTable(dbConfig, tableInfo.getTableName());
+            tableInfo.setColumns(columnInfos);
+            tableInfo.setInsertSql(createInsertSQL(columnInfos, tableInfo.getTableName()));
+            tableInfo.setDeleteByIdSql(createDeleteByIdSQL(columnInfos, tableInfo.getTableName()));
+            tableInfo.setSelectByIdSql(createSelectByIdSQL(columnInfos, tableInfo.getTableName()));
+        });
+        return tableInfos;
+    }
 
-            // //生成Mapper文件
-            // generateMapperFile(resultSet);
-            // //生成Dao文件
-            // generateDaoFile(resultSet);
-            // //生成Repository文件
-            // generateRepositoryFile(resultSet);
-            // //生成服务层接口文件
-            // generateServiceInterfaceFile(resultSet);
-            // //生成服务实现层文件
-            // generateServiceImplFile(resultSet);
-            // //生成Controller层文件
-            // generateControllerFile(resultSet);
-            // //生成DTO文件
-            // generateDTOFile(resultSet);
-            // //生成Model文件
-            // generateModelFile(resultSet);
+    // 获取表和对应属性信息
+    private static TableInfo getTableInfo(DBConfig dbConfig, String tableName) {
+        TableInfo tableInfo = DBUtil.getTableInfo(dbConfig, tableName);
+        List<ColumnInfo> columnInfos = DBUtil.getColumnInfosFromTable(dbConfig, tableInfo.getTableName());
+        tableInfo.setColumns(columnInfos);
+        tableInfo.setInsertSql(createInsertSQL(columnInfos, tableInfo.getTableName()));
+        tableInfo.setDeleteByIdSql(createDeleteByIdSQL(columnInfos, tableInfo.getTableName()));
+        tableInfo.setSelectByIdSql(createSelectByIdSQL(columnInfos, tableInfo.getTableName()));
+        return tableInfo;
+    }
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+    // 根据主键删除SQL
+    private static String createDeleteByIdSQL(List<ColumnInfo> columnInfos, String tableName) {
+        StringBuilder sql = new StringBuilder();
+        StringBuilder column = new StringBuilder(); // 列名
+        sql.append("delete from ");
+        sql.append(tableName);
+        if (columnInfos != null) {
+            for (ColumnInfo columnInfo : columnInfos) {
+                if (columnInfo.isPrimaryKey()) {
+                    sql.append(" where " + columnInfo.getColumnName() + "Id=#{" + columnInfo.getColumnName() + "Id}");
+                    break;
+                }
+            }
         }
+        // sql.append(" where " + tableName + "Id=#{" + tableName + "Id}"); // 主键查询条件
+        // sql.append(" where id=#{id}"); // 主键查询条件
+        logger.info("删除SQL：{}", sql.toString());
+        return sql.toString();
+    }
+
+    // 根据主键查询SQL
+    private static String createSelectByIdSQL(List<ColumnInfo> columnInfos, String tableName) {
+        StringBuilder sql = new StringBuilder();
+        StringBuilder wherePrimaryKey = new StringBuilder();
+        StringBuilder column = new StringBuilder(); // 列名
+        sql.append("select ");
+        Optional.ofNullable(columnInfos).orElse(new ArrayList<>()).forEach(columnInfo -> {
+            column.append(columnInfo.getColumnName() + ",");
+            if (columnInfo.isPrimaryKey()) wherePrimaryKey.append(" where " + columnInfo.getColumnName() + "Id=#{" + columnInfo.getColumnName() + "Id}");
+        });
+        sql.append(column.substring(0, column.length() - 1));
+        sql.append(" from ");
+        sql.append(tableName);
+        sql.append(wherePrimaryKey); // 主键查询条件
+        // sql.append(" where " + tableName + "Id=#{" + tableName + "Id}"); // 主键查询条件
+        // sql.append(" where id=#{id}"); // 主键查询条件
+        logger.info("查询SQL：{}", sql.toString());
+        return sql.toString();
+    }
+
+    // 插入SQL
+    private static String createInsertSQL(List<ColumnInfo> columnInfos, String tableName) {
+        StringBuilder sql = new StringBuilder();
+        StringBuilder column = new StringBuilder(); // 列名
+        StringBuilder value = new StringBuilder(); // 对应的值
+        sql.append("insert into ");
+        sql.append(tableName);
+        sql.append("(");
+        Optional.ofNullable(columnInfos).orElse(new ArrayList<>()).forEach(columnInfo -> {
+            column.append(columnInfo.getColumnName() + ",");
+            value.append("#{" + columnInfo.getColumnName() + "},");
+        });
+        sql.append(column.substring(0, column.length() - 1));
+        sql.append(")");
+        sql.append(" values(");
+        sql.append(value.substring(0, value.length() - 1));
+        sql.append(")");
+        logger.info("插入SQL：{}", sql.toString());
+        return sql.toString();
     }
 
     // 生成Bean
-    private static void generateBean(ResultSet resultSet) throws Exception {
+    public static void generateBean(TableInfo tableInfo, Map<String, Object> dataMap) {
+        logger.info("生成Bean");
         final String suffix = ".java";
-        final String path = diskPath + changeTableName + suffix;
-        final String templateName = "model-lombok.ftl";
-        File mapperFile = new File(path);
-        List<ColumnClass> columnClassList = new ArrayList<>();
-        ColumnClass columnClass = null;
-        while (resultSet.next()) {
-            //id字段略过
-            if (resultSet.getString("COLUMN_NAME").equals("id")) continue;
-            columnClass = new ColumnClass();
-            //获取字段名称
-            columnClass.setColumnName(resultSet.getString("COLUMN_NAME"));
-            //获取字段类型
-            columnClass.setColumnType(resultSet.getString("TYPE_NAME"));
-            //转换字段名称，如 sys_name 变成 SysName
-            columnClass.setChangeColumnName(replaceUnderLineAndUpperCase(resultSet.getString("COLUMN_NAME")));
-            //字段在数据库的注释
-            columnClass.setColumnComment(resultSet.getString("REMARKS"));
-            columnClassList.add(columnClass);
-        }
-        Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("model_column", columnClassList);
-        generateFileByTemplate(templateName, mapperFile, dataMap);
-
+        final String savePath = diskPath + tableInfo.getClassLowercaseName() + "/" + tableInfo.getClassUppercaseName() + suffix;
+        generate(tableInfo, dataMap, savePath, FreemarkerUtil.templateBean);
     }
 
     // 生成Controller
-    private static void generateController(ResultSet resultSet) {
-
+    public static void generateController(TableInfo tableInfo, Map<String, Object> dataMap) {
+        logger.info("生成Controller");
+        final String suffix = ".java";
+        final String savePath = diskPath + tableInfo.getClassLowercaseName() + "/" + tableInfo.getClassUppercaseName() + "Controller" + suffix;
+        generate(tableInfo, dataMap, savePath, FreemarkerUtil.templateController);
     }
 
     // 生成Service
-    private static void generateService(ResultSet resultSet) {
-
+    public static void generateService(TableInfo tableInfo, Map<String, Object> dataMap) {
+        logger.info("生成Service");
+        final String suffix = ".java";
+        final String savePath = diskPath + tableInfo.getClassLowercaseName() + "/" + tableInfo.getClassUppercaseName() + "Service" + suffix;
+        generate(tableInfo, dataMap, savePath, FreemarkerUtil.templateService);
     }
 
     // 生成Mapper
-    private static void generateMapper(ResultSet resultSet) {
-
+    public static void generateMapper(TableInfo tableInfo, Map<String, Object> dataMap) {
+        logger.info("生成Mapper");
+        final String suffix = ".java";
+        final String savePath = diskPath + tableInfo.getClassLowercaseName() + "/" + tableInfo.getClassUppercaseName() + "Mapper" + suffix;
+        generate(tableInfo, dataMap, savePath, FreemarkerUtil.templateMapper);
     }
 
-    // 将下划线变成大写字母
-    public static String replaceUnderLineAndUpperCase(String str) {
-        StringBuffer sb = new StringBuffer();
-        sb.append(str);
-        int count = sb.indexOf("_");
-        while (count != 0) {
-            int num = sb.indexOf("_", count);
-            count = num + 1;
-            if (num != -1) {
-                char ss = sb.charAt(count);
-                char ia = (char) (ss - 32);
-                sb.replace(count, count + 1, ia + "");
-            }
+    // 生成前端Html->List页面
+    private static void generateHtmlList(TableInfo tableInfo, Map<String, Object> dataMap) {
+        logger.info("生成Html->List");
+        final String suffix = ".html";
+        final String savePath = diskPath + tableInfo.getClassLowercaseName() + "/" + tableInfo.getClassLowercaseName() + "List" + suffix;
+        generate(tableInfo, dataMap, savePath, FreemarkerUtil.templateHtmlList);
+    }
+
+    // 生成前端Html->Modal页面
+    private static void generateHtmlModal(TableInfo tableInfo, Map<String, Object> dataMap) {
+        logger.info("生成Html->Modal");
+        final String suffix = ".html";
+        final String savePath = diskPath + tableInfo.getClassLowercaseName() + "/" + tableInfo.getClassLowercaseName() + "Modal" + suffix;
+        generate(tableInfo, dataMap, savePath, FreemarkerUtil.templateHtmlModal);
+    }
+
+    /**
+     * 生成代码 - 最终调用方法
+     *
+     * @param tableInfo    包信息及作者信息
+     * @param dataMap      模板数据
+     * @param savePath     保存地址
+     * @param templateName 模板名称
+     */
+    private static void generate(TableInfo tableInfo, Map<String, Object> dataMap, String savePath, String templateName) {
+        File file = FileUtil.createFile(savePath);
+        Template template = null;
+        FileOutputStream fos = null;
+        try {
+            template = FreemarkerUtil.getTemplate(templateName);
+            fos = new FileOutputStream(file);
+            dataMap.put("tableInfo", tableInfo);
+            Writer out = new BufferedWriter(new OutputStreamWriter(fos, encoding), 10240);
+            template.process(dataMap, out);
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+            logger.info("IO操作异常", ioException);
+        } catch (TemplateException e) {
+            logger.info("模板解析异常", e);
         }
-        String result = sb.toString().replaceAll("_", "");
-        return StringUtils.capitalize(result);
     }
 
-    private static void generateControllerFile(ResultSet resultSet) throws Exception {
-        final String suffix = "Controller.java";
-        final String path = diskPath + changeTableName + suffix;
-        final String templateName = "Controller.ftl";
-        File mapperFile = new File(path);
-        Map<String, Object> dataMap = new HashMap<>();
-        generateFileByTemplate(templateName, mapperFile, dataMap);
-    }
-
-    private static void generateFileByTemplate(final String templateName, File file, Map<String, Object> dataMap) throws Exception {
-        Template template = FreemarkerUtil.getTemplate(templateName);
-        FileOutputStream fos = new FileOutputStream(file);
-        dataMap.put("table_name_small", tableName);
-        dataMap.put("table_name", changeTableName);
-        dataMap.put("author", AUTHOR);
-        dataMap.put("date", CURRENT_DATE);
-        dataMap.put("package_name", packageName);
-        dataMap.put("table_annotation", tableAnnotation);
-        Writer out = new BufferedWriter(new OutputStreamWriter(fos, "utf-8"), 10240);
-        template.process(dataMap, out);
+    public static void main(String[] args) throws Exception {
+        // DBConfig dbConfig = new DBConfig();
+        // String driver = "com.mysql.jdbc.Driver";
+        // String url = "jdbc:mysql://localhost:3306/xiaoyu_website?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC";
+        // String username = "root";
+        // String password = "root";
+        // dbConfig.setUrl(url);
+        // dbConfig.setDriver(driver);
+        // dbConfig.setUsername(username);
+        // dbConfig.setPassword(password);
+        // dbConfig.setDbName("xiaoyu_website");
+        // CodeGenerateUtil.generateCode(dbConfig, "db_config");
     }
 
 }

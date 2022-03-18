@@ -49,6 +49,13 @@ public class ConnectController {
         return R.success().data("dbConfigList", connectService.queryList(dbConfig));
     }
 
+    // 代码生成
+    @RequestMapping("connect/generateCode")
+    @ResponseBody
+    public R generateCode(DBConfig dbConfig) {
+        return R.success().data("dbConfigList", connectService.generateCode(dbConfig));
+    }
+
     // 新增连接配置
     @RequestMapping("connect/insertConnect")
     @ResponseBody

@@ -7,13 +7,11 @@ import com.xiaoyu.common.Pagination;
 import com.xiaoyu.dao.CollectionMapper;
 import com.xiaoyu.entity.CollectionBean;
 import com.xiaoyu.entity.CollectionCatBean;
-import com.xiaoyu.entity.CollectionCatBean;
 import com.xiaoyu.service.baseservice.CollectionService;
 import com.xiaoyu.utils.RCode;
 import com.xiaoyu.utils.StringUtil;
 import com.xiaoyu.utils.UserUtil;
 import com.xiaoyu.vo.basevo.CollectionQuery;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

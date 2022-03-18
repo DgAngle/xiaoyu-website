@@ -1,17 +1,13 @@
 package com.xiaoyu.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.aliyun.oss.common.utils.LogUtils;
 import com.xiaoyu.common.ListResult;
 import com.xiaoyu.common.Transform;
 import com.xiaoyu.entity.CollectionBean;
 import com.xiaoyu.entity.CollectionCatBean;
-import com.xiaoyu.entity.NoteCatBean;
 import com.xiaoyu.service.baseservice.CollectionService;
 import com.xiaoyu.utils.R;
 import com.xiaoyu.vo.basevo.CollectionQuery;
 import com.xiaoyu.vo.transform.CollectionCatTransform;
-import com.xiaoyu.vo.transform.NoteCatTransform;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
